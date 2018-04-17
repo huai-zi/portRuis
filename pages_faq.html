@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" class="fixed">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>培训管理系统</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/style.css">
+    <link rel="stylesheet" href="stylesheets/css/oeinsder.css">
+
+</head>
+
+<!--[if lt IE 8]>
+<script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<body>
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+<div class="wrap">
+    <div class="page-body">
+        <div class="content">
+            <div class="content-header about-bgc1">
+                <div class="leftside-content-header">
+                    <ul class="breadcrumbs">
+                        <li><i class="fa fa-comments-o" aria-hidden="true"></i><a href="#">培训管理</a></li>
+                        <li><a>课程学习</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="animated fadeInUp">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="panel-content">
+
+                            <div class="panel-group faq-accordion peinsder-box">
+                                <div class="row animated fadeInRight " id="accordion_faq2">
+                                    <!--显示课程设备学习图解-->
+
+                                </div>
+                                <!--系统信息条数-->
+                            </div>
+                            <div id="example"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+</div>
+
+</body>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src='./javascripts/examples/bootstrap-paginator.js'></script>
+<script src='./javascripts/template.js'></script>
+<script id="temp" type="text/html">
+    {{each aa}}
+    <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="peinsder-imgas">
+            <a href="">
+                <div>
+                    <img src="{{$value.img}}" title="{{$value.imgTitle}}">
+                </div>
+                <h4 class="text-center">装换料机及反应堆</h4>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<script src='./javascripts/peinsder.js'></script>
+<script type='text/javascript'>
+    $(function () {
+
+        /*确认发布*/
+
+        $.ajax({
+            url: "./peinsder.json",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                var cc = data;
+                /*取出获取到的数据*/
+                var num1 = 0;
+                /*点击切换页数数据的更新*/
+                var num2 = 12;
+                var zong = '';
+                /*记录数据的总页数*/
+                addPage(cc, num1, num2)
+                zong = data.length;
+                zong = parseInt(zong / 12) + 1;
+                /*分页按钮*/
+                fen(cc, num1, num2, zong)
+
+            }
+        })
+
+    })
+
+
+    function addPage(cc, num1, num2) {
+        var bb = [];
+        /*将准备获取到的数据添加在新的数组中*/
+        cc.forEach(function (v, i) {
+            if (i < num2 && i >= num1) {
+                bb.push(v)
+            }
+        })
+
+        var aa = {
+            "aa": bb,
+        };
+
+        bb = [];
+        var tt = template("temp", aa)
+        document.getElementById('accordion_faq2').innerHTML = tt;
+
+    }
+
+    function fen(cc, num1, num2, zong) {
+        var options = {
+            currentPage: 1, /*默认显示位置*/
+            totalPages: zong, /*一共多少条*/
+            itemTexts: function (type, page, current) {
+                /*显示的是点击目前的位置*/
+                switch (type) {
+                    case "first":
+                        return "首页";
+                    case "prev":
+                        return "上一页";
+                    case "next":
+                        return "下一页";
+                    case "last":
+                        return "末页";
+                    case "page":
+                        return page;
+                }
+            }, onPageChanged: function (e, oldPage, newPage) {
+                /*回调函数*/
+                /*点击按钮页面显示页数的按钮值*/
+                num2 = num2 * newPage;
+                for (var i = 1; i < newPage; i++) {
+                    num1 += 12
+                }
+                addPage(cc, num1, num2)
+                num1 = 0;
+                num2 = 12;
+
+            }
+
+        }
+
+        $('#example').bootstrapPaginator(options);
+    }
+
+    function slide(data) {
+        if (data.type === 0) {
+            $('.shuju-tishi1').text(data.message)
+            $('.shuju-tishi1').slideDown()
+            var timeou = setTimeout(function () {
+                $('.shuju-tishi1').slideUp()
+            }, 2000)
+            /*成功重新记载表格数据*/
+            clearTimeout(timeout1)
+        } else {
+            clearTimeout(timeou)
+            /*数据加载失败*/
+            $('.shuju-tishi2').text(data.message)
+            $('.shuju-tishi2').slideDown()
+            var timeout1 = setTimeout(function () {
+                $('.shuju-tishi2').slideUp()
+            }, 2000)
+        }
+    }
+
+</script>
+
+</html>

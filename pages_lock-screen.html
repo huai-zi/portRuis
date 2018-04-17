@@ -1,0 +1,128 @@
+
+<!doctype html>
+<html lang="en" class="fixed accounts lock-screen">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>培训管理系统</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/style.css">
+</head>
+
+<!--[if lt IE 8]>
+<script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<body>
+
+
+<div class="wrap">
+    <div class="page-body page-body1">
+        <div class="logo">
+            <div class="avatar">
+                <img alt="Jane Doe" src="images/ui-sam.png" />
+            </div>
+        </div>
+        <div class="box animated fadeInUp">
+            <div class="panel">
+                <div class="panel-content bg-scale-0">
+                    <form>
+                        <h3 class="text-center mb-md">丸子</h3>
+                        <div class="form-group">
+                                <span class="input-with-icon">
+                                        <input type="password" class="form-control" id="password1" placeholder="请输入原密码">
+                                        <i class="fa fa-key"></i>
+                                    </span><p  class="password-yanzheng2"><i class="fa fa-info-circle fa-lg"></i>原密码有误，请重新输入</p>
+                        </div>
+                        <div class="form-group">
+                                <span class="input-with-icon">
+                                        <input type="password" class="form-control" id="password2" placeholder="请输入新密码">
+                                        <i class="fa fa-key"></i>
+                                    </span><p  class="password-yanzheng"><i class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;密码由6-21位字母与数字组成</p>
+                        </div>
+                        <div class="form-group">
+                                <span class="input-with-icon">
+                                        <input type="password" class="form-control" id="password3" placeholder="请确认新密码">
+                                        <i class="fa fa-key"></i>
+                                    </span><p  class="password-yanzheng1"><i class="fa fa-info-circle fa-lg"></i>&nbsp;两次密码不一致,请重新输入!!!</p>
+                        </div>
+                        <div class="form-group">
+                            <span  type="button" class="btn btn-wide btn-primary  btn-block btn-o" data-toggle="modal" data-target="#primary-modal">确认密码</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modell" id="primary-modal" type="button" data-toggle="modal" style="display: none;">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>密码修改成功,请重新登录</p>
+            </div>
+            <div class="modal-footer">
+                <a  href='./pages_sign-in.html' class="btn btn-primary" >登录
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
+<script src="javascripts/template-script.min.js"></script>
+<script src="javascripts/template-init.min.js"></script>
+</body>
+
+<script type='text/javascript'>
+    $(function () {
+        /*模态框的状态*/
+        $('#primary-modal').modal({
+            keyboard: false,
+            backdrop: false,
+            show: false
+        })
+        var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,21}$/;
+        $('.btn-block').on('click',function(){
+
+            /*密码验证*/
+            if (password.test($("#password2").val())) {
+                $('.password-yanzheng').hide()
+            }else{
+                /*失败的样式*/
+                $('.password-yanzheng').show()
+                return false
+            }
+            /*验证两次密码的强度*/
+            if ($('#password2').val() === $("#password3").val()) {
+                $('.password-yanzheng1').hide()
+                var dataSet = {
+                    newPassword:$("#password3").val()
+                };
+
+                /*发送新密码*/
+                $.ajax({
+                    url:"",
+                    data:dataSet,
+                    type:'POST',
+                    success:function(data){
+
+                    }
+                })
+
+            }else{
+                /*失败的样式*/
+                $('.password-yanzheng1').show()
+                return false
+            }
+
+
+        })
+    })
+</script>
+</html>

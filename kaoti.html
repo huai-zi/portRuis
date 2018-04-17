@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en" class="fixed">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>培训管理系统</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/style.css">
+    <style>
+        @media (max-width: 768px) {
+            .pull-right {
+                float: right !important;
+            }
+
+            .fadeInUp {
+                margin-top: 0 !important;
+            }
+        }
+
+        #text-addTo input, #text-addTo select, #text-addTo textarea {
+            width: 80%;
+            background: none !important;
+            outline: none !important;
+            border: 0px !important;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        h4 {
+            padding-left: 0;
+        }
+
+        h3 {
+            margin: 56px 0;
+        }
+
+        #search-headerbox {
+            margin-left: 30px;
+            line-height: 28px;
+            margin: -45px 0px;
+        }
+
+        #search-headerbox i {
+            background: #006ac3;
+            color: #ffffff;
+            margin-left: 5px;
+            cursor: pointer;
+            padding: 8px 8px;
+            border-radius: 50%;
+        }
+
+        .text-bottom0 {
+            padding-bottom: 10px;
+            background-color: #fff;
+        }
+
+
+        #text-addTo {
+            background-color: #fff;
+            width: 100%;
+            padding: 10px;
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #areae select:nth-child(1) {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<!--[if lt IE 8]>
+<script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<body>
+<h5 class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>处理数据成功...
+</h5>
+<h5 class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>处理数据失败...</h5>
+
+<div class="wrap">
+    <div class="page-body">
+        <div class="content">
+            <div class="content-header about-bgc1">
+                <div class="leftside-content-header">
+                    <ul class="breadcrumbs">
+                        <li><i class="fa fa-comments-o" aria-hidden="true"></i><a href="#">考试管理</a></li>
+                        <li><a>出题</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="animated fadeInUp col-xs-12 col-md-6" style='border-right: 1px dashed #ccc;'>
+                    <div class="row">
+                        <div class="col-sm-12 " style='background-color:#fff;'>
+                            <h3 class="text-center">选择您需要的问题,进行搜索</h3>
+                            <div class="header-section pull-right" id="search-headerbox">
+                                <input type="text" name="search1" id="search1" placeholder="搜索相关的考题"
+                                >
+                                <i class="fa fa-search search" id="search-icon"></i>
+                                <div class="header-separator"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">搜索相关的题目信息:</label>
+                                <div id="area" style='padding: 0;margin: 0;display: inline-block;'>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="promit" class="control-label">搜索相关的难度信息:</label>
+                                <select name="promit" id="promit">
+                                    <option value=''>请选择难度系数</option>
+                                    <option value="1">很简单</option>
+                                    <option value="2">简单</option>
+                                    <option value="3">中等</option>
+                                    <option value="4">困难</option>
+                                    <option value="5">很困难</option>
+                                </select>
+                            </div>
+                            <div class="form-group clearfix">
+<span class="password-yanzheng pull-left warm-xinxi1"
+      style="display: none;line-height: 35px;"><i
+        class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请依次选择相应的数据进行查询</span>
+
+                                <button class="btn btn-wide btn-success pull-right" id="sousuoSS">点击搜索</button>
+                            </div>
+                            <div class="panel">
+                                <div class="panel-content">
+                                    <h4><b>系统信息</b></h4>
+                                    <!--输入问题-->
+
+                                    <div class="panel-group faq-accordion" id="accordion_faq2">
+                                        <!--系统信息条数-->
+                                    </div>
+                                    <div id="example"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="animated fadeInUp col-xs-12 col-md-6">
+                    <form action="">
+                        <div class="row">
+                            <div class="col-sm-12" style='background-color: #fff;padding-bottom:40px;'>
+                                <h3 class='text-center' style='margin:56px 0  20px 0;'>考题</h3>
+
+                                <div id="text-addTo">添加相应的题目信息...</div>
+                                <div class="text-bottom0" style="border: 1px solid #ddd;border-radius:7px;">
+                                    <input name="radios" type="hidden" value="">
+                                    <input name="qus" type="hidden" value="">
+                                    <input name="chechbox" type="hidden" value="">
+                                    <div class="container-fluid">
+                                        <div class="row text-center">
+                                            <div class="page-zhangjie clearfix">
+                                                <ul id="myTab" class="nav nav-tabs">
+                                                    <li class="active"><a href="#home" data-toggle="tab" aria-expanded="false">
+                                                        章节添加</a>
+                                                    </li>
+                                                    <li class=""><a href="#ios" data-toggle="tab" aria-expanded="true">考题选择</a></li>
+
+                                                </ul>
+                                                <div id="myTabContent" class="tab-content">
+                                                    <input type="hidden" value='0' name="submit" id="submitType">
+                                                    <div class="tab-pane fade active in" id="home">
+                                                        <div class=" col-xs-12  ">
+                                                            <p style='color: red;display: none;' id="xianshi">请务必选择章节后进行添加,否则无法添加...</p>
+                                                            <h5>章节选择</h5>
+                                                            <div class="clearfix" id="areae" style='padding: 20px 0  30px 0px;'>
+
+                                                            </div>
+                                                            <input class="btn btn-wide btn-success " name`="zhangjie" type="submit"
+                                                                   value="章节添加"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade " id="ios" style="border-bottom: none;">
+                                                        <div class=" col-xs-12 ">
+                                                            <h5>考题选择</h5>
+                                                            <div style='margin: 10px;' class="form-group">
+                                                                <label>试卷题目:</label>
+                                                                <input class="form-control" type="text" name='papercolName'>
+                                                            </div>
+
+                                                            <input class="btn btn-wide btn-success " type=submit value='考题添加'
+                                                                   name='kaoti'/>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+        <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+
+</div>
+<div id="templl">
+
+</div>
+
+</body>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
+<script src="javascripts/template-script.min.js"></script>
+<script src="javascripts/template-init.min.js"></script>
+<script src='./javascripts/examples/bootstrap-paginator.js'></script>
+<script src='./javascripts/template.js'></script>
+<script src='./javascripts/student01.js'></script>
+<script src='./javascripts/student.js'></script>
+
+
+<script id="temp" type="text/html">
+    {{each timu as value index}}
+    <div class="panel panel-accordion">
+        <div class="panel-header bg-scale-0">
+            <a class="panel-title collapsed" data-toggle="collapse"
+               data-parent="#accordion_faq2" href="#q{{index}}">题目:{{value.title}}
+                <input type="hidden" name='' value='{{value.type}}'>
+                <ul>
+                    <li>
+                        <input type="hidden" value="{{value.id}}">
+                        <button type="button" class="btn btn-wide btn-primary  removeShuju pull-right tjfx{{value.id}}">添加
+                        </button>
+                    </li>
+                </ul>
+                <!--插入发送信息的时间-->
+                <br>
+                <span style='display: inline-block;margin-top: -16px;'>难度指数:{{stara(value.star)}}</span>
+            </a>
+        </div>
+        <div id="q{{index}}" class="panel-collapse collapse">
+            <div class="panel-content">
+                <div class="xianshi">
+                    <h3 class="control-label">{{type(value.type)}}</h3>
+
+                    <span>题目:{{value.title}}</span>
+                    <p class="control-label">答案选项:</p>
+                    <p class="control-label">
+                        A:
+                        <span>{{value.raA}}</span>
+                    </p>
+                    <p class="control-label">
+                        B:<span>{{value.raB}}</span>
+                    </p>
+                    <p class="control-label">
+                        C:<span>{{value.raC}}</span>
+                    </p>
+                    <p class="control-label">
+                        D:<span>{{value.raD}}</span>
+                    </p>
+                    <p>
+                        <span style="margin-right:20px;">正确答案:</span>
+                        {{value.xz}}
+                    </p>
+                    <p class="control-label">
+                        <span>本题知识点:</span>
+                    </p>
+                    <span>{{value.point}}</span>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {{/each}}
+</script>
+<script type='text/javascript'>
+    $(function () {
+        /*添加标签页*/
+        $('a[href="#ios"]').on('click',function(){
+            $('#submitType').val('1')
+        })
+        $('a[href="#home"]').on('click',function(){
+            $('#submitType').val('0')
+
+        })
+        /*点击出现添加章节*/
+        $('input[name="zhangjie"]').on('click',function(){
+            var kec = $('select[name="kecheng"]').val();
+            var kec1 = $('select[name="zhangjie"]').val();
+            if(kec === '' || kec1 === ""){
+                $('#xianshi').show()
+                return false
+            }
+            $('#xianshi').hide()
+        })
+        /*记录选项*/
+        window.radios = 0;
+        window.qus = 0;
+        window.chechbox = 0;
+        /*获取时间添加在页面上*/
+        /*点击文本框中的搜索*/
+        $("#search-icon").on('click', function () {
+            var data = JSON.parse(localStorage.getItem('newSt'))
+            var datas = data.shiti;
+
+            var newV = [];
+            /*获取到的值*/
+            var dataset = $('#search1').val();
+
+            datas.forEach(function (v, i) {
+                if (v.title.indexOf(dataset) !== -1) {
+                    /*要是有内容相似的文件就显示出来,否则不做显示*/
+                    newV.push(v);
+                } else if (dataset === '') {
+                    newV.push(v)
+                }
+            })
+
+            /*取出获取到的数据*/
+            var num1 = 0;
+            /*点击切换页数数据的更新*/
+            var num2 = 5;
+            var zong = '';
+            /*记录数据的总页数*/
+            addPage(newV, data, num1, num2);
+            zong = newV.length;
+            zong = parseInt(zong / 5) + 1;
+            /*分页按钮*/
+            fen(newV, data, num1, num2, zong);
+
+        })
+        /*点击搜索*/
+        $('#sousuoSS').on('click', function () {
+            var aval = $('#area select').eq(0).val();
+            var aval1 = $('#area select').eq(1).val();
+            var aval2 = $('#area select').eq(2).val();
+            var aval3 = $('#promit').val();
+            var dataset = {
+                "section": aval, /*部门名*/
+                "major": aval1, /*专业名*/
+                "station": aval2, /*岗位名*/
+                "promit": aval3/*难度系数*/
+            }
+            /*至少一个岗位信息才能行,要不然不能搜索*/
+            if (aval === '' && aval2 !== '' && aval1 === '') {
+                $('.warm-xinxi1').show();
+                return false
+            }
+            if (aval2 !== '' && aval1 === '') {
+                $('.warm-xinxi1').show();
+                return false
+            }
+
+            $.ajax({
+                url: '',
+                type: "POST",
+                data: JSON.stringify(dataset),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    $('.warm-xinxi1').hide();
+                    /*搜索将新的数据加载上去*/
+                    localStorage.setItem('newSt', JSON.stringify(data))
+                    var cc = data.shiti;
+                    /*取出获取到的数据*/
+                    var num1 = 0;
+                    /*点击切换页数数据的更新*/
+                    var num2 = 5;
+                    var zong = '';
+                    /*记录数据的总页数*/
+                    addPage(cc, data, num1, num2)
+                    zong = data.shiti.length;
+                    zong = parseInt(zong / 5) + 1;
+                    /*分页按钮*/
+                    fen(cc, data, num1, num2, zong)
+
+                    /*成功添加返回函数,返回搜索成功的数据添加到页面上*/
+                }
+            })
+
+        })
+
+        /*默认全部的试题*/
+        $.ajax({
+            url: "./zhangjie4.json",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                /*全部加载的数据存储起来*/
+                localStorage.setItem('newSt', JSON.stringify(data))
+                var cc = data.shiti;
+                /*取出获取到的数据*/
+                var num1 = 0;
+                /*点击切换页数数据的更新*/
+                var num2 = 5;
+                var zong = '';
+                /*记录数据的总页数*/
+                addPage(cc, data, num1, num2)
+                zong = data.shiti.length;
+                zong = parseInt(zong / 5) + 1;
+                /*分页按钮*/
+                fen(cc, data, num1, num2, zong)
+
+            }
+        })
+
+    })
+
+
+    function addPage(cc, data, num1, num2) {
+        var bb = [];
+        /*将准备获取到的数据添加在新的数组中*/
+        cc.forEach(function (v, i) {
+            if (i < num2 && i >= num1) {
+                bb.push(v)
+            }
+        })
+
+        var aa = {
+            "timu": bb,
+            "message": data.message
+        };
+        if (aa.timu.length === 0) {
+            document.getElementById('accordion_faq2').innerHTML = '暂无考题信息....';
+            return false
+        }
+
+        /*判断是否确定*/
+        template.helper('type', function (xz) {
+            if (xz === 0) {
+                /*为了多选使用的方法*/
+                return "单选题"
+            } else if (xz === 1) {
+                /*判断题方法*/
+                return "判断题"
+            } else {
+                return "多选题"
+            }
+        })
+        /*判断难度指数*/
+        template.config("escape", false);
+        template.helper('stara', function (xz) {
+            if (xz === 1) {
+                /*为了多选使用的方法*/
+                return '<div class="starts"><ul class="pingStar"><li rel="1" class="on" title="很简单"></li><li rel="2"  title="简单"></li><li rel="3" title="中等"></li><li rel="4"  title="困难"></li><li rel="5" title="很困难"></li></ul></div>'
+            } else if (xz === 2) {
+                /*判断题方法*/
+                return '<div class="starts"><ul class="pingStar"><li rel="1" class="on" title="很简单"></li><li rel="2" class="on" title="简单"></li><li rel="3" title="中等"></li><li rel="4"  title="困难"></li><li rel="5" title="很困难"></li></ul></div>'
+            } else if (xz === 3) {
+
+                return '<div class="starts"><ul class="pingStar"><li rel="1" class="on" title="很简单"></li><li rel="2" class="on" title="简单"></li><li rel="3" class="on" title="中等"></li><li rel="4"  title="困难"></li><li rel="5"  title="很困难"></li></ul></div>'
+            } else if (xz === 4) {
+                return '<div class="starts"><ul class="pingStar"><li rel="1" class="on" title="很简单"></li><li rel="2" class="on" title="简单"></li><li rel="3" class="on" title="中等"></li><li rel="4" class="on" title="困难"><li rel="5"  title="很困难"></li></ul></div>'
+            } else {
+                return '<div class="starts"><ul class="pingStar"><li rel="1" class="on"  title="很简单"></li><li rel="2" class="on"  title="简单"></li><li rel="3" class="on"  title="中等"></li><li rel="4" class="on"  title="困难"></li><li rel="5"  class="on" title="很困难"></li></ul></div>'
+            }
+        })
+
+        bb = [];
+        /*时间换算*/
+        template.helper('times', function (time) {
+
+            var unixTimestamp = new Date(time);
+            Date.prototype.toLocaleString = function () {
+                return this.getFullYear() + "/" + (this.getMonth() + 1) + "/" + this.getDate() + ' ' + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
+            };
+            commonTime = unixTimestamp.toLocaleString();
+
+            return commonTime
+        })
+        var tt = template("temp", aa)
+        document.getElementById('accordion_faq2').innerHTML = tt;
+        /*清空多余的数据样式*/
+        $('.xianshi p').each(function (i, v) {
+            if ($(v).find('span').text() === 'ohMyGod') {
+                $(v).hide()
+            }
+        })
+        $('.xianshi p label').each(function (i, v) {
+
+            if ($(v).text() === 'ohMyGod') {
+                $(v).hide()
+            }
+        })
+
+
+        /*点击添加按钮,发送添加的数据到右侧页面*/
+        var jilu = '';
+        var jilu1 = '';
+        var dd = '';
+        var tx = '';
+        /*记录题目的类型*/
+        var tx1 = '';
+
+        $('.removeShuju').on('click', function () {
+            jilu = $(this).siblings('input[type="hidden"]').val()
+            jilu1 = $(this).parent().parent().parent().parent().parent()
+            var typeo = $(this).parent().parent().parent().find('input[type="hidden"]').val();
+            if (+typeo === 0) {
+                radios++;
+            } else if (+typeo === 1) {
+                qus++
+            } else {
+                chechbox++
+            }
+            ;
+            $(this).hide()
+
+
+            var dataset = {
+                "id": jilu
+            }
+            /*点击添加按钮筛选数据进行页面上内容的左向右添加*/
+
+            var data = JSON.parse(localStorage.getItem('newSt'));
+            $(data.shiti).each(function (i, v) {
+
+                if (v.id === (+jilu)) {
+                    var xinxin = '';
+
+                    if (v.star === 1) {
+                        xinxin = '<div class="starts"><ul class="pingStar"><li rel="1" class="on" title="很简单"></li><li rel="2"  title="简单"></li><li rel="3" title="中等"></li><li rel="4"  title="困难"></li><li rel="5" title="很困难"></li></ul></div>'
+                    } else if (v.star === 2) {
+                        xinxin = '<div class="starts"><ul class="pingStar"><li rel="1" class="on" title="很简单"></li><li rel="2" class="on" title="简单"></li><li rel="3" title="中等"></li><li rel="4"  title="困难"></li><li rel="5" title="很困难"></li></ul></div>';
+                    } else if (v.star === 3) {
+                        xinxin = '<div class="starts"><ul class="pingStar"><li rel="1" class="on" title="很简单"></li><li rel="2" class="on" title="简单"></li><li rel="3" class="on" title="中等"></li><li rel="4"  title="困难"></li><li rel="5"  title="很困难"></li></ul></div>';
+
+                    } else if (v.star === 4) {
+                        xinxin = '<div class="starts"><ul class="pingStar"><li rel="1" class="on" title="很简单"></li><li rel="2" class="on" title="简单"></li><li rel="3" class="on" title="中等"></li><li rel="4" class="on" title="困难"><li rel="5"  title="很困难"></li></ul></div>';
+
+                    } else if (v.star === 5) {
+                        xinxin = '<div class="starts"><ul class="pingStar"><li rel="1" class="on"  title="很简单"></li><li rel="2" class="on"  title="简单"></li><li rel="3" class="on"  title="中等"></li><li rel="4" class="on"  title="困难"></li><li rel="5"  class="on" title="很困难"></li></ul></div>';
+
+                    }
+
+                    if (v.type === 0) {
+                        tx = '单选题';
+                        tx1 = 0;
+                    } else if (v.type === 1) {
+                        tx = '判断题';
+                        tx1 = 1;
+
+                    } else {
+                        tx1 = 2;
+                        tx = '多选题'
+                    }
+
+                    /*将新的数据加载到右边的选中框内*/
+                    dd = '<div class="panel panel-accordion">' +
+                        '<div class="panel-header bg-scale-0">' +
+                        '<a class="panel-title collapsed" data-toggle="collapse"' +
+                        'data-parent="#accordion_faq2" href="#qa' + v.id + '">题目: ' +
+                        v.title +
+                        '<ul>' +
+                        '<li>' +
+                        '<input type="hidden" name="id" value="' + v.id + '">' +
+                        '<button type="button" class="btn btn-wide btn-danger   removeShuju1 pull-right tjfx'+v.id+'">删除' +
+                        '</button>' +
+                        '</li>' +
+                        '</ul>' +
+                        '<!--插入发送信息的时间-->' +
+                        '<br>' +
+                        '<span style="display: inline-block;margin-top: -16px;">' +
+                        '难度指数:' + xinxin +
+                        '</span>' +
+                        '</a>' +
+                        '</div>' +
+                        '<div id="qa' + v.id + '" class="panel-collapse collapse">' +
+                        '<div class="panel-content">' +
+                        '<div class="xianshi">' +
+                        '<h3 class="control-label">' + tx + '</h3>' + '<p class="control-label">题目:</p>' +
+                        '<span><textarea disabled name="radios">' + v.title + '</textarea></span>' + '<p class="control-label">' +
+                        'A:' +
+                        '<span><input type="text" name="answer1" disabled value="' + v.raA + '"> ' + '</span>' +
+                        '</p>' +
+                        '<p class="control-label">' +
+                        'B:<span><input type="text" name="answer2" disabled value="' + v.raB + '"> ' + '</span>' +
+                        '</p>' +
+                        '<p class="control-label">' +
+                        'C:<span><input type="text" name="answer3" disabled value="' + v.raC + '"> ' + '</span>' +
+                        '</p>'+
+                        '<p class="control-label">' +
+                        'D:<span><input type="text" name="answer4" disabled value="' + v.raD + '"> ' + '</span>' +
+                        '</p>' +
+                        '<p>' +
+                        '<span style="margin-right:20px;">正确答案:<input type="text" name="answer" disabled value="' + v.xz + '">' +
+                        '</span></p>' +
+                        '<p class="control-label">' +
+                        '<span>本题知识点:</span>' +
+                        '</p>' +
+                        '<span><textarea type="text" disabled name="answerExplain">' + v.point + '</textarea></span>' +
+                        '<input type="hidden" name="questionsType" value="' + tx1 + '"><input type="hidden" name="difficulty" value="' + v.star + '">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+
+                }
+            })
+            if ($('#text-addTo').html() === '添加相应的题目信息...') {
+                $('#text-addTo').html('');
+                $('#text-addTo').append(dd)
+
+            } else {
+                $('#text-addTo').append(dd);
+            }
+
+
+            /*清空多余的数据样式*/
+            $('#text-addTo .xianshi p').each(function (i, v) {
+                if ($(v).find('span input').val() === 'ohMyGod') {
+                    $(v).hide()
+                }
+            })
+
+            $('#text-addTo .xianshi p label').each(function (i, v) {
+                if ($(v).text() === 'ohMyGod') {
+                    $(v).hide()
+                }
+            })
+
+
+            /*将新的页面加载上去,形成对应的数据*/
+            return false
+        })
+
+        /*点击删除出现数据样式,将数据进行删除*/
+        $(document).on('click', '.removeShuju1', function () {
+            var aa = $(this).parent().parent().parent().parent().parent();
+            /*点击删除,删除自己的东西*/
+            var idd = $(this).siblings('input[type="hidden"]').val()
+            aa.remove();
+            var ace = '.tjfx'+idd;
+            $(ace).show()
+            if ($('#text-addTo').html() === '') {
+                $('#text-addTo').html('添加相应的题目信息...')
+            }
+            return false
+        })
+
+    }
+
+    function fen(cc, data, num1, num2, zong) {
+        var options = {
+            currentPage: 1, /*默认显示位置*/
+            totalPages: zong, /*一共多少条*/
+            itemTexts: function (type, page, current) {
+                /*显示的是点击目前的位置*/
+                switch (type) {
+                    case "first":
+                        return "首页";
+                    case "prev":
+                        return "上一页";
+                    case "next":
+                        return "下一页";
+                    case "last":
+                        return "末页";
+                    case "page":
+                        return page;
+                }
+            }, onPageChanged: function (e, oldPage, newPage) {
+                /*回调函数*/
+                /*点击按钮页面显示页数的按钮值*/
+                num2 = num2 * newPage;
+                for (var i = 1; i < newPage; i++) {
+                    num1 += 5
+                }
+                addPage(cc, data, num1, num2)
+                num1 = 0;
+                num2 = 5;
+
+            }
+
+        }
+
+        $('#example').bootstrapPaginator(options);
+    }
+
+    function slide(data) {
+        if (data.type === 0) {
+            $('.shuju-tishi1').text(data.message)
+            $('.shuju-tishi1').slideDown()
+            var timeou = setTimeout(function () {
+                $('.shuju-tishi1').slideUp()
+            }, 2000)
+            /*成功重新记载表格数据*/
+            clearTimeout(timeout1)
+        } else {
+            clearTimeout(timeou)
+            /*数据加载失败*/
+            $('.shuju-tishi2').text(data.message)
+            $('.shuju-tishi2').slideDown()
+            var timeout1 = setTimeout(function () {
+                $('.shuju-tishi2').slideUp()
+            }, 2000)
+        }
+    }
+
+    function ajax(url, dataset, url1) {
+        $.ajax({
+            url: url,
+            data: dataset,
+            type: "post",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                /*接收值绘画到页面上*/
+                if (data.type === 0) {
+                    $.ajax({
+                        url: url1,
+                        type: "get",
+                        dataType: "json",
+                        success: function (data) {
+                            var cc = data.shiti;
+                            /*取出获取到的数据*/
+                            var num1 = 0;
+                            /*点击切换页数数据的更新*/
+                            var num2 = 5;
+                            var zong = '';
+                            /*记录数据的总页数*/
+                            addPage(cc, data, num1, num2)
+
+                            zong = data.shiti.length;
+                            zong = parseInt(zong / 5) + 1;
+                            /*分页按钮*/
+                            fen(cc, data, num1, num2, zong)
+
+                        }
+                    })
+                }
+                slide(data)
+
+            }
+        })
+    }
+
+</script>
+
+</html>

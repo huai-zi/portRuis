@@ -1,0 +1,141 @@
+/*课程管理*/
+.photo-box img {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.photo-box1 img {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.mybox .fBtns {
+    width: 37% !important;
+}
+
+.mybox .fPics {
+    width: 63% !important;
+}
+
+.aaaa {
+    margin-top: 80px;
+}
+
+.file_input {
+    position: relative;
+    margin-top: 15px;
+}
+
+.file_input button {
+    margin-left: 10px;
+}
+
+.file_input input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    left: 95px;
+    z-index: 100;
+    width: 82px;
+    top: 0;
+    height: 34px;
+}
+#lg-modal1 h3{
+    padding-bottom:20px;
+    border-bottom: 1px solid #ccc;
+}
+#lg-modal1 .modal-body div{
+    font-size: 19px;
+
+}
+#lg-modal1 .modal-body .col-xs-3,#lg-modal1 .modal-body .col-xs-9{
+    margin: 10px 0;
+}
+#lg-modal1 .modal-body .col-xs-9 img{
+    width: 200px;
+}
+.course {
+    padding: 30px;
+    background-color: #fff;
+}
+.text-center{
+    text-align:center !important;
+}
+
+.table.dataTable tr td img {
+    width: 50px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #1ab394 !important;
+    border-color: #1ab394 !important;
+    margin-top: 20px !important;
+}
+
+.btn-primary:hover {
+    background-color: #17a689 !important;
+    border-color: #17a689 !important;
+    margin-top: 20px !important;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+
+    background-color: #17a689 !important;
+    border-color: #17a689 !important;
+    margin-top: 20px !important;
+}
+
+.big_da {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background-color: rgba(0, 0, 0, .7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.big_da i {
+    position: absolute;
+    z-index: 603;
+    top: 70px;
+    right: 20px;
+    color: #fff;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.big_da img {
+    display: inline-block;
+}
+
+.photo-box .col-xs-4 img {
+    width: 150px;
+    height: 150px;
+}
+
+.photo-box .col-xs-4 .removes {
+    color: red;
+    text-align: right;
+    cursor: pointer;
+    margin: 0 auto;
+    width: 150px;
+}
+
+.photo-box1 .col-xs-4 img {
+    width: 150px;
+    height: 150px;
+}
+
+.photo-box1 .col-xs-4 .removes {
+    color: red;
+    text-align: right;
+    cursor: pointer;
+    margin: 0 auto;
+    width: 150px;
+}
+
+.model_changeText, .model_changeText1 {
+    margin-left: 30px;
+}
+

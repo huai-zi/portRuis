@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "uid": "1",
+      "name": "C语言",
+      "position": "一种编程语言",
+      "butt": "<button class='btn btn-wide btn-info1'>职位管理</button><button type='button' class='btn btn-wide btn-info notazirez' data-toggle='modal' data-target='#info-modal'>修改</button><button type='button' class='btn btn-wide btn-danger removeShuju' data-toggle='modal' data-target='#error-modal'>删除</button>"
+    },
+    {
+      "id": "2",
+      "uid": "2",
+      "name": "JAVA学习",
+      "position": "一种编程语言",
+      "butt": "<button class='btn btn-wide btn-info1'>职位管理</button><button type='button' class='btn btn-wide btn-info notazirez' data-toggle='modal' data-target='#info-modal'>修改</button><button type='button' class='btn btn-wide btn-danger removeShuju' data-toggle='modal' data-target='#error-modal'>删除</button>"
+    },
+    {
+      "id": "3",
+      "uid": "3",
+      "name": "WEB前端",
+      "position": "一种编程语言",
+      "butt": "<button class='btn btn-wide btn-info1'>职位管理</button><button type='button' class='btn btn-wide btn-info notazirez' data-toggle='modal' data-target='#info-modal'>修改</button><button type='button' class='btn btn-wide btn-danger removeShuju' data-toggle='modal' data-target='#error-modal'>删除</button>"
+    },
+    {
+      "id": "4",
+      "uid": "4",
+      "name": "PHP基础",
+      "position": "一种编程语言",
+      "butt": "<button class='btn btn-wide btn-info1'>职位管理</button><button type='button' class='btn btn-wide btn-info notazirez' data-toggle='modal' data-target='#info-modal'>修改</button><button type='button' class='btn btn-wide btn-danger removeShuju' data-toggle='modal' data-target='#error-modal'>删除</button>"
+    },
+    {
+      "id": "5",
+      "uid": "5",
+      "name": "UI设计",
+      "position": "一种编程语言",
+      "butt": "<button class='btn btn-wide btn-info1'>职位管理</button><button type='button' class='btn btn-wide btn-info notazirez' data-toggle='modal' data-target='#info-modal'>修改</button><button type='button' class='btn btn-wide btn-danger removeShuju' data-toggle='modal' data-target='#error-modal'>删除</button>"
+    },
+    {
+      "id": "6",
+      "uid": "6",
+      "name": ".NET",
+      "position": "一种编程语言",
+      "butt": "<button class='btn btn-wide btn-info1'>职位管理</button><button type='button' class='btn btn-wide btn-info notazirez' data-toggle='modal' data-target='#info-modal'>修改</button><button type='button' class='btn btn-wide btn-danger removeShuju' data-toggle='modal' data-target='#error-modal'>删除</button>"
+    },
+    {
+      "id": "7",
+      "uid": "7",
+      "name": "IOS原生",
+      "position": "一种编程语言",
+      "butt": "<button class='btn btn-wide btn-info1'>职位管理</button><button type='button' class='btn btn-wide btn-info notazirez' data-toggle='modal' data-target='#info-modal'>修改</button><button type='button' class='btn btn-wide btn-danger removeShuju' data-toggle='modal' data-target='#error-modal'>删除</button>"
+    }
+  ],
+  "message":true
+}

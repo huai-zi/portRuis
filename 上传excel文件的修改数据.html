@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en" class="fixed">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>培训管理系统</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/style.css">
+    <style>
+        #area {
+            margin-top: 0 !important;
+            padding: 0 !important;
+            margin-bottom: 15px;
+        }
+        .tbodya tr td:nth-child(1){
+
+            display: block !important;
+        }
+    </style>
+</head>
+
+<!--[if lt IE 8]>
+<script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<body>
+
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+<div class="wrap aaaa">
+    <!--顶部栏-->
+    <div class="page-body">
+        <!--左侧栏-->
+
+        <div class="content">
+            <div class="content-header about-bgc1">
+                <div class="leftside-content-header">
+                    <ul class="breadcrumbs">
+                        <li><i class="fa fa-table" aria-hidden="true"></i><a href="#">系统管理</a></li>
+                        <li><a>用户管理</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row animated fadeInRight">
+                <div class="col-sm-12">
+                    <!--模态框begin-->
+                    <button type="button" class="btn btn-wide btn-primary addTo" data-toggle="modal"
+                            data-target="#md-modal">
+                        新增成员
+                    </button>
+                    <button type="button" style='margin-left: 20px;' class="btn btn-wide btn-primary " id="upload">
+                        批量上传
+                    </button>
+                    <!--上传-->
+                    <input type="file" style='display: none;' accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name='files' id="files">
+                    <!-- 新增成员 -->
+                    <div class="modal fade" id="md-modal" tabindex="-1" role="dialog"
+                         aria-labelledby="modal-default-label">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form id="new-form" enctype=multipart/form-data>
+                                    <div class="modal-header state modal-primary">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="modal-default-label">添加用户信息</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="control-label">姓名:</label>
+                                            <input type="text" class="form-control" name='name' id="gH">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">性别:</label>
+                                            <label class="radio-inline2">
+                                                <input type="radio" name="sex" id="inlineRadio3" value="男"
+                                                       checked="checked"> 男
+                                            </label>&nbsp;&nbsp;&nbsp;
+                                            <label class="radio-inline2">
+                                                <input type="radio" name="sex" id="inlineRadio4" value="女">
+                                                女
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="phone" class="control-label">电话号码:</label>
+                                            <input type="text" class="form-control" name='iphone' id="phone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="emali" class="control-label">电子邮箱:</label>
+                                            <input type="text" class="form-control" name='email' id="emali">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <span class="password-yanzheng pull-left warm-xinxi"
+                                          style="display: none;line-height: 35px;"><i
+                                            class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
+                                        <span class="password-yanzheng pull-left warm-xinxixx"
+                                              style="display: none;line-height: 35px;"><i
+                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;手机号有误!请重新输入!!!</span>
+                                        <span class="password-yanzheng pull-left warm-xinxixxx"
+                                              style="display: none;line-height: 35px;"><i
+                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;邮箱有误!请重新输入!!!</span>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="addTo">
+                                            确认添加
+                                        </button>
+                                        <button type="button" class="btn  btn-danger btn-dangers" data-dismiss="modal">
+                                            关闭
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-content">
+                            <div class="table-responsive">
+                                <table class="data-table table table-striped nowrap table-hover"
+                                       cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>性别</th>
+                                        <th>电话</th>
+                                        <th>邮箱</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tbodya">
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+</div>
+<!--修改数模态框-->
+<div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="modal-info-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-info">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="modal-info-label"><i class="fa fa-info"></i>课程信息修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">课程名:</label>
+                    <input type="text" class="form-control" id="name1">
+                </div>
+                <div class="form-group">
+                    <!--身份-->
+                    <label class="control-label">课程简介:</label>
+                    <textarea style='max-width: 568px;' class="form-control" id="message-text1"></textarea>
+                    <br>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--确认修改-->
+                <button type="button" class="btn btn-info" id="notarize" data-dismiss="modal">确认修改</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除按钮模态框-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>删除信息</h4>
+            </div>
+            <div class="modal-body">
+                请您考虑清楚!确认删除此条用户信息!删除不可恢复!!!
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn btn-danger" id="remove" data-dismiss="modal">确认删除</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src='./javascripts/xlsx.core.min.js'></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/jquery.dataTables.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/dataTables.bootstrap.min.js"></script>
+<script src='javascripts/excel1.js'></script>
+</body>
+</html>

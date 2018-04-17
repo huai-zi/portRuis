@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" class="fixed accounts sign-in">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>培训管理系统</title>
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/style.css">
+</head>
+
+<!--[if lt IE 8]>
+<script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<body>
+
+<header class="header">
+</header>
+<div class="wrap wrap1">
+    <div class="page-body animated slideInDown">
+        <div class="logo">
+            培训管理系统
+        </div>
+        <div class="box">
+            <div class="panel mb-none">
+                <div class="panel-content bg-scale-0">
+                    <form>
+                        <div class="form-group mt-md">
+                            <span class="input-with-icon">
+                                    <input type="text" class="form-control" id="usname" placeholder="用户名">
+                                    <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                                <span class="input-with-icon">
+                                        <input type="password" class="form-control" id="password" placeholder="密码">
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                            <span class="password-yanzheng"><i class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;密码由6-21位字母与数字组成</span><br>
+                            <span
+                                    class="password-cuowu"><i class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;密码错误,请重新输入</span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-block" id="btn-block">登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src='./javascripts/circleMagic.js'></script>
+</body>
+<script type='text/javascript'>
+    /*气泡效果*/
+    $(function () {
+        $('.header').circleMagic({
+            elem: '.header',
+            radius: 35,
+            densety: .3,
+            color: 'rgba(255,255,255, .4)',
+            clearOffset: .3
+        });
+
+    })
+    window.onload = function () {
+        var password = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,21}$/;
+        var val2 = document.getElementById("usname");
+        var val1 = document.getElementById("password");
+        document.querySelector("#btn-block").onclick = function () {
+
+            if (password.test(val1.value)) {
+                /*成功的显示*/
+                var setData = {
+                    "usname":val2.value,
+                    "password":val1.value
+                }
+                /*存储数据*/
+                /*向后台传送值*/
+                $.ajax({
+                    url: "",
+                    data: setData,
+                    type: "post",
+                    success: function (data) {
+                        /*跳转到首页*/
+                        window.location.href = ""
+                    }
+                })
+                $('.password-yanzheng').hide()
+
+                return false
+            } else {
+                /*失败的样式*/
+                $('.password-yanzheng').show()
+                return false
+            }
+        }
+    }
+</script>
+
+</html>

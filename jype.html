@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="javascripts/jquery.1.10.2.js"></script>
+
+<script language=JavaScript>
+    function peinsder() {
+        myPEInside.SetupPath = "d:\\peinsder";
+        myPEInside.Project = "zip/201708171409440731.zip";
+    }
+</script>
+<body onload='peinsder()'>
+<object id="myPEInside" classid="CLSID:72D0889C-0EBD-11D0-BF0D-0000E8D0D147" width="100%"
+        style="border: none;margin: 0;padding: 0;"
+        height="1000px"></object>
+</body>
+<script>
+    //
+    var questionInfo = "kaoti:1;shijuanId:d90a4c9a-b433-430c-8a60-6d1863fcba7d;id:1";
+
+    //模型初次进入会执行到
+    function OnPEMessage(msg) {
+        console.log('我是被调用的函数');
+        console.log(msg);
+        if (msg == 1) {
+            //启动成功
+            var pe = $('#myPEInside')[0];
+            if (myPEInside && myPEInside.SetupPath != undefined) {
+
+                //给PE发送消息
+                if (questionInfo != "") {
+                    myPEInside.SetVariableValue("s_WebMessage", questionInfo);
+                    myPEInside.SetVariableValue("b_webMsg", 1);
+                }
+            }
+        }
+        else {
+            //     alert(msg);
+            //处理得到的PEInside返回的操作考试结果，结果信息在msg中
+            //&kaoti&:4,&shijuanId&:&20170321&,&score&:15,&result&:!@&id&:&1&,&daan&:&123321&%,@&id&:&2&,&daan&:&32123&%,@&id&:&3&,&daan&:&123321&%,@&id&:&19&,&daan&:&12321&%#"
+            var resultmessage = msg;
+            var index = resultmessage.indexOf("kaoti");
+            console.log(resultmessage);
+            if (index < 0) {
+                return;
+            }
+            var reg = /!/g;
+            resultmessage = resultmessage.replace(reg, '[');
+            reg = /#/g;
+            resultmessage = resultmessage.replace(reg, ']');
+            reg = /@@/g;
+            resultmessage = resultmessage.replace(reg, '{');
+            reg = /%/g;
+            resultmessage = resultmessage.replace(reg, '}');
+            reg = /&/g;
+            resultmessage = resultmessage.replace(reg, '"');
+            reg = /kaoti/g;
+            resultmessage = resultmessage.replace(reg, 'Kaoti');
+            reg = /shijuanid/g;
+            resultmessage = resultmessage.replace(reg, 'PostedExaminationPaperId');
+            reg = /score/g;
+            //{"Kaoti":1,"PostedExaminationPaperId":"d90a4c9a-b433-430c-8a60-6d1863fcba7d","Score":0,"QuestionResults":[{"Id":"1","Result":"1111"}]}
+            // {"Kaoti":1,"PostedExaminationPaperId":"d90a4c9a-b433-430c-8a60-6d1863fcba7d","Score":0,"QuestionResults":[{"Id":"1","Result":"1111"}1}
+            resultmessage = resultmessage.replace(reg, 'Score');
+            reg = /result/g;
+            resultmessage = resultmessage.replace(reg, 'QuestionResults');
+            reg = /id/g;
+            resultmessage = resultmessage.replace(reg, 'Id');
+            reg = /daan/g;
+            resultmessage = resultmessage.replace(reg, 'Result');
+            resultmessage = "{" + resultmessage + "}";
+
+            var rega = /}1/g;
+            if (rega.test(resultmessage)) {
+                resultmessage = resultmessage.replace(rega, '}]');
+            }
+
+            console.log(resultmessage);
+            $.ajax({
+                url: "http://192.168.43.103:8111/user",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    if (data.statusCode == 200) {
+                        location.href = "/Students/Exams";
+                    } else {
+                        alert("提交试卷失败00，请重试");
+                    }
+                },
+                error: function () {
+                    alert('提交试卷失败，请重试');
+                }
+            });
+
+        }
+    }
+</script>
+
+</html>

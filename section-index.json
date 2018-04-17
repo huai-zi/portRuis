@@ -1,0 +1,75 @@
+{
+  "id": 5,
+  "section": "VR部",
+  "neirong": [
+    {
+      "id": 55,
+      "major": "VR知识",
+      "remark": "VR初步尝试wwww",
+      "gangwei": [
+        {
+          "id": "1",
+          "station": "VR尝试",
+          "remark": "VR初步尝试"
+        },
+        {
+          "id": "2",
+          "station": "C语言的技术",
+          "remark": "VR初步尝试"
+        },
+        {
+          "id": "3",
+          "station": "VR视频",
+          "remark": "VR初步尝试"
+        },
+        {
+          "id": "4",
+          "station": "C语言的技术",
+          "remark": "VR初步尝试"
+        },
+        {
+          "id": "5",
+          "station": "C语言的发展史",
+          "remark": "VR初步尝试"
+        },
+        {
+          "id": "6",
+          "station": "C语言的奥秘",
+          "remark": "VR初步尝试"
+        },
+        {
+          "id": "7",
+          "station": "C语言的技术",
+          "remark": "VR初步尝试"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "major": "仿真知识",
+      "remark": "VR初步尝试asd",
+      "gangwei": [
+        {
+          "id": "1",
+          "station": "VR尝试",
+          "remark": "VR初步尝试"
+        },
+        {
+          "id": "2",
+          "station": "C语言的技术",
+          "remark": "VR初步尝试"
+        },
+        {
+          "id": "3",
+          "station": "VR视频",
+          "remark": "VR初步尝试"
+        },
+        {
+          "id": "4",
+          "station": "C语言的技术",
+          "remark": "VR初步尝试"
+        }
+      ]
+    }
+  ]
+}

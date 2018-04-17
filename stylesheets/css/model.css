@@ -1,0 +1,108 @@
+.photo-box img {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.photo-box1 img {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.mybox .fBtns {
+    width: 37% !important;
+}
+
+.mybox .fPics {
+    width: 63% !important;
+}
+
+.aaaa {
+    margin-top: 80px;
+}
+
+.file_input {
+    position: relative;
+    margin-top: 15px;
+}
+
+.file_input button {
+    margin-left: 10px;
+}
+
+.file_input input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    left: 95px;
+    z-index: 100;
+    width: 82px;
+    top: 0;
+    height: 34px;
+}
+
+.table.dataTable tr td {
+    line-height: 57px !important;
+}
+
+.table.dataTable tr td img {
+    width: 59px;
+    cursor: pointer;
+}
+
+.big_da {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 600;
+    background-color: rgba(0, 0, 0, .7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.big_da span {
+    position: absolute;
+    z-index: 603;
+    top: 70px;
+    right: 20px;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.big_da img {
+    display: inline-block;
+}
+
+.photo-box .col-xs-4 img {
+    width: 150px;
+    height: 150px;
+}
+
+.photo-box .col-xs-4 .removes {
+    color: red;
+    text-align: right;
+    cursor: pointer;
+    margin: 0 auto;
+    width: 150px;
+}
+
+.photo-box1 .col-xs-4 img {
+    width: 150px;
+    height: 150px;
+}
+
+.photo-box1 .col-xs-4 .removes {
+    color: red;
+    text-align: right;
+    cursor: pointer;
+    margin: 0 auto;
+    width: 150px;
+}
+
+.model_changeText, .model_changeText1 {
+    margin-left: 30px;
+}
+
+select {
+    padding-right: 15px;
+}

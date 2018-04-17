@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "水冷泵的原型",
+    "type": "水冷泵",
+    "position": "images/model.jpg",
+    "file": "21312321.zip"
+  },
+  {
+    "id": 2,
+    "name": "水冷泵的原型1",
+    "type": "水冷泵q",
+    "position": "images/model.jpg",
+    "file": ""
+  }
+]

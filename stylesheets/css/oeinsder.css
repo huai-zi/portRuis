@@ -1,0 +1,229 @@
+body {
+    background-color: rgb(248, 248, 248);
+}
+
+.peinsder-box {
+    background-color: #fff;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid rgb(31, 167, 193);
+}
+
+.peinsder-imgas img {
+    width: 100%;
+    min-height:200px;
+}
+
+.peinsder-imgas1 img {
+    width: 100%;
+    min-height:200px;
+
+}
+.fadeInRight {
+    padding-bottom: 0 !important;
+}
+
+@media (min-width: 1300px) {
+
+    .peinsder-box {
+        background-color: #fff;
+        width: 75% !important;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid rgb(31, 167, 193);
+    }
+}
+
+@media (min-width: 900px ) and (max-width: 1200px) {
+
+    .peinsder-box {
+        background-color: #fff;
+        width: 890px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid rgb(31, 167, 193);
+    }
+}
+
+.peinsder-imgas {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+.peinsder-imgas1 {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+h4 {
+    padding-left: 0 !important;
+    padding: 20px 0;
+    color: black;
+    font-size: 14px;
+    font-weight: 900;
+    margin: 0;
+}
+
+.peinsder-sb {
+    height: 48px;
+    line-height: 48px;
+    background-color: #028097 !important;
+    margin-bottom: 30px;
+    font-size: large;
+    color: #fff;
+
+}
+
+html.fixed .content-header {
+    height: 80px;
+    background-color: #028097;
+}
+
+.leftside-content-header {
+    float: right;
+}
+
+.banner_top {
+    margin-bottom: 0px;
+    padding-left: 5%;
+}
+
+.banner_top a {
+    float: left;
+    font-size: 14px;
+    line-height: 48px;
+    color: #a7b1c2;
+    padding: 0px 20px 0px 25px;
+    font-weight: 600;
+
+}
+
+.banner-fal {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+
+    .banner-fal {
+        text-align: center;
+    }
+
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        position: relative;
+        background-color: #fff;
+        z-index: 122;
+        top: 16px;
+    }
+
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+        background-color: #e7e7e7 !important;
+
+    }
+
+    .navbar-nav {
+        width: 100%;
+        float: left !important;
+    }
+
+    .navbar-nav > li > a {
+        line-height: 40px !important;
+    }
+}
+
+.navbar-nav {
+    float: right;
+}
+
+.banner_top a.select {
+    color: #fff;
+    background-color: #fff;
+    background-color: #337ab7;
+    border-left: 4px solid #19aa8d;
+}
+
+.aaaa {
+    padding-top: 0 !important;
+}
+
+.about-bgc1 {
+    margin-bottom: 0 !important;
+}
+
+.navbar-default {
+    margin-bottom: 0 !important;
+    height: 80px;
+    background-color: #028097 !important;
+    border-bottom: 0;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: transparent !important;
+}
+
+.navbar-toggle {
+    margin-top: 21px !important;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+
+}
+
+@media (min-width: 767px) {
+    .navbar-nav {
+        margin: 0;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        margin-top: 27px;
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 22px 25px 16px 19px;
+    }
+
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+        background-color: rgba(255, 255, 255, .15);
+        color: #fff;
+    }
+
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        width: 80%;
+        margin: 0 auto;
+        background: url('../../images/topbar_bg.png') no-repeat center;
+        background-size: contain;
+    }
+}
+
+.banner_top a:hover {
+    background-color: #eeeeee;
+}
+
+.banner_top a.select:hover {
+    background-color: #337ab7;
+}
+
+.navbar-nav > li > a {
+    line-height: 11px;
+}
+
+.onile-box .col-sm-3, .onile-box .col-sm-9 {
+    border: 1px solid #ccc;
+    height: 100%;
+}

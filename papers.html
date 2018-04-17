@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>培训管理系统</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <style>
+    .papers {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .papers {
+            width: 100%;
+        }
+    }
+
+    body {
+        background-color: #eee;
+    }
+
+    .papers-top {
+        height: 55px;
+        width: 100%;
+        line-height: 55px;
+        font-size: 16px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .papers-top i:before {
+        color: #ff652f;
+        font-size: 25px;
+        display: inline-block;
+        transform: translatey(4px);
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .subject-main {
+        background: #FFF;
+        padding: 20px;
+    }
+
+    .subject-main:after,
+    .subject-main:before {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .subject-content {
+        position: relative;
+        margin-bottom: 20px;
+        display: none;
+    }
+
+    .subject-content1 {
+        position: relative;
+        margin-bottom: 20px;
+        display: none;
+    }
+
+    .subject-content.active {
+        display: block !important;
+    }
+
+    .subject-content1.active {
+        display: block !important;
+    }
+
+    .subject-question {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    a:link,
+    a:visited {
+        text-decoration: none;
+    }
+
+    .subject-options:hover {
+        background: #F3F3F3;
+        text-decoration: none;
+        border-color: #909090;
+    }
+
+    .subject-options:hover pre {
+        color: #00bc9b;
+    }
+
+     :focus {
+        outline: -webkit-focus-ring-color auto 5px;
+    }
+
+    .subject-options {
+        width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #d4d4d4;
+        border-radius: 2px;
+        padding: 12px 20px 13px;
+        background: #FFF;
+        display: block;
+        word-break: break-all;
+        margin-bottom: 20px;
+    }
+
+    .subject-main .checkbox,
+    .subject-main .radio {
+        line-height: 20px;
+    }
+
+    .subject-main .radio.active,
+    .subject-main .checkbox.active {
+        border: 1px solid #00bc9b !important;
+    }
+
+    .subject-main .radio.active pre,
+    .subject-main .checkbox.active pre {
+        color: #00bc9b !important;
+    }
+
+    .subject-main .radio.active .icons::after,
+    .subject-main .checkbox.active .icons::after {
+        content: '';
+        width: 50%;
+        height: 50%;
+        background-color: #00bc9b;
+        border-radius: 50%;
+        display: inline-block;
+        transform: translatey(-6px);
+        line-height: 14px;
+    }
+
+    .subject-main .radio.active .icons {
+        border: 1px solid #00bc9b !important;
+    }
+
+    .subject-main .checkbox.active .icons {
+        border: 1px solid #00bc9b !important;
+    }
+
+    .font {
+        color: #00bc9b !important;
+    }
+
+    .checkbox,
+    .radio {
+        cursor: pointer;
+        font-size: 14px;
+        text-align: left;
+        display: inline-block;
+    }
+
+    .radio .icons {
+        border-radius: 50%;
+    }
+
+    .icons {
+        border: 1px solid #DDD;
+        vertical-align: -3px;
+        width: 14px;
+        height: 14px;
+        background: #FFF;
+        display: inline-block;
+        margin-right: 3px;
+        border-radius: 2px;
+        line-height: normal;
+        text-align: center;
+        position: relative;
+    }
+
+    .checkbox input,
+    .radio input {
+        display: none;
+        outline: medium none !important;
+    }
+
+    label.checkbox pre,
+    label.radio pre {
+        display: inline-block;
+        vertical-align: top;
+        max-width: 850px;
+    }
+
+    .result-answer-item pre,
+    label.checkbox pre,
+    label.radio pre {
+        padding: 0;
+        margin: 0;
+        background: 0 0;
+        border: none;
+    }
+
+    pre {
+        font-size: 14px;
+        position: relative;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        transform: translatey(1px);
+    }
+    /*答题卡*/
+
+    .answer-sheet-box {
+        border-top: 1px dashed #DDD;
+        padding: 20px;
+        font-size: 16px;
+        background: #FFF;
+    }
+
+    .open .answer-sheet-num {
+        display: block;
+        padding-left: 0;
+    }
+
+    .answer-sheet-num {
+        margin-top: 15px;
+    }
+
+    .answer-sheet-num li {
+        float: left;
+        margin-right: 10px;
+    }
+
+    .answer-sheet-num a {
+        display: block;
+        color: #dce4ec;
+        font-size: 16px;
+        width: 40px;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .answer-sheet-num a.answering-num,
+    .answer-sheet-num a:hover {
+        display: block;
+        background: #59b59c;
+        color: #FFF !important;
+    }
+
+    #submitForm {
+        text-align: right;
+    }
+
+    #next {
+        margin-left: 10px;
+    }
+
+    #primary-modall2 {
+        background-color: rgba(0, 0, 0, .7);
+    }
+
+    .col-xs-5 {
+        text-align: left;
+    }
+
+    .subject-next {
+        margin-top: 20px;
+    }
+
+    .ck-answer {
+        cursor: pointer;
+        margin: 0 15px;
+    }
+
+    .click-ckAnswer {
+        padding: 15px 0;
+    }
+    </style>
+</head>
+
+<body>
+    <!--考卷填写-->
+    <div class="page-zhangjie clearfix">
+        <div class="papers">
+            <!--题目类型-->
+            <div class="papers-top">
+                <i class="fa fa-question-circle" aria-hidden="true"></i><span class="tit">培训试题</span>
+            </div>
+            <!--考题填写-->
+            <form id="submitForm" method="post" action="/student/stuu">
+                <div class="subject-main">
+                    <div id="subject-main">
+                        <!--考题添加-->
+                    </div>
+                    <div class="subject-action clearfix">
+                        <div class="subject-next">
+                            <input type="hidden" name="cid" id="cid">
+                            <input type="hidden" name="tid" id="tid">
+                            <input id="aheadFinish" type="button" name="button" class="btn warning-btn" value="提前交卷">
+                            <input type="submit" name="" style="display: none;" id="dsubmit">
+                            <input id="next" type="button" name="button" class="btn btn-primary" value="下一题">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--答题卡-->
+            <div class="answer-sheet-box open">
+                <a href="javascript:void(0)" class="card-unfold"><span>收起答题卡</span> <i class="fa fa-chevron-down"></i></a>
+                <ul class="answer-sheet-num clearfix" id="answer-sheet-num">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--提交模板弹窗-->
+    <div class="modal fade" id="primary-modall2" tabindex="-1" role="dialog" aria-labelledby="modal-success-label" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!--您即将提交试卷,请再次检查答题卡,是否有遗漏-->
+                    你尚未完成本次练习，确定要提前交卷？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn-success1l2" class="btn btn-success" data-dismiss="modal">确认</button>
+                    <button type="button" class="btn btn-default" id="btn-success1n2" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src='javascripts/template.js'></script>
+<script src='javascripts/papers.js'></script>
+<script id="papers" type="text/html">
+    {{each shiti as value index}}
+    <div class="subject-content" id="collapseOne{{index}}" class="tab-pane fade " data-tid="{{index}}">
+        <div class="subject-question">
+            <p style="margin-left: 21.0pt;text-align: left"><span style="margin-right: 15px;">[{{ttm(value.type)}}]</span>{{value.title}}({{value.fs}}分)</p>
+        </div>
+        {{if value.type === 2}}
+        <div class="container-fluid col-xs-7">
+            <label class="checkbox   subject-options" for="papers_laber{{(value.id+9)*1357}}" style="{{show(value.raA)}}">
+                <span class="icons "></span>
+                <input type="checkbox" id="papers_laber{{(value.id+9)*1357}}" name="radios{{value.id}}" value="A" data-inid="{{index}}">
+                <pre>{{value.raA}}</pre>
+            </label>
+            <label class="checkbox   subject-options" for='papers_laber{{(value.id+9)*2357}}' style="{{show(value.raB)}}">
+                <span class="icons"></span>
+                <input type="checkbox" id="papers_laber{{(value.id+9)*2357}}" name="radios{{value.id}}" value="B" data-inid="{{index}}">
+                <pre>{{value.raB}}</pre>
+            </label>
+            <label class="checkbox  subject-options" for='papers_laber{{(value.id+9)*3357}}' style="{{show(value.raC)}}">
+                <span class="icons"></span>
+                <input type="checkbox" id="papers_laber{{(value.id+9)*3357}}" name="radios{{value.id}}" value="C" data-inid="{{index}}">
+                <pre>{{value.raC}}</pre>
+            </label>
+            <label class="checkbox   subject-options" for='papers_laber{{(value.id+9)*4357}}' style="{{show(value.raD)}}">
+                <span class="icons"></span>
+                <input type="checkbox" id="papers_laber{{(value.id+9)*4357}}" name="radios{{value.id}}" value="D" data-inid="{{index}}">
+                <pre>{{value.raD}}</pre>
+            </label>
+        </div>
+        <input type="hidden" name="questionsType" value="{{value.type}}">
+        <div class="col-xs-5">
+            <h5>相关图片</h5>
+            <img src="{{value.images}}" style="width: 100%;" class="bg-img" alt="暂无图片">
+        </div>
+        <div class="row col-xs-12 text-left ck-answer">
+            <div class="click-ckAnswer">查看答案</div>
+            <div class="col-xs-12 cQues">
+                <p>正确答案:{{value.qus}}</p>
+                <p>本题知识点:</p>
+                <p>{{value.point}}</p>
+            </div>
+        </div>
+        {{else}}
+        <div class="container-fluid col-xs-7">
+            <label class="radio subject-options" for="papers_laber0{{(value.id+9)*1357}}" style="{{show(value.raA)}}">
+                <span class="icons "></span>
+                <input type="radio" id="papers_laber0{{(value.id+9)*1357}}" name="radios{{value.id}}" value="A" data-inid="{{index}}">
+                <pre>{{value.raA}}</pre>
+            </label>
+            <label class="radio subject-options" for='papers_laber0{{(value.id+9)*2357}}' style="{{show(value.raB)}}">
+                <span class="icons"></span>
+                <input type="radio" id="papers_laber0{{(value.id+9)*2357}}" name="radios{{value.id}}" value="B" data-inid="{{index}}">
+                <pre>{{value.raB}}</pre>
+            </label>
+            <label class="radio subject-options" for='papers_laber0{{(value.id+9)*3357}}' style="{{show(value.raC)}}">
+                <span class="icons"></span>
+                <input type="radio" id="papers_laber0{{(value.id+9)*3357}}" name="radios{{value.id}}" value="C" data-inid="{{index}}">
+                <pre>{{value.raC}}</pre>
+            </label>
+            <label class="radio subject-options" for='papers_laber0{{(value.id+9)*4357}}' style="{{show(value.raD)}}">
+                <span class="icons"></span>
+                <input type="radio" id="papers_laber0{{(value.id+9)*4357}}" name="radios{{value.id}}" value="D" data-inid="{{index}}">
+                <pre>{{value.raD}}</pre>
+            </label>
+        </div>
+        <input type="hidden" name="questionsType" value="{{value.type}}">
+        <div class="col-xs-5">
+            <h5>相关图片</h5>
+            <img src="{{value.images}}" style="width: 100%;" class="bg-img" alt="暂无图片">
+        </div>
+        <div class="row col-xs-12 text-left ck-answer">
+            <div class="click-ckAnswer">查看答案</div>
+            <div class="col-xs-12 cQues">
+                <p>正确答案:{{value.qus}}</p>
+                <p>本题知识点:</p>
+                <p>{{value.point}}</p>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+    {{/each}}
+</script>
+<script id="but" type="text/html">
+    {{each shiti as value index}}
+    <li><a data-toggle="tab" aria-expanded="true" href="#collapseOne{{index}}" class="collapseOne{{index}}" data-id="{{index}}">{{index+1}}</a></li>
+    {{/each}}
+</script>
+<script>
+$(function() {
+    $(document).on('click', '.click-ckAnswer', function() {
+        var tet = $(this).text();
+
+        if (tet === '查看答案') {
+            $(this).text('关闭答案');
+            $(this).next().slideDown();
+
+        } else {
+
+            $(this).text('查看答案');
+            $(this).next().slideUp();
+        }
+    })
+})
+</script>
+
+</html>
