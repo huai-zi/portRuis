@@ -203,7 +203,7 @@
                         <!--主体结构-->
                         <div class="col-sm-12">
                             <!--模态框begin-->
-                            <a href="add_facility.html" class="btn btn-wide btn-primary addTo">
+                            <a href="./add_course.html" class="btn btn-wide btn-primary addTo" >
                                 添加设备信息
                             </a>
                             <!--制作表格-->
@@ -254,29 +254,26 @@
                     <h3>确定要删除这个设备及所属课程吗？</h3>
                     <div class="text-right col-xs-3">
                         设备名称
-                    </div>
-                    <div class=" col-xs-9">
-                        <span id="course_name">123</span>
-                    </div>
+                    </div> <div class=" col-xs-9">
+                    <span id="course_name">123</span>
+                </div>
                     <div class="text-right col-xs-3">
                         设备图像
-                    </div>
-                    <div class=" col-xs-9">
-                        <img src="./images/model.jpg" alt="" id="course_img">
-                    </div>
+                    </div> <div class=" col-xs-9">
+                    <img src="./images/model.jpg" alt="" id="course_img">
+                </div>
                     <div class="text-right col-xs-3">
                         描述
-                    </div>
-                    <div class=" col-xs-9">
-                        <span id="course_xs"></span>
-                    </div>
+                    </div> <div class=" col-xs-9">
+                    <span id="course_xs"></span>
+                </div>
                 </div>
                 <div class="modal-footer text-center">
 
                     <button type="button" class="btn  btn-default  color_red itm_qx" data-dismiss="modal">
                         删除
                     </button>
-                    <button type="button" class="btn  btn-default color_green" data-dismiss="modal">
+                    <button type="button" class="btn  btn-default color_green" data-dismiss="modal" >
                         取消
                     </button>
                 </div>
@@ -296,88 +293,26 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-//        ace.localHref(".notazirez", "amend_facility.html", function () {
-//            //对数据进行存储
-//            var that = $(this).parent().parent().children();
-//            console.log($(this));
-//            return false
-//        });
-
-
-        var options = [
-            {"data": "id"},
-            {"data": "name"},
-            {
-                "data": "position",
-                "render": function (data, type, full, set) {
-                    var a = "";
-                    var imgs = full.position.split('#');
-                    if (imgs.length >= 1) {
-                        imgs.forEach(function (v, i) {
-                            a += '<img src="' + v + '" alt="">';
-                        })
-                    } else {
-                        a = '<img src="' + data + '" alt="">';
-                    }
-                    return a
-                }
-            },
-            {
-                "data": "remarks",
-                "render": function (data, type, full, set) {
-                    return ""
-                }
-            },
-            {
-                "data": "remarks",
-                "render": function (data, type, full, set) {
-                    /*返回的数据拼接*/
-                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
-                }
-            }
-        ];
-        ace.datatables('model.json', options, function () {
-            //点击编辑
-
-            var aa3 = '';
-            var aa2 = '';
-            var aa4 = '';
-            var aa1 = '';
-            $('.notazirez').click(function () {
-                aa3 = $(this).parent().parent().children().eq(1).text();
-                aa2 = $(this).parent().parent().children().eq(2).children('img').attr('src');
-                aa1 = $(this).parent().parent().children().eq(0).text();
-                aa4 = $(this).parent().parent().children().eq(3).text();
-                var dataset = {
-                    "courseId": aa1,
-                    "courseName": aa3,
-                    "courseImage": aa2,
-                    "course": aa4,
-                }
-                localStorage.setItem("course", JSON.stringify(dataset));
-                window.location.href = "amend_facility.html";
-            })
-        })
-
-    });
+        //隐藏栏目
+    })
 
     $(function () {
         var modelz = new models();
 //将模态框进行处理
         window.textId = '';
-        $(document).on("click", '.removeShuju', function () {
-            window.textId = $(this).parent().parent().children().eq(0).text();
-            console.log(window.textId);
+        $(document).on("click",'.removeShuju',function(){
+            window.textId =$(this).parent().parent().children().eq(0).text();
+            console.log( window.textId);
         })
         var modals = ['lg-modal1', 'info-modal', 'error-modal'];
         modelz.modtal(modals);
         //删除传送数据
-        $('.itm_qx').click(function () {
+        $('.itm_qx').click(function(){
             var dataset = {
-                "id": window.textId
+              "id":window.textId
             };
             console.log(textId);
-            modelz.ajaxform(url, dataset, function () {
+            modelz.ajaxform(url,dataset,function(){
                 modelz.tables();
             })
             //取到id,与数据进行对比,加载模态框

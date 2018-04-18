@@ -32,6 +32,25 @@
     <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
 </span>
 </div>
+<!--模态框-->
+<div class="modal fade " id="error-modal55" tabindex="-1" role="dialog" aria-labelledby="modal-error-label"
+     style="display: none; padding-right: 17px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-danger">
+                <h4 class="modal-title"><i class="fa fa-warning"></i>删除信息</h4>
+            </div>
+            <div class="modal-body">
+                请您考虑清楚!确认删除此条用户信息!删除不可恢复!!!
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn btn-danger" id="remove55" data-dismiss="modal">确认删除</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="remove555">取消删除</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="sm-modal" tabindex="-1" role="dialog"
      aria-labelledby="modal-default-label" style="display: none; padding-right: 16px;">
     <div class="modal-dialog modal-md" role="document">
@@ -180,61 +199,38 @@
                     <div class="section-head">
                         <h2>设备管理</h2>
                     </div>
-                    <!--中间区域独立模块-->
-                    <form id="forms" enctype="multipart/form-data">
-                        <div class="Add_course">
-                            <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>编辑设备
-                            </div>
-                            <h3>设备信息</h3>
-                            <div class="container-fluid">
-                                <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        设备名称
-                                    </div>
-                                    <div class="col-xs-9">
-                                        <input type="hidden" name="modalId" id="modalId" value="">
-                                        <input type="text" class="form-control" name="modelName">
-
-                                        <span class="password-yanzheng pull-left warm-xinxi"
-                                              style="line-height: 35px;font-size: 16px !important;"><i
-                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
-                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        设备图像
-                                    </div>
-                                    <div class="col-xs-9">
-
-                                        <input type="file" name="modelImg" id="modelImg" accept="image/*">
-                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        图像预览
-                                    </div>
-                                    <div class="col-xs-9">
-
-                                        <img id="model_img" src="./images/model.jpg" alt="暂无图像">
+                    <div class="section-body clearfix">
+                        <!--主体结构-->
+                        <div class="col-sm-12">
+                            <!--模态框begin-->
+                            <a href="./add_course.html" class="btn btn-wide btn-primary addTo">
+                                添加设备信息
+                            </a>
+                            <!--制作表格-->
+                            <div class="panel">
+                                <div class="panel-content">
+                                    <div class="table-responsive">
+                                        <table id="basic-table"
+                                               class="data-table table table-striped nowrap table-hover" cellspacing="0"
+                                               width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>标识</th>
+                                                <th>名称</th>
+                                                <th>图像</th>
+                                                <th>备注</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="tbodya">
+                                            <!--占位符-->
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        备注
-                                    </div>
-                                    <div class="col-xs-9">
-                                        <input type="text" class="form-control" name="modelRemark">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="Add_course_bottom text-center">
-                                <button type='button' class='btn1 course_bj notazirez'>保存</button>
-                                <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
@@ -242,6 +238,52 @@
     </div>
 </div>
 
+<!--添加设备-->
+<div class="modal fade" id="lg-modal1" tabindex="-1" role="dialog"
+     aria-labelledby="modal-large-label">
+    <div class="modal-dialog modal-md" role="document">
+        <form method=post name="model_xx" id="form01" enctype=multipart/form-data>
+            <div class="modal-content">
+                <div class="modal-header state modal-primary">
+
+                    <h4 class="modal-title"><i class="fa fa-puzzle-piece"></i>删除设备</h4>
+
+                </div>
+
+                <div class="modal-body clearfix">
+                    <h3>确定要删除这个设备及所属课程吗？</h3>
+                    <div class="text-right col-xs-3">
+                        设备名称
+                    </div>
+                    <div class=" col-xs-9">
+                        <span id="course_name">123</span>
+                    </div>
+                    <div class="text-right col-xs-3">
+                        设备图像
+                    </div>
+                    <div class=" col-xs-9">
+                        <img src="./images/model.jpg" alt="" id="course_img">
+                    </div>
+                    <div class="text-right col-xs-3">
+                        描述
+                    </div>
+                    <div class=" col-xs-9">
+                        <span id="course_xs"></span>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+
+                    <button type="button" class="btn  btn-default  color_red itm_qx" data-dismiss="modal">
+                        删除
+                    </button>
+                    <button type="button" class="btn  btn-default color_green" data-dismiss="modal">
+                        取消
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
@@ -254,10 +296,94 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./course.html");
-        ace.change("#modelImg", "#model_img");
-    })
+//        ace.localHref(".notazirez", "amend_course.html", function () {
+//            //对数据进行存储
+//            var that = $(this).parent().parent().children();
+//            console.log($(this));
+//            return false
+//        });
+
+
+        var options = [
+            {"data": "id"},
+            {"data": "name"},
+            {
+                "data": "position",
+                "render": function (data, type, full, set) {
+                    var a = "";
+                    var imgs = full.position.split('#');
+                    if (imgs.length >= 1) {
+                        imgs.forEach(function (v, i) {
+                            a += '<img src="' + v + '" alt="">';
+                        })
+                    } else {
+                        a = '<img src="' + data + '" alt="">';
+                    }
+                    return a
+                }
+            },
+            {
+                "data": "remarks",
+                "render": function (data, type, full, set) {
+                    return ""
+                }
+            },
+            {
+                "data": "remarks",
+                "render": function (data, type, full, set) {
+                    /*返回的数据拼接*/
+                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
+                }
+            }
+        ];
+        ace.datatables('model.json', options, function () {
+            //点击编辑
+
+            var aa3 = '';
+            var aa2 = '';
+            var aa4 = '';
+            var aa1 = '';
+            $('.notazirez').click(function () {
+                aa3 = $(this).parent().parent().children().eq(1).text();
+                aa2 = $(this).parent().parent().children().eq(2).children('img').attr('src');
+                aa1 = $(this).parent().parent().children().eq(0).text();
+                aa4 = $(this).parent().parent().children().eq(3).text();
+                var dataset = {
+                    "courseId": aa1,
+                    "courseName": aa3,
+                    "courseImage": aa2,
+                    "course": aa4,
+                }
+                localStorage.setItem("course", JSON.stringify(dataset));
+                window.location.href = "amend_course.html";
+            })
+        })
+
+    });
+
     $(function () {
+        var modelz = new models();
+//将模态框进行处理
+        window.textId = '';
+        $(document).on("click", '.removeShuju', function () {
+            window.textId = $(this).parent().parent().children().eq(0).text();
+            console.log(window.textId);
+        })
+        var modals = ['lg-modal1', 'info-modal', 'error-modal'];
+        modelz.modtal(modals);
+        //删除传送数据
+        $('.itm_qx').click(function () {
+            var dataset = {
+                "id": window.textId
+            };
+            console.log(textId);
+            modelz.ajaxform(url, dataset, function () {
+                modelz.tables();
+            })
+            //取到id,与数据进行对比,加载模态框
+
+
+        })
         $('.big_da').click(function () {
             return false
         })
@@ -267,16 +393,8 @@
         $('.click_close').on('click', function () {
             $(this).parent().css("display", "none");
         })
-        //比对id,加载上相应的数据
-        var mo = new models();
-        //点击添加判断
-        $('#notazirez').click(function () {
-            mo.selectJc("forms", "warm-xinxi", function () {
-                mo.numcs(url, "forms", "modalId", function () {
-                    window.location.href = "course.html";
-                })
-            });
-        });
+
+        //编辑模型
 
     })
 </script>
