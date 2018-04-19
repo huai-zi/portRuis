@@ -2,9 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <style>
+        body, html {
+            background: rgb(2, 128, 151);
+            width: 100%;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .top {
+            min-width: 1124px;
+            background: url("./images/topbar_bg.png") no-repeat center;
+            height: 76px;
+            background-size: contain;
+        }
+
+        .imgs {
+            background: url("./images/asd.png") no-repeat center;
+            width: 1152px;
+            height: 518px;
+            background-size: contain;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .imgs input {
+            position: absolute;
+            width: 135px;
+            height: 30px;
+            padding-left: 5px;
+
+        }
+
+        .imgs input:nth-child(2) {
+            position: absolute;
+            right: 345px;
+            top: 295px;
+        }
+
+        .imgs input:nth-child(1) {
+            position: absolute;
+            right: 345px;
+            top: 233px;
+
+        }
+
+        .imgs span {
+            position: absolute;
+            right: 232px;
+            top: 289px;
+            background: url("./images/download.png") no-repeat center;
+            width: 100px;
+            height: 38px;
+            background-size: contain;
+            cursor: pointer;
+        }
+
+        .imgs p {
+            position: absolute;
+            right: 376px;
+            top: 320px;
+            font-size: 14px;
+            color: #ed5565;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-$END$
+<div class="top">
+
+</div>
+<div class="imgs">
+    <input type="text" id="usname" name="user"/>
+    <input type="password" id="password" name="pass"/>
+
+    <span id="loginButton" ></span>
+    <p >用户名或密码错误</p>
+</div>
 </body>
+<script type="text/javascript">
+    var func = function () {
+        if ($('#usname')[0].value != null && $('#password')[0].value.length >= 6 && $('#password')[0].value.length < 21) {
+            $.ajax({
+                url: '',
+                type: "POST",
+                data: $('form').serialize(),
+                success: function (data) {
+                    if (data === 'false') {
+                        $('.password-cuowu').show();
+                    }
+                    else {
+                        window.location.href = "user/home";
+                    }
+                }
+            });
+        }
+        else {
+            $('.password-cuowu').show();
+        }
+    }
+    $(document).ready(function () {
+        $('#loginButton').click(func);
+        window.onkeypress = function (event) {
+            var code = event.which;
+            if (code === 13) {
+                func();
+            }
+        };
+    });
+</script>
 </html>

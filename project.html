@@ -73,7 +73,7 @@
                                     <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
                                 </a>
                             </li>
-                            <li class="active-item">
+                            <li class="">
                                 <a href=''>
                                     <i class="fa fa-book" aria-hidden="true"></i>课程管理
                                 </a>
@@ -83,8 +83,8 @@
                                     <i class="fa fa-pie-chart" aria-hidden="true"></i>模型管理
                                 </a>
                             </li>
-                            <li class="">
-                                <a href=''>
+                            <li class="active-item">
+                                <a href='project.html'>
                                     <i class="fa fa-wrench" aria-hidden="true"></i>检修规划管理
                                 </a>
                             </li>
@@ -149,8 +149,8 @@
                         <!--主体结构-->
                         <div class="col-sm-12">
                             <!--模态框begin-->
-                            <a href="add_course.html" class="btn btn-wide btn-primary addTo">
-                                添加新课程
+                            <a href="add_project.html" class="btn btn-wide btn-primary addTo">
+                                添加新检修规划
                             </a>
                             <!--制作表格-->
                             <div class="panel">
@@ -162,10 +162,10 @@
                                             <thead>
                                             <tr>
                                                 <th>标识</th>
-                                                <th>名称</th>
-                                                <th>所属设备</th>
-                                                <th>图像</th>
-                                                <th>备注</th>
+                                                <th>检修规划</th>
+                                                <th>所属部分</th>
+                                                <th>检修规划文件</th>
+                                                <th>描述</th>
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
@@ -185,82 +185,31 @@
     </div>
 </div>
 
-<!--添加设备-->
-<div class="modal fade" id="lg-modal1" tabindex="-1" role="dialog"
-     aria-labelledby="modal-large-label">
-    <div class="modal-dialog modal-md" role="document">
-        <form method=post name="model_xx" id="form01" enctype=multipart/form-data>
-            <div class="modal-content">
-                <div class="modal-header state modal-primary">
 
-                    <h4 class="modal-title"><i class="fa fa-puzzle-piece"></i>删除设备</h4>
-
-                </div>
-
-                <div class="modal-body clearfix">
-                    <h3>确定要删除这门课程吗？</h3>
-                    <div class="clearfix">
-                        <div class="text-right col-xs-3">
-                            课程名称
-                        </div>
-                        <div class=" col-xs-9">
-                            <span id="course_name">123</span>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="text-right col-xs-3">
-                            所属设备
-                        </div>
-                        <div class=" col-xs-9">
-                            <span id="course_sle">123</span>
-
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="text-right col-xs-3">
-                            课程图像
-                        </div>
-                        <div class=" col-xs-9">
-                            <img src="./images/model.jpg" alt="" id="course_img">
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="text-right col-xs-3">
-                            训练文件
-                        </div>
-                        <div class=" col-xs-9">
-                            <span id="course_xs"></span>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="text-right col-xs-3">
-                            考试文件
-                        </div>
-                        <div class=" col-xs-9">
-                            <span id="course_steam"></span>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="text-right col-xs-3">
-                            备注
-                        </div>
-                        <div class=" col-xs-9">
-                            <span id="course_bz"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer text-center">
-
-
-                    <button type="button" class="btn  btn-default color_green itm_qx" data-dismiss="modal">
-                        确定
-                    </button>
-                    <button type="button" class="btn  btn-default   " data-dismiss="modal">
-                        取消
-                    </button>
-                </div>
+<!--删除按钮模态框-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-danger">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>提示
+                </h4>
             </div>
-        </form>
+            <div class="modal-body">
+                <span id="modal_remove"></span>及其所属检修规划内容都将被删除，且不能再恢复。确定要删除吗？
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn btn-danger itm_qx" data-dismiss="modal">
+                    确定
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
     </div>
 </div>
 <script src="javascripts/jquery.1.10.2.js"></script>
@@ -279,20 +228,7 @@
             {"data": "id"},
             {"data": "name"},
             {"data": "name"},
-            {
-                "data": "position",
-                "render": function (data, type, full, set) {
-                    var a = "";
-                    var imgs = full.position.split('#');
-                    if (imgs.length >= 1) {
-                        imgs.forEach(function (v, i) {
-                            a += '<img src="' + v + '" alt="">';
-                        })
-                    } else {
-                        a = '<img src="' + data + '" alt="">';
-                    }
-                    return a
-                }
+            {"data": "position"
             },
             {
                 "data": "remarks",
@@ -313,32 +249,27 @@
 
             //点击编辑
             var aa1 = '';
+            var aa2 = '';
             window.aa5 = '';
             $('.notazirez').click(function () {
                 aa1 = $(this).parent().parent().children().eq(0).text();
                 $(data.aoData).each(function (i, v) {
                     if (+aa1 === v._aData.id) {
-                        localStorage.setItem("course", JSON.stringify(v._aData));
+                        localStorage.setItem("project", JSON.stringify(v._aData));
                     }
                 })
-                window.location.href="amend_course.html"
+                window.location.href = "amend_project.html"
             });
+
             //回掉函数获取加载的数据信息
 
 
             $(".removeShuju").click(function () {
                 window.aa5 = $(this).parent().parent().children().eq(0).text();
-                $(data.aoData).each(function (i, v) {
-                    if (+aa5 === v._aData.id) {
-                        $("#course_name").text(v._aData.name);
-                        $("#course_sle").text(v._aData.type);
-                        $("#course_img").text(v._aData.position);
-                        $("#course_xs").text(v._aData.file);
-                        $("#course_steam").text(v._aData.fileStam);
-                        $("#course_bz").text(v._aData.ramark);
+                aa2 = $(this).parent().parent().children().eq(1).text();
+                $("#modal_remove").text(aa2);
+                $("#error-modal").modal();
 
-                    }
-                })
 
             })
 

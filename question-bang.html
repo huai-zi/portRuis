@@ -46,8 +46,7 @@
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="" style='display: inline-block;transform:translatey(1px);'><i class="fa fa-sign-out log-out"
-                                                                                       aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -64,7 +63,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href='course.html'>
+                                <a href='facility.html'>
                                     <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
                                 </a>
                             </li>
@@ -153,8 +152,9 @@
                                     <option value="">请选择相应的课程</option>
                                 </select>
                             </div>
-                            <a class="pull-right btn btn-wide btn-success" title='添加新题目'>添加新题目</a>
-                            <a class="pull-right btn btn-info" style='margin-right: 5px' title='批量添加'>批量添加</a>
+                            <a class="pull-right btn btn-wide btn-success" href="add_quertion_bang.html" title='添加新题目'>添加新题目</a>
+                            <a class="pull-right btn btn-info" href='upload_quertion_bang.html'
+                               style='margin-right: 5px' title='批量添加'>批量添加</a>
                         </div>
                         <div class="">
                             <!--表格数据-->
@@ -228,6 +228,7 @@
                     if (data === "") {
 
                     } else {
+                        //增加相应课程类目
                         $(data).each(function (i, v) {
                             ace.select_curriculum[0].options[i + 1] = new Option(v.name, v.id);
                         })
@@ -242,18 +243,38 @@
             var val = that.val();
             var dataset = {
                 "id": val
-            }
+            };
             //数据重新加载
-            ace.datatables('models.json',function(){
+            var options = [
+                {"data": "id"},
+                {"data": "name"},
+                {
+                    "data": "position"
+                },
+                {
+                    "data": "remarks",
+                    "render": function (data, type, full, set) {
+                        return "2017-05-19 11:11"
+                    }
+                },
+                {
+                    "data": "remarks",
+                    "render": function (data, type, full, set) {
+                        /*返回的数据拼接*/
+                        return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
+                    }
+                }
+            ];
+            ace.datatables('models.json', options, [2, 3, 4], function () {
 
-            })
+            });
             ace.ajaxPost(url, dataset, function (data) {
                 //加载到页面上
                 if (data === '') {
 
                 }
 
-            })
+            });
         });
 
 

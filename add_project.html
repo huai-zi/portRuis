@@ -86,7 +86,8 @@
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i
+                        class="fa fa-sign-out log-out" aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -102,13 +103,13 @@
                                     <i class="fa fa-university" aria-hidden="true"></i>部门管理
                                 </a>
                             </li>
-                            <li class="active-item">
+                            <li>
                                 <a href=''>
                                     <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
                                 </a>
                             </li>
                             <li class="">
-                                <a href=''>
+                                <a href='course.html'>
                                     <i class="fa fa-book" aria-hidden="true"></i>课程管理
                                 </a>
                             </li>
@@ -117,8 +118,8 @@
                                     <i class="fa fa-pie-chart" aria-hidden="true"></i>模型管理
                                 </a>
                             </li>
-                            <li class="">
-                                <a href=''>
+                            <li class="active-item">
+                                <a href='project.html'>
                                     <i class="fa fa-wrench" aria-hidden="true"></i>检修规划管理
                                 </a>
                             </li>
@@ -177,22 +178,22 @@
 
                 <div class="section animated fadeInRight">
                     <div class="section-head">
-                        <h2>设备管理</h2>
+                        <h2>检修规划管理</h2>
                     </div>
                     <!--中间区域独立模块-->
-                    <form id="forms" name='forms' enctype="multipart/form-data">
+                    <form id="forms" enctype="multipart/form-data" name="forms">
                         <div class="Add_course">
                             <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>编辑设备
+                                <i class="fa fa-ellipsis-v "></i>添加检修规划
                             </div>
-                            <h3>设备信息</h3>
+                            <h3>检修规划信息</h3>
                             <div class="container-fluid">
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
-                                        设备名称
+                                        检修规划名称
                                     </div>
                                     <div class="col-xs-9">
-                                        <input type="hidden" name="modalId" id="modalId" value="">
+
                                         <input type="text" class="form-control" name="modelName">
 
                                         <span class="password-yanzheng pull-left warm-xinxi"
@@ -202,29 +203,32 @@
                                 </div>
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
-                                        设备图像
+                                        所属设备
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <select name="" id="course-select" class="form-control">
+                                            <option value="">设备</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--上传训练文件-->
+                                <div class="clearfix">
+                                    <div class="col-xs-3 text-right">
+                                        上传检修规划文件
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="file" name="modelImg" id="modelImg" accept="image/*">
+                                        <input type="file" name="modelImg" id="modelImg1" accept=".mp4,.wmv">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
                                                  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 0%;" id="Progress">
-                                                <span class="sr-only"
+                                                 style="width: 0%;" id="Progress1">
+                                                <span class="sr-only1"
                                                       style='clip: inherit !important;width:  61px;height: 22px;position: inherit;'></span>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        图像预览
-                                    </div>
-                                    <div class="col-xs-9">
-
-                                        <img id="model_img" src="./images/model.jpg" alt="暂无图像">
                                     </div>
                                 </div>
                                 <div class="clearfix">
@@ -233,14 +237,12 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <input type="text" class="form-control" name="modelRemark">
-                                        <!--题目id值-->
-                                        <input type="hidden" name="id" value="">
-                                        <input type="hidden" name="images" value="">
+
                                     </div>
                                 </div>
                             </div>
                             <div class="Add_course_bottom text-center">
-                                <button type='button' class='btn1 course_bj notazirez'>保存</button>
+                                <button type='button' class='btn1 course_bj notazirez'>添加</button>
                                 <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
                             </div>
                         </div>
@@ -264,29 +266,27 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "facility.html");
-        ace.change("#modelImg", "#model_img", function () {
-            $(forms.images).remove();
-        });
-        ace.filesUpload('modelImg', 'Progress', '.sr-only');
+        ace.localHref(".removeShuju", "./project.html");
+        ace.change("#modelImg", "#model_img");
+        //进行数据上传的封装
+        ace.filesUpload('modelImg1', 'Progress1', '.sr-only1');
 
-        var courses = JSON.parse(localStorage.getItem("facility"));
-        var forms = document.forms;
-        forms.modelName.value = courses.name;
-        forms.id.value = courses.id;
-        forms.modelRemark.value = courses.ramark;
-        $("#model_img").attr('src', courses.position);
-        forms.images.value = courses.position;
+        //对数据进行渲染
+        ace.ajaxGet("options.json", function (data) {
+            $(data).each(function (i, v) {
+                $("#course-select").get(0).options[i] = new Option(v.name, v.id);
+            });
+
+        })
 
     })
-
     $(function () {
         var mo = new models();
         //点击添加判断
         $('#notazirez').click(function () {
             mo.selectJc("forms", "warm-xinxi", function () {
                 mo.numcs(url, "forms", "", function () {
-                    window.location.href = "facility.html";
+                    window.location.href = "project.html";
                 })
             });
         });

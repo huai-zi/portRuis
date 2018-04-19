@@ -87,12 +87,11 @@
             <div class="header-middle"></div>
             <!-- 红点信息 -->
             <div class="header-section">
-                <a href="">你好,管理员!</a>
+                <span>你好,管理员!</span>
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="" style='display: inline-block;transform:translatey(1px);'><i class="fa fa-sign-out log-out"
-                                                                                       aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -186,135 +185,29 @@
                         <h2>题目管理</h2>
                     </div>
                     <!--中间区域独立模块-->
-                    <form id="forms" enctype="multipart/form-data">
+                    <form id="forms" enctype="multipart/form-data" name="forms">
                         <div class="Add_course">
                             <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>添加题目
+                                <i class="fa fa-ellipsis-v "></i>批量添加题目
                             </div>
                             <h3>题目信息</h3>
                             <div class="container-fluid">
+
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
-                                        类型
+                                        题目文件
                                     </div>
                                     <div class="col-xs-9">
-                                        <select name="steam_shiti" id="steam_shiti" class="form-control">
-                                            <option value="0" selected>单选题</option>
-                                            <option value="1">操作题</option>
-                                            <option value="2">问答题</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        所属课程
-                                    </div>
-                                    <div class="col-xs-9">
-                                        <select name="question" class="form-control">
-                                            <option value="0" selected>单选题</option>
-                                        </select>
+
+                                        <input type="file" name="modelImg" id="modelImg" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+
                                     </div>
                                 </div>
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
-                                        题干
+                                        上传进度
                                     </div>
                                     <div class="col-xs-9">
-                                        <textarea name="" class="form-control"
-                                                  style="max-width: 100%;min-height: 84px;"></textarea>
-                                    </div>
-                                </div>
-                                <!--单选题-->
-                                <div class="steam_shiti0">
-                                    <div class="clearfix">
-                                        <div class="col-xs-3 text-right">
-                                            备选答案
-                                        </div>
-                                        <div class="col-xs-7" id="createHTml">
-
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <button type='button' class='btn1  color_ora' id="remove_checked"
-                                                    style="padding: 6px 20px;">删除备选项
-                                            </button>
-
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">
-                                        <div class="col-xs-3 text-right">
-                                            添加选项
-                                        </div>
-                                        <div class="col-xs-7">
-
-                                        <textarea name="" class="form-control tive_text"
-                                                  style="max-width: 100%;"></textarea>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <button type='button' class='btn1  color_ql' id="add_checked"
-                                                    style="padding: 6px 20px;">添加
-                                            </button>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="clearfix">
-                                        <div class="col-xs-3 text-right">
-                                            正确选项
-                                        </div>
-                                        <div class="col-xs-9" id="selecteds">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--操作题-->
-                                <div class="steam_shiti1">
-                                    <div class="clearfix">
-                                        <div class="col-xs-3 text-right">
-                                            操作步骤
-                                        </div>
-                                        <div class="col-xs-7" id="createHTml1">
-
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <button type='button' class='btn1  color_ora' id="remove_checked1"
-                                                    style="padding: 6px 20px;">删除步骤
-                                            </button>
-
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">
-                                        <div class="col-xs-3 text-right">
-                                            添加步骤
-                                        </div>
-                                        <div class="col-xs-7">
-
-                                        <textarea name="" class="form-control tive_text1"
-                                                  style="max-width: 100%;"></textarea>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <button type='button' class='btn1  color_ql' id="add_checked1"
-                                                    style="padding: 6px 20px;">添加
-                                            </button>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="clearfix">
-                                        <div class="col-xs-3 text-right">
-                                            题目序号
-                                        </div>
-                                        <div class="col-xs-9" id="selecteds1">
-                                            <input type="number" min="0" class="form-control" name="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        题目图像
-                                    </div>
-                                    <div class="col-xs-9">
-
-                                        <input type="file" name="modelImg" id="modelImg" accept="image/*">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
@@ -326,19 +219,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        图像预览
-                                    </div>
-                                    <div class="col-xs-9">
-
-                                        <img id="model_img" src="./images/model.jpg" alt="暂无图像">
-                                    </div>
-                                </div>
                             </div>
                             <div class="Add_course_bottom text-center">
-                                <button type='button' class='btn1 course_bj notazirez'>添加</button>
-                                <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
+                                <button type='button' class='btn1 course_bj notazirez'>上传</button>
+                                <button type='button' class='btn1 course_remove removeShuju'>返回</button>
                             </div>
                         </div>
                     </form>
@@ -364,143 +248,9 @@
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
         ace.localHref(".removeShuju", "./question-bang.html");
-        ace.change("#modelImg", "#model_img");
-        ace.filesUpload()
+        ace.filesUpload('modelImg','Progress','.sr-only');
     })
     $(function () {
-        $('.big_da').click(function () {
-            return false
-        })
-        $('.big_da > img').click(function () {
-            return false
-        })
-        $('.click_close').on('click', function () {
-            $(this).parent().css("display", "none");
-        })
-
-        var mo = new models();
-
-        //点击添加判断
-        $('#notazirez').click(function () {
-            mo.selectJc("forms", "warm-xinxi", function () {
-                mo.numcs(url, "forms", "", function () {
-                    window.location.href = "question-bang.html";
-                })
-            });
-        });
-
-        //点击备选项添加
-        $("#add_checked").click(function () {
-            $('#remove_checked').show();
-            var val = $('.tive_text').val();
-            var arr = [];
-            arr.push(val);
-            var arrs = JSON.parse(localStorage.getItem('arrChecked'));
-            localStorage.setItem('arrChecked', JSON.stringify(arr));
-            if (arrs.length >= 1) {
-                arr = arrs;
-                arr.push(val);
-                localStorage.setItem('arrChecked', JSON.stringify(arr));
-            }
-            var htmll = mo.createHtml(arr, 0);
-            $("#createHTml").html(htmll.html);
-            $('#selecteds').html(htmll.radios)
-            $('.tive_text').val("");
-        })
-        //删除备选项
-        $("#remove_checked").click(function () {
-            var inputSelect = $('#createHTml input[name="selectOption"]');
-            var inputRadios = $('#selecteds input[name="selects"]');
-            var arrs = JSON.parse(localStorage.getItem('arrChecked'));
-            if (arrs.length === 0) {
-                $(this).hide();
-            }
-            inputSelect.each(function (i, v) {
-                if ($(v).is(':checked')) {
-                    $(v).parent().next().remove();
-                    $(v).parent().remove();
-                    $(inputRadios[i]).parent().next().remove();
-                    $(inputRadios[i]).parent().remove();
-                    //同时删除数据并进行渲染
-                    arrs = mo.removeArray(arrs, $(v).val());
-                    localStorage.setItem('arrChecked', JSON.stringify(arrs));
-                }
-
-            })
-            if (arrs.length === 0) {
-                $(this).hide()
-            }
-            var htmll = mo.createHtml(arrs, 0);
-            $("#createHTml").html(htmll.html);
-            $('#selecteds').html(htmll.radios)
-
-        })
-        //点击切换题目类型,界面显示
-        $('#steam_shiti').on('change', function () {
-            switch ($(this).val()) {
-                case "0":
-                    $('.steam_shiti0').show();
-                    $('.steam_shiti1').hide();
-                    var arrs = JSON.parse(localStorage.getItem('arrChecked'));
-                    var htmll = mo.createHtml(arrs, 0);
-                    $('#createHTml').html(htmll.html);
-                    $('#selecteds').html(htmll.radios);
-                    arrs.length > 0 ? $('#remove_checked').show() : $('#remove_checked').hide();
-                    break;
-                case "1"://操作题
-                    $('.steam_shiti0').hide();
-                    $('.steam_shiti1').show();
-                    var arrs = JSON.parse(localStorage.getItem('arrChecked'));
-                    arrs.length > 0 ? $('#remove_checked1').show() : $('#remove_checked1').hide();
-                    var htmll = mo.createHtml(arrs, 1);
-                    $('#createHTml1').html(htmll.html);
-                    break;
-                default://问答题
-                    $('.steam_shiti0').hide();
-                    $('.steam_shiti1').hide();
-                    break;
-            }
-        })
-
-        //操作题添加
-        $('#add_checked1').on('click', function () {
-            $('#remove_checked1').show()
-            var val = $('.tive_text1').val();
-            var arr = [];
-            arr.push(val);
-            var arrs = JSON.parse(localStorage.getItem('arrChecked'));
-            localStorage.setItem('arrChecked', JSON.stringify(arr));
-            if (arrs.length >= 1) {
-                arr = arrs;
-                arr.push(val);
-                localStorage.setItem('arrChecked', JSON.stringify(arr));
-            }
-            var htmll = mo.createHtml(arr, 1);
-            $("#createHTml1").html(htmll.html);
-            $('.tive_text1').val("");
-        })
-
-        //删除备选项
-        $("#remove_checked1").click(function () {
-            var inputSelect = $('#createHTml1 input[name="selectOption"]');
-            var arrs = JSON.parse(localStorage.getItem('arrChecked'));
-            inputSelect.each(function (i, v) {
-                if ($(v).is(':checked')) {
-                    $(v).parent().next().remove();
-                    $(v).parent().remove();
-                    //同时删除数据并进行渲染
-                    arrs = mo.removeArray(arrs, $(v).val());
-                    localStorage.setItem('arrChecked', JSON.stringify(arrs));
-                }
-
-            })
-            if (arrs.length === 0) {
-                $(this).hide();
-            }
-            var htmll = mo.createHtml(arrs, 1);
-            $("#createHTml1").html(htmll.html);
-
-        })
     })
 </script>
 </body>

@@ -1,439 +1,286 @@
 <!doctype html>
-<html lang="en" class="fixed">
-
+<html lang="en" class="fixed" style='overflow: hidden'>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>培训管理系统</title>
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="stylesheets/css/vendor/media/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
-    <link rel="stylesheet" href="stylesheets/css/style.css">
-    <style>
-        .mybox .fBtns {
-            width: 37% !important;
-        }
-
-        .mybox .fPics {
-            width: 63% !important;
-        }
-    </style>
+    <link rel="stylesheet" href="stylesheets/css/vendor/toastr/toastr.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/data-table/media/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/css/subject.css">
+    <link rel="stylesheet" href="stylesheets/css/course.css">
 </head>
 <!--[if lt IE 8]>
-<script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
-<script type="text/javascript" src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<script type="text/javascript" src="javascripts/html5.js"></script>
+<script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
 
-<body>
+<body onselectstart="return false">
+<!--点击显示大的图片-->
+<div class="big_da">
+    <i class="fa  fa-close click_close" aria-hidden="true"></i>
+    <img style="width: 50%;"
+         src="http://pic.qiantucdn.com/58pic/16/40/37/22X58PICtFy.jpg!/fw/300/clip/0x400a0a0/format/webp" alt="">
+</div>
 <!--记载过程中的loading-->
-<h5 class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>处理数据成功...
-</h5>
-<h5 class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>处理数据失败...</h5>
-<div class="wrap aaaa">
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+<!--模态框-->
+<div class="modal fade " id="error-modal55" tabindex="-1" role="dialog" aria-labelledby="modal-error-label"
+     style="display: none; padding-right: 17px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-danger">
+                <h4 class="modal-title"><i class="fa fa-warning"></i>删除信息</h4>
+            </div>
+            <div class="modal-body">
+                请您考虑清楚!确认删除此条用户信息!删除不可恢复!!!
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn btn-danger" id="remove55" data-dismiss="modal">确认删除</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="remove555">取消删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="sm-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-default-label" style="display: none; padding-right: 16px;">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="   modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="modal-large-label">添加岗位</h4>
+            </div>
+            <div class="modal-body modal-timu">
+                <div class="form-group">
+                    <!--岗位-->
+                    <label class="control-label">请选择相应的部门及专业:</label>
+                    <div id="area" class="area"></div>
+                </div>
+                <div class="form-group">
+                    <label for="station1" class="control-label">岗位:</label>
+                    <input type="text" class="form-control" id="station1">
+                </div>
+                <div class="form-group">
+                    <!--身份-->
+                    <label class="control-label">岗位备注:</label>
+                    <textarea style='max-width: 568px;' class="form-control"
+                              id="station2"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                        <span class="password-yanzheng pull-left warm-xinxi2"
+                              style="display: none;line-height: 35px;"><i class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
+                <button type="button" id="station" class="btn btn-primary" data-dismiss="modal">确认添加
+                </button>
+                <button type="button" class="btn  btn-danger" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 整体页面 -->
+<div class="wrap">
+    <!--顶部栏-->
+    <div class="page-header">
+        <div class="leftside-header">
+            <div id="menu-toggle" class="visible-xs toggle-left-sidebar" data-toggle-class="left-sidebar-open"
+                 data-target="html">
+                <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+            </div>
+        </div>
+        <div class="rightside-header">
+            <div class="header-middle"></div>
+            <!-- 红点信息 -->
+            <div class="header-section">
+                <span>你好,管理员!</span>
+            </div>
+            <div class="header-separator"></div>
+            <div class="header-section" style="margin-right: 50px;">
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i
+                        class="fa fa-sign-out log-out" aria-hidden="true"></i>注销</a>
+            </div>
+        </div>
+    </div>
     <div class="page-body">
+        <!--左侧栏-->
+        <div class="left-sidebar">
+            <div id="left-nav" class="nano">
+                <div class="nano-content" style="right: 0 !important;">
+                    <nav>
+                        <ul class="nav" id="main-nav">
+                            <li class="active-item">
+                                <a href='section.html'>
+                                    <i class="fa fa-university" aria-hidden="true"></i>部门管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href='facility.html'>
+                                    <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href='course.html'>
+                                    <i class="fa fa-book" aria-hidden="true"></i>课程管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href='model.html'>
+                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>模型管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-wrench" aria-hidden="true"></i>检修规划管理
+                                </a>
+                            </li>
+                            <li class=" has-child-item close-item">
+                                <a>
+                                    <i class='fa fa-bar-chart' aria-hidden="true"></i>
+                                    <span>考试管理</span>
+                                </a>
+                                <ul class="nav child-nav level-1">
+                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href=''>试卷管理</a></li>
+                                </ul>
+                            </li>
+                            <li class=" has-child-item close-item">
+                                <a>
+                                    <i class='fa fa-users' aria-hidden="true"></i>
+                                    <span>员工管理</span>
+                                </a>
+                                <ul class="nav child-nav level-1">
+                                    <li><a href=''>账号管理</a></li>
+                                    <li><a href=''>所属部门</a></li>
+                                    <li><a href=''>所属角色</a></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
+                                </a>
+                            </li>
+                        </ul>
 
-        <div class="content">
-            <div class="content-header about-bgc1">
-                <div class="leftside-content-header">
-                    <ul class="breadcrumbs">
-                        <li><i class="fa fa-table" aria-hidden="true"></i><a href="#">培训管理</a></li>
-                        <li><a>部门管理</a></li>
-                    </ul>
+                    </nav>
                 </div>
             </div>
-            <div class="row animated fadeInRight" id="boxOne">
-                <div class="col-sm-12">
-                    <!--模态框begin-->
-                    <button type="button" class="btn btn-wide btn-primary addTo" data-toggle="modal"
-                            data-target="#lg-modal1">
-                        添加部门
-                    </button>
-                    <!-- 添加部门 -->
+        </div>
+        <!--右侧栏-->
+        <div class="content content1 content2">
+            <div class="content-header content-header1 margin-left-click"
+                 style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
+                <!--主体-->
 
-                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> <span
-                        class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                    <button type="button" class="btn btn-wide btn-primary" data-toggle="modal" data-target="#md-modal"
-                            id="zhangjie">
-                        添加专业
-                    </button>
-                    <!--添加专业-->
-
-                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                    <!--添加题目-->
-                    <button type="button" class="btn btn-wide btn-primary" data-toggle="modal" data-target="#sm-modal">
-                        添加岗位
-                    </button>
-
-
-                    <!--制作表格-->
-                    <div class="panel">
-                        <div class="panel-content">
-                            <div class="table-responsive">
-                                <table id="basic-table" class="data-table table table-striped nowrap table-hover"
-                                       cellspacing="0" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>标识</th>
-                                        <th>序号</th>
-                                        <th>部门</th>
-                                        <th>备注</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="tbodya">
-                                    <!--占位符-->
-                                    </tbody>
-                                </table>
-                                <div id="example"></div>
-
-                            </div>
-                            <a href='./zhangjie.html'>预览信息
+                <div class="section animated fadeInRight">
+                    <div class="section-head">
+                        <h2>设备管理</h2>
+                    </div>
+                    <div class="section-body clearfix">
+                        <!--主体结构-->
+                        <div class="col-sm-12">
+                            <!--模态框begin-->
+                            <a href="add_section.html" class="btn btn-wide btn-primary addTo">
+                                添加新部门
                             </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--删除按钮模态框-->
-        <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-labelledby="modal-error-label"
-             style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header state modal-danger">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>删除信息</h4>
-                    </div>
-                    <div class="modal-body">
-                        请您考虑清楚!确认删除此条用户信息!删除不可恢复!!!
-                    </div>
-                    <div class="modal-footer">
-                        <!--确认删除-->
-                        <button type="button" class="btn btn-danger" id="remove" data-dismiss="modal">确认删除</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消删除</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--岗位删除按钮模态框-->
-        <div class="modal fade" id="error-modal513" tabindex="-1" role="dialog" aria-labelledby="modal-error-label"
-             style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header state modal-danger">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="modal-error-label513"><i class="fa fa-warning"></i>删除信息</h4>
-                    </div>
-                    <div class="modal-body">
-                        请您考虑清楚!确认删除此条用户信息!删除不可恢复!!!
-                    </div>
-                    <div class="modal-footer">
-                        <!--确认删除-->
-                        <button type="button" class="btn btn-danger" id="remove513" data-dismiss="modal">确认删除</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消删除</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--专业删除按钮-->
-        <div class="modal fade " id="error-modal55" tabindex="-1" role="dialog" aria-labelledby="modal-error-label"
-             style="display: none; padding-right: 17px;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header state modal-danger">
-                        <h4 class="modal-title"><i class="fa fa-warning"></i>删除信息</h4>
-                    </div>
-                    <div class="modal-body">
-                        请您考虑清楚!确认删除此条用户信息!删除不可恢复!!!
-                    </div>
-                    <div class="modal-footer">
-                        <!--确认删除-->
-                        <button type="button" class="btn btn-danger" id="remove55" data-dismiss="modal">确认删除</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="remove555">取消删除</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--修改数模态框-->
-        <div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="modal-info-label"
-             style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header state modal-info">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="modal-info-label"><i class="fa fa-info"></i>部门修改</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="name" class="control-label">部门名:</label>
-                            <input type="text" class="form-control" id="name1">
-                        </div>
-                        <div class="form-group">
-                            <!--身份-->
-                            <label class="control-label">部门备注:</label>
-                            <textarea style='max-width: 568px;' class="form-control" id="message-text1"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <!--确认修改-->
-                        <button type="button" class="btn btn-info" id="notarize" data-dismiss="modal">确认修改</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--查看专业以及岗位信息-->
-        <div class="row animated fadeInUp fadeInUp1" id="boxTwo" style="width: 0%; display: none">
-            <div class="col-sm-12 " style="padding:15px 0;">
-
-                <div class="modal-content" style='width: 100%;overflow-x: auto;'>
-                    <div style='min-width: 860px;width: 100%;'>
-                        <div class="modal-header state ">
-                            <h4 class="modal-title modal-title1"></h4>
-                        </div>
-                        <div class="tabbar">
-                            <span style='margin-left: 0px;'>专业:</span>
-                            <span style='margin-left: 15%;'>岗位:</span>
-                        </div>
-                        <div class="modal-body">
-                            <div class="box">
-                                <div class="banner">
-                                    <div class="mybox">
-                                        <div class="fPics" id="fPics">
-                                            <a href="javascripts:void(0)" style='opacity: 1;z-index: 2;'></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                            <a href="javascripts:void(0)"></a>
-                                        </div>
-
-                                        <ul class="fBtns" id="fBtns">
-                                            <li class="rli3">
-                                                <span style="width:100%"></span>
-                                                <a href="#"></a>
-                                            </li>
-
-                                            <li class="rli3">
-                                                <span style="width:0px"></span>
-                                                <a href="#"></a>
-                                            </li>
-
-                                            <li class="rli3">
-                                                <span style="width:0px"></span>
-                                                <a href="#"></a>
-                                            </li>
-
-                                            <li class="rli3">
-                                                <span style="width:0px"></span>
-                                                <a href="#"></a>
-                                            </li>
-
-                                            <li class="rli3">
-                                                <span style="width:0px"></span>
-                                                <a href="#"></a>
-                                            </li>
-
-                                            <li class="rli3">
-                                                <span style="width:0px"></span>
-                                                <a href="#"></a>
-                                            </li>
-
-                                        </ul>
+                            <!--制作表格-->
+                            <div class="panel">
+                                <div class="panel-content">
+                                    <div class="table-responsive">
+                                        <table id="basic-table"
+                                               class="data-table table table-striped nowrap table-hover" cellspacing="0"
+                                               width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>标识</th>
+                                                <th>名称</th>
+                                                <th>所属部门</th>
+                                                <th>备注</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="tbodya">
+                                            <!--占位符-->
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <!--确认修改-->
-                            <button type="button" class="btn btn-info" data-dismiss="modal" id="two">返回上一步</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!--数据修改-->
-        <div class="modal fade" id="default-modal513" tabindex="-1" role="dialog" aria-labelledby="modal-info-label"
-             style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header state modal-info">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="modal-info-label513"><i class="fa fa-info"></i>岗位修改</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="name" class="control-label">岗位名:</label>
-                            <input type="text" class="form-control" id="name513">
-                        </div>
-                        <div class="form-group">
-                            <!--身份-->
-                            <label class="control-label">岗位备注:</label>
-                            <textarea style='max-width: 568px;' class="form-control" id="message-text513"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <!--确认修改-->
-                        <button type="button" class="btn btn-info" id="notarize513" data-dismiss="modal">确认修改</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
+            <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
         </div>
-        <!--章节数据修改-->
-        <div class="modal fade " id="default-modal5" tabindex="-1" role="dialog" aria-labelledby="modal-info-label"
-             style="display: none; padding-right: 17px;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header state modal-info">
+    </div>
+</div>
 
-                        <h4 class="modal-title" id="modal-info-label5"><i class="fa fa-info"></i>专业修改</h4>
+<!--添加设备-->
+<div class="modal fade" id="lg-modal1" tabindex="-1" role="dialog"
+     aria-labelledby="modal-large-label">
+    <div class="modal-dialog modal-md" role="document">
+        <form method=post name="model_xx" id="form01" enctype=multipart/form-data>
+            <div class="modal-content">
+                <div class="modal-header state modal-primary">
+
+                    <h4 class="modal-title"><i class="fa fa-puzzle-piece"></i>删除设备</h4>
+
+                </div>
+
+                <div class="modal-body clearfix">
+                    <h3>确定要删除这个部门及下属子部门？</h3>
+                    <div class="text-right col-xs-3">
+                        设备名称
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="name" class="control-label">专业名:</label>
-                            <input type="text" class="form-control" id="name5">
+                    <div class=" col-xs-9">
+                        <span id="course_name">123</span>
+                    </div>
+                    <div class="clearfix">
+                        <div class="text-right col-xs-3">
+                            设备图像
                         </div>
-                        <div class="form-group">
-                            <!--身份-->
-                            <label class="control-label">专业备注:</label>
-                            <textarea style="max-width: 568px;" class="form-control" id="message-text5"></textarea>
+                        <div class=" col-xs-9">
+                            <span id="course_img"></span>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <!--确认修改-->
-                        <button type="button" class="btn btn-info" id="notarize5" data-dismiss="modal">确认修改</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="notarize3">关闭</button>
+                    <div class="clearfix">
+                        <div class="text-right col-xs-3">
+                            描述
+                        </div>
+                        <div class=" col-xs-9">
+                            <span id="course_xs"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!--添加专业-->
-        <div class="modal fade" id="md-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
-             style="display: none;">
-            <div class="modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header state modal-primary">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="modal-small-label">添加专业</h4>
-                    </div>
-                    <div class="modal-body modal-zhangjie">
-                        <label>部门:</label>
-                        <select name="kecheng" id="kecheng">
-                            <option>请选择部门</option>
-                        </select>
+                <div class="modal-footer text-center">
 
-                        <div class="form-group">
-                            <label for="name" class="control-label">专业名称:</label>
-                            <input id="kecheng1" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <!--身份-->
-                            <label class="control-label">专业备注:</label>
-                            <textarea id="kecheng2" style='max-width: 568px;'
-                                      class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <span class="password-yanzheng pull-left warm-xinxi1"
-                              style="display: none;line-height: 35px;"><i class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
-                        <button type="button" id="major-addto" class="btn btn-primary" data-dismiss="modal">
-                            确认添加
-                        </button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消添加</button>
-                    </div>
+                    <button type="button" class="btn  btn-default color_green itm_qx" data-dismiss="modal">                        确定                    </button>                    <button type="button" class="btn  btn-default   " data-dismiss="modal">                        取消                    </button>
                 </div>
             </div>
-        </div>
-        <!--添加岗位-->
-        <div class="modal fade" id="sm-modal" tabindex="-1" role="dialog"
-             aria-labelledby="modal-default-label" style="display: none; padding-right: 16px;">
-            <div class="modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                    <div class="modal-header state modal-primary">
-                        <button type="button" class="close" data-dismiss="   modal" aria-label="Close"><span
-                                aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="modal-large-label">添加岗位</h4>
-                    </div>
-                    <div class="modal-body modal-timu">
-                        <div class="form-group">
-                            <!--岗位-->
-                            <label class="control-label">请选择相应的部门及专业:</label>
-                            <div id="area" class="area"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="station1" class="control-label">岗位:</label>
-                            <input type="text" class="form-control" id="station1">
-                        </div>
-                        <div class="form-group">
-                            <!--身份-->
-                            <label class="control-label">岗位备注:</label>
-                            <textarea style='max-width: 568px;' class="form-control"
-                                      id="station2"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <span class="password-yanzheng pull-left warm-xinxi2"
-                              style="display: none;line-height: 35px;"><i class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
-                        <button type="button" id="station" class="btn btn-primary" data-dismiss="modal">确认添加
-                        </button>
-                        <button type="button" class="btn  btn-danger" data-dismiss="modal">关闭</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--添加部门-->
-        <div class="modal fade" id="lg-modal1" tabindex="-1" role="dialog"
-             aria-labelledby="modal-large-label" style="display: none;">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header state modal-primary">
-                        <h4 class="modal-title" id="modal-default-label">添加部门</h4>
-                    </div>
-
-
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="name" class="control-label">部门名称:</label>
-                            <input type="text" class="form-control" id="name">
-                        </div>
-                        <div class="form-group">
-                            <!--身份-->
-                            <label class="control-label">部门备注:</label>
-                            <textarea class="form-control" id="message-text"
-                                      style='max-width:868px;'></textarea>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <span class="password-yanzheng pull-left warm-xinxi" style="display: none;line-height: 35px;"><i
-                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="addTo">确认添加
-                        </button>
-                        <button type="button" class="btn  btn-default" data-dismiss="modal">取消添加</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+        </form>
     </div>
 </div>
 <script src="javascripts/jquery.1.10.2.js"></script>
@@ -441,338 +288,94 @@
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
 <script src="javascripts/template-script.min.js"></script>
 <script src="javascripts/template-init.min.js"></script>
-<script src='./javascripts/section-liandong.js'></script>
-<script src='./javascripts/common.js'></script>
 <script src="stylesheets/css/vendor/media/js/jquery.dataTables.min.js"></script>
 <script src="stylesheets/css/vendor/media/js/dataTables.bootstrap.min.js"></script>
-<script src='javascripts/admin.js'></script>
-<script src='javascripts/section.js'></script>
-</body>
-<script type='text/javascript'>
-    new Bmove("#fBtns", "#fPics");
+<script src='javascripts/course.js'></script>
+<script type="text/javascript" src='javascripts/sea.js'></script>
+<script type="text/javascript">
+    seajs.use('./javascripts/common.js', function (main) {
+        var ace = new main.comm();
 
-    //    数据加载失败案例
-    /*模态框的动态显示操作*/
+        var options = [
+            {"data": "id"},
+            {"data": "name"},
+            {
+                "data": "position"
+            },
+            {
+                "data": "remarks",
+                "render": function (data, type, full, set) {
+                    return ""
+                }
+            },
+            {
+                "data": "remarks",
+                "render": function (data, type, full, set) {
+                    /*返回的数据拼接*/
+                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
+                }
+            }
+        ];
+        ace.datatables('model.json', options, [0, 3, 4], function (data) {
+            //点击编辑
+
+            var aa1 = '';
+            $('.notazirez').click(function () {
+                aa1 = $(this).parent().parent().children().eq(0).text();
+                $(data.aoData).each(function (i, v) {
+                    if (+aa1 === v._aData.id) {
+                        console.log(v._aData);
+                        localStorage.setItem("section", JSON.stringify(v._aData));
+                    }
+                })
+                window.location.href = "amend_section.html";
+            });
+
+            window.textId = '';
+            $('.removeShuju').on("click", function () {
+                window.textId = $(this).parent().parent().children().eq(0).text();
+                $(data.aoData).each(function (i, v) {
+                    if (+textId === v._aData.id) {
+                        $("#course_name").text(v._aData.name);
+                        $("#course_img").text(v._aData.position);
+                        $("#course_xs").text(v._aData.ramark);
+                    }
+                })
+            })
+        })
+    });
+
     $(function () {
+        var modelz = new models();
+//将模态框进行处理
 
-        var aa = '';
-        var num = 1;
-
-        var aceec = ''
-        $(document).on('click', '.tbodya > tr', function () {
-            /*获取点击后的id值*/
-            aceec = $(this).children().eq(0).text()
-
-        })
-
-        /*职位管理点击请求数据*/
-        $(document).on('click', '.btn-info1', function () {
-            var acee = $(this).parent().parent().children().eq(0).text();
-            var acee1 = $(this).parent().parent().children().eq(2).text();
+        var modals = ['lg-modal1', 'info-modal', 'error-modal'];
+        modelz.modtal(modals);
+        //删除传送数据
+        $('.itm_qx').click(function () {
             var dataset = {
-                "id": aceec
+                "id": window.textId
             };
-
-            $('.modal-title1').text('部门:' + acee1);
-
-            $.ajax({
-                url: './section-index.json',
-                data: dataset,
-                dataType: 'JSON',
-                type: 'get',
-                success: function (data) {
-
-                    data.neirong.forEach(function (v, i) {
-                        /*渲染数据*/
-                        $('#fBtns > li').eq(i).children('a').html('<i style="line-height: 32px;">' + data['neirong'][i]['major'] + '</i>' + "<input type='hidden' value=" + data['neirong'][i]['remark'] + " name=" + data['neirong'][i]['id'] + " data-id=" + data['id'] + "><b style='float:right;font-weight: 100;padding: 5px 10px;border-radius: 2px;display: none; background-color: #d2322d;color: #fff;' type='button'  class='btn btn-wide btn-danger remove-station6' data-toggle='modal'>删除</b><b type='button' style='float:right;font-weight: 100;padding: 5px 10px;border-radius: 2px;background-color: #5bc0de;color: #fff;margin-right: 20px;' class='f-right xiu-station5' data-toggle='modal' data-target='#default-modal5'>修改数据</b>");
-
-
-                        for (var g = 0; g < v['gangwei'].length; g++) {
-                            aa += "<p>" + '<input data-uid = '+v['id']+' disabled class="form-control" type=hidden name="' + v['gangwei'][g]['id'] + '" value="' + v['gangwei'][g]['id'] + '"><span>' + v['gangwei'][g]['station'] + "</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备注:<span>" + v['gangwei'][g]['remark'] + "</span><button type='button' class='btn btn-wide btn-info xiu-station' data-toggle='modal' data-target='#default-modal513'>修改数据</button><button type='button' class='btn btn-wide btn-danger remove-station' data-target='#error-modal513' data-toggle='modal' >删除</button>" + "</p>";
-
-                            num++
-                        }
-                        num = 1;
-                        $('#fPics > a').eq(i).html(aa);
-                        aa = '';
-                    })
-                    /*点击修改专业的内容*/
-                    var zhuanye1 = '';
-                    var zhuanye2 = '';
-                    var zhuanye3 = '';
-                    var zhuanye4 = '';
-                    var zhuanye5 = '';
-                    $('.xiu-station5').on('click', function () {
-                        zhuanye1 = $(this).prev().prev().attr('name')
-                        zhuanye5 = $(this).prev().prev().attr('data-id')
-                        zhuanye2 = $(this).prev().prev().val()
-                        zhuanye3 = $(this).parent().children('i').text()
-                        zhuanye4 = $(this).parent().children('i')
-                        $('#default-modal5').css('display', 'block')
-                        $('#default-modal5').addClass('in')
-                        $('#name5').val(zhuanye3)
-                        $('#message-text5').val(zhuanye2)
-                        return false
-                    })
-
-                    /*专业修改数据的添加*/
-                    $('#notarize5').on('click', function () {
-                        var dateset = {
-                            "shang":zhuanye5,
-                            "id": zhuanye1,
-                            "zhangjieName": $('#name5').val(),
-                            "zhangjieRe": $('#message-text5').val()
-                        }
-                        zhuanye4.text($('#name5').val());
-                        $('#default-modal5').css('display', 'none')
-                        $('#default-modal5').removeClass('in')
-
-                        $.ajax({
-                            url: '',
-                            type: "POST",
-                            data: JSON.stringify(dateset),
-                            dataType: "json",
-                            contentType: "application/json",
-                            success: function (data) {
-
-                                slide(data)
-                                /*请求成功*/
-                            }
-                        })
-                        return false
-                    })
-                    $('#notarize3').on('click', function () {
-
-                        $('#default-modal5').css('display', 'none')
-                        $('#default-modal5').removeClass('in')
-                        return false
-                    })
-                    /*清除多余的html*/
-                    $('#fBtns > li').each(function (i, v) {
-                        if ($(v).find('a').text() === '') {
-                            $(this).css('display', 'none')
-                        }
-                    })
-                    /*加载后点击修改数据*/
-                    var chuanId = ''
-                    var chuanName = ''
-                    var chuanName1 = ''
-                    var chuanBz = ''
-                    var chuanBz1 = ''
-                    var chuanBz2 = ''
-                    $('.xiu-station').on('click', function () {
-                        chuanId = $(this).parent().children('input').eq(0).attr('name');
-                        chuanBz2 = $(this).parent().children('input').eq(0).attr('data-uid');
-                        chuanName = $(this).parent().children('span').eq(0).html();
-                        chuanName1 = $(this).parent().children('span').eq(0);
-                        chuanBz = $(this).parent().children('span').eq(1).html();
-                        chuanBz1 = $(this).parent().children('span').eq(1);
-                        $('#name513').val(chuanName)
-                        $('#message-text513').val(chuanBz)
-                    })
-                    /*岗位确认修改的传值*/
-                    $('#notarize513').on('click', function () {
-                        var dataset = {
-                            "shang":chuanBz2,
-                            "id": chuanId,
-                            "chuanName": $('#name513').val(),
-                            "chuanBz": $('#message-text513').val()
-                        }
-                        chuanName1.html($('#name513').val())
-                        chuanBz1.html($('#message-text513').val())
-
-                        $.ajax({
-                            url: '',
-                            type: "POST",
-                            data: JSON.stringify(dataset),
-                            dataType: "json",
-                            contentType: "application/json",
-                            success: function (data) {
-                                slide(data)
-                                /*请求成功*/
-                            }
-                        })
-
-                    })
-
-
-                    /*在加载后页面的删除*/
-                    var gwId = ''
-                    var gwId1 = ''
-                    $('.remove-station').click(function () {
-                        gwId = $(this).parent().children('input').eq(0).attr('name')
-                        gwId1 = $(this).parent()
-
-                    })
-                    /*删除按钮的确认删除*/
-                    $('#remove513').on('click', function () {
-                        var dataset = {
-                            "id": gwId
-                        }
-
-                        $.ajax({
-                            url: '',
-                            type: "POST",
-                            data: JSON.stringify(dataset),
-                            dataType: "json",
-                            contentType: "application/json",
-                            success: function (data) {
-                                slide(data)
-                                if (data.type === 0) {
-                                    gwId1.remove()
-
-                                }
-                                /*请求成功*/
-                            }
-                        })
-                    })
-                    /*删除专业*/
-                    var acese = ''
-                    var acese1 = ''
-                    $('.remove-station6').on('click', function () {
-                        $('#error-modal55').css('display', 'block')
-                        $('#error-modal55').addClass('in')
-                        acese = $(this).parent().children('input').eq(0).attr('name');
-                        acese1 = $(this).parent().parent()
-                        return false
-                    })
-
-                    $('#remove555').on('click', function () {
-
-                        $('#error-modal55').css('display', 'none')
-                        $('#error-modal55').removeClass('in')
-                        return false
-                    })
-                    /*确认删除按钮*/
-                    $('#remove55').on('click', function () {
-                        var dataset = {
-                            'id': acese
-                        }
-                        if ($('#fBtns').children('li').find('a').eq(1).html() === '') {
-                            $('.mybox').html('暂无数据请及时添加...')
-                        }
-                        $('#error-modal55').css('display', 'none')
-                        $('#error-modal55').removeClass('in')
-                        acese1.remove();
-
-                        $.ajax({
-                            url: '',
-                            type: "POST",
-                            data: JSON.stringify(dataset),
-                            dataType: "json",
-                            contentType: "application/json",
-                            success: function (data) {
-                                if (data.type === 0) {
-                                    acese1.remove();
-
-                                }
-                                slide(data)
-
-                                /*请求成功*/
-                            }
-                        })
-                        return false
-                    })
-
-                }
-
+            console.log(textId);
+            modelz.ajaxform(url, dataset, function () {
+                modelz.tables();
             })
+            //取到id,与数据进行对比,加载模态框
+
+        })
+        $('.big_da').click(function () {
+            return false
+        })
+        $('.big_da > img').click(function () {
+            return false
+        })
+        $('.click_close').on('click', function () {
+            $(this).parent().css("display", "none");
         })
 
-
-        /*实例化数据*/
-        var table = $('.data-table').DataTable();
-
-        /*部门添加数据*/
-
-//        var uida = 1;
-        $('#addTo').on('click', function () {
-            var val1 = $('#name').val();
-            var val2 = $('#message-text').val();
-            var dataset = {
-                "sectionName": val1,
-                "sectionBz": val2
-            }
-            /*判断事件的成功与否*/
-            if (val1 === '' || val2 === '') {
-                $('.warm-xinxi').show();
-                return false
-            }
-            /*
-             $.get('./section1.json',"",function(data){
-             var uidNum = data.data.length + uida;
-             uida++;
-             $('#name').val("")
-             $('#message-text').val("")
-             table.row.add({
-             "id": "",
-             "uid":uidNum,
-             "name": $('#name').val(),
-             "position": $('#message-text').val(),
-             "butt": "<button class='btn btn-wide btn-info1'>职位管理</button><button type='button' class='btn btn-wide btn-info notazirez' data-toggle='modal' data-target='#info-modal'>修改</button><button type='button' class='btn btn-wide btn-danger removeShuju' data-toggle='modal' data-target='#error-modal'>删除</button>"
-             }).draw();
-             })*/
-
-
-            /*点击添加按钮*/
-            $.ajax({
-                type: "POST",
-                url: '',
-                data: dataset,
-                success: function (data) {
-                    /*成功后执行的函数*/
-                    $('#name').val("")
-                    $('#message-text').val("")
-                    table.ajax.reload();
-                    slide(data)
-                    $('.warm-xinxi').hide();
-                }
-            })
-        });
-
-
-        /*修改数据获取*/
-        $(document).on('click', '.notazirez', function () {
-            /*点击添加按钮*/
-            $('#name1').val($(this).parent().parent().children().eq(2).text())
-            $('#message-text1').val($(this).parent().parent().children().eq(3).text())
-        });
-
-        /*确认修改按钮*/
-        /*模态框的状态*/
-        $('#default-modal513').modal({
-            keyboard: false,
-            backdrop: false,
-            show: false
-        })
-        $('#error-modal513').modal({
-            keyboard: false,
-            backdrop: false,
-            show: false
-        })
+        //编辑模型
 
     })
-
-    function slide(data) {
-        if (data.type === 0) {
-            $('.shuju-tishi1').text(data.message)
-            $('.shuju-tishi1').slideDown()
-            var timeou = setTimeout(function () {
-                $('.shuju-tishi1').slideUp()
-            }, 2000)
-            /*成功重新记载表格数据*/
-            clearTimeout(timeout1)
-        } else {
-            clearTimeout(timeou)
-            /*数据加载失败*/
-            $('.shuju-tishi2').text(data.message)
-            $('.shuju-tishi2').slideDown()
-            var timeout1 = setTimeout(function () {
-                $('.shuju-tishi2').slideUp()
-            }, 2000)
-        }
-    }
-
 </script>
-
+</body>
 </html>

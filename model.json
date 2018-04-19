@@ -4,13 +4,17 @@
     "name": "水冷泵的原型",
     "type": "水冷泵",
     "position": "images/model.jpg",
-    "file": "21312321.zip"
+    "file": "21312321.zip",
+    "fileStam": "21312321.zip",
+    "ramark": ""
   },
   {
     "id": 2,
     "name": "水冷泵的原型1",
     "type": "水冷泵q",
     "position": "images/model.jpg",
-    "file": ""
+    "file": "21312321.zip",
+    "fileStam": "21312321.zip",
+    "ramark": ""
   }
 ]
