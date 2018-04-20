@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en" class="fixed" style='overflow: hidden'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/toastr/toastr.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/data-table/media/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/css/subject.css">
+    <link rel="stylesheet" href="stylesheets/css/course.css">
+</head>
+<!--[if lt IE 8]>
+<script type="text/javascript" src="javascripts/html5.js"></script>
+<script type="text/javascript" src="javascripts/respond.js"></script>
+<![endif]-->
+
+<body onselectstart="return false">
+<!--点击显示大的图片-->
+<div class="big_da">
+    <i class="fa  fa-close click_close" aria-hidden="true"></i>
+    <img style="width: 50%;"
+         src="http://pic.qiantucdn.com/58pic/16/40/37/22X58PICtFy.jpg!/fw/300/clip/0x400a0a0/format/webp" alt="">
+</div>
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+<div class="modal fade" id="sm-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-default-label" style="display: none; padding-right: 16px;">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="   modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="modal-large-label">添加岗位</h4>
+            </div>
+            <div class="modal-body modal-timu">
+                <div class="form-group">
+                    <!--岗位-->
+                    <label class="control-label">请选择相应的部门及专业:</label>
+                    <div id="area" class="area"></div>
+                </div>
+                <div class="form-group">
+                    <label for="station1" class="control-label">岗位:</label>
+                    <input type="text" class="form-control" id="station1">
+                </div>
+                <div class="form-group">
+                    <!--身份-->
+                    <label class="control-label">岗位备注:</label>
+                    <textarea style='max-width: 568px;' class="form-control"
+                              id="station2"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                        <span class="password-yanzheng pull-left warm-xinxi2"
+                              style="display: none;line-height: 35px;"><i class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
+                <button type="button" id="station" class="btn btn-primary" data-dismiss="modal">确认添加
+                </button>
+                <button type="button" class="btn  btn-danger" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 整体页面 -->
+<div class="wrap">
+    <!--顶部栏-->
+    <div class="page-header">
+        <div class="leftside-header">
+            <div id="menu-toggle" class="visible-xs toggle-left-sidebar" data-toggle-class="left-sidebar-open"
+                 data-target="html">
+                <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+            </div>
+        </div>
+        <div class="rightside-header">
+            <div class="header-middle"></div>
+            <!-- 红点信息 -->
+            <div class="header-section">
+                <span>你好,管理员!</span>
+            </div>
+            <div class="header-separator"></div>
+            <div class="header-section" style="margin-right: 50px;">
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
+            </div>
+        </div>
+    </div>
+    <div class="page-body">
+        <!--左侧栏-->
+        <div class="left-sidebar">
+            <div id="left-nav" class="nano">
+                <div class="nano-content" style="right: 0 !important;">
+                    <nav>
+                        <ul class="nav" id="main-nav">
+                            <li>
+                                <a href=''>
+                                    <i class="fa fa-university" aria-hidden="true"></i>部门管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href=''>
+                                    <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
+                                </a>
+                            </li>
+                            <li class="active-item">
+                                <a href='course.html'>
+                                    <i class="fa fa-book" aria-hidden="true"></i>课程管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href='model.html'>
+                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>模型管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-wrench" aria-hidden="true"></i>检修规划管理
+                                </a>
+                            </li>
+                            <li class=" has-child-item close-item">
+                                <a>
+                                    <i class='fa fa-bar-chart' aria-hidden="true"></i>
+                                    <span>考试管理</span>
+                                </a>
+                                <ul class="nav child-nav level-1">
+                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href=''>试卷管理</a></li>
+                                </ul>
+                            </li>
+                            <li class=" has-child-item close-item">
+                                <a>
+                                    <i class='fa fa-users' aria-hidden="true"></i>
+                                    <span>员工管理</span>
+                                </a>
+                                <ul class="nav child-nav level-1">
+                                    <li><a href=''>账号管理</a></li>
+                                    <li><a href=''>所属部门</a></li>
+                                    <li><a href=''>所属角色</a></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
+                                </a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!--右侧栏-->
+        <div class="content content1 content2">
+            <div class="content-header content-header1 margin-left-click"
+                 style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
+                <!--主体-->
+
+                <div class="section animated fadeInRight">
+                    <div class="section-head">
+                        <h2>课程管理</h2>
+                    </div>
+                    <!--中间区域独立模块-->
+                    <form id="forms" enctype="multipart/form-data" name="forms">
+                        <div class="Add_course">
+                            <div class="Add_course_head">
+                                <i class="fa fa-ellipsis-v "></i>添加课程
+                            </div>
+                            <h3>课程信息</h3>
+                            <div class="container-fluid">
+                                <div class="clearfix">
+                                    <div class="col-xs-3 text-right">
+                                        课程名称
+                                    </div>
+                                    <div class="col-xs-9">
+
+                                        <input type="text" class="form-control" name="modelName">
+
+                                        <span class="password-yanzheng pull-left warm-xinxi"
+                                              style="line-height: 35px;font-size: 16px !important;"><i
+                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="col-xs-3 text-right">
+                                        所属设备
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <select name="" id="course-select" class="form-control">
+                                            <option value="">设备</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="col-xs-3 text-right">
+                                        课程图像
+                                    </div>
+                                    <div class="col-xs-9">
+
+                                        <input type="file" name="modelImg" id="modelImg" accept="image/*">
+                                        <div class="progress progress-striped" style="margin-top: 20px;">
+                                            <div class="progress-bar progress-bar-success text-center"
+                                                 role="progressbar"
+                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                                 style="width: 0%;" id="Progress">
+                                                <span class="sr-only"
+                                                      style='clip: inherit !important;width:  61px;height: 22px;position: inherit;'></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="col-xs-3 text-right">
+                                        图像预览
+                                    </div>
+                                    <div class="col-xs-9">
+
+                                        <img id="model_img" src="./images/model.jpg" alt="暂无图像">
+                                    </div>
+                                </div>
+                                <!--上传训练文件-->
+                                <div class="clearfix">
+                                    <div class="col-xs-3 text-right">
+                                        上传训练文件
+                                    </div>
+                                    <div class="col-xs-9">
+
+                                        <input type="file" name="modelImg" id="modelImg1" accept=".zip">
+                                        <div class="progress progress-striped" style="margin-top: 20px;">
+                                            <div class="progress-bar progress-bar-success text-center"
+                                                 role="progressbar"
+                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                                 style="width: 0%;" id="Progress1">
+                                                <span class="sr-only1"
+                                                      style='clip: inherit !important;width:  61px;height: 22px;position: inherit;'></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--上传考试文件-->
+                                <div class="clearfix">
+                                    <div class="col-xs-3 text-right">
+                                        上传考试文件
+                                    </div>
+                                    <div class="col-xs-9">
+
+                                        <input type="file" name="modelImg" id="modelImg2" accept=".zip">
+                                        <div class="progress progress-striped" style="margin-top: 20px;">
+                                            <div class="progress-bar progress-bar-success text-center"
+                                                 role="progressbar"
+                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                                 style="width: 0%;" id="Progress2">
+                                                <span class="sr-only2"
+                                                      style='clip: inherit !important;width:  61px;height: 22px;position: inherit;'></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--上传视频文件-->
+                                <div class="clearfix">
+                                    <div class="col-xs-3 text-right">
+                                        上传视频文件
+                                    </div>
+                                    <div class="col-xs-9">
+
+                                        <input type="file" name="modelImg" id="modelImg3" accept="audio/*,video/*">
+                                        <div class="progress progress-striped" style="margin-top: 20px;">
+                                            <div class="progress-bar progress-bar-success text-center"
+                                                 role="progressbar"
+                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                                 style="width: 0%;" id="Progress3">
+                                                <span class="sr-only3"
+                                                      style='clip: inherit !important;width:  61px;height: 22px;position: inherit;'></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="col-xs-3 text-right">
+                                        备注
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <input type="text" class="form-control" name="modelRemark">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Add_course_bottom text-center">
+                                <button type='button' class='btn1 course_bj notazirez'>添加</button>
+                                <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+        </div>
+    </div>
+</div>
+
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
+<script src="javascripts/template-script.min.js"></script>
+<script src="javascripts/template-init.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/jquery.dataTables.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/dataTables.bootstrap.min.js"></script>
+<script src='javascripts/course.js'></script>
+<script type="text/javascript" src='javascripts/sea.js'></script>
+<script type="text/javascript">
+    seajs.use('./javascripts/common.js', function (main) {
+        var ace = new main.comm();
+        ace.localHref(".removeShuju", "./course.html");
+        ace.change("#modelImg", "#model_img");
+        //进行数据上传的封装
+        for (var i = 0; i < 4; i++) {
+            if (i === 0) {
+                ace.filesUpload('modelImg', 'Progress', '.sr-only');
+
+            } else {
+                var modelImg = "modelImg" + i;
+                var Progress = "Progress" + i;
+                var sr_only = ".sr-only" + i;
+                ace.filesUpload(modelImg, Progress, sr_only);
+
+            }
+
+        }
+        //对数据进行渲染
+        ace.ajaxGet("options.json", function (data) {
+            $(data).each(function (i, v) {
+                $("#course-select").get(0).options[i] = new Option(v.name, v.id);
+            });
+
+        })
+
+    })
+    $(function () {
+        var mo = new models();
+        //点击添加判断
+        $('#notazirez').click(function () {
+            mo.selectJc("forms", "warm-xinxi", function () {
+                mo.numcs(url, "forms", "", function () {
+                    window.location.href = "facility.html";
+                })
+            });
+        });
+
+    })
+</script>
+</body>
+</html>

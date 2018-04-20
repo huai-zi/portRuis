@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en" class="fixed" style='overflow: hidden'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/toastr/toastr.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/magnific-popup/magnific-popup.css">
+
+    <link rel="stylesheet" href="stylesheets/css/vendor/data-table/media/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/css/subject.css">
+    <link rel="stylesheet" href="stylesheets/css/question-bank.css">
+</head>
+<style>
+    .btn.btn-wide {
+        transform: translatey(12px);
+        margin-left: 20px;
+    }
+
+    .section-foot {
+        margin: 20px;
+        border-radius: 5px;
+    }
+
+    input[readonly="readonly"] {
+        cursor: auto !important;
+    }
+</style>
+<!--[if lt IE 8]>
+<script type="text/javascript" src="javascripts/html5.js"></script>
+<script type="text/javascript" src="javascripts/respond.js"></script>
+<![endif]-->
+<style>
+    #basic-table_wrapper {
+        margin-top: 20px;
+    }
+</style>
+<body onselectstart="return false">
+
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+<!-- 整体页面 -->
+<div class="wrap">
+    <!--顶部栏-->
+    <div class="page-header">
+        <div class="leftside-header">
+            <div id="menu-toggle" class="visible-xs toggle-left-sidebar" data-toggle-class="left-sidebar-open"
+                 data-target="html">
+                <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+            </div>
+        </div>
+        <div class="rightside-header">
+            <div class="header-middle"></div>
+            <!-- 红点信息 -->
+            <div class="header-section">
+                <a href="">你好,吴亮!</a>
+            </div>
+            <div class="header-separator"></div>
+            <div class="header-section" style="margin-right: 50px;">
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i
+                        class="fa fa-sign-out log-out" aria-hidden="true"></i>注销</a>
+            </div>
+        </div>
+    </div>
+    <div class="page-body">
+        <!--左侧栏-->
+        <div class="left-sidebar">
+            <div id="left-nav" class="nano">
+                <div class="nano-content" style="right: 0 !important;">
+                    <nav>
+                        <ul class="nav" id="main-nav">
+                            <li>
+                                <a href='section.html'>
+                                    <i class="fa fa-university" aria-hidden="true"></i>部门管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href='facility.html'>
+                                    <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-book" aria-hidden="true"></i>课程管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href='model.html'>
+                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>模型管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href='project.html'>
+                                    <i class="fa fa-wrench" aria-hidden="true"></i>检修规划管理
+                                </a>
+                            </li>
+                            <li class=" has-child-item open-item">
+                                <a>
+                                    <i class='fa fa-bar-chart' aria-hidden="true"></i>
+                                    <span>考试管理</span>
+                                </a>
+                                <ul class="nav child-nav level-1">
+                                    <li class=""><a href='question-bang.html'>题库管理</a></li>
+                                    <li class="active-item"><a href=''>试卷管理</a></li>
+                                </ul>
+                            </li>
+                            <li class=" has-child-item close-item">
+                                <a>
+                                    <i class='fa fa-users' aria-hidden="true"></i>
+                                    <span>员工管理</span>
+                                </a>
+                                <ul class="nav child-nav level-1">
+                                    <li><a href=''>账号管理</a></li>
+                                    <li><a href=''>所属部门</a></li>
+                                    <li><a href=''>所属角色</a></li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
+                                </a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!--右侧栏-->
+        <div class="content  ">
+            <form name="forms" id="forms">
+                <div class="content-header content-header1 margin-left-click"
+                     style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
+                    <!--主体-->
+                    <div class="container-fluid">
+                        <div class="section animated fadeInRight">
+                            <div class="section-head">
+                                <h2>题库管理</h2>
+                            </div>
+                            <div class="section-body clearfix">
+                                <!--主体结构-->
+                                <div>
+                                    设备
+                                    <input type="text" readonly="readonly" id="facility" value="">
+
+                                    课程
+                                    <input type="text" readonly="readonly" id="curriculum" value="">
+                                    试卷名称
+                                    <input type="text" name="test_name" id="forms_test" value="">
+
+
+                                </div>
+                                <span id="test_button" class=" btn btn-wide btn-success" title='添加新试卷'>创建试卷</span>
+                                <span id="test_close" class=" btn btn-wide  btn-info" title='关闭'>关闭</span>
+                            </div>
+                            <div class=" clearfix">
+                                <!--表格数据-->
+                                <table id="basic-table"
+                                       class="data-table table table-striped nowrap table-hover" cellspacing="0"
+                                       width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>标识</th>
+                                        <th>选中</th>
+                                        <th>题型</th>
+                                        <th>题干</th>
+                                        <th>创建时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tbodya">
+                                    <!--占位符-->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
+<script src="javascripts/template-script.min.js"></script>
+<script src="javascripts/template-init.min.js"></script>
+<script src="stylesheets/css/vendor/toastr/toastr.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/jquery.dataTables.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/dataTables.bootstrap.min.js"></script>
+<script src="stylesheets/css/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src='javascripts/course.js'></script>
+<script type="text/javascript" src='javascripts/sea.js'></script>
+<script type="text/javascript">
+    seajs.use('./javascripts/common.js', function (main) {
+        var ace = new main.comm();
+        ace.localHref("#test_close", "test.html");
+        window.seleIds = [];
+
+        var options = [
+            {"data": "id"},
+            {
+                "data": "remarks",
+                "render": function (data, type, full, set) {
+                    var inpu = "<label style='width: 100%;cursor:pointer'>" +
+                        "<input name='id' type='checkbox' " +
+                        "class='checkSelect checkedSe" +
+                        full.id + "' value='" + full.id + "'>" +
+                        "</label>"
+                    return inpu
+                }
+            },
+            {"data": "name"},
+            {
+                "data": "position",
+                "render": function (data, type, full, set) {
+                    var substrs = full.position.substr(0, 18) + "...";
+                    return substrs;
+                }
+            },
+            {
+                "data": "position",
+                "render": function (data, type, full, set) {
+                    return "2018-04-20"
+                }
+            }
+        ];
+
+        ace.datatables('model.json', options, [0, 1, 2, 3, 4], function (data) {
+
+            //点击编辑
+            var aa1 = '';
+            var aa2 = '';
+            window.aa5 = '';
+            $('.notazirez').click(function () {
+                aa1 = $(this).parent().parent().children().eq(0).text();
+                $(data.aoData).each(function (i, v) {
+                    if (+aa1 === v._aData.id) {
+                        localStorage.setItem("project", JSON.stringify(v._aData));
+                    }
+                })
+                window.location.href = "amend_project.html"
+            });
+
+            //回掉函数获取加载的数据信息
+
+
+            $(".removeShuju").click(function () {
+                window.aa5 = $(this).parent().parent().children().eq(0).text();
+                aa2 = $(this).parent().parent().children().eq(1).text();
+                $("#modal_remove").text(aa2);
+                $("#error-modal").modal();
+            });
+            $(".checkSelect").on("change", function () {
+                var vals = $(this).val();
+                if ($(this).is(':checked')) {
+                    window.seleIds.push(vals);
+                } else {
+                    window.seleIds.forEach(function (v, i) {
+                        if (v === vals) {
+                            window.seleIds.splice(i, 1);
+                        }
+                    })
+
+                }
+                //获取的选中的id值数组化
+                console.log(seleIds);
+            })
+
+        });
+        //设备变化
+        var mo = new models();
+        var local = JSON.parse(localStorage.getItem("test"));
+//        $('#facility').val(local.facility);//设备Id
+        $('#facility').val(local.facilityT);
+//        $('#curriculum').val(local.course);//课程id
+        $('#curriculum').val(local.courseT);
+
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en" class="fixed" style='overflow: hidden'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/toastr/toastr.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/data-table/media/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/css/subject.css">
+</head>
+<!--[if lt IE 8]>
+<script type="text/javascript" src="javascripts/html5.js"></script>
+<script type="text/javascript" src="javascripts/respond.js"></script>
+<![endif]-->
+
+<body onselectstart="return false">
+<!--点击显示大的图片-->
+<div class="big_da">
+    <i class="fa  fa-close click_close" aria-hidden="true" title="关闭"></i>
+    <img style="width: 50%;"
+         src="" alt="">
+</div>
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+<!-- 整体页面 -->
+<div class="wrap">
+    <!--顶部栏-->
+    <div class="page-header">
+        <div class="leftside-header">
+            <div id="menu-toggle" class="visible-xs toggle-left-sidebar" data-toggle-class="left-sidebar-open"
+                 data-target="html">
+                <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+            </div>
+        </div>
+        <div class="rightside-header">
+            <div class="header-middle"></div>
+            <!-- 红点信息 -->
+            <div class="header-section">
+                <span>你好,管理员!</span>
+            </div>
+            <div class="header-separator"></div>
+            <div class="header-section" style="margin-right: 50px;">
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i
+                        class="fa fa-sign-out log-out"
+                        aria-hidden="true"></i>注销</a>
+            </div>
+        </div>
+    </div>
+    <div class="page-body">
+        <!--左侧栏-->
+        <div class="left-sidebar">
+            <div id="left-nav" class="nano">
+                <div class="nano-content" style="right: 0 !important;">
+                    <nav>
+                        <ul class="nav" id="main-nav">
+                            <li>
+                                <a href='section.html'>
+                                    <i class="fa fa-university" aria-hidden="true"></i>部门管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href='facility.html'>
+                                    <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href='course.html'>
+                                    <i class="fa fa-book" aria-hidden="true"></i>课程管理
+                                </a>
+                            </li>
+                            <li class="active-item">
+                                <a href='model.html'>
+                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>模型管理
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href=''>
+                                    <i class="fa fa-wrench" aria-hidden="true"></i>检修规划管理
+                                </a>
+                            </li>
+                            <li class=" has-child-item close-item">
+                                <a>
+                                    <i class='fa fa-bar-chart' aria-hidden="true"></i>
+                                    <span>考试管理</span>
+                                </a>
+                                <ul class="nav child-nav level-1">
+                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href=''>试卷管理</a></li>
+                                </ul>
+                            </li>
+                            <li class=" has-child-item close-item">
+                                <a>
+                                    <i class='fa fa-users' aria-hidden="true"></i>
+                                    <span>员工管理</span>
+                                </a>
+                                <ul class="nav child-nav level-1">
+                                    <li><a href=''>账号管理</a></li>
+                                    <li><a href=''>所属部门</a></li>
+                                    <li><a href=''>所属角色</a></li>
+                                </ul>
+                            </li>
+                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
+                        </ul>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!--右侧栏-->
+        <div class="content ">
+            <div class="content-header content-header1 margin-left-click"
+                 style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
+                <!--主体-->
+
+                <div class="section animated fadeInRight">
+                    <div class="section-head">
+                        <h2>模型管理</h2>
+                    </div>
+                    <div class="section-body clearfix">
+                        <!--主体结构-->
+                        <div class="col-sm-12">
+                            <!--模态框begin-->
+                            <div style="padding-top: 20px;">
+                                <a href="add_model.html" class="btn btn-wide color_green addTo">
+                                    添加新模型
+                                </a>
+                                <a href="add_model_manage.html" class="btn btn-wide  addTo color_ql "
+                                   style="margin-left: 20px;">
+                                    模型资源浏览
+                                </a>
+                            </div>
+                            <!--制作表格-->
+                            <div class="panel">
+                                <div class="panel-content">
+                                    <div class="table-responsive">
+                                        <table id="basic-table"
+                                               class="data-table table table-striped nowrap table-hover" cellspacing="0"
+                                               width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>标识</th>
+                                                <th>名称</th>
+                                                <th>所属部分</th>
+                                                <th>模型文件</th>
+                                                <th>下载文件</th>
+                                                <th>描述</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="tbodya">
+                                            <!--占位符-->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<!--删除按钮模态框-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-danger">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span id="modal_remove"></span>及其所属检修规划内容都将被删除，且不能再恢复。确定要删除吗？
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn btn-danger itm_qx" data-dismiss="modal">
+                    确定
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
+<script src="javascripts/template-script.min.js"></script>
+<script src="javascripts/template-init.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/jquery.dataTables.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src='javascripts/course.js'></script>
+<script type="text/javascript" src='javascripts/sea.js'></script>
+<script type="text/javascript">
+    seajs.use('./javascripts/common.js', function (main) {
+        var ace = new main.comm();
+        var options = [
+            {"data": "id"},
+            {"data": "name"},
+            {"data": "position"},
+            {"data": "file"},
+            {"data": "fileStam"},
+            {"data": "ramark"},
+            {
+                "data": "ramark",
+                "render": function (data, type, full, set) {
+                    /*返回的数据拼接*/
+                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
+                }
+            }
+        ];
+        //点击编辑按钮
+        ace.datatables('model.json', options, [2, 3, 4, 5, 6], function (data) {
+
+            //点击编辑
+            var aa1 = '';
+            var aa2 = '';
+            window.aa5 = '';
+            $('.notazirez').click(function () {
+                aa1 = $(this).parent().parent().children().eq(0).text();
+                $(data.aoData).each(function (i, v) {
+                    if (+aa1 === v._aData.id) {
+                        localStorage.setItem("model", JSON.stringify(v._aData));
+                    }
+                })
+                window.location.href = "amend_model.html"
+            });
+            //回掉函数获取加载的数据信息
+
+
+            $(".removeShuju").click(function () {
+                window.aa5 = $(this).parent().parent().children().eq(0).text();
+                aa2 = $(this).parent().parent().children().eq(1).text();
+                $("#modal_remove").text(aa2);
+                $("#error-modal").modal();
+
+            })
+
+
+        })
+
+    });
+
+    $(function () {
+        var modelz = new models();
+//将模态框进行处理
+        var modals = ['lg-modal1', 'info-modal', 'error-modal'];
+        modelz.modtal(modals);
+        //删除传送数据
+        $('.itm_qx').click(function () {
+            var dataset = {
+                "id": window.aa5
+            };
+
+            modelz.ajaxform(url, dataset, function () {
+                modelz.tables();
+            })
+            //取到id,与数据进行对比,加载模态框
+
+        })
+        $('.big_da').click(function () {
+            return false
+        })
+        $('.big_da > img').click(function () {
+            return false
+        })
+        $('.click_close').on('click', function () {
+            $(this).parent().css("display", "none");
+        })
+
+        //编辑模型
+
+    })
+</script>
+</body>
+</html>
