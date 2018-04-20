@@ -82,12 +82,11 @@
             <div class="header-middle"></div>
             <!-- 红点信息 -->
             <div class="header-section">
-                <a href="">你好,管理员!</a>
+                <span>你好,管理员!</span>
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="" style='display: inline-block;transform:translatey(1px);'><i class="fa fa-sign-out log-out"
-                                                                                       aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -144,26 +143,7 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
-                                </a>
-                            </li>
+                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
                         </ul>
 
                     </nav>
@@ -171,7 +151,7 @@
             </div>
         </div>
         <!--右侧栏-->
-        <div class="content content1 content2">
+        <div class="content ">
             <div class="content-header content-header1 margin-left-click"
                  style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
                 <!--主体-->
@@ -265,19 +245,19 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./course.html");
+        ace.localHref(".removeShuju", "facility.html");
         ace.change("#modelImg", "#model_img", function () {
             $(forms.images).remove();
         });
         ace.filesUpload('modelImg', 'Progress', '.sr-only');
 
-        var courses = JSON.parse(localStorage.getItem("course"));
+        var courses = JSON.parse(localStorage.getItem("facility"));
         var forms = document.forms;
-        forms.modelName.value = courses.courseName;
-        forms.id.value = courses.courseId;
-        forms.modelRemark.value = courses.course;
-        $("#model_img").attr('src', courses.courseImage);
-        forms.images.value = courses.courseImage;
+        forms.modelName.value = courses.name;
+        forms.id.value = courses.id;
+        forms.modelRemark.value = courses.ramark;
+        $("#model_img").attr('src', courses.position);
+        forms.images.value = courses.position;
 
     })
 
@@ -287,7 +267,7 @@
         $('#notazirez').click(function () {
             mo.selectJc("forms", "warm-xinxi", function () {
                 mo.numcs(url, "forms", "", function () {
-                    window.location.href = "course.html";
+                    window.location.href = "facility.html";
                 })
             });
         });

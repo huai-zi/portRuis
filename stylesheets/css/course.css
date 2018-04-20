@@ -39,26 +39,33 @@
     top: 0;
     height: 34px;
 }
-#lg-modal1 h3{
-    padding-bottom:20px;
+
+#lg-modal1 h3 {
+    padding-bottom: 20px;
     border-bottom: 1px solid #ccc;
+    font-size:19px;
 }
-#lg-modal1 .modal-body div{
-    font-size: 19px;
+
+#lg-modal1 .modal-body div {
+    font-size: 15px;
 
 }
-#lg-modal1 .modal-body .col-xs-3,#lg-modal1 .modal-body .col-xs-9{
+
+#lg-modal1 .modal-body .col-xs-3, #lg-modal1 .modal-body .col-xs-9 {
     margin: 10px 0;
 }
-#lg-modal1 .modal-body .col-xs-9 img{
+
+#lg-modal1 .modal-body .col-xs-9 img {
     width: 200px;
 }
+
 .course {
     padding: 30px;
     background-color: #fff;
 }
-.text-center{
-    text-align:center !important;
+
+.text-center {
+    text-align: center !important;
 }
 
 .table.dataTable tr td img {
@@ -77,7 +84,8 @@
     border-color: #17a689 !important;
     margin-top: 20px !important;
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
 
     background-color: #17a689 !important;
     border-color: #17a689 !important;
@@ -95,11 +103,16 @@
     align-items: center;
 }
 
+input[type="file"] {
+    line-height: 0;
+    cursor: pointer !important;
+}
+
 .big_da i {
     position: absolute;
     z-index: 603;
-    top: 70px;
-    right: 20px;
+    top: 36px;
+    right: 36px;
     color: #fff;
     font-size: 27px;
     cursor: pointer;

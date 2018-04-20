@@ -24,10 +24,12 @@ define(function (require, exports, module) {
                 success: function (data) {
 
                     if (data.type || data.type === 0) {
-                        callback();
-                        slide(data);
+                        callback ? callback() : null;
+
+                        model.prototype.slide(data);
                     } else {
-                        callback(data);
+                        callback ? callback(data) : null;
+
                     }
                 }
             })
@@ -40,7 +42,8 @@ define(function (require, exports, module) {
                 type: "get",
                 dataType: "json",
                 success: function (data) {
-                    callback(data);
+                    callback ? callback(data) : null;
+
                 }
             })
         }
@@ -71,27 +74,56 @@ define(function (require, exports, module) {
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    if (data.type === 0) {
-                        callback()
+                    if (data.type || data.type === 0) {
+                        callback ? callback() : null;
+
+                        model.prototype.slide(data);
+                    } else {
+                        callback ? callback(data) : null;
+
                     }
-                    slide(data);
                 }
             });
         }
 
         //封装点击跳转页面
-        function localHref(bq, local) {
-            $(bq).click(function () {
+        function localHref(bq, local, callback) {
+            //bq, local, callback---点击按钮类名或者id名\跳转路径\回掉函数
+            $(bq).on('click', function () {
+                callback ? callback() : null;
                 window.location.href = local;
             })
         }
 
         //监控图像改变填充图像地址
-        function change(bq, gh) {
+        function change(bq, gh, callback) {
+            //bq, gh----file标签改变id名\图片展示框id名
             $(bq).on('change', function () {
                 var urls = com.prototype.getObjectURL(this.files[0]);
                 $(gh).attr('src', urls);
+                callback ? callback() : null;
             })
+        }
+
+
+        function slide(data) {
+            if (data.type === 0) {
+                $('.shuju-tishi1').text(data.message)
+                $('.shuju-tishi1').slideDown()
+                var timeou = setTimeout(function () {
+                    $('.shuju-tishi1').slideUp()
+                }, 2000)
+                /*成功重新记载表格数据*/
+                clearTimeout(timeout1)
+            } else {
+                clearTimeout(timeou)
+                /*数据加载失败*/
+                $('.shuju-tishi2').text(data.message)
+                $('.shuju-tishi2').slideDown()
+                var timeout1 = setTimeout(function () {
+                    $('.shuju-tishi2').slideUp()
+                }, 2000)
+            }
         }
 
         //获取图片地址
@@ -107,35 +139,17 @@ define(function (require, exports, module) {
             return url;
         }
 
-        function datatables(url,callback) {
+        function datatables(url, option, optionShow, callback) {
+            //url, option, optionShow, callback---数据请求路径\数据加载处理\显示手动排序隐藏列\回掉函数
             var table = $('.data-table').DataTable({
                 "ajax": {
                     'url': url,//'models.json'
+                    "type": "get",
                     "dataSrc": function (json) {
                         return json;
                     }
                 },
-                "columns": [
-                    {"data": "id"},
-                    {"data": "name"},
-                    {
-                        "data": "position"
-                    },
-                    {
-                        "data": "remarks",
-                        "render": function (data, type, full, set) {
-                            return "2017-05-19 11:11"
-                        }
-                    },
-                    {
-                        "data": "remarks",
-                        "render": function (data, type, full, set) {
-                            /*返回的数据拼接*/
-                            return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
-                        }
-                    }
-                ],
-
+                "columns": option,
                 "createdRow": function (row, data, index) {
                     /* 设置表格中的内容居中 */
                     $('td', row).attr("class", "text-left");
@@ -145,19 +159,25 @@ define(function (require, exports, module) {
                 "order": [[1, 'asc']],
                 "columnDefs": [//指定heard栏手动排序按钮
                     {
-                        "orderable": false, "targets": [2, 3, 4]
+                        "orderable": false, "targets": optionShow//[2, 3, 4]
+                    },
+                    {
+                        //设置第一列不参与搜索
+                        "targets": [0],
+                        "searchable": false
                     }
                 ],
                 "stateSave": true,
-                iDisplayLength: 5,
+                iDisplayLength: 10,
                 sProcessing: "正在获取数据，请稍后...",
                 "retrieve": true,
                 searchDelay: 350,
                 "destroy": true,
+
                 // bAutoWidth:true,
                 "aLengthMenu": [
-                    [5, 15, 20, -1],
-                    [5, 15, 20, "全部"]
+                    [10, 15, 20, -1],
+                    [10, 15, 20, "全部"]
                 ],// 显示条数设置
                 language: {
                     lengthMenu: "显示 _MENU_ 条数据",
@@ -177,25 +197,125 @@ define(function (require, exports, module) {
 
                 },
 
-                "fnDrawCallback": function () {
-                    callback()
-                    /*修改数*/
-                    var aa3 = '';
-                    var aa4 = '';
-                    var aa1 = '';
-                    $(document).on('click', '.notazirez', function () {
-                        /*点击添加按钮*/
-                        aa3 = $(this).parent().parent().children().eq(2).children('img').attr('src');
-                        aa1 = $(this).parent().parent().children().eq(0).text();
-                        window.aa1 = aa1;
-                        aa4 = $(this).parent().parent().children().eq(4).text();
-                        $('#name1').val($(this).parent().parent().children().eq(1).text());
-
+                "fnDrawCallback": function (data) {
+                    //加载完参数进行回掉函数操作
+                    callback ? callback(data) : null;
+                    //进行图片展示
+                    var vul = '';
+                    $(document).on('click', '.tbodya > tr td img', function () {
+                        /*获取点击后的id值*/
+                        vul = $(this).children().eq(0).text();
+                        var stcImg = $(this).attr('src');
+                        $('.big_da').css("display", "flex");
+                        $('.big_da > img').attr('src', stcImg);
                     });
-
                 }
 
             });
+        }
+
+        function filesUpload(files, progress, fontShow) {
+            //files, progress, fontShow参数解析:上传按钮的id名\展示进度的样式条\进度数字化
+            var h = {
+                init: function (files, progress, fontShow) {
+                    var me = this;
+                    //上传改变出发函数input file标签
+                    document.getElementById(files).onchange = me.fileHandler
+                    //展示进度标签
+                    me.progress = document.getElementById(progress);
+                    me.loaded = 0;
+                    //每次读取1M
+                    me.step = 1024 * 1024;
+                    me.times = 0;
+
+                },
+                fileHandler: function (e) {
+                    var me = h;
+                    me.loaded = 0;
+
+                    var file = me.file = this.files[0];
+                    var reader = me.reader = new FileReader();
+                    //文件的大小
+                    me.total = file.size;
+
+                    //设置相关的回掉函数
+                    reader.onloadstart = me.onLoadStart;//读取开始时触发
+                    reader.onprogress = me.onProgress;//读取中
+                    reader.onabort = me.onAbort;//中断时触发
+                    reader.onerror = me.onerror;//出错时触发
+                    reader.onload = me.onLoad;//文件读取成功时出发
+                    reader.onloadend = me.onLoadEnd;//文件读取完成,不管成功失败时触发
+                    //读取第一块,每次读取一次
+                    me.readBlob(file, 0);
+                    me.progress.style = "width:0%";
+                },
+                onLoadStart: function () {
+                    var me = h;
+                },
+                onProgress: function (e) {
+                    //读取过程中的数据e.loaded为每次上传的数据数量
+                    var me = h;
+                    me.loaded += e.loaded;
+                    //e.loaded为加载当次数据文件大小,并且每加载完成一次,就调用一次读取文件成功函数Load,直到最后数据完全加载完全则和总数相同
+                    //更新进度条
+//                console.log(e);
+                    //me,为读取完全整个文件的数据大小
+                    //     console.log(me);
+                    me.progress.style = "width:" + parseInt((me.loaded / me.total) * 100) + "%";
+
+                    var values = (me.loaded / me.total) * 100;
+
+                    if (values >= 100) {
+                        $(fontShow).html("已上传完成");
+                        $(fontShow).attr('title', "已上传完成");
+                        me.progress.title = "已上传完成";
+                    } else {
+                        var tit = (me.loaded / me.total) * 100;
+                        $(fontShow).html(parseInt(tit) + "%");
+                        me.progress.title = tit;
+                    }
+                },
+                onAbort: function () {
+                    var me = h;
+
+                },
+                onError: function () {
+
+                    var me = h;
+                },
+                onLoad: function () {
+                    var me = h;
+
+                    if (me.loaded < me.total) {
+                        me.readBlob(me.loaded);
+                    } else {
+                        //设置文件大小
+                        me.loaded = me.total;
+                    }
+                },
+                onLoadEnd: function () {
+                    var me = h;
+
+                },
+                readBlob: function (start) {
+                    var me = h;
+
+                    var blob,
+                        file = me.file;
+
+                    blob = file.slice(start, start + me.step + 1);
+                    //将文件读取为文本
+                    me.reader.readAsText(blob);
+                },
+                abortHandler: function () {
+                    var me = h;
+                    if (me.reader) {
+                        me.reader.abort();
+                    }
+                }
+            };
+
+            h.init(files, progress, fontShow);
         }
 
         com.prototype = {
@@ -207,7 +327,9 @@ define(function (require, exports, module) {
             "localHref": localHref,
             "change": change,
             "getObjectURL": getObjectURL,
-            "datatables": datatables
+            "datatables": datatables,
+            "filesUpload": filesUpload,
+            "slide":slide
         }
         return com;
     })();

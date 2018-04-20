@@ -82,12 +82,11 @@
             <div class="header-middle"></div>
             <!-- 红点信息 -->
             <div class="header-section">
-                <a href="">你好,管理员!</a>
+                <span>你好,管理员!</span>
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="" style='display: inline-block;transform:translatey(1px);'><i class="fa fa-sign-out log-out"
-                                                                                       aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -103,13 +102,13 @@
                                     <i class="fa fa-university" aria-hidden="true"></i>部门管理
                                 </a>
                             </li>
-                            <li>
+                            <li class="">
                                 <a href=''>
                                     <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
                                 </a>
                             </li>
                             <li class="active-item">
-                                <a href='course.html'>
+                                <a href=''>
                                     <i class="fa fa-book" aria-hidden="true"></i>课程管理
                                 </a>
                             </li>
@@ -144,26 +143,7 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
-                                </a>
-                            </li>
+                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
                         </ul>
 
                     </nav>
@@ -171,7 +151,7 @@
             </div>
         </div>
         <!--右侧栏-->
-        <div class="content content1 content2">
+        <div class="content ">
             <div class="content-header content-header1 margin-left-click"
                  style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
                 <!--主体-->
@@ -181,10 +161,10 @@
                         <h2>课程管理</h2>
                     </div>
                     <!--中间区域独立模块-->
-                    <form id="forms" enctype="multipart/form-data">
+                    <form id="forms" name="forms" enctype="multipart/form-data">
                         <div class="Add_course">
                             <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>添加课程
+                                <i class="fa fa-ellipsis-v "></i>编辑课程
                             </div>
                             <h3>课程信息</h3>
                             <div class="container-fluid">
@@ -206,7 +186,7 @@
                                         所属设备
                                     </div>
                                     <div class="col-xs-9">
-                                        <select name="" id="course-select" class="form-control">
+                                        <select name="course-select" id="course-select" class="form-control">
                                             <option value="">设备</option>
 
                                         </select>
@@ -246,7 +226,7 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="file" name="modelImg" id="modelImg1" accept=".zip">
+                                        <input type="file" name="modelImg1" id="modelImg1" accept=".zip">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
@@ -265,7 +245,7 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="file" name="modelImg" id="modelImg2" accept=".zip">
+                                        <input type="file" name="modelImg2" id="modelImg2" accept=".zip">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
@@ -284,7 +264,7 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="file" name="modelImg" id="modelImg3" accept="audio/*,video/*">
+                                        <input type="file" name="modelImg3" id="modelImg3" accept="audio/*,video/*">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
@@ -302,7 +282,10 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <input type="text" class="form-control" name="modelRemark">
-
+                                        <input type="hidden" name="id" value="">
+                                        <input type="hidden" name="ymodelImg" value="">
+                                        <input type="hidden" name="ymodelImg1" value="">
+                                        <input type="hidden" name="ymodelImg2" value="">
                                     </div>
                                 </div>
                             </div>
@@ -313,6 +296,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
             <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
         </div>
@@ -331,37 +315,32 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./course.html");
-        ace.change("#modelImg", "#model_img");
-        //进行数据上传的封装
-        for (var i = 0; i < 4; i++) {
-            if (i === 0) {
-                ace.filesUpload('modelImg', 'Progress', '.sr-only');
+        ace.localHref(".removeShuju", "course.html");
+        ace.change("#modelImg", "#model_img", function () {
+            $(forms.images).remove();
+        });
+        ace.filesUpload('modelImg', 'Progress', '.sr-only');
 
-            } else {
-                var modelImg = "modelImg" + i;
-                var Progress = "Progress" + i;
-                var sr_only = ".sr-only" + i;
-                ace.filesUpload(modelImg, Progress, sr_only);
-
-            }
-
-        }
-        //对数据进行渲染
-        ace.ajaxGet("options.json", function (data) {
-            $(data).each(function (i, v) {
-                $("#course-select").get(0).options[i] = new Option(v.name, v.id);
-            })
-        })
+        var courses = JSON.parse(localStorage.getItem("course"));
+        console.log(courses);
+        var forms = document.forms;
+        forms.modelName.value = courses.name;
+        forms.id.value = courses.id;
+        forms.ymodelImg.value = courses.position;
+        forms.ymodelImg1.value = courses.file;
+        forms.ymodelImg2.value = courses.fileStam;
+        forms.modelRemark.value = courses.ramark;
+        $("#model_img").attr('src', courses.position);
 
     })
+
     $(function () {
         var mo = new models();
         //点击添加判断
         $('#notazirez').click(function () {
             mo.selectJc("forms", "warm-xinxi", function () {
                 mo.numcs(url, "forms", "", function () {
-                    window.location.href = "facility.html";
+                    window.location.href = "course.html";
                 })
             });
         });

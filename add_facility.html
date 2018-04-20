@@ -32,42 +32,7 @@
     <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
 </span>
 </div>
-<div class="modal fade" id="sm-modal" tabindex="-1" role="dialog"
-     aria-labelledby="modal-default-label" style="display: none; padding-right: 16px;">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-header state modal-primary">
-                <button type="button" class="close" data-dismiss="   modal" aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="modal-large-label">添加岗位</h4>
-            </div>
-            <div class="modal-body modal-timu">
-                <div class="form-group">
-                    <!--岗位-->
-                    <label class="control-label">请选择相应的部门及专业:</label>
-                    <div id="area" class="area"></div>
-                </div>
-                <div class="form-group">
-                    <label for="station1" class="control-label">岗位:</label>
-                    <input type="text" class="form-control" id="station1">
-                </div>
-                <div class="form-group">
-                    <!--身份-->
-                    <label class="control-label">岗位备注:</label>
-                    <textarea style='max-width: 568px;' class="form-control"
-                              id="station2"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                        <span class="password-yanzheng pull-left warm-xinxi2"
-                              style="display: none;line-height: 35px;"><i class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
-                <button type="button" id="station" class="btn btn-primary" data-dismiss="modal">确认添加
-                </button>
-                <button type="button" class="btn  btn-danger" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- 整体页面 -->
 <div class="wrap">
     <!--顶部栏-->
@@ -82,12 +47,11 @@
             <div class="header-middle"></div>
             <!-- 红点信息 -->
             <div class="header-section">
-                <a href="">你好,管理员!</a>
+                <span>你好,管理员!</span>
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="" style='display: inline-block;transform:translatey(1px);'><i class="fa fa-sign-out log-out"
-                                                                                       aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -144,26 +108,7 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
-                                </a>
-                            </li>
+                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
                         </ul>
 
                     </nav>
@@ -171,7 +116,7 @@
             </div>
         </div>
         <!--右侧栏-->
-        <div class="content content1 content2">
+        <div class="content ">
             <div class="content-header content-header1 margin-left-click"
                  style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
                 <!--主体-->
@@ -181,7 +126,7 @@
                         <h2>设备管理</h2>
                     </div>
                     <!--中间区域独立模块-->
-                    <form id="forms" enctype="multipart/form-data">
+                    <form id="forms" enctype="multipart/form-data" name="forms">
                         <div class="Add_course">
                             <div class="Add_course_head">
                                 <i class="fa fa-ellipsis-v "></i>添加设备
@@ -263,7 +208,7 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./course.html");
+        ace.localHref(".removeShuju", "./facility.html");
         ace.change("#modelImg", "#model_img");
         ace.filesUpload('modelImg', 'Progress', '.sr-only');
 
@@ -274,7 +219,7 @@
         $('#notazirez').click(function () {
             mo.selectJc("forms", "warm-xinxi", function () {
                 mo.numcs(url, "forms", "", function () {
-                    window.location.href = "course.html";
+                    window.location.href = "facility.html";
                 })
             });
         });

@@ -13,6 +13,24 @@
     <link rel="stylesheet" href="stylesheets/css/subject.css">
     <link rel="stylesheet" href="stylesheets/css/course.css">
 </head>
+<style>
+    input[type="text"] {
+        cursor: pointer;
+        font-weight: 100;
+    }
+
+    .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+        background-color: #f4f4f4;
+    }
+
+    .Add_course .clearfix {
+        margin: 15px 0;
+    }
+
+    h3 {
+        padding: 10px 0;
+    }
+</style>
 <!--[if lt IE 8]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
@@ -86,7 +104,8 @@
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i
+                        class="fa fa-sign-out log-out" aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -97,7 +116,7 @@
                 <div class="nano-content" style="right: 0 !important;">
                     <nav>
                         <ul class="nav" id="main-nav">
-                            <li class="active-item">
+                            <li class="">
                                 <a href='section.html'>
                                     <i class="fa fa-university" aria-hidden="true"></i>部门管理
                                 </a>
@@ -143,22 +162,13 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
-                                </a>
-                            </li>
-
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
-                                </a>
-                            </li>
+                            <li class="active-item"><a href='pemanage.html'> <i class="fa fa-edit"
+                                                                                aria-hidden="true"></i>PEInside管理
+                            </a></li>
+                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='download.html'> <i class="fa fa-download"
+                                                                     aria-hidden="true"></i>软件下载
+                            </a></li>
                         </ul>
 
                     </nav>
@@ -173,56 +183,52 @@
 
                 <div class="section animated fadeInRight">
                     <div class="section-head">
-                        <h2>部门管理</h2>
+                        <h2>PEInside管理</h2>
                     </div>
                     <!--中间区域独立模块-->
                     <form id="forms" enctype="multipart/form-data" name="forms">
                         <div class="Add_course">
                             <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>添加部门
+                                <i class="fa fa-rocket "></i>当前PEInside管理
                             </div>
-                            <h3>部门信息</h3>
+                            <h3></h3>
                             <div class="container-fluid">
                                 <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        设备名称
+                                    <div class="col-xs-2 text-center">
+                                        插件版本号
                                     </div>
-                                    <div class="col-xs-9">
+                                    <div class="col-xs-10">
 
-                                        <input type="text" class="form-control" name="modelName">
+                                        <input type="text" class="form-control" name="modelName"
+                                               readonly value="720">
 
-                                        <span class="password-yanzheng pull-left warm-xinxi"
-                                              style="line-height: 35px;font-size: 16px !important;"><i
-                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
                                     </div>
                                 </div>
 
                                 <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        所属设备
-                                    </div>
-                                    <div class="col-xs-9">
-                                        <select name="course-select" id="course-select" class="form-control">
-                                            <option value="0">公司</option>
-                                            <option value="1">培训处</option>
-                                            <option value="2">维修处</option>
+                                    <div class="col-xs-2 text-center">
+                                        插件安装文档
 
-                                        </select>
+                                    </div>
+                                    <div class="col-xs-10">
+
+                                        <input type="text" class="form-control" name="modelName"
+                                               readonly value="/uploadFile/201707171147.exe">
+
                                     </div>
                                 </div>
                                 <div class="clearfix">
-                                    <div class="col-xs-3 text-right">
-                                        备注
-                                    </div>
-                                    <div class="col-xs-9">
-                                        <input type="text" class="form-control" name="modelRemark">
+                                    <div class="col-xs-2 text-center">
+
 
                                     </div>
+                                    <div class="col-xs-10">
+                                        <a href="add_pemanage.html" class="btn btn-wide color_blue addTo">
+                                            修改
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="Add_course_bottom text-center">
-                                <button type='button' class='btn1 course_bj notazirez'>添加</button>
-                                <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
+
                             </div>
                         </div>
                     </form>

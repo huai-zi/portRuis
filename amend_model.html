@@ -108,26 +108,7 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
-                                </a>
-                            </li>
+                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
                         </ul>
 
                     </nav>
@@ -135,7 +116,7 @@
             </div>
         </div>
         <!--右侧栏-->
-        <div class="content content1 content2">
+        <div class="content ">
             <div class="content-header content-header1 margin-left-click"
                  style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
                 <!--主体-->
@@ -148,7 +129,7 @@
                     <form id="forms" enctype="multipart/form-data" name="forms">
                         <div class="Add_course">
                             <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>添加模型
+                                <i class="fa fa-ellipsis-v "></i>编辑模型
                             </div>
                             <h3>模型信息</h3>
                             <div class="container-fluid">
@@ -200,7 +181,7 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="file" name="modelImg" id="modelImg1" accept=".zip">
+                                        <input type="file" name="modelImg1" id="modelImg1" accept=".zip">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
@@ -219,7 +200,9 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <input type="text" class="form-control" name="modelRemark">
-
+                                        <input type="hidden" name="id" value="">
+                                        <input type="hidden" name="ymodelImg" value="">
+                                        <input type="hidden" name="ymodelImg1" value="">
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +231,7 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./facility.html");
+        ace.localHref(".removeShuju", "./model.html");
         ace.filesUpload('modelImg', 'Progress', '.sr-only');
         ace.filesUpload('modelImg1', 'Progress1', '.sr-only1');
 
@@ -258,7 +241,17 @@
                 $("#course-select").get(0).options[i] = new Option(v.name, v.id);
             });
 
-        })
+        });
+
+        var courses = JSON.parse(localStorage.getItem("model"));
+        console.log(courses);
+        var forms = document.forms;
+        forms.modelName.value = courses.name;
+        forms.id.value = courses.id;
+        forms.ymodelImg.value = courses.file;
+        forms.ymodelImg1.value = courses.fileStam;
+        forms.modelRemark.value = courses.ramark;
+
     })
     $(function () {
         var mo = new models();
@@ -266,7 +259,7 @@
         $('#notazirez').click(function () {
             mo.selectJc("forms", "warm-xinxi", function () {
                 mo.numcs(url, "forms", "", function () {
-                    window.location.href = "facility.html";
+                    window.location.href = "model.html";
                 })
             });
         });

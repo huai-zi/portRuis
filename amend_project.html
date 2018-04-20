@@ -144,26 +144,7 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
-                                </a>
-                            </li>
+                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
                         </ul>
 
                     </nav>
@@ -171,7 +152,7 @@
             </div>
         </div>
         <!--右侧栏-->
-        <div class="content content1 content2">
+        <div class="content ">
             <div class="content-header content-header1 margin-left-click"
                  style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
                 <!--主体-->
@@ -219,7 +200,7 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="file" name="modelImg" id="modelImg1" accept=".mp4,.wmv">
+                                        <input type="file" name="modelImg1" id="modelImg1" accept=".mp4,.wmv">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
@@ -237,7 +218,8 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <input type="text" class="form-control" name="modelRemark">
-
+                                        <input type="hidden" name="id" value="">
+                                        <input type="hidden" name="ymodelImg1" value="">
                                     </div>
                                 </div>
                             </div>
@@ -278,6 +260,12 @@
             });
 
         })
+        var courses = JSON.parse(localStorage.getItem("project"));
+        var forms = document.forms;
+        forms.modelName.value = courses.name;
+        forms.id.value = courses.id;
+        forms.ymodelImg1.value = courses.file;
+        forms.modelRemark.value = courses.ramark;
 
     })
     $(function () {

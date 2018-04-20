@@ -123,26 +123,7 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
-                                </a>
-                            </li>
+                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
                         </ul>
 
                     </nav>
@@ -173,7 +154,7 @@
 
 
                                 </div>
-                                <span id="test_button" class=" btn btn-wide btn-success" title='添加新试卷'>创建试卷</span>
+                                <span id="test_button" class=" btn btn-wide btn-success" title='保存试卷'>保存试卷</span>
                                 <span id="test_close" class=" btn btn-wide  btn-info" title='关闭'>关闭</span>
                             </div>
                             <div class=" clearfix">
@@ -220,7 +201,11 @@
         var ace = new main.comm();
         ace.localHref("#test_close", "test.html");
         window.seleIds = [];
-
+        var locals = JSON.parse(localStorage.getItem("tests"));
+        $("#forms_test").val(locals.name);
+        //同时传试卷id,获取选中的题目的id值进行标注，同时上传id进行保存
+        var jieguo = ["2", "3", "6"];
+        window.seleIds = jieguo;
         var options = [
             {"data": "id"},
             {
@@ -278,7 +263,10 @@
             $(".checkSelect").on("change", function () {
                 var vals = $(this).val();
                 if ($(this).is(':checked')) {
-                    window.seleIds.push(vals);
+                    if (window.seleIds.join().indexOf(vals) === -1) {
+                        window.seleIds.push(vals);
+                    }
+
                 } else {
                     window.seleIds.forEach(function (v, i) {
                         if (v === vals) {
@@ -288,9 +276,13 @@
 
                 }
                 //获取的选中的id值数组化
-                console.log(seleIds);
             })
 
+
+            jieguo.forEach(function (v, i) {
+                var num = ".checkedSe" + v;
+                $(num).prop('checked', true);
+            })
         });
         //设备变化
         var mo = new models();
@@ -299,7 +291,11 @@
         $('#facility').val(local.facilityT);
 //        $('#curriculum').val(local.course);//课程id
         $('#curriculum').val(local.courseT);
-
+        $("#test_button").click(function () {
+            console.log(window.seleIds);
+            var dataset = window.seleIds;
+            mo.ajaxPost(url, dataset);
+        })
 
     })
 </script>

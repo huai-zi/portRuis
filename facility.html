@@ -101,12 +101,11 @@
             <div class="header-middle"></div>
             <!-- 红点信息 -->
             <div class="header-section">
-                <a href="">你好,管理员!</a>
+                <span>你好,管理员!</span>
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="" style='display: inline-block;transform:translatey(1px);'><i class="fa fa-sign-out log-out"
-                                                                                       aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -123,12 +122,12 @@
                                 </a>
                             </li>
                             <li class="active-item">
-                                <a href=''>
+                                <a href='facility.html'>
                                     <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
                                 </a>
                             </li>
                             <li class="">
-                                <a href=''>
+                                <a href='course.html'>
                                     <i class="fa fa-book" aria-hidden="true"></i>课程管理
                                 </a>
                             </li>
@@ -163,26 +162,7 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
-                                </a>
-                            </li>
+                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
                         </ul>
 
                     </nav>
@@ -190,7 +170,7 @@
             </div>
         </div>
         <!--右侧栏-->
-        <div class="content content1 content2">
+        <div class="content ">
             <div class="content-header content-header1 margin-left-click"
                  style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
                 <!--主体-->
@@ -203,7 +183,7 @@
                         <!--主体结构-->
                         <div class="col-sm-12">
                             <!--模态框begin-->
-                            <a href="./add_course.html" class="btn btn-wide btn-primary addTo">
+                            <a href="add_facility.html" class="btn btn-wide btn-primary addTo">
                                 添加设备信息
                             </a>
                             <!--制作表格-->
@@ -273,12 +253,7 @@
                 </div>
                 <div class="modal-footer text-center">
 
-                    <button type="button" class="btn  btn-default  color_red itm_qx" data-dismiss="modal">
-                        删除
-                    </button>
-                    <button type="button" class="btn  btn-default color_green" data-dismiss="modal">
-                        取消
-                    </button>
+                    <button type="button" class="btn  btn-default color_green itm_qx" data-dismiss="modal">                        确定                    </button>                    <button type="button" class="btn  btn-default   " data-dismiss="modal">                        取消                    </button>
                 </div>
             </div>
         </form>
@@ -296,7 +271,7 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-//        ace.localHref(".notazirez", "amend_course.html", function () {
+//        ace.localHref(".notazirez", "amend_facility.html", function () {
 //            //对数据进行存储
 //            var that = $(this).parent().parent().children();
 //            console.log($(this));
@@ -336,7 +311,7 @@
                 }
             }
         ];
-        ace.datatables('model.json', options, function () {
+        ace.datatables('model.json', options, [2, 3, 4], function (data) {
             //点击编辑
 
             var aa3 = '';
@@ -344,18 +319,14 @@
             var aa4 = '';
             var aa1 = '';
             $('.notazirez').click(function () {
-                aa3 = $(this).parent().parent().children().eq(1).text();
-                aa2 = $(this).parent().parent().children().eq(2).children('img').attr('src');
                 aa1 = $(this).parent().parent().children().eq(0).text();
-                aa4 = $(this).parent().parent().children().eq(3).text();
-                var dataset = {
-                    "courseId": aa1,
-                    "courseName": aa3,
-                    "courseImage": aa2,
-                    "course": aa4,
-                }
-                localStorage.setItem("course", JSON.stringify(dataset));
-                window.location.href = "amend_course.html";
+                $(data.aoData).each(function (i, v) {
+                    if (+aa1 === v._aData.id) {
+                        console.log(v._aData);
+                        localStorage.setItem("facility", JSON.stringify(v._aData));
+                    }
+                })
+                window.location.href = "amend_facility.html";
             })
         })
 
@@ -381,7 +352,6 @@
                 modelz.tables();
             })
             //取到id,与数据进行对比,加载模态框
-
 
         })
         $('.big_da').click(function () {

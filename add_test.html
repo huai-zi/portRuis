@@ -24,12 +24,20 @@
         margin: 20px;
         border-radius: 5px;
     }
+
+    input[readonly="readonly"] {
+        cursor: auto !important;
+    }
 </style>
 <!--[if lt IE 8]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
-
+<style>
+    #basic-table_wrapper {
+        margin-top: 20px;
+    }
+</style>
 <body onselectstart="return false">
 
 <!--记载过程中的loading-->
@@ -115,26 +123,7 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>分页管理
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href=''>
-                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载
-                                </a>
-                            </li>
+                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
                         </ul>
 
                     </nav>
@@ -142,116 +131,60 @@
             </div>
         </div>
         <!--右侧栏-->
-        <div class="content content1 content2">
-            <div class="content-header content-header1 margin-left-click"
-                 style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
-                <!--主体-->
-                <div class="container-fluid">
-                    <div class="section animated fadeInRight">
-                        <div class="section-head">
-                            <h2>题库管理</h2>
-                        </div>
-                        <div class="section-body clearfix">
-                            <!--主体结构-->
-                            <div>
-                                设备
-                                <select name="" id="facility">
-                                    <option value="">请选择设备</option>
-                                    <option value="1">爆破阀</option>
-                                </select>
-                                课程
-                                <select name="" id="curriculum">
-                                    <option value="">请选择相应的课程</option>
-                                    <option value="">请选择相应的课程</option>
-                                </select>
+        <div class="content  ">
+            <form name="forms" id="forms">
+                <div class="content-header content-header1 margin-left-click"
+                     style='height: 100%;background-color: #f3f3f4;padding: 20px;'>
+                    <!--主体-->
+                    <div class="container-fluid">
+                        <div class="section animated fadeInRight">
+                            <div class="section-head">
+                                <h2>题库管理</h2>
                             </div>
-                            <button id="test_button" class=" btn btn-wide btn-success" title='添加新试卷'>添加新试卷</button>
-                        </div>
-                        <div class=" clearfix">
-                            <!--表格数据-->
-                            <table id="basic-table"
-                                   class="data-table table table-striped nowrap table-hover" cellspacing="0"
-                                   width="100%">
-                                <thead>
-                                <tr>
-                                    <th>标识</th>
-                                    <th>设备</th>
-                                    <th>课程</th>
-                                    <th>试卷名称</th>
-                                    <th>创建时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody class="tbodya">
-                                <!--占位符-->
-                                </tbody>
-                            </table>
-                            <div class="section-foot">
-                                选择设备及课程查看试卷。
-                                <button type="button" class="close" id="select-close"><span>×</span><span
-                                        class="sr-only">Close</span>
-                                </button>
-                            </div>
-                        </div>
+                            <div class="section-body clearfix">
+                                <!--主体结构-->
+                                <div>
+                                    设备
+                                    <input type="text" readonly="readonly" id="facility" value="">
 
+                                    课程
+                                    <input type="text" readonly="readonly" id="curriculum" value="">
+                                    试卷名称
+                                    <input type="text" name="test_name" id="forms_test" value="">
+
+
+                                </div>
+                                <span id="test_button" class=" btn btn-wide btn-success" title='创建试卷'>创建试卷</span>
+                                <span id="test_close" class=" btn btn-wide  btn-info" title='关闭'>关闭</span>
+                            </div>
+                            <div class=" clearfix">
+                                <!--表格数据-->
+                                <table id="basic-table"
+                                       class="data-table table table-striped nowrap table-hover" cellspacing="0"
+                                       width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>标识</th>
+                                        <th>选中</th>
+                                        <th>题型</th>
+                                        <th>题干</th>
+                                        <th>创建时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tbodya">
+                                    <!--占位符-->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 
-<!--删除按钮模态框-->
-<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
-     aria-labelledby="modal-error-label"
-     style="display: none;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header state modal-danger">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>提示
-                </h4>
-            </div>
-            <div class="modal-body">
-                <span id="modal_remove"></span>试卷删除后不可再恢复. <br>确定要删除选中的试卷?
-            </div>
-            <div class="modal-footer">
-                <!--确认删除-->
-                <button type="button" class="btn btn-danger itm_qx" data-dismiss="modal">
-                    确定
-                </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--警告信息-->
-<div class="modal fade" id="error-modal2" tabindex="-1" role="dialog"
-     aria-labelledby="modal-error-label"
-     style="display: none;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header state modal-warning">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
-                </h4>
-            </div>
-            <div class="modal-body">
-                <span></span>请先选择设备及课程
-            </div>
-            <div class="modal-footer">
-                <!--确认删除-->
-                <button type="button" class="btn btn-danger" data-dismiss="modal">
-                    确定
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
@@ -266,70 +199,39 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        //隐藏栏目
-        ace.select_but.click(function () {
-            $(this).parent().slideUp();
-        });
-
-        //对数据进行
-        ace.ajaxGet('tables.json', function (data) {
-            ace.select_facility[0].options[0] = new Option('请选择设备', '')
-            $(data).each(function (i, v) {
-                ace.select_facility[0].options[i + 1] = new Option(v.name, v.id);
-            })
-        });
-
-        //设备变化
-        var mo = new models();
-        ace.select_facility.on('change', function () {
-            var that = $(this);
-            var val = that.val();
-            if (val === '') {
-
-            } else {
-                var dataset = {
-                    "id": val
-                }
-                ace.ajaxPost(url, dataset, function (data) {
-
-                    ace.select_curriculum[0].options[0] = new Option('请选择相应的课程', '')
-                    if (data === "") {
-
-                    } else {
-                        //增加相应课程类目
-                        $(data).each(function (i, v) {
-                            ace.select_curriculum[0].options[i + 1] = new Option(v.name, v.id);
-                        })
-                    }
-
-                })
-            }
-        })
-        //课程变化
+        ace.localHref("#test_close", "test.html");
+        window.seleIds = [];
 
         var options = [
             {"data": "id"},
-            {"data": "name"},
-            {"data": "name"},
-            {
-                "data": "position"
-            },
             {
                 "data": "remarks",
                 "render": function (data, type, full, set) {
-                    return "2017-05-19 11:11"
+                    var inpu = "<label style='width: 100%;cursor:pointer'>" +
+                        "<input name='id' type='checkbox' " +
+                        "class='checkSelect checkedSe" +
+                        full.id + "' value='" + full.id + "'>" +
+                        "</label>"
+                    return inpu
+                }
+            },
+            {"data": "name"},
+            {
+                "data": "position",
+                "render": function (data, type, full, set) {
+                    var substrs = full.position.substr(0, 18) + "...";
+                    return substrs;
                 }
             },
             {
-                "data": "remarks",
+                "data": "position",
                 "render": function (data, type, full, set) {
-                    /*返回的数据拼接*/
-                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
+                    return "2018-04-20"
                 }
             }
         ];
 
-        ace.datatables('model.json', options, [2, 3, 4, 5], function (data) {
+        ace.datatables('model.json', options, [0, 1, 2, 3, 4], function (data) {
 
             //点击编辑
             var aa1 = '';
@@ -353,53 +255,35 @@
                 aa2 = $(this).parent().parent().children().eq(1).text();
                 $("#modal_remove").text(aa2);
                 $("#error-modal").modal();
-            })
+            });
+            $(".checkSelect").on("change", function () {
+                var vals = $(this).val();
+                if ($(this).is(':checked')) {
+                    if (window.seleIds.join().indexOf(vals) === -1) {
+                        window.seleIds.push(vals);
+                    }
 
-        });
-
-        ace.select_curriculum.on('change', function () {
-            var that = $(this);
-            var val = that.val();
-            var dataset = {
-                "id": val
-            };
-            console.log(mo);
-            //数据重新加载
-            mo.tables();
-            ace.ajaxPost(url, dataset, function (data) {
-                //加载到页面上
-                if (data === '') {
+                } else {
+                    window.seleIds.forEach(function (v, i) {
+                        if (v === vals) {
+                            window.seleIds.splice(i, 1);
+                        }
+                    })
 
                 }
-
-            });
-        });
-
-        $('.itm_qx').click(function () {
-            var dataset = {
-                "id": window.aa5
-            };
-            console.log(dataset);
-            modelz.ajaxform(url, dataset, function () {
-                modelz.tables();
+                //获取的选中的id值数组化
+                console.log(seleIds);
             })
-            //取到id,与数据进行对比,加载模态框
 
-        })
-        var modals = ['error-modal', 'error-modal1'];
-        mo.modtal(modals);
+        });
+        //设备变化
+        var mo = new models();
+        var local = JSON.parse(localStorage.getItem("test"));
+//        $('#facility').val(local.facility);//设备Id
+        $('#facility').val(local.facilityT);
+//        $('#curriculum').val(local.course);//课程id
+        $('#curriculum').val(local.courseT);
 
-        $("#test_button").click(function () {
-            var facility = $("#facility").val();
-            var course = $("#curriculum").val();
-            if (facility === "" || course === '') {
-                $('#error-modal2').modal();
-
-            }else{
-                window.location.href = "add_test.html";
-            }
-
-        })
 
     })
 </script>
