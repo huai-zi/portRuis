@@ -15,6 +15,10 @@
         .modal_span {
             display: none;
         }
+
+        .panel {
+            display: none;
+        }
     </style>
 </head>
 <!--[if lt IE 8]>
@@ -159,7 +163,8 @@
                                 </div>
                                 <div class="col-xs-9">
 
-                                    <input type="file" name="modelImg" id="modelImg1" accept=".xlsx">
+                                    <input type="file" name="modelImg" id="modelImg1"
+                                           accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
 
                                 </div>
                                 <div class="col-xs-3 text-right">
@@ -181,6 +186,8 @@
                             <div class="panel">
                                 <div class="panel-content">
                                     <div class="table-responsive" style='overflow-x: auto'>
+                                        <h3>数据展示如下：</h3>
+
                                         <table id="basic-table"
                                                class="data-table table table-striped nowrap table-hover" cellspacing="0"
                                                width="100%">
@@ -195,7 +202,6 @@
                                                 <th>电话</th>
                                                 <th>性别</th>
                                                 <th>角色</th>
-                                                <th>操作</th>
                                             </tr>
                                             </thead>
                                             <tbody class="tbodya">
@@ -204,6 +210,11 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-xs-12 text-center">
+                                <span class="btn btn-wide  color_blue color_blue_but" style="margin-top: 20px;">
+                                    确认上传
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -214,37 +225,13 @@
     </div>
 </div>
 
-
-<!--删除按钮模态框-->
-<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+<!--警告信息-->
+<div class="modal fade" id="error-modal2" tabindex="-1" role="dialog"
      aria-labelledby="modal-error-label"
      style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header state modal-primary">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>提示
-                </h4>
-            </div>
-            <div class="modal-body">
-                <span id="modal_remove" class="modal_span">锁定用户账号成功</span>
-                <span id="modal_removeS" class="modal_span">解锁用户账号成功</span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--删除按钮模态框-->
-<div class="modal fade" id="error-modal1" tabindex="-1" role="dialog"
-     aria-labelledby="modal-error-label"
-     style="display: none;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header state modal-primary">
+            <div class="modal-header state modal-warning">
                 <button type="button" class="close" data-dismiss="modal"
                         aria-label="Close"><span
                         aria-hidden="true">×</span></button>
@@ -252,15 +239,19 @@
                 </h4>
             </div>
             <div class="modal-body">
-                用户 "<span id="modal_usname"></span>"登陆密码被重置为"888888"
+                <span></span>请选择相应的xlsx文件再进行上传
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    确定
+                </button>
             </div>
         </div>
     </div>
 </div>
 <script src="javascripts/jquery.1.10.2.js"></script>
+<script src='javascripts/xlsx.core.min.js'></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
 <script src="javascripts/template-script.min.js"></script>
@@ -269,8 +260,11 @@
 <script src="stylesheets/css/vendor/media/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src='javascripts/course.js'></script>
 <script type="text/javascript" src='javascripts/sea.js'></script>
+<script type="text/javascript" src='javascripts/excel.js'></script>
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
+        var modelz = new models();
+
         var ace = new main.comm();
         var options = [
             {"data": "id"},
@@ -281,100 +275,161 @@
             {"data": "fileStam"},
             {"data": "fileStam"},
             {"data": "fileStam"},
-            {"data": "fileStam"},
-            {
-                "data": "ramark",
-                "render": function (data, type, full, set) {
-                    /*返回的数据拼接*/
-                    if (full.id === 5) {
-                        return "<button type='button' class='btn1 color_green notazirez ' data-hidd='0'>解锁</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>重置密码</button>"
-                    } else {
-                        return "<button type='button' class='btn1 color_ora notazirez' data-hidd='1'>锁定</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>重置密码</button>"
-                    }
-
-                }
-            }
+            {"data": "fileStam"}
         ];
-        //点击编辑按钮
-        ace.datatables('model.json', options, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], function (data) {
+        ace.filesUpload("modelImg1", "Progress1", ".sr-only1");
 
-            //点击编辑
-            var aa2 = '';
-            var aa5 = '';
+        $("#modelImg1").change(function (e) {
 
-            //回掉函数获取加载的数据信息
+            ace.changeFile(e, function (datas) {
+                console.log(datas[0]['"账号"']);
+                if (datas[0]['"账号"'] === undefined) {
+                    alert('请上传指定的格式--账号-姓名-处室-员工号-手机号');
+                    //现将进度条停止
+                    $("#modelImg1").get(0).files[0] = "";
+                    $("#modelImg1").val('');
+                    $(".sr-only1").html("");
+                    $(".sr-only1").attr('title', "");
+                    $("#Progress1")[0].style = "width:0 !important";
+                    $("#Progress1").attr('title', "");
 
 
-            $(".removeShuju").click(function () {
-
-                aa5 = $(this).parent().parent().children().eq(0).text();
-                aa2 = $(this).parent().parent().children().eq(1).text();
-                $("#modal_usname").text(aa2);
-                $("#error-modal1").modal();
-                var dataset = {
-                    "id": aa5
+                    return null
                 }
-                console.log(dataset);
 
-                ace.ajaxPost(url, dataset)
+                var options = [
+                    {
+                        "data": "账号",
+                        "render": function (data, type, full) {
+
+                            var fll = full['"账号"'];
+                            if (fll === "" || fll === undefined) {
+                                return ""
+                            } else {
+                                return fll
+                            }
+                        }
+                    },
+                    {
+                        "data": "账号",
+                        "render": function (data, type, full) {
+                            var fll = full['"账号"'];
+
+                            if (fll === "" || fll === undefined) {
+                                return ""
+                            } else {
+                                return fll
+                            }
+                        }
+                    },
+                    {
+                        "data": "姓名",
+                        "render": function (data, type, full) {
+                            var fll = full['"姓名"'];
+                            if (fll === "" || fll === undefined) {
+                                return ""
+                            } else {
+                                return fll
+                            }
+                        }
+                    },
+                    {
+                        "data": "处室",
+                        "render": function (data, type, full) {
+                            var fll = full['"处室"'];
+
+                            if (fll === "" || fll === undefined) {
+                                return ""
+                            } else {
+                                return fll
+                            }
+                        }
+                    },
+                    {
+                        "data": "员工号",
+                        "render": function (data, type, full) {
+                            var fll = full['"员工号"'];
+
+                            if (fll === "" || fll === undefined) {
+                                return ""
+                            } else {
+                                return fll
+                            }
+                        }
+                    },
+                    {
+                        "data": "员工号",
+                        "render": function (data, type, full) {
+                            var fll = full['"员工号"'];
+
+                            if (fll === "" || fll === undefined) {
+                                return ""
+                            } else {
+                                return fll
+                            }
+                        }
+                    },
+                    {
+                        "data": "手机",
+                        "render": function (data, type, full) {
+                            var fll = full['"手机"'];
+
+                            if (fll === "" || fll === undefined) {
+                                return ""
+                            } else {
+                                return fll
+                            }
+                        }
+                    },
+                    {
+                        "data": "手机",
+                        "render": function (data, type, full) {
+                            var fll = full['"手机"'];
+
+                            if (fll === "" || fll === undefined) {
+                                return ""
+                            } else {
+                                return fll
+                            }
+                        }
+                    },
+                    {
+                        "data": "手机",
+                        "render": function (data, type, full) {
+                            var fll = full['"手机"'];
+
+                            if (fll === "" || fll === undefined) {
+                                return ""
+                            } else {
+                                return fll
+                            }
+                        }
+                    }
+                ];
+                $(".color_blue_but").click(function () {
+                    ace.ajaxPost(url, datas, function () {
+
+
+                    });
+                })
+                modelz.datatables(datas, options, [0, 1, 2, 3, 4, 5, 6, 7, 8], function (data) {
+                    $(".panel").show();
+                })
+
             })
+        })
+        //点击进行数据保存
+        $(".color_blue_but").click(function () {
+            if ($("#modelImg1").val() === "") {
+                $("#error-modal2").modal()
 
+            }
 
         })
 
     });
 
-    $(function () {
-        var modelz = new models();
-//将模态框进行处理
-        var modals = ['lg-modal1', 'info-modal', 'error-modal'];
-        modelz.modtal(modals);
-        //删除传送数据
-        var aa1 = '';
 
-        $(document).on('click', '.notazirez', function () {
-            var that = $(this);
-            aa1 = $(this).parent().parent().children().eq(0).text();
-            var dataset = {
-                "id": aa1
-            }
-            console.log(dataset);
-            mo.ajaxform(url, dataset)
-            console.log($(this).attr('data-hidd'));
-            if ($(this).attr('data-hidd') === "0") {
-                that.removeClass("color_green");
-                that.addClass("color_ora");
-                that.text("锁定");
-                that.attr("data-hidd", "1");
-                $("#modal_removeS").show();
-                $("#modal_remove").hide();
-
-            } else if ($(this).attr('data-hidd') === "1") {
-                that.removeClass("color_ora");
-                that.addClass("color_green");
-                that.text("解锁");
-                that.attr("data-hidd", "0");
-                $("#modal_removeS").hide();
-                $("#modal_remove").show();
-
-            }
-            $("#error-modal").modal();
-
-        });
-
-        $('.big_da').click(function () {
-            return false
-        })
-        $('.big_da > img').click(function () {
-            return false
-        })
-        $('.click_close').on('click', function () {
-            $(this).parent().css("display", "none");
-        })
-
-        //编辑模型
-
-    })
 </script>
 </body>
 </html>

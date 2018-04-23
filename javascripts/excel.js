@@ -32,9 +32,9 @@ var excels = (function () {
             clearTimeout(timeou)
             /*数据加载失败*/
             $('.shuju-tishi2').text(data.message)
-            $('.shuju-tishi2').slideDown()
+            $('.shuju-tishi2').slideDown();
             var timeout1 = setTimeout(function () {
-                $('.shuju-tishi2').slideUp()
+                $('.shuju-tishi2').slideUp();
             }, 2000)
         }
     }
@@ -89,13 +89,13 @@ var excels = (function () {
                 for (var key in v) {
                     var bb = v[key];
                     //删除填写格式不规范的对象
-                    console.log(v);
                     delete v[key];
                     //将填写出的对象进行清除空格处理
                     key = $.trim(key);
                     v['"' + key + '"'] = bb;
                 }
             })
+            console.log(persons);
             excel.prototype.dataTables(persons, name, sex, iphone, cshi, email);
             //persons为传入的数据值
             // excel.prototype.newForm(url, persons);

@@ -160,6 +160,68 @@ var models = (function () {
         };
     }
 
+    function datatables(url, option, optionShow, callback) {
+        //url, option, optionShow, callback---数据请求路径\数据加载处理\显示手动排序隐藏列\回掉函数
+
+        var table = $('.data-table').DataTable({
+
+            "data":url,
+            "columns": option,
+            "createdRow": function (row, data, index) {
+                /* 设置表格中的内容居中 */
+                $('td', row).attr("class", "text-left");
+                $('th', row).attr("class", "text-left");
+            },
+            ordering: true,
+            "order": [[1, 'asc']],
+            "columnDefs": [//指定heard栏手动排序按钮
+                {
+                    "orderable": false, "targets": optionShow//[2, 3, 4]
+                },
+                {
+                    //设置第一列不参与搜索
+                    "targets": [0],
+                    "searchable": false
+                }
+            ],
+            "stateSave": true,
+            iDisplayLength: 10,
+            sProcessing: "正在获取数据，请稍后...",
+            "retrieve": true,
+            searchDelay: 350,
+            "destroy": true,
+
+            // bAutoWidth:true,
+            "aLengthMenu": [
+                [10, 15, 20, -1],
+                [10, 15, 20, "全部"]
+            ],// 显示条数设置
+            language: {
+                lengthMenu: "显示 _MENU_ 条数据",
+                search: '<span class="" style=" font-size: 18px;vertical-align: middle;margin-right: 5px">搜索' +
+                '</span>',//右上角的搜索文本，可以写html标签
+                paginate: {//分页的样式内容。
+                    previous: "上一页",
+                    next: "下一页",
+                    first: "第一页",
+                    last: "最后"
+                },
+                info: " _START_ - _END_ 条内容 共 _TOTAL_ 条内容", /*显示页面的数据条数*/
+                zeroRecords: "<strong>没有您要的内容，输点其它关键字试试！！</strong>",//table tbody内容为空时，tbody的内容。
+                //下面三者构成了总体的左下角的内容。
+                infoEmpty: "0条记录",//筛选为空时左下角的显示。
+                infoFiltered: ""//筛选之后的左下角筛选提示，
+
+            },
+
+            "fnDrawCallback": function (data) {
+                //加载完参数进行回掉函数操作
+                callback ? callback(data) : null;
+            }
+
+        });
+    }
+
     //删除数组某一项
     function removeArray(arr, item) {
         var result = [];
@@ -175,6 +237,8 @@ var models = (function () {
 
     }
 
+
+
     model.prototype = {
         constructor: model,
         "slide": slide,
@@ -186,7 +250,8 @@ var models = (function () {
         "getObjectURL": getObjectURL,
         "createHtml": createHtml,
         "removeArray": removeArray,
-        "clicks": clicks
+        "clicks": clicks,
+        "datatables":datatables
     };
     return model;
 })();

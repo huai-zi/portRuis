@@ -141,7 +141,9 @@ define(function (require, exports, module) {
 
         function datatables(url, option, optionShow, callback) {
             //url, option, optionShow, callback---数据请求路径\数据加载处理\显示手动排序隐藏列\回掉函数
+
             var table = $('.data-table').DataTable({
+
                 "ajax": {
                     'url': url,//'models.json'
                     "type": "get",
@@ -318,6 +320,54 @@ define(function (require, exports, module) {
             h.init(files, progress, fontShow);
         }
 
+        //上传监控
+        function changeFile(e, callback) {
+            console.log(666);
+            var files = e.target.files;
+            var fileReader = new FileReader();
+            fileReader.onload = function (ev) {
+                try {
+                    var data = ev.target.result,
+                        workbook = XLSX.read(data, {
+                            type: 'binary'
+                        }), // 以二进制流方式读取得到整份excel表格对象
+                        persons = []; // 存储获取到的数据
+                } catch (e) {
+                    alert('文件类型不正确,重新上传');
+                    return;
+                }
+
+                // 表格的表格范围，可用于判断表头是否数量是否正确
+                var fromTo = '';
+                // 遍历每张表读取
+                for (var sheet in workbook.Sheets) {
+                    if (workbook.Sheets.hasOwnProperty(sheet)) {
+                        fromTo = workbook.Sheets[sheet]['!ref'];
+                        persons = persons.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
+
+                        // break; // 如果只取第一张表，就取消注释这行
+                    }
+                }
+                $(persons).each(function (i, v) {
+                    for (var key in v) {
+                        var bb = v[key];
+                        //删除填写格式不规范的对象
+                        delete v[key];
+                        //将填写出的对象进行清除空格处理
+                        key = $.trim(key);
+                        v['"' + key + '"'] = bb;
+                    }
+                })
+
+                callback ? callback(persons) : null;
+
+                //persons为传入的数据值
+                // excel.prototype.newForm(url, persons);
+            };
+            // 以二进制方式打开文件
+            fileReader.readAsBinaryString(files[0]);
+        };
+
         com.prototype = {
             constructor: com,
             "ajaxPost": ajaxPost,
@@ -329,7 +379,8 @@ define(function (require, exports, module) {
             "getObjectURL": getObjectURL,
             "datatables": datatables,
             "filesUpload": filesUpload,
-            "slide":slide
+            "slide": slide,
+            "changeFile": changeFile
         }
         return com;
     })();
