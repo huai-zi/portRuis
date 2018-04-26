@@ -180,4 +180,6 @@ var PE = (function () {
 
     return PE1;
 })()
-
+//默认启动滚动条显示向上图标
+var pes = new PE();
+pes.scrollTop();

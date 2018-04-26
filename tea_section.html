@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en" class="fixed">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">    <link rel="stylesheet" href="stylesheets/css/vendor/data-table/media/css/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/style.css">
+    <link rel="stylesheet" href="stylesheets/css/oeinsder.css">
+    <link rel="stylesheet" href="stylesheets/css/subject.css">
+    <link rel="stylesheet" href="stylesheets/css/question-bank.css">
+
+</head>
+<style>
+    .peinsder-box {
+        padding: 3px !important;
+    }
+
+    .Add_course .clearfix {
+        margin: 15px 0;
+    }
+
+    .onile-box .col-sm-3 ul {
+        margin: 0 -14px !important;
+
+    }
+
+    .section {
+        margin-top: 0px !important;
+    }
+
+    #prevs {
+        display: none;
+    }
+
+    .subject-action {
+        padding-top: 30px;
+    }
+
+    h4 {
+        padding: 0 !important;
+        color: #fff;
+    }
+
+    .nav-tabs > li a {
+        font-weight: 600;
+        font-size: 14px;
+        color: #a7b1c2 !important;
+        background-color: transparent !important;
+    }
+
+    .nav-tabs > li {
+        float: left !important;
+        width: auto !important;
+    }
+
+    .nav-tabs > li:last-child {
+        float: right !important;
+    }
+
+    .nav-tabs > li.active a {
+        color: #555555 !important;
+    }
+
+    .nav-tabs > li a:hover {
+        color: #555555 !important;
+
+        background-color: #e6e6e6 !important;
+    }
+
+    .section-head {
+        box-shadow: none !important;
+        margin-top: 0 !important;
+    }
+
+    h3 {
+        border-bottom: 1px solid #e7eaec;
+        padding-bottom: 10px;
+    }
+
+    .nav-tabs {
+        background-color: rgb(248, 248, 248) !important;
+    }
+
+    .peinsder-box {
+        margin-top: 6px;
+        border: none !important;
+        width: 80% !important;
+        padding: 20px !important;
+    }
+
+    .nav-tabs.nav-justified {
+        box-shadow: 0 6px 0px #e7eaec;
+    }
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    .container-fluid.peinsder-sb {
+
+        padding-left: 20px;
+    }
+
+    body {
+        background-color: rgb(248, 248, 248) !important;
+    }
+
+    .section-foot {
+        margin: 20px;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .btn.btn-wide {
+        transform: translatey(3px);
+        margin-left: 20px;
+    }
+</style>
+<!--[if lt IE 8]>
+<script type="text/javascript" src="javascripts/html5.js"></script>
+<script type="text/javascript" src="javascripts/respond.js"></script>
+<![endif]-->
+<body>
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+
+<!--导航条-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!--汉堡菜单-->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#" title='模型浏览'>模型浏览</a></li>
+                <li><a href="#" title='考核培训' class="selects_top">考核培训</a></li>
+                <li><a href="#" title='检修规划'>检修规划</a></li>
+                <li><a href="#" title='你好'>你好,吴亮!</a></li>
+                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--底部栏-->
+<div class="content">
+    <div>
+        <div class="container-fluid banner-fal">
+            <ul class="nav nav-tabs nav-justified">
+                <li role="presentation"><a href="#">试卷发放</a></li>
+                <li role="presentation" class="active"><a href="#">试卷管理</a></li>
+                <li role="presentation"><a href="#">模拟试卷</a></li>
+                <li role="presentation"><a href="#">成绩管理</a></li>
+                <li role="presentation"><a href="#">软件下载</a></li>
+
+            </ul>
+        </div>
+        <div class="peinsder-box">
+            <!--主体部分-->
+            <div class="container-fluid peinsder-sb">
+                试卷
+            </div>
+            <div class=" animated fadeInRight">
+                <!--中间区域独立模块-->
+
+                <div class="container-fluid">
+                    <div class="section-body clearfix">
+                        <!--主体结构-->
+                        <div>
+                            设备
+                            <select name="" id="facility">
+                                <option value="">请选择设备</option>
+                                <option value="1">爆破阀</option>
+                            </select>
+                            课程
+                            <select name="" id="curriculum">
+                                <option value="">请选择相应的课程</option>
+                                <option value="2">课程</option>
+                            </select>
+                            <button id="test_button" class=" btn btn-wide btn-success" title='添加新试卷'>添加新试卷</button>
+                        </div>
+
+                    </div>
+                    <div class=" clearfix">
+                        <!--表格数据-->
+                        <table id="basic-table"
+                               class="data-table table table-striped nowrap table-hover" cellspacing="0"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th>标识</th>
+                                <th>设备</th>
+                                <th>课程</th>
+                                <th>试卷名称</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody class="tbodya">
+                            <!--占位符-->
+                            </tbody>
+                        </table>
+                        <div class="section-foot">
+                            选择设备及课程查看试卷。
+                            <button type="button" class="close" id="select-close"><span>×</span><span
+                                    class="sr-only">Close</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除按钮模态框-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-danger">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span id="modal_remove"></span>试卷删除后不可再恢复. <br>确定要删除选中的试卷?
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn btn-danger itm_qx" data-dismiss="modal">
+                    确定
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--警告信息-->
+<div class="modal fade" id="error-modal2" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-warning">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span></span>请先选择设备及课程
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--向上按钮-->
+<a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+</body>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/jquery.dataTables.min.js"></script>
+<script src="stylesheets/css/vendor/media/js/dataTables.bootstrap.min.js"></script>
+<script src="javascripts/peinsder.js"></script>
+<script src='javascripts/course.js'></script>
+<script type="text/javascript" src='javascripts/sea.js'></script>
+<script type="text/javascript">
+    seajs.use('./javascripts/common.js', function (main) {
+        var ace = new main.comm();
+        //隐藏栏目
+        ace.select_but.click(function () {
+            $(this).parent().slideUp();
+        });
+
+        //对数据进行
+        ace.ajaxGet('tables.json', function (data) {
+            ace.select_facility[0].options[0] = new Option('请选择设备', '')
+            $(data).each(function (i, v) {
+                ace.select_facility[0].options[i + 1] = new Option(v.name, v.id);
+            })
+        });
+
+        //设备变化
+        var mo = new models();
+        ace.select_facility.on('change', function () {
+            var that = $(this);
+            var val = that.val();
+            if (val === '') {
+
+            } else {
+                var dataset = {
+                    "id": val
+                }
+                ace.ajaxPost(url, dataset, function (data) {
+
+                    ace.select_curriculum[0].options[0] = new Option('请选择相应的课程', '')
+                    if (data === "") {
+
+                    } else {
+                        //增加相应课程类目
+                        $(data).each(function (i, v) {
+                            ace.select_curriculum[0].options[i + 1] = new Option(v.name, v.id);
+                        })
+                    }
+
+                })
+            }
+        })
+        //课程变化
+
+        var options = [
+            {"data": "id"},
+            {"data": "name"},
+            {"data": "name"},
+            {
+                "data": "position"
+            },
+            {
+                "data": "remarks",
+                "render": function (data, type, full, set) {
+                    return "2017-05-19 11:11"
+                }
+            },
+            {
+                "data": "remarks",
+                "render": function (data, type, full, set) {
+                    /*返回的数据拼接*/
+                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
+                }
+            }
+        ];
+
+        ace.datatables('model.json', options, [2, 3, 4, 5], function (data) {
+
+            //点击编辑
+            var aa1 = '';
+            var aa2 = '';
+            window.aa5 = '';
+            $('.notazirez').click(function () {
+                aa1 = $(this).parent().parent().children().eq(0).text();
+                $(data.aoData).each(function (i, v) {
+                    if (+aa1 === v._aData.id) {
+                        localStorage.setItem("tea_tests", JSON.stringify(v._aData));
+                    }
+                })
+                window.location.href = "amend_test.html"
+            });
+
+            //回掉函数获取加载的数据信息
+
+            $(".removeShuju").click(function () {
+                window.aa5 = $(this).parent().parent().children().eq(0).text();
+                aa2 = $(this).parent().parent().children().eq(1).text();
+                $("#modal_remove").text(aa2);
+                $("#error-modal").modal();
+            })
+
+        });
+
+        ace.select_curriculum.on('change', function () {
+            var that = $(this);
+            var val = that.val();
+            var dataset = {
+                "id": val
+            };
+            //数据重新加载
+            if (val === '') {
+                $("#section-foot").show();
+                $("#basic-table").hide();
+                $("#basic-table_wrapper").hide();
+                $(".section-foot").show();
+            } else {
+                mo.tables();
+                $("#basic-table").show();
+                $("#basic-table_wrapper").show();
+                $(".section-foot").hide();
+            }
+
+            ace.ajaxPost(url, dataset, function (data) {
+                //加载到页面上
+                if (data === '') {
+
+                }
+
+            });
+        });
+
+        $('.itm_qx').click(function () {
+            var dataset = {
+                "id": window.aa5
+            };
+            console.log(dataset);
+            modelz.ajaxform(url, dataset, function () {
+                modelz.tables();
+            })
+            //取到id,与数据进行对比,加载模态框
+
+        })
+        var modals = ['error-modal', 'error-modal2'];
+        mo.modtal(modals);
+
+        $("#test_button").click(function () {
+            var facility = $("#facility").val();
+            var course = $("#curriculum").val();
+            if (facility === "" || course === '') {
+                $('#error-modal2').modal();
+
+            } else {
+
+                var dataset = {
+                    "facility": facility,
+                    "facilityT": $("#facility  option:selected").text(),
+                    "course": course,
+                    "courseT": $("#curriculum  option:selected").text(),
+                }
+                localStorage.setItem("tea_test", JSON.stringify(dataset));
+                window.location.href = "tea_add_test.html";
+            }
+
+        })
+
+    })
+</script>
+</html>

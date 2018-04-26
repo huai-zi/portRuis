@@ -232,7 +232,8 @@ html.right-sidebar-opened .right-sidebar {
     display: none;
     border-radius: 50%;
     text-align: center;
-    background: #004E90;
+    /*background: #004E90;*/
+    background: #028097;
     -webkit-box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.53);
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.53);
 }
@@ -6332,4 +6333,7 @@ p.quesction {
     line-height: 25px;
     color: #fff;
     background-color: #ddd;
+}
+a.form-control{
+    font-weight:100;
 }

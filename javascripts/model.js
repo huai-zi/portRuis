@@ -319,7 +319,7 @@ $('#qren').on('click', function () {
         return false
     } else {
         //成功的情况，进行数据传递，格式name=XX&files=xx
-        modelz.numcs(url, "form02",window.aa1, function () {
+        modelz.numcs(url, "form02",+window.aa1, function () {
             modelz.tables();
         })
     }

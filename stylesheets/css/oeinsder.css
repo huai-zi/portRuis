@@ -12,14 +12,15 @@ body {
 
 .peinsder-imgas img {
     width: 100%;
-    min-height:200px;
+    min-height: 200px;
 }
 
 .peinsder-imgas1 img {
     width: 100%;
-    min-height:200px;
+    min-height: 200px;
 
 }
+
 .fadeInRight {
     padding-bottom: 0 !important;
 }
@@ -79,6 +80,16 @@ h4 {
     margin: 0;
 }
 
+.modal-warning h4 {
+    padding: 0 !important;
+    color: #fff !important;
+}
+
+.modal .modal-content .modal-header.state i {
+    border: none !important;
+    color: #fff !important;
+}
+
 .peinsder-sb {
     height: 48px;
     line-height: 48px;
@@ -100,7 +111,7 @@ html.fixed .content-header {
 
 .banner_top {
     margin-bottom: 0px;
-    padding-left: 5%;
+    padding: 0 5%;
 }
 
 .banner_top a {
@@ -116,6 +127,10 @@ html.fixed .content-header {
 .banner-fal {
     width: 80%;
     margin: 0 auto;
+}
+
+.selects_top {
+    background-color: rgba(255, 255, 255, .15) !important;
 }
 
 @media (max-width: 768px) {
@@ -224,6 +239,61 @@ html.fixed .content-header {
 }
 
 .onile-box .col-sm-3, .onile-box .col-sm-9 {
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
+    min-height: 800px;
     height: 100%;
+}
+
+.onile-box .col-sm-3 {
+    /*border: 1px solid #ccc;*/
+    min-height: 800px;
+    overflow-y: scroll;
+    height: 100%;
+    background-color: rgb(242, 250, 242);
+}
+
+.onile-box .col-sm-3 > ul {
+    /*border: 1px solid #ccc;*/
+    background-color: rgb(210, 245, 251) !important;
+    color: rgb(51, 122, 183);
+    padding-left: 20px;
+}
+
+.onile-box .col-sm-3 > ul li a {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 30px;
+    color: rgb(51, 122, 183);
+}
+
+.onile-box .col-sm-3 > ul li a span {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 30px;
+    color: #ffd800;
+}
+
+.onile-box .col-sm-3 > ul li a:hover {
+    color: #23527c !important;
+
+}
+
+.navbar-nav li:nth-child(5) {
+    position: relative;
+}
+
+
+label {
+    cursor: pointer;
+}
+
+
+.navbar-default {
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+}
+
+.content {
+    padding-top: 80px;
 }

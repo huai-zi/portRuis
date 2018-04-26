@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="stylesheets/css/bootstrap-3.3.4.css">
+    <style>
+        .qubie {
+            background-color: #00C5CD;
+            padding: 5px;
+            margin: 30px;
+            border-radius: 5px;
+        }
+
+        .qubie h3 {
+            color: #fff;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .qubie .yihuilu {
+            overflow: hidden;
+            color: #fff;
+            width: 100%;
+            margin: 0 auto;
+            padding: 5px;
+            padding-bottom: 0;
+            line-height: 30px;
+        }
+
+        .qubie .yihuiluone {
+            overflow: hidden;
+            background-color: #303030;
+            min-height: 400px;
+        }
+
+        .qubie .yihuilu .col-xs-6, .qubie .yihuilu .col-xs-2 {
+            background-color: rgba(245, 245, 245, .3);
+        }
+
+        .qubie .yihuilu .col-xs-4 {
+            color: rgb(232, 173, 63);
+        }
+        .canshu{
+            margin: 30px ;
+        }
+        .canshu >  div{
+            width: 150px;
+            display: inline-block;
+        }
+        .fuhao span{
+            font-size: 19px;
+            color: #fff;
+            margin: 10px;
+            padding: 3px;
+            cursor: pointer;
+            border-radius:50% ;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="canshu">
+    选择查看参数：
+    <div>
+        <select class="form-control">
+            <option>一回路参数</option>
+            <option>二回路参数</option>
+            <option>安全壳参数</option>
+            <option>稳压器参数</option>
+        </select>
+    </div>
+    <button type="button" class="btn btn-success" style="display: inline-block;margin-left:15px;">选择</button>
+</div>
+<div class="container-fluid">
+    <div class="col-xs-3  qubie">
+        <h3>一回路参数</h3>
+        <div class="yihuiluone">
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>反应堆功率</span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>33.36</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>MW</span>
+                </div>
+            </div>
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>最大堆芯温度</span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>335.62</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>&#8451;</span>
+                </div>
+            </div>
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>燃料包壳温度</span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>165.46</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>&#8451;</span>
+                </div>
+            </div>
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>燃料温度</span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>103.36</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>&#8451;</span>
+                </div>
+            </div>
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>反应堆堆芯出口温度</span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>205.08</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>&#8451;</span>
+                </div>
+            </div>
+            <div class="fuhao">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3  qubie">
+        <h3>二回路参数</h3>
+        <div class="yihuiluone">
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>SG1二次侧压力</span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>6.56</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>MPa</span>
+                </div>
+            </div>
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>SG1蒸汽流量
+                    </span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>0.00</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>kg/s</span>
+                </div>
+            </div>
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>SG1给水流量</span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>0.0</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>kg/s</span>
+                </div>
+            </div>
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>SG2二次侧压力</span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>6.58</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>MPa</span>
+                </div>
+            </div>
+            <div class="yihuilu">
+                <div class="col-xs-6">
+                    <span>SG2蒸汽流量</span>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <span>0.00</span>
+                </div>
+                <div class="col-xs-2">
+                    <span>kg/s</span>
+                </div>
+            </div>
+            <div class="fuhao">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="javascripts/jquery.1.10.2.js"></script>
+</html>

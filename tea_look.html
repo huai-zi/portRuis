@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en" class="fixed">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/style.css">
+    <link rel="stylesheet" href="stylesheets/css/subject.css">
+    <link rel="stylesheet" href="stylesheets/css/oeinsder.css">
+</head>
+<style>
+    .peinsder-box {
+        padding: 3px !important;
+    }
+
+    .Add_course .clearfix {
+        margin: 15px 0;
+    }
+
+    .onile-box .col-sm-3 ul {
+        margin: 0 -14px !important;
+
+    }
+
+    #basic-table_length, #basic-table_filter {
+        display: none;
+    }
+
+    .section {
+        margin-top: 0px !important;
+    }
+
+    #prevs {
+        display: none;
+    }
+
+    .subject-action {
+        padding-top: 30px;
+    }
+
+    h4 {
+        padding: 0 !important;
+        color: #fff;
+    }
+
+    .nav-tabs > li a {
+        font-weight: 600;
+        font-size: 14px;
+        color: #a7b1c2 !important;
+        background-color: transparent !important;
+    }
+
+    .nav-tabs > li {
+        float: left !important;
+        width: auto !important;
+    }
+
+    .nav-tabs > li:last-child {
+        float: right !important;
+    }
+
+    .nav-tabs > li.active a {
+        color: #555555 !important;
+    }
+
+    .nav-tabs > li a:hover {
+        color: #555555 !important;
+
+        background-color: #e6e6e6 !important;
+    }
+
+    .section-head {
+        box-shadow: none !important;
+        margin-top: 0 !important;
+    }
+
+    table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after {
+        display: none;
+    }
+
+
+    .nav-tabs {
+        background-color: rgb(248, 248, 248) !important;
+    }
+
+    .peinsder-box {
+        margin-top: 6px;
+        border: none !important;
+        width: 80% !important;
+        padding: 20px !important;
+    }
+
+    .nav-tabs.nav-justified {
+        box-shadow: 0 6px 0px #e7eaec;
+    }
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    .container-fluid.peinsder-sb {
+
+        padding-left: 20px;
+    }
+
+    body {
+        background-color: rgb(248, 248, 248) !important;
+    }
+
+    .section-body {
+        padding: 20px 0;
+    }
+
+    .section-foot {
+        margin: 20px;
+        margin-left: 0;
+        border-radius: 5px;
+    }
+
+    .bor_span {
+        display: inline-block;
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+
+    .btn.btn-wide {
+        transform: translatey(3px);
+        margin-left: 20px;
+    }
+
+    #basic-table_wrapper {
+        width: 100% !important;
+        display: none;
+    }
+
+    .send_span {
+        margin-right: 10px;
+        background-color: orange;
+        padding: 5px;
+        border-radius: 10px;
+        line-height: 11px;
+        color: #fff;
+        margin-top: 14px;
+    }
+
+    .no_pei {
+        min-height: 750px !important;
+        border-radius: 10px;
+    }
+
+    .no_pei {
+        border-color: #028097 !important;
+        overflow-x: hidden;
+        min-height: auto !important;
+        background-color: #fff;
+    }
+
+    .accordion-heading {
+        background-color: #d2f5fb;
+        line-height: 49px;
+        padding-left: 40px;
+    }
+
+    .accordion-heading a {
+        font-size: 18px;
+        font-weight: 600;
+        color: #555555;
+    }
+
+    .onile-box .col-sm-3 {
+        overflow-y: hidden !important;
+        background-color: transparent !important;
+    }
+
+    #answer-sheet-num {
+        margin: 0 !important;
+        padding-left: 0;
+
+    }
+
+    #answer-sheet-num li a {
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        color: #333;
+        line-height: 41px;
+        font-size: 14px;
+        padding-left: 10px;
+    }
+
+    #answer-sheet-num li a:hover {
+        background-color: #f5f5f5 !important;
+    }
+
+    .col-sm-9 {
+        border: 1px solid #028097;
+        border-radius: 5px;
+    }
+
+    .peinsder-sb {
+        margin: 0 -15px;
+    }
+
+    .tab-pane {
+        font-size: 14px;
+    }
+
+    .tab-pane > div {
+        margin: 10px 0;
+    }
+
+    .tab-pane > div .col-xs-2 {
+        line-height: 34px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .tab-pane > div span {
+        line-height: 34px;
+    }
+    .subject-next{
+        padding:0 20px 30px 0;
+    }
+</style>
+<!--[if lt IE 8]>
+<script type="text/javascript" src="javascripts/html5.js"></script>
+<script type="text/javascript" src="javascripts/respond.js"></script>
+<![endif]-->
+<body>
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+
+<!--导航条-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!--汉堡菜单-->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#" title='模型浏览'>模型浏览</a></li>
+                <li><a href="#" title='考核培训'>考核培训</a></li>
+                <li><a href="#" title='检修规划'>检修规划</a></li>
+                <li><a href="#" title='你好'>你好,吴亮!</a></li>
+                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--底部栏-->
+<div class="content">
+    <div>
+        <div class="container-fluid banner-fal">
+            <ul class="nav nav-tabs nav-justified">
+                <li role="presentation"><a href="#">试卷发放</a></li>
+                <li role="presentation"><a href="#">试卷管理</a></li>
+                <li role="presentation"><a href="#">模拟试卷</a></li>
+                <li role="presentation" class="active"><a href="#">成绩管理</a></li>
+                <li role="presentation"><a href="#">软件下载</a></li>
+
+            </ul>
+        </div>
+        <div class="peinsder-box">
+            <form name="forms">
+                <div class="row" id="peinsder-box">
+                    <!--显示课程设备学习图解-->
+                    <div class="container-fluid onile-box">
+                        <div class="col-sm-3">
+                            <div class="no_pei no_pei_one">
+                                <label style="font-size: 16px;background-color: #028097 !important;color: #fff;">
+                                    题目列表
+                                </label>
+                                <ul id="answer-sheet-num" class="answer-sheet-box">
+                                    <!--<li role="presentation" class="active">-->
+                                    <!--<a href="#home" aria-controls="home" role="tab"-->
+                                    <!--data-toggle="tab">Home</a></li>-->
+                                    <!--展示题目区域-->
+
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="container-fluid peinsder-sb">
+                                考卷
+                            </div>
+                            <div style="margin-top:30px ;border-bottom: 1px solid #e7eaec;margin-bottom: 25px;">
+                                课程:<input type="text" style="display: inline-block
+" disabled=true>
+                                试卷:<input type="text" style="display: inline-block
+" disabled=true>
+                                学员:<input type="text" style="display: inline-block
+" disabled=true></div>
+                            <div class="tab-content" id="subject-main">
+                                <!--<div role="tabpanel" class="tab-pane active" id="home">home</div>-->
+                                <!--显示题目区域-->
+                            </div>
+                            <div class="subject-action clearfix text-right">
+                                <div class="subject-next">
+                                    <input type="hidden" name="id" value="" id="hidden_id">
+                                    <span id="aheadFinish" class="btn warning-btn color_green"
+                                          style="color: #fff;">关闭</span>
+                                    <span id="prevs" class="btn warning-btn">上一题</span>
+                                    <span id="next" class="btn warning-btn">下一题</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--警告信息-->
+<div class="modal fade" id="error-modal2" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-warning">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-span1">需要先选择正确备选项</span>
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-span1">进入操作考核阶段后,理论考核页面将不可见。</span><br><span>确认考试操作考核吗？</span>
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    取消
+                </button>
+                <button style="background-color: #1ab394;color: #fff" type="button" class="btn " id="buttons"
+                        data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--向上按钮-->
+<a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+</body>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src='javascripts/template.js'></script>
+<script src='javascripts/tea_look.js'></script>
+<script src="javascripts/peinsder.js"></script>
+<script src='javascripts/course.js'></script>
+
+<script id="papers" type="text/html">
+    {{each shiti as value index}}
+    <div class="tab-pane" role="tabpanel" id="collapseOne{{index}}">
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                题型
+            </div>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" readonly value="{{value.title}}">
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                所属课程
+            </div>
+            <div class="col-xs-10">
+                <span> {{value.title}}</span>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                题干
+            </div>
+            <div class="col-xs-10">
+                <textarea name="" id="" class="form-control" cols="30" rows="5" readonly>{{value.title}}
+                </textarea>
+
+            </div>
+        </div>
+        {{if value.type === 0}}
+        <!--单选题-->
+
+
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                备选答案
+            </div>
+            <div class="col-xs-10">
+                <label>
+                    <input type="radio" disabled="true">A、{{value.title}}
+                </label>
+            </div>
+
+            <div class="col-xs-2 text-right">
+            </div>
+            <div class="col-xs-10">
+                <label>
+                    <input type="radio" disabled="true">A、{{value.title}}
+                </label>
+            </div>
+
+            <div class="col-xs-2 text-right">
+            </div>
+            <div class="col-xs-10">
+                <label>
+                    <input type="radio" disabled="true">A、{{value.title}}
+                </label>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                学员回答
+            </div>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" value="{{value.title}} " readonly>
+
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                得分
+            </div>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" readonly value="{{value.title}}">
+            </div>
+        </div>
+        {{/if}}
+        {{if value.type === 1}}
+        <!--操作题-->
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                题目序号
+            </div>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" readonly value="{{value.title}}">
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                操作步骤
+            </div>
+            <div class="col-xs-10">
+                <textarea name="" class="form-control" readonly cols="30" rows="5">{{value.title}}</textarea>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                学员回答
+            </div>
+            <div class="col-xs-10">
+                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly cols="30"
+                          rows="7">第{{index+1}}步：{{value.title}}</textarea>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                得分
+            </div>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" readonly value="{{value.title}}">
+            </div>
+        </div>
+        {{/if}}
+
+        {{if value.type === 2}}
+        <!--问答题-->
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                题目图像
+            </div>
+            <div class="col-xs-10">
+                <img src="{{value.title}}" alt="没有指定图像">
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                学员回答
+            </div>
+            <div class="col-xs-10">
+                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly cols="30"
+                          rows="7">{{value.title}}</textarea>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="col-xs-2 text-right">
+                得分
+            </div>
+            <div class="col-xs-10">
+                <input type="text" class="form-control" readonly value="{{value.title}}">
+            </div>
+        </div>
+        {{/if}}
+
+    </div>
+    {{/each}}
+</script>
+<script id="but" type="text/html">
+    {{each shiti as value index}}
+    <li role="presentation" class="">
+        <a href="#collapseOne{{index}}" aria-controls="#collapseOne{{index}}" role="tab" class="collapseOne{{index}}"
+           data-toggle="tab" data-id="{{index}}">第 {{index+1}} 题 {{ttm(value.type)}} </a>
+    </li>
+    {{/each}}
+</script>
+<script type="text/javascript">
+    $(function () {
+        var modealz = new models();
+        $("#aheadFinish").click(function () {
+            console.log(22);
+        })
+
+    })
+</script>
+</html>

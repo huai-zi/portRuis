@@ -1,13 +1,53 @@
 {
   "shiti":[
     {
-      "type":1,
-      "title":"asdasdasdasda",
+      "type":0,
+      "title":"aaaa",
       "fs":12,
       "id":2,
       "raA":"Aas",
       "raB":"Aas",
       "raC":"Aas",
+      "answer":["asd","asd","asd"],
+      "raC":"Aas",
+      "qus":"A",
+      "point":"qwee"
+    },
+    {
+      "type":1,
+      "title":"bbbbb",
+      "fs":162,
+      "id":3,
+      "raA":"Aas",
+      "raB":"Aas",
+      "raC":"Aas",
+      "raD":"Aas",
+      "answer":["asd","asd","asd"],
+      "qus":"A",
+      "point":"qwee"
+    },
+    {
+      "type":2,
+      "title":"ccccc",
+      "fs":122,
+      "id":4,
+      "raA":"Aas",
+      "raB":"Aas",
+      "raC":"Aas",
+      "answer":["asd","asd","asd"],
+      "raD":"Aas",
+      "qus":"A",
+      "point":"qwee"
+    },
+    {
+      "type":0,
+      "title":"ccccc",
+      "fs":122,
+      "id":4,
+      "raA":"Aas",
+      "raB":"Aas",
+      "raC":"Aas",
+      "answer":["asd","asd","asd"],
       "raD":"Aas",
       "qus":"A",
       "point":"qwee"

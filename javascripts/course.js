@@ -7,6 +7,19 @@ var models = (function () {
         }
     }
 
+    //获取值
+    function ajaxGet(url, callback) {
+        $.ajax({
+            url: url,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                callback ? callback(data) : null;
+
+            }
+        })
+    }
+
     //向后台传值
     function ajaxform(url, dataset, callback) {
         $.ajax({
@@ -17,7 +30,7 @@ var models = (function () {
             contentType: "application/json",
             success: function (data) {
                 if (data.type || data.type === 0) {
-                    callback ? callback() : null;
+                    callback ? callback(data) : null;
                     model.prototype.slide(data);
                 } else {
                     callback ? callback(data) : null;
@@ -41,11 +54,8 @@ var models = (function () {
         } else {
             $('.' + wrong).hide();
             callback ? callback() : null;
-
             return true
         }
-
-
     }
 
     //传递图片信息
@@ -54,11 +64,11 @@ var models = (function () {
         if (typeof(cid) === "number") {
             formData.append("id", cid);
 
-        } else {
+        } else if (cid !== "") {
             var tid = document.forms.cid.value;
             formData.append("id", tid);
-        }
 
+        }
 
         $.ajax({
             url: url,
@@ -69,12 +79,30 @@ var models = (function () {
             contentType: false,
             processData: false,
             success: function (data) {
-                if (data.type === 0) {
-                    callback ? callback() : null;
+                if (data.type || data.type === 0) {
+                    callback ? callback(data) : null;
+
+                    model.prototype.slide(data);
+                } else {
+                    callback ? callback(data) : null;
 
                 }
             }
         });
+    }
+
+    function localUp(data, callback) {
+        //需要在已经配置上的表格中进行数据替换
+        var table = $('.data-table').dataTable();
+        var oSettings = table.fnSettings(); //这里获取表格的配置
+        table.fnClearTable(this); //动态刷新关键部分语句，先清空数据
+        for (var i = 0, l = data.length; i < l; i++) {
+            table.oApi._fnAddData(oSettings, data[i]); //这里添加一行数据
+        }
+        oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+        table.fnDraw();//绘制表格
+        callback ? callback(data) : null;
+
     }
 
     //将模态框设置点击空白处不取消地址
@@ -165,7 +193,7 @@ var models = (function () {
 
         var table = $('.data-table').DataTable({
 
-            "data":url,
+            "data": url,
             "columns": option,
             "createdRow": function (row, data, index) {
                 /* 设置表格中的内容居中 */
@@ -233,10 +261,20 @@ var models = (function () {
         return result;
     }
 
-    function clicks() {
+    function sorts(data,callback) {
+        for (var i = 0; i < data.length - 1; i++) {
+            for (var j = 1; j < data.length; j++) {
+                if (i != j) {
+                    if (data[i].id == data[j].id && data[i].id == data[j].id) {
+                        data.splice(j, 1)
+                    }
+                }
+
+            }
+        }
+        callback ? callback(data) : null;
 
     }
-
 
 
     model.prototype = {
@@ -250,8 +288,10 @@ var models = (function () {
         "getObjectURL": getObjectURL,
         "createHtml": createHtml,
         "removeArray": removeArray,
-        "clicks": clicks,
-        "datatables":datatables
+            "datatables": datatables,
+        "ajaxGet": ajaxGet,
+        "localUp": localUp,
+        "sorts":sorts
     };
     return model;
 })();

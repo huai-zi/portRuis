@@ -6,7 +6,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":1
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":0
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":1
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":0
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":2
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":2
   },
   {
     "id": 7,
@@ -60,7 +66,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":0
   },
   {
     "id": 8,
@@ -69,7 +76,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":1
   },
   {
     "id": 9,
@@ -78,7 +86,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":2
   },
   {
     "id": 10,
@@ -87,7 +96,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":1
   },
   {
     "id": 12,
@@ -96,7 +106,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":2
   },
   {
     "id": 21,
@@ -105,7 +116,8 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":0
   },
   {
     "id": 22,
@@ -114,6 +126,7 @@
     "position": "images/model.jpg",
     "file": "21312321.zip",
     "fileStam": "21312321.zip",
-    "ramark": ""
+    "ramark": "",
+    "qb":1
   }
 ]

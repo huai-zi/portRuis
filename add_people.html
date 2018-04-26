@@ -19,6 +19,18 @@
         .panel {
             display: none;
         }
+
+        .erroe-span1, .erroe-span2 {
+            display: none;
+        }
+        .sr-only{
+            clip: inherit !important;
+            width: auto;
+            height:auto;
+        }
+        .progress1{
+            display: none;
+        }
     </style>
 </head>
 <!--[if lt IE 8]>
@@ -136,7 +148,7 @@
 
                 <div class="section animated fadeInRight">
                     <div class="section-head">
-                        <h2>模型管理</h2>
+                        <h2>批量添加新员工</h2>
                     </div>
                     <div class="section-body clearfix">
                         <!--主体结构-->
@@ -211,6 +223,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="clearfix">
+                                <div class="progress progress1 progress-striped active">
+                                    <div class="progress-bar progress-bar-success" role="progressbar"
+                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 100%;">
+                                        <span class="sr-only">数据解析中</span>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="col-xs-12 text-center">
                                 <span class="btn btn-wide  color_blue color_blue_but" style="margin-top: 20px;">
                                     确认上传
@@ -219,6 +241,7 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" id="Abort" value="中断上传">
             </div>
             <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
         </div>
@@ -239,7 +262,8 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <span></span>请选择相应的xlsx文件再进行上传
+                <span class="erroe-span1">请选择相应的xlsx文件再进行上传</span>
+                <span class="error-span2">请上传指定的格式--账号-姓名-处室-员工号-手机号</span>
             </div>
             <div class="modal-footer">
                 <!--确认删除-->
@@ -277,14 +301,18 @@
             {"data": "fileStam"},
             {"data": "fileStam"}
         ];
-        ace.filesUpload("modelImg1", "Progress1", ".sr-only1");
+        ace.filesUpload("modelImg1", "Progress1", ".sr-only1", 1);
 
         $("#modelImg1").change(function (e) {
-
+                $(".progress1").show();
             ace.changeFile(e, function (datas) {
                 console.log(datas[0]['"账号"']);
+                //判断传错情况
                 if (datas[0]['"账号"'] === undefined) {
-                    alert('请上传指定的格式--账号-姓名-处室-员工号-手机号');
+                    $(".erroe-span2").show();
+                    $(".erroe-span1").hide();
+                    $("#error-modal2").modal();
+                    $("#Abort").click();
                     //现将进度条停止
                     $("#modelImg1").get(0).files[0] = "";
                     $("#modelImg1").val('');
@@ -292,11 +320,14 @@
                     $(".sr-only1").attr('title', "");
                     $("#Progress1")[0].style = "width:0 !important";
                     $("#Progress1").attr('title', "");
+                    $(".panel").hide();
+                    $(".progress1").hide();
 
-
-                    return null
+                    return false
                 }
 
+
+                $(".panel").show();
                 var options = [
                     {
                         "data": "账号",
@@ -421,7 +452,10 @@
         //点击进行数据保存
         $(".color_blue_but").click(function () {
             if ($("#modelImg1").val() === "") {
-                $("#error-modal2").modal()
+                $(".erroe-span1").show();
+                $(".erroe-span2").hide();
+                $("#error-modal2").modal();
+
 
             }
 

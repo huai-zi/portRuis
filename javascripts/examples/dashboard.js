@@ -15,7 +15,7 @@ $(function () {
     };
 
     /*修改欢迎词*/
-    toastr.info('欢迎您的到来!', '<h5 style="margin-top: 0px; margin-bottom: 5px;"><b>培训管理系统</b></h5>');
+    toastr.info('欢迎您的到来!', '<h5 style="margin-top: 0px; margin-bottom: 5px;"><b>三门核电有限公司三门数字化仿真检修平台</b></h5>');
 
     //AREA CHART EXAMPLE
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

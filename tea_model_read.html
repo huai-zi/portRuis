@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en" class="fixed">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <!--<link rel="stylesheet" href="stylesheets/css/style.css">-->
+    <link rel="stylesheet" href="stylesheets/css/oeinsder.css">
+</head>
+<style>
+    .peinsder-box {
+        padding: 3px !important;
+    }
+
+    .onile-box .col-sm-3 {
+        min-height: inherit !important;
+    }
+
+    .onile-box .col-sm-3, .onile-box .col-sm-9 {
+        min-height: inherit !important;
+    }
+
+    .heard_top {
+        line-height: 35px;
+        background-color: rgb(31, 167, 193);
+        font-size: 18px;
+        font-weight: bolder;
+        padding: 2px 10px;
+        color: #fff;
+        border-radius: 5px;
+        margin: 0 -14px;
+    }
+
+    .heard_top i {
+        margin-right: 10px;
+    }
+
+    .onile-box .col-sm-3 ul {
+        margin: 0 -14px !important;
+
+    }
+
+    #prevs {
+        display: none;
+    }
+
+    .subject-action {
+        padding-top: 30px;
+    }
+
+    h4 {
+        padding: 0 !important;
+        color: #fff;
+    }
+
+    h3 {
+        border-bottom: 1px solid #e7eaec;
+        padding-bottom: 10px;
+    }
+
+    .subject-question p {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+        margin-left: 0 !important;
+    }
+
+    .col-xs-7 {
+        margin-left: 30px !important;
+    }
+
+    .btn {
+        background: transparent;
+        border: 1px solid #e7eaec;
+        margin-bottom: 0px !important;
+    }
+
+    .onile-box .col-sm-3 ul li a {
+        font-size: 20px !important;
+        line-height: 54px !important;
+    }
+
+    .onile-box .col-sm-3 ul {
+        /*border: 1px solid #ccc;*/
+        background-color: transparent !important;
+        color: rgb(51, 122, 183);
+        padding-left: 20px;
+    }
+
+    #tip1 {
+        margin: 30px 0 0 0;
+        text-align: center;
+        font-size: 16px;
+        display: none;
+    }
+
+    #tip2 {
+        margin: 30px 0 0 0;
+        text-align: center;
+        font-size: 16px;
+        display: none;
+    }
+
+    .box {
+        width: 160px;
+        height: 160px;
+        margin: 0 20px 20px 0;
+        border-radius: 5%;
+        float: left;
+        position: relative;
+        text-align: center;
+        background-color: navajowhite;
+    }
+
+    .box img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 20px auto;
+        max-width: 100%;
+        max-height: 100%;
+        outline: none;
+    }
+
+    #bgbox {
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index: 10001;
+        opacity: .70;
+        filter: alpha(opacity=70);
+    }
+
+    #boxshow {
+        display: none;
+        position: absolute;
+        top: 25%;
+        left: 22%;
+        width: 53%;
+        height: 49%;
+        padding: 8px;
+        border: 8px solid #E8E9F7;
+        background-color: white;
+        z-index: 10002;
+        overflow: hidden;
+    }
+
+    #boxshow img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #boxflash {
+        display: none;
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        width: 80%;
+        height: 60%;
+        padding: 8px;
+        border: 8px solid #E8E9F7;
+        background-color: white;
+        z-index: 10002;
+        overflow: hidden;
+    }
+
+    #close_btn, #close_btn2 {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    #lable-count {
+        padding: 0 10px;
+        border-radius: 5px;
+        opacity: 0.3;
+        font-size: 20px;
+        filter: alpha(opacity=30);
+        background-color: coral;
+    }
+
+    #flash-content {
+        z-index: -1;
+        overflow: auto;
+    }
+
+    #flash2 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .panel-body div b {
+        color: #fff;
+        padding: 0 12px;
+        height: 23px;
+        line-height: 23px;
+        margin-top: 11px;
+        border-radius: 30px;
+        font-size: 14px;
+        background-color: forestgreen;
+    }
+
+    .panel-body div a {
+        font-size: 24px;
+        color: #000;
+        font-weight: 600;
+    }
+
+    .btn-lg, .btn-group-lg > .btn {
+        padding: 3px 16px;
+    }
+
+    #peinsder-box {
+        padding-top: 80px;
+    }
+
+    .onile-box {
+        height: 100%;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    .panel-body {
+        padding: 0;
+        margin: 0 -14px;
+    }
+
+    .panel-body > div {
+        padding: 0 24px;
+    }
+
+    .panel-body div {
+        margin: 0 -14px;
+        line-height: 44px;
+    }
+
+    #menu {
+        overflow-x: hidden;
+    }
+
+    .bga {
+        background-color: rgb(210, 245, 251);
+        margin-bottom: 3px !important;
+
+    }
+
+    .bga:hover {
+        background-color: rgb(210, 245, 251) !important;
+    }
+
+    #subject-main {
+        height: 100%;
+    }
+
+    .org {
+        background-color: orange !important;
+    }
+</style>
+<!--[if lt IE 8]>
+<script type="text/javascript" src="javascripts/html5.js"></script>
+<script type="text/javascript" src="javascripts/respond.js"></script>
+<![endif]-->
+<body onselectstart="return false">
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+
+<!--导航条-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!--汉堡菜单-->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#" class="selects_top" title='模型浏览'>模型浏览</a></li>
+                <li><a href="#" title='考核培训'>考核培训</a></li>
+                <li><a href="#" title='检修规划'>检修规划</a></li>
+                <li><a href="#" title='你好'>你好,吴亮!</a></li>
+                <li><a href="#" title='通知'><i class="fa fa-bell"></i></a></li>
+                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--底部栏-->
+<div class="row" id="peinsder-box">
+    <!--显示课程设备学习图解-->
+    <div class="container-fluid onile-box">
+        <div class="col-sm-3" id="menu">
+            <div class="container-fluid heard_top">
+                <i class="fa fa-joomla"></i>模型目录
+            </div>
+            <!--<ul id="answer-sheet-num" class="answer-sheet-box">-->
+            <!--&lt;!&ndash;<li role="presentation" class="active">&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="#home" aria-controls="home" role="tab"&ndash;&gt;-->
+            <!--&lt;!&ndash;data-toggle="tab" class="clearfix">Home <span class="pull-right">展开</span></a>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--<li role="presentation" class="active">-->
+            <!--<a href="#home" class="clearfix" aria-controls="home" role="tab"-->
+            <!--data-toggle="tab">Home <span class="pull-right">展开</span></a>-->
+            <!---->
+            <!--</li>-->
+            <!--&lt;!&ndash;展示题目区域&ndash;&gt;-->
+
+            <!--</ul>-->
+
+            <div class="panel-body" id="add_page">
+
+            </div>
+
+        </div>
+        <div class="col-sm-9">
+            <div class="container-fluid heard_top">
+                <i class="fa fa-medium"></i> 模型浏览
+            </div>
+            <div class="tab-content" id="subject-main main">
+                <div class="panel-body" style="background-color:white;">
+                    <div id="tip1">目前不支持您所使用的浏览器，请使用IE浏览器进行课程学习。</div>
+                    <div id="tip2">系统检测到您还未安装浏览模型所需的组件。<br/>32位操作系统请 <a href="/UploadFiles/Software/Composer_X86.exe">点此下载</a>
+                        32位程序并安装。<br/>64位操作系统请下载 <a href="/UploadFiles/Software/Composer_X64.msi">点此下载</a>64位程序并安装。
+                    </div>
+                    <div id="wrapper">
+                        <div id="showModul">
+                            <div id="mainContainer">
+                                <object id="viewer" height="800" width="800"
+                                        classid="CLSID:410B702D-FCFC-46B7-A954-E876C84AE4C0">
+                                    <!--value内填写.smgXml后缀文件存放路径，注意图片等文件要放在与smgXml同目录下-->
+                                    <param name="_StockProps" value="0">
+                                    <param name="RenderGroundShadow" value="0">
+                                    <param name="RenderMode" value="1">
+                                    <param name="CameraPlayMode" value="1">
+                                    <param name="AntiAliasingOnIdle" value="0">
+                                    <param name="GroundGrid" value="0">
+                                    <param name="AutoPlay" value="0">
+
+                                    <param name="FileName" value="/UploadFiles/Moduls/201708161528331345.smg">
+                                </object>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="uzid" value="">
+<!--向上按钮-->
+<a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+</body>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src='javascripts/template.js'></script>
+<script src='javascripts/stu_ready.js'></script>
+<script src="javascripts/peinsder.js"></script>
+<script src='javascripts/course.js'></script>
+<script id="but" type="text/html">
+    {{each shiti as value index}}
+    <div class=" btn-link btn-lg clearfix bga">
+
+        <a class="pull-left btn_id" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
+           data-target="#menu{{value.id}}">{{value.name}}</a>
+        <b class="pull-right btn_id" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
+           data-target="#menu{{value.id}}">展开</b>
+    </div>
+    <div id="menu{{value.id}}" class="collapse">
+
+    </div>
+    {{/each}}
+</script>
+<script id="buts" type="text/html">
+    {{each shiti as value index}}
+    <div class=" btn-link btn-lg clearfix">
+        <a class="pull-left  btn_ids" role="button" type="button" data-toggle="collapse"
+           data-target="#menus{{value.id}}"
+           data-codeid="{{value.id}}">{{value.name}}</a>
+        <b class="pull-right btn_ids" role="button" type="button" data-toggle="collapse"
+           data-target="#menus{{value.id}}"
+           data-codeid="{{value.id}}">展开</b>
+    </div>
+    <div id="menus{{value.id}}" class="collapse bga clearfix btn-link btn-lg clearfix">
+
+    </div>
+    {{/each}}
+</script>
+<script id="butss" type="text/html">
+    {{each shiti as value index}}
+    <a class="pull-left">{{value.name}}</a>
+    <b class="pull-right org">下载</b>
+    {{/each}}
+</script>
+<script type="text/javascript">
+    var modelz = new models();
+    modelz.ajaxGet("scratch.json", function (data) {
+        //获取新的数组
+        var parents = [];
+        $(data).each(function (i, v) {
+            if (v.parent === 0) {
+                parents.push(v);
+            }
+        });
+        console.log(parents);
+        var datas = {
+            "shiti": parents
+        }
+        var htm = template("but", datas);
+        document.getElementById("add_page").innerHTML = htm;
+        var ace = true;
+        var aces = true;
+
+        $(".btn_id").click(function () {
+            if (ace) {
+                if ($(this).parent().children("b.btn_id").text() === "展开") {
+                    $(this).parent().children("b.btn_id").text("折叠")
+                } else {
+                    $(this).parent().children("b.btn_id").text("展开")
+                }
+                ace = false;
+            } else {
+                return false
+            }
+            setTimeout(function () {
+                ace = true;
+            }, 400)
+
+            var yid = $(this).attr("data-codeid");
+            var newId = [];
+            $(data).each(function (i, v) {
+                if (v.parent === +yid) {
+                    newId.push(v);
+                }
+            });
+            var datas = {
+                "shiti": newId
+            }
+            if (newId.length === 0) {
+                $(this).parent().children("b.btn_id").hide();
+                return false
+            }
+            if ($("#uzid").val() === yid) {
+            } else {
+                var htm = template("buts", datas);
+                var names = "menu" + yid;
+                document.getElementById(names).innerHTML = htm;
+
+                $("#uzid").val(yid);
+
+                $(".btn_ids").click(function () {
+                    if (aces) {
+                        if ($(this).parent().children("b.btn_ids").text() === "展开") {
+                            $(this).parent().children("b.btn_ids").text("折叠")
+                        } else {
+                            $(this).parent().children("b.btn_ids").text("展开")
+                        }
+                        aces = false;
+                    } else {
+                        return false
+                    }
+                    setTimeout(function () {
+                        aces = true;
+                    }, 400);
+                    var yid = $(this).attr("data-codeid");
+                    var newId = [];
+                    $(data).each(function (i, v) {
+                        if (v.parent === +yid) {
+                            newId.push(v);
+                        }
+                    });
+                    if (newId.length === 0) {
+                        $(this).parent().children("b.btn_ids").hide();
+                        return false
+                    }
+                    var datas = {
+                        "shiti": newId
+                    }
+                    var htmff = template("butss", datas);
+                    var names = "menus" + yid;
+                    document.getElementById(names).innerHTML = htmff;
+                })
+            }
+        })
+    })
+    var hei = $(window).height();
+    $("#peinsder-box").height(hei);
+
+
+    var currentModulId = 'e0dced9a-1b33-42bf-80fa-e4a6b939a6a0';
+
+
+    var minWidth = 600;
+    var minHeight = 500;
+    var viewHeight = $(window).height() - 120;
+    if (viewHeight < minHeight) {
+        viewHeight = minHeight;
+    }
+    $("#viewer").height(viewHeight);
+
+    $("#main").height(viewHeight + 50);
+    var viewWidth = $(window).width() - $("#menu").width() - 15;
+    console.log(viewWidth);
+    $("#viewer").width((minWidth < viewWidth) ? viewWidth : minWidth);
+
+    var viewWidth = $(window).width() - $("#menu").width();
+
+    $(window).resize(function () {
+        var viewHeight = $(window).height() - 120;
+        if (viewHeight < minHeight) {
+            viewHeight = minHeight;
+        }
+        $("#viewer").height(viewHeight);
+        $("#main").height(viewHeight + 50);
+        var viewWidth = $(window).width() - $("#menu").width() - 15;
+        $("#viewer").width((minWidth < viewWidth) ? viewWidth : minWidth);
+
+    });
+
+
+    function isIE() { //ie?
+        if (!!window.ActiveXObject || "ActiveXObject" in window)
+            return true;
+        else
+            return false;
+    }
+
+    //检测控件是否存在
+    function checkControlExist() {
+        try {
+            var comActiveX = new ActiveXObject("DS.3DVIAPlayerActiveXCtrl");
+        }
+        catch (e) {
+            return false;
+        }
+        return true;
+    }
+
+    if (!isIE()) {
+        $("#tip1").show();
+        $("#tip2").hide();
+        $("#wrapper").hide();
+    } else {
+        //检测插件是否运行加载
+        if (!checkControlExist()) {
+            $("#tip1").hide();
+            $("#tip2").show();
+            //有提示用记安装控件
+            $("#wrapper").hide();
+        }
+        else {
+            $("#tip1").hide();
+            $("#tip2").hide();
+            //有提示用记安装控件
+            $("#wrapper").show();
+        }
+    }
+
+    function collapseAccordionSub(subId, id) {
+        var subItem = $("#" + id);
+        var target = $("#" + subId)[0];
+        if (target.innerText == "折叠") {
+            $("div[tag='" + id + "'").collapse('hide');
+            target.innerText = "展开";
+        } else {
+            target.innerText = "折叠";
+            $("div[tag='" + id + "'").collapse('show');
+        }
+    }
+
+    function collapseAccordion(target, id) {
+        var subItem = $("#" + id);
+        if (target.innerText == "折叠") {
+            $("div[tag='" + id + "'").collapse('hide');
+            target.innerText = "展开";
+        } else {
+            target.innerText = "折叠";
+            $("div[tag='" + id + "'").collapse('show');
+        }
+    }
+
+    function showModul(url) {
+        location.href = url;
+        return false;
+    }
+
+    function showItem() {
+        var data = new Array();
+        var content = ["40377f79-36b0-4c22-b8b2-fb5d6a5b4b05_", "32013314-f95d-4523-a9ac-dfa0ddfffdf3_"];
+        if (content != 0) {
+            for (var i = 0; i < content.length; i++) {
+                data.push(content[i]);
+            }
+        }
+        for (var i = 0; i < data.length; i++) {
+            $("#" + data[i]).click();
+        }
+
+    }
+
+    showItem();
+
+    function downloadModul(id) {
+        window.open("/TDVIA/GetModulFile/" + id, "_blank");
+    }
+</script>
+</html>

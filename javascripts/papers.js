@@ -56,6 +56,7 @@ $(function () {
         dataType: "json",
         contentType: "application/json",
         success: function (data) {
+            console.log(data);
             localStorage.setItem('aceeee', JSON.stringify(data));
             /*隐藏没有显示的内容*/
             template.helper('show', function (ra) {

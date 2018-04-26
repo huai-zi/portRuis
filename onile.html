@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>培训管理系统</title>
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
     <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
     <link rel="stylesheet" href="stylesheets/css/style.css">
     <link rel="stylesheet" href="stylesheets/css/oeinsder.css">
 </head>
+<style>
+    .peinsder-box {
+        padding: 3px !important;
+    }
 
+    .heard_top {
+        line-height: 35px;
+        background-color: rgb(31, 167, 193);
+        font-size: 18px;
+        font-weight: bolder;
+        padding: 2px 10px;
+        color: #fff;
+        border-radius: 5px;
+        margin: 0 -14px;
+    }
+
+    .heard_top i {
+        margin-right: 10px;
+    }
+
+    .onile-box .col-sm-3 ul {
+        margin: 0 -14px !important;
+
+    }
+
+    h3 {
+        border-bottom: 1px solid #e7eaec;
+        padding-bottom: 10px;
+    }
+</style>
 <!--[if lt IE 8]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
@@ -54,33 +83,37 @@
     <div>
         <div class="container-fluid banner-fal">
             <ul class="banner_top clearfix">
-                <li><a title="课程学习" href="">课程学习</a></li>
-                <li><a href="" class="select" title='在线考试'>在线考试</a></li>
+                <li><a title="课程学习" href="oeinsder.html">课程学习</a></li>
+                <li><a href="onile.html" class="select" title='在线考试'>在线考试</a></li>
                 <li><a href="" title='模拟考试'>模拟考试</a></li>
                 <li><a href="" title='成绩查看'>成绩查看</a></li>
+                <li class="pull-right"><a href="stu_download.html" title='软件下载'>软件下载</a></li>
             </ul>
         </div>
         <div class="peinsder-box">
-            <div class="container-fluid peinsder-sb">
-                在线学习
-            </div>
             <div class="row animated fadeInRight " id="peinsder-box">
                 <!--显示课程设备学习图解-->
                 <div class="container-fluid onile-box">
                     <div class="col-sm-3">
-                        <ul>
-                            <li role="presentation" class="active">
-                                <a href="#home" aria-controls="home" role="tab"
-                                   data-toggle="tab">Home</a></li>
-                            <li role="presentation">
-                                <a href="#profile" aria-controls="profile" role="tab"
-                                   data-toggle="tab">Profile</a></li>
+                        <div class="container-fluid heard_top">
+                            <i class="fa fa-newspaper-o"></i>题目列表
+                        </div>
+                        <ul id="onile_testLi">
+                            <!--<li role="presentation" class="active">-->
+                            <!--<a href="#home" aria-controls="home" role="tab"-->
+                            <!--data-toggle="tab">Home</a></li>-->
+                            <!--展示题目区域-->
+
                         </ul>
                     </div>
                     <div class="col-sm-9">
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="home">home</div>
-                            <div role="tabpanel" class="tab-pane" id="profile">profile</div>
+                        <div class="container-fluid heard_top">
+                            <i class="fa fa-eye"></i> 答题
+                        </div>
+                        <h3>题目信息</h3>
+                        <div class="tab-content" id="onile_test">
+                            <!--<div role="tabpanel" class="tab-pane active" id="home">home</div>-->
+                            <!--显示题目区域-->
                         </div>
                     </div>
                 </div>
@@ -94,15 +127,52 @@
 </body>
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src='./javascripts/examples/bootstrap-paginator.js'></script>
-<script src='./javascripts/template.js'></script>
-<script src='javascripts/peinsder.js'></script>
-<script id="onile" type='text/html'>
-
+<script src='javascripts/examples/bootstrap-paginator.js'></script>
+<script src='javascripts/template.js'></script>
+<script src="javascripts/peinsder.js"></script>
+<script src="javascripts/course.js"></script>
+<script id="papers" type="text/html">
+    {{each shiti as value index}}
+    <div role="tabpanel" class="tab-pane" id="collapseOne{{index}}">{{index}}</div>
+    {{/each}}
+</script>
+<script id="but" type="text/html">
+    {{each shiti as value index}}
+    <li role="presentation" class="">
+        <a href="#collapseOne{{index}}" aria-controls="#collapseOne{{index}}" role="tab" class="collapseOne{{index}}"
+           data-toggle="tab" data-id="{{index}}">{{index+1}}、{{value.title}}</a>
+    </li>
+    {{/each}}
 </script>
 <script type="text/javascript">
-
     var onile = new PE();
+    var modelz = new models();
+    modelz.ajaxGet("papers.json", function (datas) {
+        console.log(datas);
 
+        template.helper('show', function (ra) {
+            if (ra === 'ohMyGod' || ra === undefined) {
+                return 'display:none;'
+            }
+        })
+        /*判断题目类型*/
+        template.helper('ttm', function (ra) {
+            if (ra === 0) {
+                return '单选题'
+            } else if (ra === 1) {
+                return '判断题'
+            } else if (ra === 2) {
+                return '多选题'
+            }
+        })
+        var tm = template("papers", datas);
+        var sj = template("but", datas);
+
+        document.getElementById("onile_test").innerHTML = tm;
+        document.getElementById("onile_testLi").innerHTML = sj;
+        $("#onile_testLi li")[0].classList.add("active");
+        $("#onile_test div")[0].classList.add("active");
+
+    })
 </script>
 </html>

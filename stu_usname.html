@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en" class="fixed">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="stylesheets/css/style.css">
+    <link rel="stylesheet" href="stylesheets/css/oeinsder.css">
+    <link rel="stylesheet" href="stylesheets/css/subject.css">
+    <link rel="stylesheet" href="stylesheets/css/course.css">
+</head>
+<style>
+    input[type="text"] {
+        font-weight: 100;
+    }
+
+    .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+        background-color: #f4f4f4;
+    }
+
+    .Add_course .clearfix {
+        margin: 15px 0;
+    }
+
+    h3 {
+        padding: 10px 0;
+    }
+
+    .peinsder-box {
+        padding-top: 0 !important;
+    }
+
+    .section-head {
+        box-shadow: none !important;
+        margin: 0 -20px !important;
+    }
+
+    .section {
+        margin-top: 20px !important;
+    }
+    .progress-striped{
+        display: none;
+    }
+</style>
+<!--[if lt IE 8]>
+<script type="text/javascript" src="javascripts/html5.js"></script>
+<script type="text/javascript" src="javascripts/respond.js"></script>
+<![endif]-->
+<body>
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+
+<!--导航条-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!--汉堡菜单-->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#" title='模型浏览'>模型浏览</a></li>
+                <li><a href="#" title='考核培训'>考核培训</a></li>
+                <li><a href="#" title='检修规划'>检修规划</a></li>
+                <li><a class="selects_top" href="#" title='你好'>你好,吴亮!</a></li>
+                <li class="acee"><a href="#" title='通知'><i class="fa fa-bell"></i></a></li>
+                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--底部栏-->
+<div class="content">
+    <div>
+        <div class="container-fluid banner-fal">
+            <ul class="banner_top clearfix">
+                <li><a title="课程学习" href="oeinsder.html">课程学习</a></li>
+                <li><a href="onile.html" title='在线考试'>在线考试</a></li>
+                <li><a href="" title='模拟考试'>模拟考试</a></li>
+                <li><a href="" title='成绩查看'>成绩查看</a></li>
+                <li class="pull-right"><a href="stu_download.html" class="" title='软件下载'>软件下载</a></li>
+            </ul>
+        </div>
+        <div class="peinsder-box">
+            <div class="section-head">
+                <h2>账号管理</h2>
+            </div>
+            <div class="section animated fadeInRight">
+
+                <!--中间区域独立模块-->
+                <form id="forms" enctype="multipart/form-data" name="forms">
+                    <div class="Add_course">
+                        <div class="Add_course_head">
+                            <i class="fa fa-ellipsis-v "></i>更新账号信息
+                        </div>
+                        <div class="container-fluid">
+                            <div class="clearfix">
+                                <div class="col-xs-3 text-right">
+                                    用户名
+                                </div>
+                                <div class="col-xs-9">
+
+                                    <input type="text" class="form-control" readonly name="modelName" value="asdsa">
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-xs-3 text-right">
+                                    姓名
+                                </div>
+                                <div class="col-xs-9">
+
+                                    <input type="text" class="form-control" readonly name="modelName" value="asdsa">
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-xs-3 text-right">
+                                    工号
+                                </div>
+                                <div class="col-xs-9">
+
+                                    <input type="text" class="form-control" readonly name="modelName" value="112001">
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-xs-3 text-right">
+                                    Email
+                                </div>
+                                <div class="col-xs-9">
+
+                                    <input type="text" class="form-control" name="modelName" value="huauzu@qq.com">
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-xs-3 text-right">
+                                    电话
+                                </div>
+                                <div class="col-xs-9">
+
+                                    <input type="text" class="form-control" name="modelName" value="huauzu@qq.com">
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="col-xs-3 text-right">
+                                    性别
+                                </div>
+                                <div class="col-xs-9">
+                                    <label>
+                                        <input type="radio" name="sex" checked>男
+                                    </label> <br>
+                                    <label>
+                                        <input type="radio" name="sex">女
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="clearfix">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                     aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: 100%;">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="Add_course_bottom text-center">
+                            <button type='button' class='btn1 course_bj notazirez'>保存</button>
+                            <button type='button' class='btn1 color_ql removeShuju'>修改密码</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--向上按钮-->
+<a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+</body>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src='javascripts/peinsder.js'></script>
+<script type="text/javascript">
+    $(function () {
+        $('.navbar-nav li:nth-child(5).acee::after').css("content", "77 !important");
+    })
+</script>
+</html>

@@ -123,7 +123,11 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
+                            <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
+                            </a></li>
+                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
+                            </a></li>
                         </ul>
 
                     </nav>
@@ -202,9 +206,10 @@
         ace.localHref("#test_close", "test.html");
         window.seleIds = [];
         var locals = JSON.parse(localStorage.getItem("tests"));
+        console.log(locals);
         $("#forms_test").val(locals.name);
         //同时传试卷id,获取选中的题目的id值进行标注，同时上传id进行保存
-        var jieguo = ["2", "3", "6"];
+        var jieguo = ["2", "3", "6","21"];
         window.seleIds = jieguo;
         var options = [
             {"data": "id"},
@@ -236,29 +241,10 @@
         ];
 
         ace.datatables('model.json', options, [0, 1, 2, 3, 4], function (data) {
-
-            //点击编辑
-            var aa1 = '';
-            var aa2 = '';
             window.aa5 = '';
-            $('.notazirez').click(function () {
-                aa1 = $(this).parent().parent().children().eq(0).text();
-                $(data.aoData).each(function (i, v) {
-                    if (+aa1 === v._aData.id) {
-                        localStorage.setItem("project", JSON.stringify(v._aData));
-                    }
-                })
-                window.location.href = "amend_project.html"
-            });
-
             //回掉函数获取加载的数据信息
-
-
             $(".removeShuju").click(function () {
                 window.aa5 = $(this).parent().parent().children().eq(0).text();
-                aa2 = $(this).parent().parent().children().eq(1).text();
-                $("#modal_remove").text(aa2);
-                $("#error-modal").modal();
             });
             $(".checkSelect").on("change", function () {
                 var vals = $(this).val();
@@ -275,9 +261,9 @@
                     })
 
                 }
+                console.log(window.seleIds);
                 //获取的选中的id值数组化
             })
-
 
             jieguo.forEach(function (v, i) {
                 var num = ".checkedSe" + v;

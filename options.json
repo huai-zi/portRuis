@@ -1,66 +1,98 @@
 [
   {
     "id": 1,
-    "name": "设备名称"
+    "name": "设备名称",
+    "department":"维修处",
+    "sex":0
   },
   {
-    "id": 1,
-    "name": "设备名称1"
+    "id": 2,
+    "name": "设备名称1",
+    "department":"培训处",
+    "sex":1
   },
   {
-    "id": 1,
-    "name": "设备名称2"
+    "id": 3,
+    "name": "设备名称2",
+    "department":"维修处",
+    "sex":1
   },
   {
-    "id": 1,
-    "name": "设备名称3"
-  },
-  {
-    "id": 4,
-    "name": "设备名称4"
-  },
-  {
-    "id": 1,
-    "name": "设备名称5"
-  },
-  {
-    "id": 1,
-    "name": "设备名称1"
-  },
-  {
-    "id": 1,
-    "name": "设备名称2"
-  },
-  {
-    "id": 1,
-    "name": "设备名称3"
+    "id": 5,
+    "name": "设备名称3",
+    "department":"培训处",
+    "sex":1
   },
   {
     "id": 4,
-    "name": "设备名称4"
+    "name": "设备名称4",
+    "department":"培训处",
+    "sex":0
   },
   {
-    "id": 1,
-    "name": "设备名称5"
+    "id": 6,
+    "name": "设备名称5",
+    "department":"维修处",
+    "sex":0
   },
   {
-    "id": 1,
-    "name": "设备名称1"
+    "id": 7,
+    "name": "设备名称1",
+    "department":"培训处",
+    "sex":1
   },
   {
-    "id": 1,
-    "name": "设备名称2"
+    "id": 8,
+    "name": "设备名称2",
+    "department":"培训处",
+    "sex":0
   },
   {
-    "id": 1,
-    "name": "设备名称3"
+    "id": 99,
+    "name": "设备名称3",
+    "department":"培训处",
+    "sex":1
   },
   {
-    "id": 4,
-    "name": "设备名称4"
+    "id": 76,
+    "name": "设备名称4",
+    "department":"维修处",
+    "sex":1
   },
   {
-    "id": 1,
-    "name": "设备名称5"
+    "id": 534,
+    "name": "设备名称5",
+    "department":"培训处",
+    "sex":0
+  },
+  {
+    "id": 23,
+    "name": "设备名称1",
+    "department":"维修处",
+    "sex":1
+  },
+  {
+    "id": 54,
+    "name": "设备名称2",
+    "department":"培训处",
+    "sex":1
+  },
+  {
+    "id": 14,
+    "name": "设备名称3",
+    "department":"维修处",
+    "sex":1
+  },
+  {
+    "id": 545,
+    "name": "设备名称4",
+    "department":"培训处",
+    "sex":1
+  },
+  {
+    "id": 32,
+    "name": "设备名称5",
+    "department":"维修处",
+    "sex":1
   }
 ]

@@ -24,9 +24,9 @@ define(function (require, exports, module) {
                 success: function (data) {
 
                     if (data.type || data.type === 0) {
-                        callback ? callback() : null;
+                        callback ? callback(data) : null;
 
-                        model.prototype.slide(data);
+                        com.prototype.slide(data);
                     } else {
                         callback ? callback(data) : null;
 
@@ -75,12 +75,11 @@ define(function (require, exports, module) {
                 processData: false,
                 success: function (data) {
                     if (data.type || data.type === 0) {
-                        callback ? callback() : null;
-
-                        model.prototype.slide(data);
-                    } else {
                         callback ? callback(data) : null;
 
+                        com.prototype.slide(data);
+                    } else {
+                        callback ? callback(data) : null;
                     }
                 }
             });
@@ -153,7 +152,8 @@ define(function (require, exports, module) {
                 },
                 "columns": option,
                 "createdRow": function (row, data, index) {
-                    /* 设置表格中的内容居中 */
+                    /* 设置表格中的内容 */
+
                     $('td', row).attr("class", "text-left");
                     $('th', row).attr("class", "text-left");
                 },
@@ -216,7 +216,7 @@ define(function (require, exports, module) {
             });
         }
 
-        function filesUpload(files, progress, fontShow) {
+        function filesUpload(files, progress, fontShow, stop) {
             //files, progress, fontShow参数解析:上传按钮的id名\展示进度的样式条\进度数字化
             var h = {
                 init: function (files, progress, fontShow) {
@@ -229,6 +229,11 @@ define(function (require, exports, module) {
                     //每次读取1M
                     me.step = 1024 * 1024;
                     me.times = 0;
+                    stop = stop ? stop : null;
+                    if (stop === 1) {
+                        //学员身份下,进行的数据传输
+                        document.getElementById('Abort').onclick = me.abortHandler;
+                    }
 
                 },
                 fileHandler: function (e) {
