@@ -1,0 +1,189 @@
+[
+  {
+    "id": 1,
+    "name": "试卷名称",
+    "machineId": 1,
+    "machineName": "设备名称",
+    "CourseId": 1,
+    "courseName": "课程名称",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  },
+  {
+    "id": 1,
+    "name": "试卷名称1",
+    "machineId": 1,
+    "machineName": "设备名称1",
+    "CourseId": 1,
+    "courseName": "课程名称1",
+    "questionBody": [
+      "试卷内的题干",
+      "试卷内的数据"
+    ],
+    "questioneId": [
+      111,
+      222
+    ],
+    "createDate":"2018-12-12 12:12"
+  }
+]

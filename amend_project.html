@@ -129,7 +129,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -144,7 +144,11 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
+                            <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
+                            </a></li>
+                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
+                            </a></li>
                         </ul>
 
                     </nav>
@@ -162,12 +166,13 @@
                         <h2>检修规划管理</h2>
                     </div>
                     <!--中间区域独立模块-->
-                    <form id="forms" enctype="multipart/form-data" name="forms">
-                        <div class="Add_course">
-                            <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>编辑检修规划
-                            </div>
-                            <h3>检修规划信息</h3>
+                    <div class="Add_course">
+                        <div class="Add_course_head">
+                            <i class="fa fa-ellipsis-v "></i>编辑检修规划
+                        </div>
+                        <h3>检修规划信息</h3>
+                        <form id="forms" enctype="multipart/form-data" name="forms">
+
                             <div class="container-fluid">
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
@@ -175,11 +180,11 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="text" class="form-control" name="modelName">
+                                        <input type="text" class="form-control" name="name">
 
                                         <span class="password-yanzheng pull-left warm-xinxi"
-                                              style="line-height: 35px;font-size: 16px !important;"><i
-                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
+                                              style="line-height: 35px;font-size: 12px !important;"><i
+                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;&nbsp;名称必须在1-200字符之间</span>
                                     </div>
                                 </div>
                                 <div class="clearfix">
@@ -187,7 +192,7 @@
                                         所属设备
                                     </div>
                                     <div class="col-xs-9">
-                                        <select name="" id="course-select" class="form-control">
+                                        <select name="parentId" id="course-select" class="form-control">
                                             <option value="">设备</option>
 
                                         </select>
@@ -200,7 +205,7 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="file" name="modelImg1" id="modelImg1" accept=".mp4,.wmv">
+                                        <input type="file" name="file" id="modelImg1" accept=".mp4,.wmv">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
@@ -217,18 +222,19 @@
                                         备注
                                     </div>
                                     <div class="col-xs-9">
-                                        <input type="text" class="form-control" name="modelRemark">
-                                        <input type="hidden" name="id" value="">
-                                        <input type="hidden" name="ymodelImg1" value="">
+                                        <input type="text" class="form-control" name="note">
+                                        <input type="hidden" id="ids" name="id" value="">
+                                        <input type="hidden" id="files" name="file" value="">
                                     </div>
                                 </div>
                             </div>
-                            <div class="Add_course_bottom text-center">
-                                <button type='button' class='btn1 course_bj notazirez'>添加</button>
-                                <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
-                            </div>
+                        </form>
+
+                        <div class="Add_course_bottom text-center">
+                            <button type='button' class='btn1 course_bj notazirez'>添加</button>
+                            <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
@@ -236,6 +242,32 @@
     </div>
 </div>
 
+<!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-span1">信息保存成功</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
@@ -248,37 +280,54 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./project.html");
+        var mo = new models();
+        ace.butChange("#modelImg1", function () {
+            $("#files").remove();
+        });
+
+        ace.localHref(".removeShuju", "project.html");
         ace.change("#modelImg", "#model_img");
         //进行数据上传的封装
         ace.filesUpload('modelImg1', 'Progress1', '.sr-only1');
-
-        //对数据进行渲染
-        ace.ajaxGet("options.json", function (data) {
-            $(data).each(function (i, v) {
-                $("#course-select").get(0).options[i] = new Option(v.name, v.id);
-            });
-
-        })
         var courses = JSON.parse(localStorage.getItem("project"));
-        var forms = document.forms;
-        forms.modelName.value = courses.name;
-        forms.id.value = courses.id;
-        forms.ymodelImg1.value = courses.file;
-        forms.modelRemark.value = courses.ramark;
 
-    })
-    $(function () {
-        var mo = new models();
-        //点击添加判断
-        $('#notazirez').click(function () {
-            mo.selectJc("forms", "warm-xinxi", function () {
-                mo.numcs(url, "forms", "", function () {
+        //模型的name
+        ace.ajaxGet("/model/read", function (data) {
+            var num = 1;
+            $("#course-select").get(0).options[0] = new Option("请选择所属部分", "");
+            $(data).each(function (i, v) {
+                if (courses.id === v.id) {
+                } else {
+                    $("#course-select")[0].options[num] = new Option(v.name, v.id);
+                    num++;
+                }
+            });
+        })
+
+        var forms = document.forms;
+        forms.name.value = courses.name;
+        forms.id.value = courses.id;
+        $("#files").val(courses.file)
+        forms.note.value = courses.note;
+        //选中
+        $("#course-select").children().each(function (i, v) {
+            if ($(v).text().indexOf(courses.name) !== -1) {
+                $(v).prop('selected', true);
+                return false
+            }
+        })
+
+        $('.notazirez').click(function () {
+            if (forms.name.value === "") {
+                $(".warm-xinxi").show()
+            } else {
+                mo.numcs("/overhaul/update", "forms", "", function () {
+                    $(".warm-xinxi").hide();
+                    $("#error-modal").modal();
                     window.location.href = "project.html";
                 })
-            });
+            }
         });
-
     })
 </script>
 </body>

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "名称",
+    "parentId": 1,
+    "note": "备注",
+    "parentName": "上级名称"
+  },
+  {
+    "id": 3,
+    "name": "名称1",
+    "parentId": 1,
+    "note": null,
+    "parentName": "上级名称"
+  },
+  {
+    "id": 2,
+    "name": "名称2",
+    "parentId": 1,
+    "note": "备注",
+    "parentName": "上级名称"
+  }
+]

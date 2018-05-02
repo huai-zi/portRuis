@@ -14,11 +14,10 @@
     <link rel="stylesheet" href="stylesheets/css/course.css">
 </head>
 <style>
-    input[type="text"] {
+    a.form-control {
         cursor: pointer;
         font-weight: 100;
     }
-
     .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
         background-color: #f4f4f4;
     }
@@ -147,7 +146,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -196,10 +195,8 @@
                                     Google浏览器(32位)
                                 </div>
                                 <div class="col-xs-10">
-
-                                    <input type="text" class="form-control" name="modelName" class="modelName" readonly
-                                           value="Google(32位),适用于windows7(SP1)及更高版本32位操作系统">
-
+                                    <a type="text" class="form-control modelName" name="modelName">Google(32位),适用于windows7(SP1)及更高版本64位操作系统
+                                    </a>
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -207,10 +204,8 @@
                                     Google浏览器(64位)
                                 </div>
                                 <div class="col-xs-10">
-
-                                    <input type="text" class="form-control" name="modelName" class="modelName" readonly
-                                           value="Google(64位),适用于windows7(SP1)及更高版本64位操作系统">
-
+                                    <a type="text" class="form-control modelName" name="modelName">Google(64位),适用于windows7(SP1)及更高版本64位操作系统
+                                    </a>
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -218,10 +213,8 @@
                                     IE浏览器(32位)
                                 </div>
                                 <div class="col-xs-10">
-
-                                    <input type="text" class="form-control" name="modelName" class="modelName" readonly
-                                           value="IE(32位),适用于windows7(SP1)及更高版本32位操作系统">
-
+                                    <a type="text" class="form-control modelName" name="modelName">IE(32位),适用于windows7(SP1)及更高版本32位操作系统
+                                    </a>
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -229,10 +222,8 @@
                                     IE浏览器(64位)
                                 </div>
                                 <div class="col-xs-10">
-
-                                    <input type="text" class="form-control" name="modelName" class="modelName" readonly
-                                           value="IE(64位),适用于windows7(SP1)及更高版本64位操作系统">
-
+                                    <a type="text" class="form-control modelName" name="modelName">IE(64位),适用于windows7(SP1)及更高版本64位操作系统
+                                    </a>
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -240,10 +231,8 @@
                                     课程学习工具
                                 </div>
                                 <div class="col-xs-10">
-
-                                    <input type="text" class="form-control" name="modelName" class="modelName" readonly
-                                           value="课程学习必须使用的工具软件">
-
+                                    <a type="text" class="form-control modelName" name="modelName">课程学习必须使用的工具软件
+                                    </a>
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -251,9 +240,9 @@
                                     模型工具(32位)
                                 </div>
                                 <div class="col-xs-10">
+                                    <a type="text" class="form-control modelName" name="modelName">打开模型必须使用的工具软件，适用于32位操作系统
+                                    </a>
 
-                                    <input type="text" class="form-control" name="modelName" class="modelName1" readonly
-                                           value="打开模型必须使用的工具软件，适用于32位操作系统">
 
                                 </div>
                             </div>
@@ -263,9 +252,8 @@
 
                                 </div>
                                 <div class="col-xs-10">
-
-                                    <input type="text" class="form-control" name="modelName" class="modelName2" readonly
-                                           value="打开模型必须使用的工具软件，适用于64位操作系统">
+                                    <a type="text" class="form-control modelName" name="modelName">打开模型必须使用的工具软件，适用于64位操作系统
+                                    </a>
 
                                 </div>
                             </div>
@@ -298,7 +286,7 @@
     $(function () {
         var mo = new models();
         //点击添加判断
-        $('#notazirez').click(function () {
+        $('.notazirez').click(function () {
             mo.selectJc("forms", "warm-xinxi", function () {
                 mo.numcs(url, "forms", "", function () {
                     window.location.href = "section.html";

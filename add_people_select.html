@@ -114,7 +114,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -230,12 +230,39 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <span >请先选择要加入的员工以及加入的部门</span>
+                <span>请先选择要加入的员工以及加入的部门</span>
             </div>
             <div class="modal-footer">
                 <!--确认删除-->
                 <button type="button" class="btn " data-dismiss="modal">
                     确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="">信息保存成功</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
                 </button>
             </div>
         </div>
@@ -263,13 +290,34 @@
     seajs.use('./javascripts/common.js', function (main) {
         var modelz = new models();
         var ace = new main.comm();
-        ace.ajaxGet('options.json', function (data) {
+        //添加部门下拉框
+        ace.ajaxGet("/department/read", function (data) {
+            $("#select_check")[0].options[0] = new Option("请先选择部门", "");
+            data.unshift({"id": 0, "name": "公司"})
+            $(data).each(function (i, v) {
+                $("#select_check")[0].options[i + 1] = new Option(v.name, v.id);
+            })
+        });
+
+        ace.ajaxGet('/user/read', function (data) {
+            var peops = [];
+            $(data).each(function (i, v) {
+                //将部门信息尽心筛选
+                if (v.department === null) {
+                    peops.push(v);
+                }
+            })
             var seles = {
-                "seles": data
+                "seles": peops
             };
 
-            var htmls = template("selectes", seles);
-            document.getElementById("tc_no_label").innerHTML = htmls;
+            if (peops.length === 0) {
+
+            } else {
+                var htmls = template("selectes", seles);
+                document.getElementById("tc_no_label").innerHTML = htmls;
+            }
+
             //全选
             $(".no_pei_heard").click(function () {
                 if ($(this).prop("checked")) {
@@ -302,16 +350,41 @@
                 $(".no_pei_one div label ").each(function (i, v) {
                     if ($(v).children('input').is(':checked')) {
                         pushs.push($(v).children('input').attr("id"));
-                        $(v).children('input').prop("checked", false);
-                        document.getElementById("tc_no_label1").appendChild($(v)[0]);
-
                     }
-                })
+                });
 
-                if (pushs.length === 0 || $(".no_pei_two div label ").length === 0) {
+                if (pushs.length === 0 || $("#select_check :selected").val() === "") {
                     $("#error-modal2").modal();
+                    return false
+                } else {
+                    $(".no_pei_one div label ").each(function (i, v) {
+                        if ($(v).children('input').is(':checked')) {
+                            $(v).children('input').prop("checked", false);
+                            document.getElementById("tc_no_label1").appendChild($(v)[0]);
+                        }
+                    });
+                    if ($(".no_pei_one div label ").length === 0) {
+                        $(".no_pei_heard").prop('checked', false)
+                    }
+                    var dataset = {
+                        "userId": pushs,
+                        "departmentId": $("#select_check :selected").val()
+                    }
+                    $("#error-modal").modal("show");
+                    setTimeout(function () {
+                        $("#error-modal").modal("hide");
+                    }, 1500)
+                    ace.ajaxPost("/updateDepartment", dataset, function (data) {
+                        if (data.type === 0) {
+                            $("#error-modal").modal("show");
+                            setTimeout(function () {
+                                $("#error-modal").modal("hide");
+                            }, 800)
+                        }
+                    })
                 }
-                console.log(pushs);
+
+
             });
             //向左侧移动
 
@@ -320,32 +393,55 @@
                 $(".no_pei_two div label ").each(function (i, v) {
                     if ($(v).children('input').is(':checked')) {
                         pushs.push($(v).children('input').attr("id"));
-                        $(v).children('input').prop("checked", false);
-                        document.getElementById("tc_no_label").appendChild($(v)[0]);
                     }
                 })
-                if (pushs.length === 0 || $(".no_pei_one div label ").length ) {
-
-                    $("#error-modal2").modal()
+                if (pushs.length === 0) {
+                    $("#error-modal2").modal();
+                    return false
+                } else {
+                    $(".no_pei_two div label ").each(function (i, v) {
+                        if ($(v).children('input').is(':checked')) {
+                            $(v).children('input').prop("checked", false);
+                            document.getElementById("tc_no_label").appendChild($(v)[0]);
+                        }
+                    });
+                    if ($(".no_pei_heard_one div label ").length === 0) {
+                        $(".no_pei_heard_one").prop('checked', false);
+                    }
+                    var dataset = {
+                        "userId": pushs,
+                        "departmentId": null
+                    }
+                    ace.ajaxPost("/updateDepartment", dataset, function (data) {
+                        if (data.type === 0) {
+                            $("#error-modal").modal("show");
+                            setTimeout(function () {
+                                $("#error-modal").modal("hide");
+                            }, 800)
+                        }
+                    })
                 }
 
-                console.log(pushs);
             });
 
+            //改变部门
             $("#select_check").change(function () {
-                $(this).children("option").each(function (i, v) {
-                    if ($(v).is(":selected")) {
-                        $(v).val();
-                        //改变并请求数据再渲染
-                        ace.ajaxGet("options.json", function (data) {
-                            var seles = {
-                                "seles": data
-                            };
-                            var htmls = template("selectes", seles);
-                            document.getElementById("tc_no_label1").innerHTML = htmls;
-                        })
+                var sections = [];
+                $(data).each(function (i, v) {
+                    if (v.department == $("#select_check :selected").text()) {
+                        sections.push(v);
                     }
                 })
+                if (sections.length === 0) {
+                    document.getElementById("tc_no_label1").innerHTML = "";
+                    return false
+                }
+                //改变并请求数据再渲染
+                var seles = {
+                    "seles": sections
+                };
+                var htmls = template("selectes", seles);
+                document.getElementById("tc_no_label1").innerHTML = htmls;
             })
 
         })

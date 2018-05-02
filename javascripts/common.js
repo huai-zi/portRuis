@@ -18,9 +18,9 @@ define(function (require, exports, module) {
             $.ajax({
                 url: url,
                 type: "POST",
-                data: JSON.stringify(dataset),
+                data: dataset,
                 dataType: "json",
-                contentType: "application/json",
+                // contentType: "application/json",
                 success: function (data) {
 
                     if (data.type || data.type === 0) {
@@ -41,9 +41,13 @@ define(function (require, exports, module) {
                 url: url,
                 type: "get",
                 dataType: "json",
+                timeout: 10000,
                 success: function (data) {
                     callback ? callback(data) : null;
 
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("数据请求有误,请重新访问,或联系管理员")
                 }
             })
         }
@@ -73,6 +77,7 @@ define(function (require, exports, module) {
                 cache: false,
                 contentType: false,
                 processData: false,
+                timeout: 10000,
                 success: function (data) {
                     if (data.type || data.type === 0) {
                         callback ? callback(data) : null;
@@ -81,6 +86,9 @@ define(function (require, exports, module) {
                     } else {
                         callback ? callback(data) : null;
                     }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("数据请求有误,请重新访问,或联系管理员")
                 }
             });
         }
@@ -100,6 +108,14 @@ define(function (require, exports, module) {
             $(bq).on('change', function () {
                 var urls = com.prototype.getObjectURL(this.files[0]);
                 $(gh).attr('src', urls);
+                callback ? callback() : null;
+            })
+        }
+
+        //监控改变图标进行数据处理
+        function butChange(bq, callback) {
+            //bq, gh----file标签改变id名\图片展示框id名
+            $(bq).on('change', function () {
                 callback ? callback() : null;
             })
         }
@@ -297,6 +313,7 @@ define(function (require, exports, module) {
                         me.readBlob(me.loaded);
                     } else {
                         //设置文件大小
+                        $(".progress1").hide();
                         me.loaded = me.total;
                     }
                 },
@@ -327,7 +344,6 @@ define(function (require, exports, module) {
 
         //上传监控
         function changeFile(e, callback) {
-            console.log(666);
             var files = e.target.files;
             var fileReader = new FileReader();
             fileReader.onload = function (ev) {
@@ -361,9 +377,9 @@ define(function (require, exports, module) {
                         //将填写出的对象进行清除空格处理
                         key = $.trim(key);
                         v['"' + key + '"'] = bb;
+                        v['"角色"'] = "学员"
                     }
                 })
-
                 callback ? callback(persons) : null;
 
                 //persons为传入的数据值
@@ -372,6 +388,19 @@ define(function (require, exports, module) {
             // 以二进制方式打开文件
             fileReader.readAsBinaryString(files[0]);
         };
+
+
+        //正则匹配数据
+        function regex(name, num, data) {
+            var rage2 = '\\{(\\s)*\\"' + name + '\\"(\\s)*:(\\s)*';
+            var rage1 = '[\\s\\S]+?\\}';
+            var rage3 = num;
+            var ww = rage2 + rage3 + rage1;
+            var rage = new RegExp(ww);
+            var datas = JSON.parse(JSON.stringify(data).match(rage)[0]);
+            return datas
+
+        }
 
         com.prototype = {
             constructor: com,
@@ -385,7 +414,9 @@ define(function (require, exports, module) {
             "datatables": datatables,
             "filesUpload": filesUpload,
             "slide": slide,
-            "changeFile": changeFile
+            "changeFile": changeFile,
+            "butChange": butChange,
+            "regex": regex
         }
         return com;
     })();

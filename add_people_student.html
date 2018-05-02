@@ -114,7 +114,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -196,9 +196,9 @@
                                         <input class="no_pei_heard_one" type="checkbox" value="未分配员工">
                                         <select name="select_check" id="select_check">
                                             <option value="">请选择角色</option>
+                                            <option value="0">系统管理员</option>
                                             <option value="1">教员</option>
-                                            <option value="2">系统管理员</option>
-                                            <option value="3">学员</option>
+                                            <option value="2">学员</option>
                                         </select>
                                     </label>
                                     <div id="tc_no_label1">
@@ -231,12 +231,40 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <span >请先选择要加入的员工以及加入的角色</span>
+                <span>请先选择要加入的员工以及加入的角色</span>
             </div>
             <div class="modal-footer">
                 <!--确认删除-->
                 <button type="button" class="btn " data-dismiss="modal">
                     确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="">信息保存成功</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
                 </button>
             </div>
         </div>
@@ -264,13 +292,27 @@
     seajs.use('./javascripts/common.js', function (main) {
         var modelz = new models();
         var ace = new main.comm();
-        ace.ajaxGet('options.json', function (data) {
+
+
+        ace.ajaxGet('/user/read', function (data) {
+            var peops = [];
+            $(data).each(function (i, v) {
+                //将部门信息尽心筛选
+                if (v.character === null) {
+                    peops.push(v);
+                }
+            })
+
             var seles = {
                 "seles": data
             };
+            if (peops.length === 0) {
 
-            var htmls = template("selectes", seles);
-            document.getElementById("tc_no_label").innerHTML = htmls;
+            } else {
+                var htmls = template("selectes", seles);
+                document.getElementById("tc_no_label").innerHTML = htmls;
+            }
+
             //全选
             $(".no_pei_heard").click(function () {
                 if ($(this).prop("checked")) {
@@ -303,14 +345,41 @@
                 $(".no_pei_one div label ").each(function (i, v) {
                     if ($(v).children('input').is(':checked')) {
                         pushs.push($(v).children('input').attr("id"));
-                        $(v).children('input').prop("checked", false);
-                        document.getElementById("tc_no_label1").appendChild($(v)[0]);
                     }
-                })
-                if (pushs.length === 0|| $(".no_pei_two div label ").length) {
+                });
+
+                if (pushs.length === 0 || $("#select_check :selected").val() === "") {
                     $("#error-modal2").modal();
+                    return false
+                } else {
+                    $(".no_pei_one div label ").each(function (i, v) {
+                        if ($(v).children('input').is(':checked')) {
+                            $(v).children('input').prop("checked", false);
+                            document.getElementById("tc_no_label1").appendChild($(v)[0]);
+                        }
+                    });
+                    if ($(".no_pei_one div label ").length === 0) {
+                        $(".no_pei_heard").prop('checked', false)
+                    }
+                    var dataset = {
+                        "userId": pushs,
+                        "roleId": $("#select_check :selected").val()
+                    }
+                    $("#error-modal").modal("show");
+                    setTimeout(function () {
+                        $("#error-modal").modal("hide");
+                    }, 1500)
+                    ace.ajaxPost("/updateRole", dataset, function (data) {
+                        if (data.type === 0) {
+                            $("#error-modal").modal("show");
+                            setTimeout(function () {
+                                $("#error-modal").modal("hide");
+                            }, 800)
+                        }
+                    })
                 }
-                console.log(pushs);
+
+
             });
             //向左侧移动
 
@@ -319,31 +388,55 @@
                 $(".no_pei_two div label ").each(function (i, v) {
                     if ($(v).children('input').is(':checked')) {
                         pushs.push($(v).children('input').attr("id"));
-                        $(v).children('input').prop("checked", false);
-                        document.getElementById("tc_no_label").appendChild($(v)[0]);
                     }
                 })
-                if (pushs.length === 0|| $(".no_pei_one div label ").length) {
-                    $("#error-modal2").modal()
+                if (pushs.length === 0) {
+                    $("#error-modal2").modal();
+                    return false
+                } else {
+                    $(".no_pei_two div label ").each(function (i, v) {
+                        if ($(v).children('input').is(':checked')) {
+                            $(v).children('input').prop("checked", false);
+                            document.getElementById("tc_no_label").appendChild($(v)[0]);
+                        }
+                    });
+                    if ($(".no_pei_heard_one div label ").length === 0) {
+                        $(".no_pei_heard_one").prop('checked', false);
+                    }
+                    var dataset = {
+                        "userId": pushs,
+                        "roleId": null
+                    }
+                    ace.ajaxPost("/updateRole", dataset, function (data) {
+                        if (data.type === 0) {
+                            $("#error-modal").modal("show");
+                            setTimeout(function () {
+                                $("#error-modal").modal("hide");
+                            }, 800)
+                        }
+                    })
                 }
 
-                console.log(pushs);
             });
 
+            //改变部门
             $("#select_check").change(function () {
-                $(this).children("option").each(function (i, v) {
-                    if ($(v).is(":selected")) {
-                        $(v).val();
-                        //改变并请求数据再渲染
-                        ace.ajaxGet("options.json", function (data) {
-                            var seles = {
-                                "seles": data
-                            };
-                            var htmls = template("selectes", seles);
-                            document.getElementById("tc_no_label1").innerHTML = htmls;
-                        })
+                var sections = [];
+                $(data).each(function (i, v) {
+                    if (v.character === +$("#select_check :selected").val()) {
+                        sections.push(v);
                     }
                 })
+                if (sections.length === 0) {
+                    document.getElementById("tc_no_label1").innerHTML = "";
+                    return false
+                }
+                //改变并请求数据再渲染
+                var seles = {
+                    "seles": sections
+                };
+                var htmls = template("selectes", seles);
+                document.getElementById("tc_no_label1").innerHTML = htmls;
             })
 
         })

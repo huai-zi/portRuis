@@ -5,16 +5,14 @@
     "parentId": 0,
     "parentName": "名称",
     "note": "",
-    "model": "模型文件",
-    "download": "下载文件"
+    "file": "检修规划文件"
   },
   {
-    "id": 1,
+    "id": 2,
     "name": "名称",
     "parentId": 1293,
     "parentName": "名称",
     "note": "备注",
-    "model": "模型文件",
-    "download": "视频文件"
+    "file": "检修规划文件"
   }
 ]

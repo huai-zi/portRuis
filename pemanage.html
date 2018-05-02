@@ -147,7 +147,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -199,8 +199,7 @@
                                     </div>
                                     <div class="col-xs-10">
 
-                                        <input type="text" class="form-control" name="modelName"
-                                               readonly value="720">
+                                        <input type="text" class="form-control" name="id" id="ids" readonly value="">
 
                                     </div>
                                 </div>
@@ -212,7 +211,7 @@
                                     </div>
                                     <div class="col-xs-10">
 
-                                        <input type="text" class="form-control" name="modelName"
+                                        <input type="text" class="form-control" name="document" id="documents"
                                                readonly value="/uploadFile/201707171147.exe">
 
                                     </div>
@@ -223,9 +222,9 @@
 
                                     </div>
                                     <div class="col-xs-10">
-                                        <a href="add_pemanage.html" class="btn btn-wide color_blue addTo">
+                                        <span class="btn btn-wide color_blue notazirez">
                                             修改
-                                        </a>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -252,18 +251,19 @@
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
         ace.localHref(".removeShuju", "./section.html");
+        ace.ajaxGet("/pe/read", function (data) {
+            localStorage.setItem("pemanage",JSON.stringify(data));
 
-
+            $("#ids").val(data.id);
+            $("#documents").val(data.document);
+        })
     })
     $(function () {
         var mo = new models();
         //点击添加判断
-        $('#notazirez').click(function () {
-            mo.selectJc("forms", "warm-xinxi", function () {
-                mo.numcs(url, "forms", "", function () {
-                    window.location.href = "section.html";
-                })
-            });
+        $('.notazirez').click(function () {
+            window.location.href = "add_pemanage.html";
+
         });
 
     })

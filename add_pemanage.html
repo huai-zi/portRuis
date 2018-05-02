@@ -136,7 +136,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -187,7 +187,8 @@
                                     </div>
                                     <div class="col-xs-10">
 
-                                        <input type="text" class="form-control" name="modelName" class="modelName" id="modelName" value="720">
+                                        <input type="text" class="form-control" name="id" id="ids" class="modelName"
+                                               value="">
 
                                     </div>
                                 </div>
@@ -199,8 +200,8 @@
                                     </div>
                                     <div class="col-xs-10">
 
-                                        <input type="text" class="form-control" name="modelName"
-                                               readonly value="/uploadFile/201707171147.exe">
+                                        <input type="text" class="form-control" name="documents" id="documentss"
+                                               readonly value="">
 
                                     </div>
                                 </div>
@@ -211,7 +212,7 @@
                                     </div>
                                     <div class="col-xs-10">
 
-                                        <input type="file" name="modelImg" id="modelImg" accept=".exe,.zip">
+                                        <input type="file" name="document" id="documents" accept=".exe,.zip">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
@@ -223,7 +224,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="clearfix">
                                     <div class="col-xs-2 text-center">
 
@@ -274,6 +274,33 @@
         </div>
     </div>
 </div>
+
+!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="">信息保存成功</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
@@ -286,15 +313,25 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
+        var mo = new models();
+        var formss = document.forms;
+        var ids = localStorage.getItem("pemanage");
+        formss.id.value = ids.id;
+        formss.documents.value = ids.document;
 
         ace.filesUpload("modelImg", "Progress", ".sr-only");
-        $(".color_blue").click(function () {
-            if ($("#modelImg").val() === "" || $("#modelName").val()) {
-                $("#error-modal2").modal();
-            }else{
-                //提交数据
 
-                window.location.href = "pemanage.html"
+        $(".color_blue").click(function () {
+            if ($("#documents").val()) {
+                $("#error-modal2").modal();
+            } else {
+                //提交数据
+                mo.numcs("/pe/update", "forms", "", function (data) {
+                    if (data.type === 0) {
+                        $("#error-modal").modal();
+                        window.location.href = "pemanage.html";
+                    }
+                })
             }
 
         })

@@ -17,7 +17,15 @@
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
+<style>
+    .table > thead > tr th:nth-child(3) {
+        color: #337ab7 !important;
+    }
 
+    .progress-striped {
+        display: none;
+    }
+</style>
 <body onselectstart="return false">
 <!--点击显示大的图片-->
 <div class="big_da">
@@ -148,7 +156,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -163,7 +171,11 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
+                            <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
+                            </a></li>
+                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
+                            </a></li>
                         </ul>
 
                     </nav>
@@ -227,21 +239,21 @@
             <div class="modal-content">
                 <div class="modal-header state modal-primary">
 
-                    <h4 class="modal-title"><i class="fa fa-puzzle-piece"></i>删除设备</h4>
+                    <h4 class="modal-title"><i class="fa fa-puzzle-piece"></i>删除部门</h4>
 
                 </div>
 
                 <div class="modal-body clearfix">
                     <h3>确定要删除这个部门及下属子部门？</h3>
                     <div class="text-right col-xs-3">
-                        设备名称
+                        部门名称
                     </div>
                     <div class=" col-xs-9">
                         <span id="course_name">123</span>
                     </div>
                     <div class="clearfix">
                         <div class="text-right col-xs-3">
-                            设备图像
+                            所属部门
                         </div>
                         <div class=" col-xs-9">
                             <span id="course_img"></span>
@@ -249,16 +261,23 @@
                     </div>
                     <div class="clearfix">
                         <div class="text-right col-xs-3">
-                            描述
+                            备注
                         </div>
                         <div class=" col-xs-9">
                             <span id="course_xs"></span>
                         </div>
                     </div>
                 </div>
+                <div class="progress progress-striped active">
+                    <div class="progress-bar progress-bar-success" role="progressbar"
+                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                         style="width: 100%;">
+                    </div>
+                </div>
                 <div class="modal-footer text-center">
 
-                    <button type="button" class="btn  btn-default color_green itm_qx" data-dismiss="modal">                        确定                    </button>                    <button type="button" class="btn  btn-default   " data-dismiss="modal">                        取消                    </button>
+                    <button type="button" class="btn  btn-default color_green itm_qx" data-dismiss="modal"> 确定</button>
+                    <button type="button" class="btn  btn-default   " data-dismiss="modal"> 取消</button>
                 </div>
             </div>
         </form>
@@ -280,32 +299,34 @@
         var options = [
             {"data": "id"},
             {"data": "name"},
+            {"data": "parentName"},
             {
-                "data": "position"
-            },
-            {
-                "data": "remarks",
+                "data": "note",
                 "render": function (data, type, full, set) {
-                    return ""
+                    if (full.note === null || full.note === undefined) {
+                        return ""
+                    } else {
+                        return full.note
+                    }
                 }
             },
             {
-                "data": "remarks",
+                "data": "note",
                 "render": function (data, type, full, set) {
                     /*返回的数据拼接*/
                     return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
                 }
             }
         ];
-        ace.datatables('model.json', options, [0, 3, 4], function (data) {
-            //点击编辑
 
+        //数据加载
+        ace.datatables('/department/read', options, [0, 3, 4], function (data) {
+            //点击编辑
             var aa1 = '';
             $('.notazirez').click(function () {
                 aa1 = $(this).parent().parent().children().eq(0).text();
                 $(data.aoData).each(function (i, v) {
                     if (+aa1 === v._aData.id) {
-                        console.log(v._aData);
                         localStorage.setItem("section", JSON.stringify(v._aData));
                     }
                 })
@@ -318,8 +339,8 @@
                 $(data.aoData).each(function (i, v) {
                     if (+textId === v._aData.id) {
                         $("#course_name").text(v._aData.name);
-                        $("#course_img").text(v._aData.position);
-                        $("#course_xs").text(v._aData.ramark);
+                        $("#course_img").text(v._aData.name);
+                        $("#course_xs").text(v._aData.note);
                     }
                 })
             })
@@ -328,34 +349,21 @@
 
     $(function () {
         var modelz = new models();
-//将模态框进行处理
-
-        var modals = ['lg-modal1', 'info-modal', 'error-modal'];
-        modelz.modtal(modals);
         //删除传送数据
         $('.itm_qx').click(function () {
             var dataset = {
                 "id": window.textId
             };
-            console.log(textId);
-            modelz.ajaxform(url, dataset, function () {
-                modelz.tables();
+
+            modelz.ajaxform("/department/delete", dataset, function (data) {
+                $(".progress-striped").show();
+                modelz.tables(function(){
+                    $(".progress-striped").hide();
+
+                });
             })
-            //取到id,与数据进行对比,加载模态框
 
         })
-        $('.big_da').click(function () {
-            return false
-        })
-        $('.big_da > img').click(function () {
-            return false
-        })
-        $('.click_close').on('click', function () {
-            $(this).parent().css("display", "none");
-        })
-
-        //编辑模型
-
     })
 </script>
 </body>

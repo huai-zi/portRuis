@@ -93,7 +93,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -147,7 +147,7 @@
                                         <input type="text" class="form-control" name="modelName">
 
                                         <span class="password-yanzheng pull-left warm-xinxi"
-                                              style="line-height: 35px;font-size: 16px !important;"><i
+                                              style="line-height: 35px;font-size: 12px !important;"><i
                                                 class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
                                     </div>
                                 </div>
@@ -222,7 +222,7 @@
     $(function () {
         var mo = new models();
         //点击添加判断
-        $('#notazirez').click(function () {
+        $('.notazirez').click(function () {
             mo.selectJc("forms", "warm-xinxi", function () {
                 mo.numcs(url, "forms", "", function () {
                     window.location.href = "model.html";

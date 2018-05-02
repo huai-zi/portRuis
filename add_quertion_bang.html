@@ -17,6 +17,10 @@
     .steam_shiti1, .steam_shiti2, #remove_checked, #remove_checked1 {
         display: none;
     }
+
+    .span_one1, .span_one2, .span_one3, .span_one4 {
+        display: none;
+    }
 </style>
 <!--[if lt IE 8]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
@@ -92,7 +96,8 @@
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i
+                        class="fa fa-sign-out log-out" aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -149,7 +154,11 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
+                            <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
+                            </a></li>
+                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
+                            </a></li>
                         </ul>
 
                     </nav>
@@ -167,20 +176,20 @@
                         <h2>题目管理</h2>
                     </div>
                     <!--中间区域独立模块-->
-                    <form id="forms" enctype="multipart/form-data" name="forms">
-                        <div class="Add_course">
-                            <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>添加题目
-                            </div>
-                            <h3>题目信息</h3>
+                    <div class="Add_course">
+                        <div class="Add_course_head">
+                            <i class="fa fa-ellipsis-v "></i>添加题目
+                        </div>
+                        <h3>题目信息</h3>
+                        <form id="forms" enctype="multipart/form-data" name="forms">
                             <div class="container-fluid">
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
                                         类型
                                     </div>
                                     <div class="col-xs-9">
-                                        <select name="steam_shiti" id="steam_shiti" class="form-control">
-                                            <option value="0" selected>单选题</option>
+                                        <select name="type" id="steam_shiti" class="form-control">
+                                            <option value="0">单选题</option>
                                             <option value="1">操作题</option>
                                             <option value="2">问答题</option>
                                         </select>
@@ -191,8 +200,8 @@
                                         所属课程
                                     </div>
                                     <div class="col-xs-9">
-                                        <select name="question" class="form-control">
-                                            <option value="0" selected>单选题</option>
+                                        <select name="courseId" id="courseId" class="form-control">
+
                                         </select>
                                     </div>
                                 </div>
@@ -201,7 +210,7 @@
                                         题干
                                     </div>
                                     <div class="col-xs-9">
-                                        <textarea name="" class="form-control"
+                                        <textarea name="body" id="bodyText" class="form-control"
                                                   style="max-width: 100%;min-height: 84px;"></textarea>
                                     </div>
                                 </div>
@@ -285,7 +294,7 @@
                                             题目序号
                                         </div>
                                         <div class="col-xs-9" id="selecteds1">
-                                            <input type="number" min="0" class="form-control" name="">
+                                            <input type="number" min="0" class="form-control" name="modelId">
                                         </div>
                                     </div>
                                 </div>
@@ -295,7 +304,7 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="file" name="modelImg" id="modelImg" accept="image/*">
+                                        <input type="file" name="image" id="modelImg" accept="image/*">
                                         <div class="progress progress-striped" style="margin-top: 20px;">
                                             <div class="progress-bar progress-bar-success text-center"
                                                  role="progressbar"
@@ -317,12 +326,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="Add_course_bottom text-center">
-                                <button type='button' class='btn1 course_bj notazirez'>添加</button>
-                                <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
-                            </div>
+                        </form>
+
+                        <div class="Add_course_bottom text-center">
+                            <button type='button' class='btn1 course_bj notazirez'>添加</button>
+                            <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
@@ -330,6 +340,62 @@
     </div>
 </div>
 
+<!--警告信息-->
+<div class="modal fade" id="error-modal2" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-warning">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="span_one1">需要添加题干</span>
+                <span class="span_one2">需要添加备选项</span>
+                <span class="span_one3">需要添加正确答案</span>
+                <span class="span_one4">需要输入题目序号,请为正整数</span>
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-span1">信息保存成功</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
@@ -344,31 +410,95 @@
 
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./question-bang.html");
+        ace.localHref(".removeShuju", "question-bang.html");
         ace.change("#modelImg", "#model_img");
-        ace.filesUpload('modelImg','Progress','.sr-only');
+        ace.filesUpload('modelImg', 'Progress', '.sr-only');
+
+        var fac = [];
+        //加载所属课程中的内容
+        ace.ajaxGet("/course/read", function (data) {
+                //将课程进行筛选
+                $(data).each(function (i, v) {
+                    if (v.parentId !== 0) {
+                        fac.push(v);
+                    }
+                })
+                $(fac).each(function (i, v) {
+                    //加载数据
+                    $("#courseId")[0].options[i] = new Option(v.name, v.id);
+                })
+            }
+        )
+
 
     })
     $(function () {
-        $('.big_da').click(function () {
-            return false
-        })
-        $('.big_da > img').click(function () {
-            return false
-        })
-        $('.click_close').on('click', function () {
-            $(this).parent().css("display", "none");
-        })
-
         var mo = new models();
 
         //点击添加判断
-        $('#notazirez').click(function () {
-            mo.selectJc("forms", "warm-xinxi", function () {
-                mo.numcs(url, "forms", "", function () {
-                    window.location.href = "question-bang.html";
+        $('.notazirez').click(function () {
+            if ($("#bodyText").val() === "" || $("#bodyText").val() === undefined) {
+                $(".span_one1").show();
+                $(".span_one2").hide();
+                $(".span_one3").hide();
+                $("#error-modal2").modal();
+                return false
+            }
+
+            //单选题类型
+            var qub = 0;
+            if ($("#steam_shiti").val() === "0") {
+                if ($("input[name='answer']")[0] === undefined) {
+                    $(".span_one2").show();
+                    $(".span_one1").hide();
+                    $(".span_one3").hide();
+                    $("#error-modal2").modal();
+                    return false
+                }
+                $("input[name='right']").each(function (i, v) {
+                    if ($(v).is(":checked")) {
+                        qub = 1;
+                    }
                 })
-            });
+                if (qub !== 1) {
+                    $(".span_one3").show();
+                    $(".span_one2").hide();
+                    $(".span_one4").hide();
+                    $(".span_one1").hide();
+                    $("#error-modal2").modal();
+                    return false
+                }
+                $(".steam_shiti1").remove();
+
+            } else if ($("#steam_shiti").val() === "1") {
+                //操作题类型
+                if ($("#createHTml1 input[name='answer']")[0] === undefined) {
+                    $(".span_one2").show();
+                    $(".span_one1").hide();
+                    $(".span_one3").hide();
+                    $("#error-modal2").modal();
+                    return false
+                }
+                if($("input[name='modelId']").val() === ""){
+                    $(".span_one4").show();
+                    $(".span_one1").hide();
+                    $(".span_one3").hide();
+                    $(".span_one2").hide();
+                    $("#error-modal2").modal();
+                    return false
+                }
+                $(".steam_shiti0").remove();
+
+            } else if ($("#steam_shiti").val() === "2") {
+                //问答题类型
+                $(".steam_shiti0").remove();
+                $(".steam_shiti1").remove();
+            }
+            mo.numcs("/questions/create", "forms", "", function () {
+
+                $("#error-modal").modal();
+                window.location.href = "question_bang.html";
+            })
         });
 
         //点击备选项添加
@@ -391,8 +521,8 @@
         })
         //删除备选项
         $("#remove_checked").click(function () {
-            var inputSelect = $('#createHTml input[name="selectOption"]');
-            var inputRadios = $('#selecteds input[name="selects"]');
+            var inputSelect = $('#createHTml input[name="answer"]');
+            var inputRadios = $('#selecteds input[name="right"]');
             var arrs = JSON.parse(localStorage.getItem('arrChecked'));
             if (arrs.length === 0) {
                 $(this).hide();
@@ -464,7 +594,7 @@
 
         //删除备选项
         $("#remove_checked1").click(function () {
-            var inputSelect = $('#createHTml1 input[name="selectOption"]');
+            var inputSelect = $('#createHTml1 input[name="answer"]');
             var arrs = JSON.parse(localStorage.getItem('arrChecked'));
             inputSelect.each(function (i, v) {
                 if ($(v).is(':checked')) {

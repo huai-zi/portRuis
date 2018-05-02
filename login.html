@@ -74,11 +74,13 @@
 
 </div>
 <div class="imgs">
-    <input type="text" id="usname" name="user"/>
-    <input type="password" id="password" name="pass"/>
+    <form name="forms">
+        <input type="text" id="usname" name="name"/>
+        <input type="password" id="password" name="password"/>
 
-    <span id="loginButton" ></span>
-    <p >用户名或密码错误</p>
+        <span id="loginButton"></span>
+        <p class="password-cuowu">用户名或密码错误 <br>无效的登陆尝试.</p>
+    </form>
 </div>
 </body>
 <script src='javascripts/jquery.1.10.2.js'></script>
@@ -86,15 +88,14 @@
     var func = function () {
         if ($('#usname')[0].value != null && $('#password')[0].value.length >= 6 && $('#password')[0].value.length < 21) {
             $.ajax({
-                url: '',
+                url: '/login',
                 type: "POST",
                 data: $('form').serialize(),
                 success: function (data) {
-                    if (data === 'false') {
+                    if (data.type === 1) {
                         $('.password-cuowu').show();
-                    }
-                    else {
-                        window.location.href = "user/home";
+                    } else {
+                        window.location.href = "section.html";
                     }
                 }
             });

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "名称",
+    "parentId": 0,
+    "parentName": "名称",
+    "type": "水冷泵q",
+    "image": "images/model.jpg",
+    "test": "考试文件.zip",
+    "note": "",
+    "training": "训练文件",
+    "movie": "视频文件"
+  },
+  {
+    "id": 1,
+    "name": "名称",
+    "parentId": 1293,
+    "parentName": "名称",
+    "type": "水冷泵q",
+    "image": "images/model.jpg",
+    "test": "考试文件.zip",
+    "note": "",
+    "training": "训练文件",
+    "movie": "视频文件"
+  }
+]

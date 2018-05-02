@@ -13,9 +13,13 @@ var models = (function () {
             url: url,
             type: "get",
             dataType: "json",
+            timeout: 10000,
             success: function (data) {
                 callback ? callback(data) : null;
 
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("数据请求有误,请重新访问,或联系管理员")
             }
         })
     }
@@ -25,9 +29,10 @@ var models = (function () {
         $.ajax({
             url: url,
             type: "POST",
-            data: JSON.stringify(dataset),
+            data: dataset,
             dataType: "json",
-            contentType: "application/json",
+            timeout: 10000,
+            // contentType: "application/json",
             success: function (data) {
                 if (data.type || data.type === 0) {
                     callback ? callback(data) : null;
@@ -36,6 +41,9 @@ var models = (function () {
                     callback ? callback(data) : null;
 
                 }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("数据请求有误,请重新访问,或联系管理员")
             }
         })
     }
@@ -67,7 +75,6 @@ var models = (function () {
         } else if (cid !== "") {
             var tid = document.forms.cid.value;
             formData.append("id", tid);
-
         }
 
         $.ajax({
@@ -78,6 +85,7 @@ var models = (function () {
             cache: false,
             contentType: false,
             processData: false,
+            timeout: 10000,
             success: function (data) {
                 if (data.type || data.type === 0) {
                     callback ? callback(data) : null;
@@ -87,6 +95,9 @@ var models = (function () {
                     callback ? callback(data) : null;
 
                 }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("数据请求有误,请重新访问,或联系管理员")
             }
         });
     }
@@ -108,14 +119,13 @@ var models = (function () {
     //将模态框设置点击空白处不取消地址
     function modtal(dataa) {
         $(dataa).each(function (i, v) {
-            $("#" + v).css('backgroundColor', 'rgba(0,0,0,.7)')
+            $("#" + v).css('backgroundColor', 'rgba(0,0,0,.7)');
             $("#" + v).modal({
                 keyboard: false,
                 backdrop: false,
                 show: false
-            })
+            });
         })
-
     }
 
     function getObjectURL(file) {
@@ -151,9 +161,11 @@ var models = (function () {
     }
 
     //提交数据数据成功，成功请求数据加载页面
-    function tablesAjax() {
+    function tablesAjax(callback) {
         var table = $('.data-table').DataTable();
         table.ajax.reload();
+        callback ? callback() : null;
+
         return table;
     }
 
@@ -168,15 +180,18 @@ var models = (function () {
         var html = "";
         var radios = "";
         $(text).each(function (i, v) {
+            //选项内容
             html +=
                 "<label>" +
-                "<input type='checkbox' name='selectOption' value='" +
+                "<input type='checkbox' name='answer' value='" +
                 v + "'> " +
                 zm[i] + '、' + v +
                 "</label>" + "<br>";
+            //正确答案
             radios +=
                 "<label>" +
-                "<input type='radio' name='selects' value='" +
+                "<input type='radio' name='right' data-en='" + zm[i] +
+                "' value='" +
                 v + "'> " +
                 zm[i] +
                 "</label>" + "<br>";
@@ -245,6 +260,13 @@ var models = (function () {
             "fnDrawCallback": function (data) {
                 //加载完参数进行回掉函数操作
                 callback ? callback(data) : null;
+                $(document).on('click', '.tbodya > tr td img', function () {
+                    /*获取点击后的id值*/
+                    vul = $(this).children().eq(0).text();
+                    var stcImg = $(this).attr('src');
+                    $('.big_da').css("display", "flex");
+                    $('.big_da > img').attr('src', stcImg);
+                });
             }
 
         });
@@ -261,7 +283,7 @@ var models = (function () {
         return result;
     }
 
-    function sorts(data,callback) {
+    function sorts(data, callback) {
         for (var i = 0; i < data.length - 1; i++) {
             for (var j = 1; j < data.length; j++) {
                 if (i != j) {
@@ -276,6 +298,16 @@ var models = (function () {
 
     }
 
+    //选中样式
+    function selected(id, canshu) {
+        $(id).children().each(function (i, v) {
+            if ($(v).val().indexOf(canshu) !== -1) {
+                $(v).prop('selected', true);
+                return false
+            }
+        })
+    }
+
 
     model.prototype = {
         constructor: model,
@@ -288,14 +320,15 @@ var models = (function () {
         "getObjectURL": getObjectURL,
         "createHtml": createHtml,
         "removeArray": removeArray,
-            "datatables": datatables,
+        "datatables": datatables,
         "ajaxGet": ajaxGet,
         "localUp": localUp,
-        "sorts":sorts
+        "sorts": sorts,
+        "selected": selected
     };
     return model;
 })();
 
 var mo = new models();
-var modalss = ['error-modal', 'error-modal2'];
+var modalss = ['lg-modal1', 'info-modal', 'error-modal', 'error-modal2'];
 mo.modtal(modalss);

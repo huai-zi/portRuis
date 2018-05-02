@@ -18,7 +18,6 @@
         background-color: #f9f9f9 !important;
     }
 
-
     table td:first-child, table th:first-child {
         display: block !important;
     }
@@ -103,7 +102,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -118,7 +117,11 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
+                            <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
+                            </a></li>
+                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
+                            </a></li>
                         </ul>
 
                     </nav>
@@ -175,7 +178,7 @@
                                 </div>
                             </div>
                             <div class="Add_course_bottom text-center">
-                                <button type='button' class='btn1 course_bj notazirez'>添加</button>
+                                <!--<button type='button' class='btn1 course_bj notazirez'>添加</button>-->
                                 <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
                             </div>
                         </div>
@@ -186,8 +189,10 @@
         </div>
     </div>
 </div>
+<a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 <script src="javascripts/jquery.1.10.2.js"></script>
+<script src='javascripts/peinsder.js'></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
 <script src="javascripts/template-script.min.js"></script>
@@ -199,15 +204,33 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./model.html");
+        var mo = new models();
 
-        //对数据进行渲染
-        ace.ajaxGet("options.json", function (data) {
-            $(data).each(function (i, v) {
-                $("#course-select").get(0).options[i] = new Option(v.name, v.id);
-            });
+        ace.localHref(".removeShuju", "model.html");
 
-        })
+        //对所属模型进行设置
+        var model = JSON.parse(localStorage.getItem("models"));
+        $("#course-select").get(0).options[0] = new Option("==请选择模型==", "");
+        $(model).each(function (i, v) {
+            $("#course-select").get(0).options[i + 1] = new Option(v.name, v.id);
+        });
+
+        var options = [
+            {"data": "name"},
+            {"data": "parentName"},
+            {"data": "note"},
+            {
+                "data": "note",
+                "render": function (data, type, full, set) {
+                    /*返回的数据拼接*/
+                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
+                }
+            }
+        ];
+        mo.datatables(url, options, [0, 3], function () {
+
+        });
+
     })
 </script>
 </body>

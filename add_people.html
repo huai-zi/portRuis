@@ -23,13 +23,19 @@
         .erroe-span1, .erroe-span2 {
             display: none;
         }
-        .sr-only{
+
+        .sr-only {
             clip: inherit !important;
             width: auto;
-            height:auto;
+            height: auto;
         }
-        .progress1{
+
+        .progress1 {
             display: none;
+        }
+
+        table td:first-child, table th:first-child {
+            display: block !important;
         }
     </style>
 </head>
@@ -114,7 +120,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -151,88 +157,92 @@
                         <h2>批量添加新员工</h2>
                     </div>
                     <div class="section-body clearfix">
+
                         <!--主体结构-->
                         <div class="col-sm-12">
-                            <!--模态框begin-->
-                            <div style="padding-top: 20px;">
-                                <a href="people.html" class="btn btn-wide  color_green">
-                                    员工列表
-                                </a>
+                            <form enctype=multipart/form-data name="forms">
 
-                                <a href="people_section.html" class="btn btn-wide   color_ql "
-                                   style="margin-left: 20px;">
-                                    部门调整
-                                </a>
-                                <a href="people_.html" class="btn btn-wide   color_blue "
-                                   style="margin-left: 20px;">
-                                    角色调整
-                                </a>
-                            </div>
+                                <!--模态框begin-->
+                                <div style="padding-top: 20px;">
+                                    <a href="people.html" class="btn btn-wide  color_green">
+                                        员工列表
+                                    </a>
 
-                            <div class="clearfix" style="width: 80%;margin: 0 auto;">
-                                <div class="col-xs-3 text-right">
-                                    员工表格
+                                    <a href="people_section.html" class="btn btn-wide   color_ql "
+                                       style="margin-left: 20px;">
+                                        部门调整
+                                    </a>
+                                    <a href="people_.html" class="btn btn-wide   color_blue "
+                                       style="margin-left: 20px;">
+                                        角色调整
+                                    </a>
                                 </div>
-                                <div class="col-xs-9">
 
-                                    <input type="file" name="modelImg" id="modelImg1"
-                                           accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                <div class="clearfix" style="width: 80%;margin: 0 auto;">
+                                    <div class="col-xs-3 text-right">
+                                        员工表格
+                                    </div>
+                                    <div class="col-xs-9">
 
-                                </div>
-                                <div class="col-xs-3 text-right">
-                                    上传进度
-                                </div>
-                                <div class="col-xs-9">
-                                    <div class="progress progress-striped" style="margin-top: 20px;">
-                                        <div class="progress-bar progress-bar-success text-center"
-                                             role="progressbar"
-                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                             style="width: 0%;" id="Progress1">
+                                        <input type="file" name="modelImg" id="modelImg1"
+                                               accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+
+                                    </div>
+                                    <div class="col-xs-3 text-right">
+                                        上传进度
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <div class="progress progress-striped" style="margin-top: 20px;">
+                                            <div class="progress-bar progress-bar-success text-center"
+                                                 role="progressbar"
+                                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                                 style="width: 0%;" id="Progress1">
                                                 <span class="sr-only1"
                                                       style='clip: inherit !important;width:  61px;height: 22px;position: inherit;'></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--制作表格-->
-                            <div class="panel">
-                                <div class="panel-content">
-                                    <div class="table-responsive" style='overflow-x: auto'>
-                                        <h3>数据展示如下：</h3>
+                                <!--制作表格-->
+                                <div class="panel">
+                                    <div class="panel-content">
+                                        <div class="table-responsive" style='overflow-x: auto'>
+                                            <h3>数据展示如下：</h3>
 
-                                        <table id="basic-table"
-                                               class="data-table table table-striped nowrap table-hover" cellspacing="0"
-                                               width="100%">
-                                            <thead>
-                                            <tr>
-                                                <th>标识</th>
-                                                <th>用户名</th>
-                                                <th>姓名</th>
-                                                <th>部门</th>
-                                                <th>工号</th>
-                                                <th>Email</th>
-                                                <th>电话</th>
-                                                <th>性别</th>
-                                                <th>角色</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody class="tbodya">
-                                            <!--占位符-->
-                                            </tbody>
-                                        </table>
+                                            <table id="basic-table"
+                                                   class="data-table table table-striped nowrap table-hover"
+                                                   cellspacing="0"
+                                                   width="100%">
+                                                <thead>
+                                                <tr>
+                                                    <th>用户名</th>
+                                                    <th>姓名</th>
+                                                    <th>部门</th>
+                                                    <th>工号</th>
+                                                    <th>Email</th>
+                                                    <th>电话</th>
+                                                    <th>性别</th>
+                                                    <th>角色</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="tbodya">
+                                                <!--占位符-->
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="clearfix">
-                                <div class="progress progress1 progress-striped active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar"
-                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                         style="width: 100%;">
-                                        <span class="sr-only">数据解析中</span>
+                                <div class="clearfix">
+                                    <div class="progress progress1 progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar"
+                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: 100%;">
+                                            <span class="sr-only">数据解析中</span>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
+                                </div>
+                            </form>
                             <div class="col-xs-12 text-center">
                                 <span class="btn btn-wide  color_blue color_blue_but" style="margin-top: 20px;">
                                     确认上传
@@ -263,7 +273,7 @@
             </div>
             <div class="modal-body">
                 <span class="erroe-span1">请选择相应的xlsx文件再进行上传</span>
-                <span class="error-span2">请上传指定的格式--账号-姓名-处室-员工号-手机号</span>
+                <span class="erroe-span2">请上传指定的格式--账号-姓名-处室-员工号-手机号</span>
             </div>
             <div class="modal-footer">
                 <!--确认删除-->
@@ -274,6 +284,35 @@
         </div>
     </div>
 </div>
+
+
+<!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-span1">信息保存成功</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src='javascripts/xlsx.core.min.js'></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -284,29 +323,19 @@
 <script src="stylesheets/css/vendor/media/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src='javascripts/course.js'></script>
 <script type="text/javascript" src='javascripts/sea.js'></script>
-<script type="text/javascript" src='javascripts/excel.js'></script>
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var modelz = new models();
-
         var ace = new main.comm();
-        var options = [
-            {"data": "id"},
-            {"data": "name"},
-            {"data": "position"},
-            {"data": "file"},
-            {"data": "fileStam"},
-            {"data": "fileStam"},
-            {"data": "fileStam"},
-            {"data": "fileStam"},
-            {"data": "fileStam"}
-        ];
+
         ace.filesUpload("modelImg1", "Progress1", ".sr-only1", 1);
 
         $("#modelImg1").change(function (e) {
-                $(".progress1").show();
+            if ($(this).val() === "" || $(this).val() === undefined) {
+                return false
+            }
+            $(".progress1").show();
             ace.changeFile(e, function (datas) {
-                console.log(datas[0]['"账号"']);
                 //判断传错情况
                 if (datas[0]['"账号"'] === undefined) {
                     $(".erroe-span2").show();
@@ -322,32 +351,18 @@
                     $("#Progress1").attr('title', "");
                     $(".panel").hide();
                     $(".progress1").hide();
-
                     return false
                 }
-
 
                 $(".panel").show();
                 var options = [
                     {
                         "data": "账号",
                         "render": function (data, type, full) {
-
-                            var fll = full['"账号"'];
-                            if (fll === "" || fll === undefined) {
-                                return ""
-                            } else {
-                                return fll
-                            }
-                        }
-                    },
-                    {
-                        "data": "账号",
-                        "render": function (data, type, full) {
                             var fll = full['"账号"'];
 
                             if (fll === "" || fll === undefined) {
-                                return ""
+                                return "暂无"
                             } else {
                                 return fll
                             }
@@ -358,7 +373,7 @@
                         "render": function (data, type, full) {
                             var fll = full['"姓名"'];
                             if (fll === "" || fll === undefined) {
-                                return ""
+                                return "暂无"
                             } else {
                                 return fll
                             }
@@ -370,7 +385,7 @@
                             var fll = full['"处室"'];
 
                             if (fll === "" || fll === undefined) {
-                                return ""
+                                return "暂无"
                             } else {
                                 return fll
                             }
@@ -382,31 +397,19 @@
                             var fll = full['"员工号"'];
 
                             if (fll === "" || fll === undefined) {
-                                return ""
+                                return "暂无"
                             } else {
                                 return fll
                             }
                         }
                     },
                     {
-                        "data": "员工号",
+                        "data": "Email",
                         "render": function (data, type, full) {
-                            var fll = full['"员工号"'];
+                            var fll = full['"Email"'];
 
                             if (fll === "" || fll === undefined) {
-                                return ""
-                            } else {
-                                return fll
-                            }
-                        }
-                    },
-                    {
-                        "data": "手机",
-                        "render": function (data, type, full) {
-                            var fll = full['"手机"'];
-
-                            if (fll === "" || fll === undefined) {
-                                return ""
+                                return "暂无"
                             } else {
                                 return fll
                             }
@@ -418,45 +421,62 @@
                             var fll = full['"手机"'];
 
                             if (fll === "" || fll === undefined) {
-                                return ""
+                                return "暂无"
                             } else {
                                 return fll
                             }
                         }
                     },
                     {
-                        "data": "手机",
+                        "data": "性别",
                         "render": function (data, type, full) {
-                            var fll = full['"手机"'];
+                            var fll = full['"性别"'];
 
                             if (fll === "" || fll === undefined) {
-                                return ""
+                                return "暂无"
+                            } else {
+                                return fll
+                            }
+                        }
+                    },
+                    {
+                        "data": "角色",
+                        "render": function (data, type, full) {
+                            var fll = full['"角色"'];
+
+                            if (fll === "" || fll === undefined) {
+                                return "暂无"
                             } else {
                                 return fll
                             }
                         }
                     }
                 ];
-                $(".color_blue_but").click(function () {
-                    ace.ajaxPost(url, datas, function () {
 
-
-                    });
-                })
-                modelz.datatables(datas, options, [0, 1, 2, 3, 4, 5, 6, 7, 8], function (data) {
+                modelz.datatables(datas, options, [2, 3, 4, 5, 6, 7], function (data) {
                     $(".panel").show();
-                })
+                });
+
+                window.datas = datas;
 
             })
-        })
-        //点击进行数据保存
+        });
+
+
         $(".color_blue_but").click(function () {
-            if ($("#modelImg1").val() === "") {
+            if ($("#modelImg1").val() === "" || window.datas === undefined) {
                 $(".erroe-span1").show();
                 $(".erroe-span2").hide();
                 $("#error-modal2").modal();
-
-
+                return false
+            } else {
+                //上传数据并数据保存成功
+                ace.ajaxform("/createByExcel", window.datas, function (data) {
+                    if (data.type === 0) {
+                        $("#error-modal").modal();
+                        window.location.href = "people.html";
+                    }
+                });
             }
 
         })

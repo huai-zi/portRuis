@@ -13,18 +13,17 @@
     <link rel="stylesheet" href="stylesheets/css/subject.css">
     <link rel="stylesheet" href="stylesheets/css/course.css">
 </head>
+<style>
+    .progress {
+        display: none;
+    }
+</style>
 <!--[if lt IE 8]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
 
 <body onselectstart="return false">
-<!--点击显示大的图片-->
-<div class="big_da">
-    <i class="fa  fa-close click_close" aria-hidden="true" title="关闭"></i>
-    <img style="width: 50%;"
-         src="" alt="">
-</div>
 <!--记载过程中的loading-->
 <div class="text-center">
 <span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
@@ -94,7 +93,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -198,6 +197,13 @@
             <div class="modal-body">
                 <span id="modal_remove"></span>及其所属检修规划内容都将被删除，且不能再恢复。确定要删除吗？
             </div>
+
+            <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-success" role="progressbar"
+                     aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                     style="width: 100%;">
+                </div>
+            </div>
             <div class="modal-footer">
                 <!--确认删除-->
                 <button type="button" class="btn btn-danger itm_qx" data-dismiss="modal">
@@ -220,16 +226,23 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
+        var modelz = new models();
+
         var options = [
             {"data": "id"},
             {"data": "name"},
-            {"data": "name"},
-            {"data": "position"
+            {"data": "parentName"},
+            {
+                "data": "file"
             },
             {
-                "data": "remarks",
+                "data": "note",
                 "render": function (data, type, full, set) {
-                    return ""
+                    if (full.note === null || full.note === undefined) {
+                        return ""
+                    } else {
+                        return full.note
+                    }
                 }
             },
             {
@@ -241,7 +254,7 @@
             }
         ];
         //点击编辑按钮
-        ace.datatables('model.json', options, [2, 3, 4, 5], function (data) {
+        ace.datatables('/overhaul/read', options, [0, 2, 3, 4, 5], function (data) {
 
             //点击编辑
             var aa1 = '';
@@ -258,52 +271,32 @@
             });
 
             //回掉函数获取加载的数据信息
-
-
             $(".removeShuju").click(function () {
                 window.aa5 = $(this).parent().parent().children().eq(0).text();
                 aa2 = $(this).parent().parent().children().eq(1).text();
                 $("#modal_remove").text(aa2);
                 $("#error-modal").modal();
 
-
             })
 
+        });
+
+        $('.itm_qx').click(function () {
+            var dataset = {
+                "id": window.aa5
+            };
+            modelz.ajaxform("/overhaul/delete", dataset, function (data) {
+                $(".progress-striped").show();
+                modelz.tables(function () {
+                    $(".progress-striped").hide();
+
+                });
+            })
 
         })
 
     });
 
-    $(function () {
-        var modelz = new models();
-//将模态框进行处理
-        var modals = ['lg-modal1', 'info-modal', 'error-modal'];
-        modelz.modtal(modals);
-        //删除传送数据
-        $('.itm_qx').click(function () {
-            var dataset = {
-                "id": window.aa5
-            };
-            console.log(dataset);
-            modelz.ajaxform(url, dataset, function () {
-                modelz.tables();
-            })
-            //取到id,与数据进行对比,加载模态框
-
-        })
-        $('.big_da').click(function () {
-            return false
-        })
-        $('.big_da > img').click(function () {
-            return false
-        })
-        $('.click_close').on('click', function () {
-            $(this).parent().css("display", "none");
-        })
-
-        //编辑模型
-
-    })
 </script>
 </body>
 </html>

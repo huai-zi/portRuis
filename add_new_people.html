@@ -129,7 +129,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -166,12 +166,13 @@
                         <h2>用户管理</h2>
                     </div>
                     <!--中间区域独立模块-->
-                    <form id="forms" enctype="multipart/form-data" name="forms">
-                        <div class="Add_course">
-                            <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>添加用户
-                            </div>
-                            <h3>用户信息</h3>
+                    <div class="Add_course">
+                        <div class="Add_course_head">
+                            <i class="fa fa-ellipsis-v "></i>添加用户
+                        </div>
+                        <h3>用户信息</h3>
+                        <form id="forms" enctype="multipart/form-data" name="forms">
+
                             <div class="container-fluid">
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
@@ -179,10 +180,10 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="text" class="form-control" name="modelName">
+                                        <input type="text" class="form-control" name="number">
 
                                         <span class="password-yanzheng pull-left warm-xinxi"
-                                              style="line-height: 35px;font-size: 16px !important;"><i
+                                              style="line-height: 35px;font-size: 12px !important;"><i
                                                 class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;工号不能为空</span>
                                     </div>
                                 </div>
@@ -192,10 +193,10 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="text" class="form-control" name="modelName">
+                                        <input type="text" class="form-control" name="loginName">
 
-                                        <span class="password-yanzheng pull-left warm-xinxi"
-                                              style="line-height: 35px;font-size: 16px !important;"><i
+                                        <span class="password-yanzheng pull-left warm-xinxi1"
+                                              style="line-height: 35px;font-size: 12px !important;"><i
                                                 class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;用户名不能为空</span>
                                     </div>
                                 </div>
@@ -205,10 +206,10 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="text" class="form-control" name="modelName">
+                                        <input type="text" class="form-control" name="userName">
 
-                                        <span class="password-yanzheng pull-left warm-xinxi"
-                                              style="line-height: 35px;font-size: 16px !important;"><i
+                                        <span class="password-yanzheng pull-left warm-xinxi2"
+                                              style="line-height: 35px;font-size: 12px !important;"><i
                                                 class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;真实姓名不能为空</span>
                                     </div>
                                 </div>
@@ -218,11 +219,8 @@
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="text" class="form-control" name="modelName" value='888888'>
+                                        <input type="text" class="form-control" name="password" value='888888'>
 
-                                        <span class="password-yanzheng pull-left warm-xinxi"
-                                              style="line-height: 35px;font-size: 16px !important;"><i
-                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;真实姓名不能为空</span>
                                     </div>
                                 </div>
                                 <div class="clearfix">
@@ -230,9 +228,9 @@
                                         所属角色
                                     </div>
                                     <div class="col-xs-9">
-                                        <select name="" id="course-select" class="form-control">
-                                            <option value="0">教员</option>
-                                            <option value="1">系统管理员</option>
+                                        <select name="character" class="form-control">
+                                            <option value="0">系统管理员</option>
+                                            <option value="1">教员</option>
                                             <option value="2">学员</option>
 
                                         </select>
@@ -243,9 +241,7 @@
                                         所属部门
                                     </div>
                                     <div class="col-xs-9">
-                                        <select name="" class="form-control">
-                                            <option value="0">培训处</option>
-                                            <option value="1">维修处</option>
+                                        <select name="department" class="form-control" id="course-select">
                                         </select>
                                     </div>
                                 </div>
@@ -255,10 +251,10 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <label>
-                                            <input type="radio" name="sex" checked value="">男
+                                            <input type="radio" name="sex" checked value="1">男
                                         </label><br>
                                         <label>
-                                            <input type="radio" name="sex" value="">女
+                                            <input type="radio" name="sex" value="0">女
                                         </label>
                                     </div>
                                 </div>
@@ -268,10 +264,10 @@
                                     </div>
                                     <div class="col-xs-9">
                                         <label>
-                                            <input type="radio" name="suo" value="">锁定
+                                            <input type="radio" name="lock" value="1" checked>锁定
                                         </label><br>
                                         <label>
-                                            <input type="radio" name="suo" checked value="">解锁
+                                            <input type="radio" name="lock" value="0">解锁
                                         </label>
                                     </div>
                                 </div>
@@ -280,19 +276,47 @@
                                         电话号码
                                     </div>
                                     <div class="col-xs-9">
-                                        <input type="text" class="form-control" name="modelRemark">
+                                        <input type="text" class="form-control" name="email">
                                     </div>
                                 </div>
                             </div>
-                            <div class="Add_course_bottom text-center">
-                                <button type='button' class='btn1 course_bj notazirez'>添加</button>
-                                <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
-                            </div>
+                        </form>
+
+                        <div class="Add_course_bottom text-center">
+                            <button type='button' class='btn1 course_bj notazirez'>添加</button>
+                            <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+        </div>
+    </div>
+</div>
+
+<!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span>信息保存成功</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -311,18 +335,47 @@
         var ace = new main.comm();
         ace.localHref(".removeShuju", "people.html");
         //进行数据上传的封装
+        ace.ajaxGet("/department/read", function (data) {
+            data.unshift({"id": 0, "name": "公司"})
+            $(data).each(function (i, v) {
+                $("#course-select")[0].options[i] = new Option(v.name, v.id);
+            })
+        });
 
     })
     $(function () {
         var mo = new models();
         //点击添加判断
-        $('#notazirez').click(function () {
-            var model = document.forms;
-            //判断内容值,并进行传输
+        $('.notazirez').click(function () {
+            var formas = document.forms;
 
-            mo.numcs(url, "forms", "", function () {
-                window.location.href = "people.html";
-            })
+            //判断内容值,并进行传输
+            if (formas.number.value === "") {
+                $(".warm-xinxi").show();
+                $(".warm-xinxi1").hide();
+                $(".warm-xinxi2").hide();
+                return false
+            } else if (formas.loginName.value === "") {
+                $(".warm-xinxi1").show();
+                $(".warm-xinxi").hide();
+                $(".warm-xinxi2").hide();
+                return false
+
+            } else if (formas.userName.value === "") {
+                $(".warm-xinxi2").show();
+                $(".warm-xinxi1").hide();
+                $(".warm-xinxi").hide();
+                return false
+
+            } else {
+                mo.numcs("/user/create", "forms", "", function (data) {
+                    if (data.type === 0) {
+                        $("#error-modal").modal();
+                        window.location.href = "people.html";
+                    }
+                })
+            }
+
         });
 
     })

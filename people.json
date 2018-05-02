@@ -1,0 +1,38 @@
+[
+  {
+    "id":2,
+    "number":"1234",
+    "loginName":"登陆名称",
+    "userName":"用户名",
+    "character":13,
+    "department":"部门名称",
+    "sex":1,
+    "tel":"323423423",
+    "lock":0,
+    "email ":"123@asds"
+  },
+  {
+    "id":65,
+    "number":"1234",
+    "loginName":"登陆名称",
+    "userName":"用户名",
+    "character":13,
+    "department":"部门名称",
+    "sex":1,
+    "tel":"323423423",
+    "lock":0,
+    "email ":"123@asds"
+  },
+  {
+    "id":344,
+    "number":"1234",
+    "loginName":"登陆名称",
+    "userName":"用户名",
+    "character":13,
+    "department":"部门名称",
+    "sex":1,
+    "tel":"323423423",
+    "lock":0,
+    "email ":"123@asds"
+  }
+]

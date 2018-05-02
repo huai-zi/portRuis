@@ -86,7 +86,8 @@
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
-                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i                        class="fa fa-sign-out log-out"                        aria-hidden="true"></i>注销</a>
+                <a href="login.html" style='display: inline-block;transform:translatey(1px);'><i
+                        class="fa fa-sign-out log-out" aria-hidden="true"></i>注销</a>
             </div>
         </div>
     </div>
@@ -128,7 +129,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -143,7 +144,11 @@
                                     <li><a href=''>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="">                                <a href='pemanage.html'>                                    <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理                                </a>                            </li>                            <li class="">                                <a href=''>                                    <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件                                </a>                            </li>                            <li class="">                                <a href='download.html'>                                    <i class="fa fa-download" aria-hidden="true"></i>软件下载                                </a>                            </li>
+                            <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
+                            </a></li>
+                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
+                            </a></li>
                         </ul>
 
                     </nav>
@@ -161,36 +166,34 @@
                         <h2>部门管理</h2>
                     </div>
                     <!--中间区域独立模块-->
-                    <form id="forms" enctype="multipart/form-data" name="forms">
-                        <div class="Add_course">
-                            <div class="Add_course_head">
-                                <i class="fa fa-ellipsis-v "></i>添加部门
-                            </div>
-                            <h3>部门信息</h3>
+                    <div class="Add_course">
+                        <div class="Add_course_head">
+                            <i class="fa fa-ellipsis-v "></i>添加部门
+                        </div>
+                        <h3>部门信息</h3>
+                        <form id="forms" enctype="multipart/form-data" name="forms">
+
                             <div class="container-fluid">
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
-                                        设备名称
+                                        部门名称
                                     </div>
                                     <div class="col-xs-9">
 
-                                        <input type="text" class="form-control" name="modelName">
+                                        <input type="text" class="form-control" name="name">
 
                                         <span class="password-yanzheng pull-left warm-xinxi"
-                                              style="line-height: 35px;font-size: 16px !important;"><i
-                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;请将空白部分补充完整</span>
+                                              style="line-height: 35px;font-size: 12px !important;"><i
+                                                class="fa fa-info-circle fa-lg"></i>&nbsp;&nbsp;部门名称必须在1-200字符之间</span>
                                     </div>
                                 </div>
 
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
-                                        所属设备
+                                        所属部门
                                     </div>
                                     <div class="col-xs-9">
-                                        <select name="course-select" id="course-select" class="form-control">
-                                            <option value="0">公司</option>
-                                            <option value="1">培训处</option>
-                                            <option value="2">维修处</option>
+                                        <select name="parentId" id="course-select" class="form-control">
 
                                         </select>
                                     </div>
@@ -200,17 +203,18 @@
                                         备注
                                     </div>
                                     <div class="col-xs-9">
-                                        <input type="text" class="form-control" name="modelRemark">
+                                        <input type="text" class="form-control" name="note">
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="Add_course_bottom text-center">
-                                <button type='button' class='btn1 course_bj notazirez'>添加</button>
-                                <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
-                            </div>
+                        </form>
+
+                        <div class="Add_course_bottom text-center">
+                            <button type='button' class='btn1 course_bj notazirez'>添加</button>
+                            <button type='button' class='btn1 course_remove removeShuju'>关闭</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
@@ -218,6 +222,32 @@
     </div>
 </div>
 
+<!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-span1">部门信息已保存</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
@@ -230,22 +260,39 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./section.html");
+        ace.localHref(".removeShuju", "section.html");
+        var datass = [];
+        var forms = document.forms;
 
+        ace.ajaxGet("/department/read", function (data) {
+            var num = 0;
+            data.unshift({"id": 0, "name": "公司"})
+            $(data).each(function (i, v) {
+                $("#course-select")[0].options[num] = new Option(v.name, v.id);
+                num++;
 
-    })
-    $(function () {
+            })
+        })
+
+        //数据判断
         var mo = new models();
         //点击添加判断
-        $('#notazirez').click(function () {
-            mo.selectJc("forms", "warm-xinxi", function () {
-                mo.numcs(url, "forms", "", function () {
+
+        $('.notazirez').click(function () {
+            if (forms.name.value === "") {
+                $(".warm-xinxi").show();
+            } else {
+                mo.numcs("/department/create", "forms", "", function () {
+                    $(".warm-xinxi").hide();
+                    $("#error-modal").modal();
                     window.location.href = "section.html";
                 })
-            });
+            }
+
         });
 
     })
+
 </script>
 </body>
 </html>

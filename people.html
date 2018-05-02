@@ -98,7 +98,7 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href='question-bang.html'>题库管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
                                     <li><a href=''>试卷管理</a></li>
                                 </ul>
                             </li>
@@ -251,21 +251,68 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
+        var modelz = new models();
+        window.localData = [];
+
         var options = [
             {"data": "id"},
-            {"data": "name"},
-            {"data": "position"},
-            {"data": "file"},
-            {"data": "fileStam"},
-            {"data": "fileStam"},
-            {"data": "fileStam"},
-            {"data": "fileStam"},
-            {"data": "fileStam"},
+            {"data": "loginName"},
+            {"data": "userName"},
             {
-                "data": "ramark",
+                "data": "department",
                 "render": function (data, type, full, set) {
-                    /*返回的数据拼接*/
-                    if (full.id === 5) {
+                    switch (data) {
+                        case null:
+                            return "";
+                            break;
+                        default:
+                            return data;
+                    }
+                }
+            },
+            {"data": "number"},
+            {"data": "email"},
+            {"data": "tel"},
+            {
+                "data": "sex",
+                "render": function (data, type, full, set) {
+                    switch (data) {
+                        case 0:
+                            return "女";
+                            break;
+                        case 1:
+                            return "男";
+                            break;
+                        default:
+                            return "";
+                    }
+                }
+            },
+            {
+                "data": "character",
+                "render": function (data, type, full, set) {
+                    switch (data) {
+                        case 0:
+                            return "系统管理员";
+                            break;
+                        case 1:
+                            return "教员";
+                            break;
+                        case 2:
+                            return "学员";
+                            break;
+                        default:
+                            return "";
+                    }
+                }
+            },
+            {
+                "data": "lock",
+                "render": function (data, type, full, set) {
+                    /*返回的数据拼接 0:解锁  1:锁定 */
+                    if (full.character === 0) {
+                        return "";
+                    } else if (data === 0) {
                         return "<button type='button' class='btn1 color_green notazirez ' data-hidd='0'>解锁</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>重置密码</button>"
                     } else {
                         return "<button type='button' class='btn1 color_ora notazirez' data-hidd='1'>锁定</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>重置密码</button>"
@@ -275,85 +322,79 @@
             }
         ];
         //点击编辑按钮
-        ace.datatables('model.json', options, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], function (data) {
+        ace.datatables('/user/read', options, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], function (data) {
+            //遍历出加载的数据
+            $(data.aoData).each(function (i, v) {
+                window.localData.push(v._aData);
+            })
 
+            localStorage.setItem("peoples",JSON.stringify(window.localData));
             //点击编辑
             var aa2 = '';
             var aa5 = '';
 
-            //回掉函数获取加载的数据信息
-
-
+            //重置密码
             $(".removeShuju").click(function () {
 
                 aa5 = $(this).parent().parent().children().eq(0).text();
                 aa2 = $(this).parent().parent().children().eq(1).text();
                 $("#modal_usname").text(aa2);
-                $("#error-modal1").modal();
-                var dataset = {
-                    "id": aa5
-                }
-                console.log(dataset);
+                var shu = ace.regex("id", aa5, window.localData);
 
-                ace.ajaxPost(url, dataset)
+                shu.password = "888888";
+                var dataset = shu;
+
+                ace.ajaxPost("/user/update", dataset, function (data) {
+                    if (data.type === 0) {
+                        $("#error-modal1").modal();
+
+                    }
+                })
             })
 
+            var aa1 = '';
+            //锁定与解锁
+            $('.notazirez').on('click', function () {
+                var that = $(this);
+                aa1 = $(this).parent().parent().children().eq(0).text();
+                var shu = ace.regex("id", aa1, window.localData);
 
-        })
+                if ($(this).attr('data-hidd') === "0") {
+                    shu.lock = 1
+                } else {
+                    shu.lock = 0
+                }
+                var dataset = shu;
+                mo.ajaxform("/user/update", dataset, function (data) {
+                    if (data.type === 0) {
+                        if (that.attr('data-hidd') === "0") {
+                            that.removeClass("color_green");
+                            that.addClass("color_ora");
+                            that.text("锁定");
+                            that.attr("data-hidd", "1");
+                            $("#modal_removeS").show();
+                            $("#modal_remove").hide();
 
-    });
+                        } else if (that.attr('data-hidd') === "1") {
+                            that.removeClass("color_ora");
+                            that.addClass("color_green");
+                            that.text("解锁");
+                            that.attr("data-hidd", "0");
+                            $("#modal_removeS").hide();
+                            $("#modal_remove").show();
 
-    $(function () {
-        var modelz = new models();
-//将模态框进行处理
-        var modals = ['lg-modal1', 'info-modal', 'error-modal'];
-        modelz.modtal(modals);
-        //删除传送数据
-        var aa1 = '';
+                        }
+                        $("#error-modal").modal();
+                    }
+                });
 
-        $(document).on('click', '.notazirez', function () {
-            var that = $(this);
-            aa1 = $(this).parent().parent().children().eq(0).text();
-            var dataset = {
-                "id": aa1
-            }
-            console.log(dataset);
-            mo.ajaxform(url, dataset)
-            console.log($(this).attr('data-hidd'));
-            if ($(this).attr('data-hidd') === "0") {
-                that.removeClass("color_green");
-                that.addClass("color_ora");
-                that.text("锁定");
-                that.attr("data-hidd", "1");
-                $("#modal_removeS").show();
-                $("#modal_remove").hide();
 
-            } else if ($(this).attr('data-hidd') === "1") {
-                that.removeClass("color_ora");
-                that.addClass("color_green");
-                that.text("解锁");
-                that.attr("data-hidd", "0");
-                $("#modal_removeS").hide();
-                $("#modal_remove").show();
-
-            }
-            $("#error-modal").modal();
+            });
 
         });
 
-        $('.big_da').click(function () {
-            return false
-        })
-        $('.big_da > img').click(function () {
-            return false
-        })
-        $('.click_close').on('click', function () {
-            $(this).parent().css("display", "none");
-        })
+    });
 
-        //编辑模型
-
-    })
 </script>
 </body>
 </html>
