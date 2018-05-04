@@ -58,7 +58,7 @@
             <div class="header-middle"></div>
             <!-- 红点信息 -->
             <div class="header-section">
-                <a href="">你好,吴亮!</a>
+                <a href="" class="usname_local" onload="loginas()">你好</a>
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
@@ -122,7 +122,7 @@
                             </li>
                             <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
                             </a></li>
-                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='admin_clear.html'> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
                             <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
                             </a></li>
                         </ul>
@@ -272,106 +272,64 @@
             $(this).parent().slideUp();
         });
 
-
-        var options = [
-            {"data": "id"},
-            {"data": "machineName"},
-            {"data": "courseName"},
-            {"data": "name"},
-            {"data": "createDate"},
+        var ss = [
             {
-                "data": "remarks",
-                "render": function (data, type, full, set) {
-                    /*返回的数据拼接*/
-                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
+                "name": 111,
+                "id": 5654,
+                "node": 999
+            }
+        ]
+        var options = [
+            {"data": "name"},
+            {"data": "id"},
+            {
+                "data": "node",
+                "render":function(){
+                    return "<span class='fixed'>qwdw</span>"
                 }
+
             }
         ];
         window.aa5 = '';
         window.tre = "";
         ace.select_curriculum.on('change', function () {
-
-            ace.datatables('test.json', options, [2, 3, 4, 5], function (data) {
-
-                //点击编辑
-                var aa1 = '';
-                var aa2 = '';
-                window.aa5 = '';
-                $('.notazirez').click(function () {
-                    aa1 = $(this).parent().parent().children().eq(0).text();
-                    $(data.aoData).each(function (i, v) {
-                        if (+aa1 === v._aData.id) {
-                            localStorage.setItem("tests", JSON.stringify(v._aData));
-                        }
-                    })
-                    window.location.href = "amend_test.html"
-                });
-
-                //回掉函数获取加载的数据信息
-
-                $(".removeShuju").click(function () {
-                    window.aa5 = $(this).parent().parent().children().eq(0).text();
-                    aa2 = $(this).parent().parent().children().eq(1).text();
-                    $("#modal_remove").text(aa2);
-                    $("#error-modal").modal();
-                    window.tre = $(this).parent().parent()[0];
-
+            mo.datatables(ss, options, [0], function (data) {
+                $(".fixed").click(function(){
+                    console.log(22);
                 })
-
             });
         });
 
+        $("#facility").on("change", function () {
 
-        //课程变化
-        ace.select_curriculum.on('change', function () {
-            var that = $(this);
-            var val = that.val();
-            var dataset = {
-                "id": val
-            };
-            //数据重新加载
-            if (val === '') {
-                $("#section-foot").show();
-                $("#basic-table").hide();
-                $("#basic-table_wrapper").hide();
-                $(".section-foot").show();
-            } else {
-                mo.tables();
-                $("#basic-table").show();
-                $("#basic-table_wrapper").show();
-                $(".section-foot").hide();
-            }
+            ace.datatables("ceshi.json", options, [0], function (data) {
 
-            ace.ajaxPost(url, dataset, function (data) {
-                //加载到页面上
-                if (data === '') {
-
-                }
-
-            });
-        });
-
-        //确认删除
-        $('.itm_qx').click(function () {
-            var dataset = {
-                "id": window.aa5
-            };
-            $(".progress").show();
-
-            $(".progress").hide();
-            var table = $('.data-table').DataTable();
-            table.row(window.tre).remove().draw();
-            $("#error-modal2").modal()
-
-            //取到id,与数据进行对比,加载模态框
-            setTimeout(function(){
-                $("#error-modal2").modal("hide")
-
-            },2000)
+            })
         })
-
+        var sss = [
+            {
+                "name": 111,
+                "id": 5654,
+                "node": 999
+            },
+            {
+                "name": 111,
+                "id": 5654,
+                "node": 999
+            },
+            {
+                "name": 111,
+                "id": 5654,
+                "node": 999
+            }
+        ]
+//数据需要清空再进行加载,否则加载不上
         $("#test_button").click(function () {
 
+            mo.localUp(sss);
+//            mo.datatables(sss, options, [0], function (data) {
+//
+//            });
 
         })
 

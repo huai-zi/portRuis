@@ -95,6 +95,7 @@
                     if (data.type === 1) {
                         $('.password-cuowu').show();
                     } else {
+                        localStorage.setItem("login",JSON.stringify(data));
                         window.location.href = "section.html";
                     }
                 }

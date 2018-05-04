@@ -27,6 +27,10 @@
     #basic-table_length, #basic-table_filter {
         display: none;
     }
+
+    .section-foot {
+        display: none;
+    }
 </style>
 <!--[if lt IE 8]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
@@ -56,12 +60,12 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" title='模型浏览'>模型浏览</a></li>
-                <li><a href="#" title='考核培训'>考核培训</a></li>
-                <li><a href="#" title='检修规划'>检修规划</a></li>
-                <li><a href="#" title='你好'>你好,吴亮!</a></li>
-                <li><a href="#" title='通知'><i class="fa fa-bell"></i></a></li>
-                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+                <li><a href="stu_model_read.html" title='模型浏览'>模型浏览</a></li>
+                <li><a class="selects_top" href="oeinsder.html" title='考核培训'>考核培训</a></li>
+                <li><a href="stu_xiu.html" title='检修规划'>检修规划</a></li>
+                <li><a href="stu_usname.html" title='你好' class="usname_local" onload="loginas()">你好</a></li>
+                <li><a href="stu_student.html" title='通知'><i class="fa fa-bell"></i></a></li>
+                <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
     </div>
@@ -71,10 +75,10 @@
     <div>
         <div class="container-fluid banner-fal">
             <ul class="banner_top clearfix">
-                <li><a title="课程学习" href="oeinsder.html">课程学习</a></li>
-                <li><a href="onile.html" title='在线考试'>在线考试</a></li>
-                <li><a href="" class="select" title='模拟考试'>模拟考试</a></li>
-                <li><a href="" title='成绩查看'>成绩查看</a></li>
+                <li><a href="oeinsder.html" title="课程学习">课程学习</a></li>
+                <li><a href="stu_student.html" title='在线考试'>在线考试</a></li>
+                <li><a href="stu_moni_test.html" class="select" title='模拟考试'>模拟考试</a></li>
+                <li><a href="stu_history_test.html" title='成绩查看'>成绩查看</a></li>
                 <li class="pull-right"><a href="stu_download.html" title='软件下载'>软件下载</a></li>
             </ul>
         </div>
@@ -89,7 +93,7 @@
                     <div class="section-body clearfix">
                         <!--主体结构-->
                         <div>
-                            模拟试卷
+                            设备
                             <select name="" id="facility">
                                 <option value="">请选择设备</option>
                                 <option value="1">爆破阀</option>
@@ -201,107 +205,174 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
+        var mo = new models();
         //隐藏栏目
         ace.select_but.click(function () {
             $(this).parent().slideUp();
         });
 
-        //对数据进行
-        ace.ajaxGet('tables.json', function (data) {
-            ace.select_facility[0].options[0] = new Option('请选择设备', '')
+        var fac = [];
+        var course = [];
+        var cz = [];
+        ace.ajaxGet("/course/read", function (data) {
+            //加载设备id渲染在下拉框
             $(data).each(function (i, v) {
-                ace.select_facility[0].options[i + 1] = new Option(v.name, v.id);
-            })
-        });
-
-        //设备变化
-        var mo = new models();
-        ace.select_facility.on('change', function () {
-            var that = $(this);
-            var val = that.val();
-            if (val === '') {
-
-            } else {
-                var dataset = {
-                    "id": val
+                if (v.parentId === 0) {
+                    fac.push(v);
+                } else {
+                    //课程数据
+                    course.push(v);
                 }
-                ace.ajaxPost(url, dataset, function (data) {
+            });
+            //增加设备
+            ace.select_facility[0].options[0] = new Option('请选择设备', '')
+            $(fac).each(function (i, v) {
+                ace.select_facility[0].options[i + 1] = new Option(v.name, v.id);
+            });
 
-                    ace.select_curriculum[0].options[0] = new Option('请选择相应的课程', '')
-                    if (data === "") {
 
-                    } else {
-                        //增加相应课程类目
-                        $(data).each(function (i, v) {
-                            ace.select_curriculum[0].options[i + 1] = new Option(v.name, v.id);
-                        })
-                    }
-
-                })
-            }
+            //设备变化
+            ace.select_facility.on('change', function () {
+                var that = $(this);
+                //设备id
+                var val = that.val();
+                if (val === '') {
+                    ace.select_curriculum[0].options[0] = new Option('请选择课程', '');
+                } else {
+                    $(course).each(function (i, v) {
+                        //判断设备在课程的parent里面的位置并进行数据重组
+                        if (+val === v.parentId) {
+                            cz.push(v);
+                        }
+                    })
+                    ace.select_curriculum[0].options[0] = new Option('请选择课程', '')
+                    //增加相应课程类目
+                    $(cz).each(function (i, v) {
+                        ace.select_curriculum[0].options[i + 1] = new Option(v.name, v.id);
+                    });
+                }
+                cz = [];
+            })
         })
-        //课程变化
 
+
+        //课程变化
         var options = [
             {"data": "id"},
             {"data": "name"},
-            {"data": "name"},
-            {"data": "name"},
-            {"data": "name"},
             {
-                "data": "position"
-            },
-            {
-                "data": "remarks",
+                "data": "name",
                 "render": function (data, type, full, set) {
-                    return "2017-05-19 11:11"
+                    var logins = JSON.parse(localStorage.getItem("login"));
+                    var a = logins.name;
+                    return a;
                 }
             },
             {
-                "data": "remarks",
+                "data": "operationScore",
+                "render": function (data, type, full, set) {
+                    if (data === 0) {
+                        return ""
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            {
+                "data": "chooseScore",
+                "render": function (data, type, full, set) {
+                    if (data === 0) {
+                        return ""
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            {
+                "data": "drawTime",
+                "render": function (data, type, full, set) {
+                    if (data === null) {
+                        return ""
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            {
+                "data": "submitTime",
+                "render": function (data, type, full, set) {
+                    if (data === null) {
+                        return ""
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            {
+                "data": "",
                 "render": function (data, type, full, set) {
                     /*返回的数据拼接*/
-                    return "<button type='button' class='btn1 course_bj notazirez'>开始考试</button>"
+                    if (data ===) {
+                        return "<button type='button' class='btn1 course_bj notazirez'>开始考试</button>"
+
+                    } else {
+                        return false
+                    }
                 }
             }
         ];
-
-        ace.datatables('model.json', options, [2, 3, 4, 5], function (data) {
-
-            //点击编辑
-            var aa1 = '';
-            var aa2 = '';
-            window.aa5 = '';
-            $('.notazirez').click(function () {
-                aa1 = $(this).parent().parent().children().eq(0).text();
-                $(data.aoData).each(function (i, v) {
-                    if (+aa1 === v._aData.id) {
-                        localStorage.setItem("onlies", JSON.stringify(aa1));
-                    }
-                })
-                window.location.href = "stu_moni_ceshi.html"
+        ace.ajaxGet("/paper/tests", function (data) {
+            var paperId = [];
+            $(data).each(function (i, v) {
+                //模拟试卷
+                if (v.paperType === 2) {
+                    paperId.push(v);
+                }
             });
+            if (paperId.length === 0) {
+                $("#basic-table").hide();
+                $("#basic-table_wrapper").hide();
+                $(".section-foot").show();
+                return false
+            } else {
+                mo.datatables(paperId, options, [2, 3, 4, 5], function (data) {
 
-            //回掉函数获取加载的数据信息
+                    //点击编辑
+                    var aa1 = '';
+                    var aa2 = '';
+                    window.aa5 = '';
+                    //开始考试
+                    $('.notazirez').click(function () {
+                        aa1 = $(this).parent().parent().children().eq(0).text();
+                        $(data.aoData).each(function (i, v) {
+                            if (+aa1 === v._aData.id) {
+                                localStorage.setItem("moniOnlies", JSON.stringify(aa1));
+                            }
+                        })
+                        window.location.href = "stu_moni_ceshi.html"
+                    });
 
-            $(".removeShuju").click(function () {
-                window.aa5 = $(this).parent().parent().children().eq(0).text();
-                aa2 = $(this).parent().parent().children().eq(1).text();
-                $("#modal_remove").text(aa2);
-                $("#error-modal").modal();
-            })
 
-        });
+                });
+            }
 
+
+        })
+
+        //课程进行数据变化
         ace.select_curriculum.on('change', function () {
             var that = $(this);
             var val = that.val();
+
             var dataset = {
                 "id": val
             };
+            //根据课程id查询当前模拟试卷
             //数据重新加载
+            ace.ajaxPost("/questions/readByName", dataset, function (data) {
+
+            })
             if (val === '') {
-                $("#section-foot").show();
                 $("#basic-table").hide();
                 $("#basic-table_wrapper").hide();
                 $(".section-foot").show();
@@ -321,19 +392,6 @@
             });
         });
 
-        $('.itm_qx').click(function () {
-            var dataset = {
-                "id": window.aa5
-            };
-            console.log(dataset);
-            modelz.ajaxform(url, dataset, function () {
-                modelz.tables();
-            })
-            //取到id,与数据进行对比,加载模态框
-
-        })
-        var modals = ['error-modal', 'error-modal2'];
-        mo.modtal(modals);
 
         $("#test_button").click(function () {
             var facility = $("#facility").val();
@@ -342,15 +400,20 @@
                 $('#error-modal2').modal();
 
             } else {
-
                 var dataset = {
-                    "facility": facility,
-                    "facilityT": $("#facility  option:selected").text(),
-                    "course": course,
-                    "courseT": $("#curriculum  option:selected").text(),
+                    "id": course
                 }
-//                localStorage.setItem("test", JSON.stringify(dataset));
-                window.location.href = "add_test.html";
+                ace.ajaxPost("/paper/draw", dataset, function (data) {
+                    if (data.type === 0) {
+                        location.href = "";
+                    } else {
+                        $(".section-foot").show();
+                        $("#basic-table").hide();
+                        $("#basic-table_wrapper").hide();
+                        $("#error-modal").modal();
+                    }
+                })
+
             }
 
         })

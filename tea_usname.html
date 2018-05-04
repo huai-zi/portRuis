@@ -119,6 +119,7 @@
         transform: translatey(3px);
         margin-left: 20px;
     }
+
     input[type="text"] {
         font-weight: 100;
     }
@@ -147,7 +148,8 @@
     .section {
         margin-top: 20px !important;
     }
-    .progress-striped{
+
+    .progress-striped {
         display: none;
     }
 </style>
@@ -179,12 +181,12 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" title='模型浏览'>模型浏览</a></li>
-                <li><a href="#" title='考核培训'>考核培训</a></li>
-                <li><a href="#" title='检修规划'>检修规划</a></li>
-                <li><a class="selects_top" href="#" title='你好'>你好,吴亮!</a></li>
-                <li class="acee"><a href="#" title='通知'><i class="fa fa-bell"></i></a></li>
-                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+                <li><a href="tea_model_read.html" title='模型浏览'>模型浏览</a></li>
+                <li><a href="tea_send.html" title='考核培训'>考核培训</a></li>
+                <li><a href="tea_xiu.html" title='检修规划'>检修规划</a></li>
+                <li><a href="tea_usname.html" class="selects_top" title='你好' class="usname_local"
+                       onload="loginas()">你好</a></li>
+                <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
     </div>
@@ -194,12 +196,11 @@
     <div>
         <div class="container-fluid banner-fal">
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation"><a href="#">试卷发放</a></li>
-                <li role="presentation"><a href="#">试卷管理</a></li>
-                <li role="presentation"><a href="#">模拟试卷</a></li>
-                <li role="presentation"><a href="#">成绩管理</a></li>
-                <li role="presentation"><a href="#">软件下载</a></li>
-
+                <li role="presentation"><a href="tea_send.html">试卷发放</a></li>
+                <li role="presentation"><a href="tea_section.html">试卷管理</a></li>
+                <li role="presentation"><a href="tea_moni_test.html">模拟试卷</a></li>
+                <li role="presentation"><a href="tea_score.html">成绩管理</a></li>
+                <li role="presentation"><a href="tea_download.html">软件下载</a></li>
             </ul>
         </div>
         <div class="peinsder-box">
@@ -209,12 +210,13 @@
             <div class="section animated fadeInRight">
 
                 <!--中间区域独立模块-->
-                <form id="forms" enctype="multipart/form-data" name="forms">
-                    <div class="Add_course">
-                        <div class="Add_course_head">
-                            <i class="fa fa-ellipsis-v "></i>更新账号信息
-                        </div>
-                        <h5>账号信息</h5>
+                <div class="Add_course">
+                    <div class="Add_course_head">
+                        <i class="fa fa-ellipsis-v "></i>更新账号信息
+                    </div>
+                    <h5>账号信息</h5>
+                    <form id="forms" enctype="multipart/form-data" name="forms">
+
                         <div class="container-fluid">
                             <div class="clearfix">
                                 <div class="col-xs-3 text-right">
@@ -222,7 +224,8 @@
                                 </div>
                                 <div class="col-xs-9">
 
-                                    <input type="text" class="form-control" readonly name="modelName" value="asdsa">
+                                    <input type="text" id="loginNames" class="form-control" readonly disabled
+                                           name="loginName" value="">
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -231,7 +234,8 @@
                                 </div>
                                 <div class="col-xs-9">
 
-                                    <input type="text" class="form-control" readonly name="modelName" value="asdsa">
+                                    <input type="text" class="form-control" readonly disabled id="userNames"
+                                           name="userName" value="">
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -240,7 +244,8 @@
                                 </div>
                                 <div class="col-xs-9">
 
-                                    <input type="text" class="form-control" readonly name="modelName" value="112001">
+                                    <input type="text" class="form-control" readonly disabled name="number" id="numbers"
+                                           value="">
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -249,7 +254,7 @@
                                 </div>
                                 <div class="col-xs-9">
 
-                                    <input type="text" class="form-control" name="modelName" value="huauzu@qq.com">
+                                    <input type="text" class="form-control" name="email" id="emails" value="">
                                 </div>
                             </div>
                             <div class="clearfix">
@@ -258,25 +263,27 @@
                                 </div>
                                 <div class="col-xs-9">
 
-                                    <input type="text" class="form-control" name="modelName" value="huauzu@qq.com">
+                                    <input type="text" class="form-control" name="tel" id="tels" value="">
                                 </div>
                             </div>
                             <div class="clearfix">
                                 <div class="col-xs-3 text-right">
                                     性别
                                 </div>
-                                <div class="col-xs-9">
+                                <div class="col-xs-9" id="sexs">
                                     <label>
-                                        <input type="radio" name="sex" checked>男
+                                        <input type="radio" name="sex" id="sexs1" value="1">男
                                     </label> <br>
                                     <label>
-                                        <input type="radio" name="sex">女
+                                        <input type="radio" name="sex" id="sexs0" value="0">女
                                     </label>
                                 </div>
                             </div>
 
 
                         </div>
+                        <input type="hidden" id="passwords" value="" name="password">
+                        <input type="hidden" id="ids" value="" name="id">
                         <div class="clearfix">
                             <div class="progress progress-striped active">
                                 <div class="progress-bar progress-bar-success" role="progressbar"
@@ -286,25 +293,85 @@
                             </div>
 
                         </div>
-                        <div class="Add_course_bottom text-center">
-                            <button type='button' class='btn1 course_bj notazirez'>保存</button>
-                            <button type='button' class='btn1 color_ql removeShuju'>修改密码</button>
-                        </div>
+                    </form>
+
+                    <div class="Add_course_bottom text-center">
+                        <button type='button' class='btn1 course_bj notazirez'>保存</button>
+                        <button type='button' class='btn1 color_ql removeShuju'>修改密码</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<!--培训提示信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-span1">信息保存成功</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--向上按钮-->
 <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
 </body>
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src='javascripts/peinsder.js'></script>
+<script src="javascripts/sea.js"></script>
+<script src="javascripts/course.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $('.navbar-nav li:nth-child(5).acee::after').css("content", "77 !important");
+    seajs.use('./javascript/common.js', function (main) {
+        var ace = new main.comm();
+        var mo = new models();
+        var logins = JSON.parse(localStorage.getItem("login"));
+
+        ace.ajaxGet("/user/read", function (data) {
+            var sxid = ace.regex("id", logins.id, data);
+            localStorage.setItem('amendPassword', JSON.stringify(sxid));
+            $("#ids").val(sxid.id);
+            $("#passwords").val(sxid.password);
+            $("#loginNames").val(sxid.loginName);
+            $("#userNames").val(sxid.userName);
+            $("#numbers").val(sxid.number);
+            $("#emails").val(sxid.email);
+            $("#tels").val(sxid.tel);
+            if (sxid.sex === 0) {
+                $("#sexs0").prop('checked', true);
+            } else {
+                $("#sexs1").prop('checked', true);
+            }
+        })
+        //数据保存
+        $(".notazirez").click(function () {
+            mo.numcs("/user/update", "forms", "", function (data) {
+                if (data.type === 0) {
+                    $("#error-modal").modal();
+                    window.location.href = "tea_send.html";
+                }
+            })
+        })
     })
 </script>
 </html>

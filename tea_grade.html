@@ -164,7 +164,7 @@
     .no_pei {
         border-color: #028097 !important;
         overflow-x: hidden;
-        min-height: auto !important;
+        min-height: inherit !important;
         background-color: #fff;
     }
 
@@ -205,7 +205,7 @@
         background-color: #f5f5f5 !important;
     }
 
-    .error-span1, error-span2 {
+    .error-span2 {
         display: none;
     }
 
@@ -272,11 +272,11 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" title='模型浏览'>模型浏览</a></li>
-                <li><a href="#" title='考核培训'>考核培训</a></li>
-                <li><a href="#" title='检修规划'>检修规划</a></li>
-                <li><a href="#" title='你好'>你好,吴亮!</a></li>
-                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+                <li><a href="tea_model_read.html" title='模型浏览'>模型浏览</a></li>
+                <li><a href="tea_send.html" class="selects_top" title='考核培训'>考核培训</a></li>
+                <li><a href="tea_xiu.html" title='检修规划'>检修规划</a></li>
+                <li><a href="tea_usname.html" title='你好' class="usname_local" onload="loginas()">你好</a></li>
+                <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
     </div>
@@ -286,11 +286,11 @@
     <div>
         <div class="container-fluid banner-fal">
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation"><a href="#">试卷发放</a></li>
-                <li role="presentation"><a href="#">试卷管理</a></li>
-                <li role="presentation"><a href="#">模拟试卷</a></li>
-                <li role="presentation" class="active"><a href="#">成绩管理</a></li>
-                <li role="presentation"><a href="#">软件下载</a></li>
+                <li role="presentation"><a href="tea_send.html">试卷发放</a></li>
+                <li role="presentation"><a href="tea_section.html">试卷管理</a></li>
+                <li role="presentation"><a href="tea_moni_test.html">模拟试卷</a></li>
+                <li role="presentation" class="active"><a href="tea_score.html">成绩管理</a></li>
+                <li role="presentation"><a href="tea_download.html">软件下载</a></li>
 
             </ul>
         </div>
@@ -319,11 +319,11 @@
                                 考卷
                             </div>
                             <div style="margin-top:30px ;border-bottom: 1px solid #e7eaec;margin-bottom: 25px;">
-                                课程:<input type="text" style="display: inline-block
+                                课程:<input type="text" id="coursed" style="display: inline-block
 " disabled=true>
-                                试卷:<input type="text" style="display: inline-block
+                                试卷:<input type="text" id="tests" style="display: inline-block
 " disabled=true>
-                                学员:<input type="text" style="display: inline-block
+                                学员:<input type="text" id="students" style="display: inline-block
 " disabled=true>
                                 <span id="aheadFinish" class="btn warning-btn"
                                       style="background-color: #f8ac59;color: #fff;">提交</span>
@@ -364,7 +364,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <span class="error-span1">需要先选择正确备选项</span>
+                <span>请将问答题分数填写完整再提交</span>
             </div>
             <div class="modal-footer">
                 <!--确认删除-->
@@ -425,7 +425,7 @@
                 题型
             </div>
             <div class="col-xs-10">
-                <input type="text" class="form-control" readonly value="{{value.title}}">
+                <input type="text" class="form-control" readonly disabled value="问答题">
             </div>
         </div>
         <div class="clearfix">
@@ -433,7 +433,7 @@
                 所属课程
             </div>
             <div class="col-xs-10">
-                <span> {{value.title}}</span>
+                <span> {{value.courseName}}</span>
             </div>
         </div>
         <div class="clearfix">
@@ -446,90 +446,6 @@
 
             </div>
         </div>
-        {{if value.type === 0}}
-        <!--单选题-->
-
-
-        <div class="clearfix">
-            <div class="col-xs-2 text-right">
-                备选答案
-            </div>
-            <div class="col-xs-10">
-                <label>
-                    <input type="radio" disabled="true">A、{{value.title}}
-                </label>
-            </div>
-
-            <div class="col-xs-2 text-right">
-            </div>
-            <div class="col-xs-10">
-                <label>
-                    <input type="radio" disabled="true">A、{{value.title}}
-                </label>
-            </div>
-
-            <div class="col-xs-2 text-right">
-            </div>
-            <div class="col-xs-10">
-                <label>
-                    <input type="radio" disabled="true">A、{{value.title}}
-                </label>
-            </div>
-        </div>
-        <div class="clearfix">
-            <div class="col-xs-2 text-right">
-                学员回答
-            </div>
-            <div class="col-xs-10">
-                <input type="text" class="form-control" value="{{value.title}} " readonly>
-
-            </div>
-        </div>
-        <div class="clearfix">
-            <div class="col-xs-2 text-right">
-                得分
-            </div>
-            <div class="col-xs-10">
-                <input type="text" class="form-control" readonly value="{{value.title}}">
-            </div>
-        </div>
-        {{/if}}
-        {{ if value.type=== 1}}
-        <!--操作题-->
-        <div class="clearfix">
-            <div class="col-xs-2 text-right">
-                题目序号
-            </div>
-            <div class="col-xs-10">
-                <input type="text" class="form-control" readonly value="{{value.title}}">
-            </div>
-        </div>
-        <div class="clearfix">
-            <div class="col-xs-2 text-right">
-                操作步骤
-            </div>
-            <div class="col-xs-10">
-                <textarea name="" class="form-control" readonly cols="30" rows="5">{{value.title}}</textarea>
-            </div>
-        </div>
-        <div class="clearfix">
-            <div class="col-xs-2 text-right">
-                学员回答
-            </div>
-            <div class="col-xs-10">
-                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly cols="30"
-                          rows="7">第{{index+1}}步：{{value.title}}</textarea>
-            </div>
-        </div>
-        <div class="clearfix">
-            <div class="col-xs-2 text-right">
-                得分
-            </div>
-            <div class="col-xs-10">
-                <input type="text" class="form-control" readonly value="{{value.title}}">
-            </div>
-        </div>
-        {{/if}}
         {{ if value.type=== 2}}
         <!--问答题-->
         <div class="clearfix">
@@ -537,7 +453,7 @@
                 题目图像
             </div>
             <div class="col-xs-10">
-                <img src="" alt="没有指定图像">
+                <img src="{{value.image}}" style="width: 300px;" alt="没有指定图像">
             </div>
         </div>
         <div class="clearfix">
@@ -545,8 +461,9 @@
                 学员回答
             </div>
             <div class="col-xs-10">
-                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly cols="30"
-                          rows="7">{{value.title}}</textarea>
+                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly disabled
+                          cols="30"
+                          rows="7">{{value.studentAnswer[0]}}</textarea>
             </div>
         </div>
         <div class="clearfix">
@@ -554,7 +471,7 @@
                 得分
             </div>
             <div class="col-xs-10">
-                <input type="number" class="form-control" max=10 min=0 value="{{value.title}}">
+                <input type="number" class="form-control numFen" max=10 min=0 value="{{value.score}}">
             </div>
         </div>
         {{/if}}
@@ -572,6 +489,13 @@
 </script>
 <script type="text/javascript">
     $(function () {
+
+        var aa4 = JSON.parse(localStorage.getItem('lookGrade'));
+        $("#coursed").val(aa4.courseName);
+        $("#tests").val(aa4.name);
+        $("#students").val(aa4.usname);
+        $("#hidden_id").val(aa4.testId);//试卷id
+
         var modealz = new models();
         $("#aheadFinish").click(function () {
             $(".error-span2").show();
@@ -579,9 +503,6 @@
             $(".error-span1").hide();
             $('#error-modal').modal();
         })
-        $("#buttons").click(function () {
-            console.log(22);
-        });
 
 
     })

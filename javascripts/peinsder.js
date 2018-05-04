@@ -56,17 +56,33 @@ var PE = (function () {
                 url: url,
                 type: "get",
                 success: function (data) {
+
+                    var fac = [];
+                    var fac1 = [];
+                    //对特殊数据进行处理,双重身份
+                    $(data).each(function (i, v) {
+                        if (v.parentId !== 0) {
+                            fac.push(v);//课程
+                        }else{
+                            //为0的是设备
+                            fac1.push(v);
+
+                        }
+                    })
+                    //将设备进行保存
+                    localStorage.setItem("kecheng",JSON.stringify(fac));
+
                     //将数据进行渲染到页面上
                     var num1 = 0;
                     /*点击切换页数数据的更新*/
                     var num2 = 12;
                     var zong = '';
                     /*记录数据的总页数*/
-                    PE1.prototype.addPage(data, num1, num2, 1, id);
-                    zong = data.length;
+                    PE1.prototype.addPage(fac1, num1, num2, 1, id);
+                    zong = fac1.length;
                     zong = parseInt(zong / 12) + 1;
                     /*分页按钮*/
-                    PE1.prototype.fen(data, num1, num2, zong, 1, id);
+                    PE1.prototype.fen(fac1, num1, num2, zong, 1, id);
 
                 }
             })
@@ -119,19 +135,25 @@ var PE = (function () {
 
         $('.peinsder-imgas').on("click", function () {
             var dataVal = $(this).attr('old');
-            var dataset = {
-                "id": dataVal
-            };
+            var dataset = [];
             //点击传送id,并接收返回的值
-            pe.ajaxPost("peinsder1.json", dataset, function (data) {
-                //接收返回的json
-                pe.templates("", data, id);
+            //不需要传值,直接进行遍历筛选
+
+            var kecheng = JSON.parse(localStorage.getItem("kecheng"));
+            $(kecheng).each(function(i,v){
+                if(+dataVal === v.parentId ){
+                    dataset.push(v);
+                }
             })
+
+                //接收返回的json
+            pe.templates("", dataset, id);
 
         })
         $('.peinsder-imgas1').on("click", function () {
             var hash = $(this).attr('zips');
-            window.location.href = 'peinsder.html' + "#" + hash
+            var url = 'peinsder.html' + "#" + hash;
+            window.open(url,"_blank");
         })
     }
 

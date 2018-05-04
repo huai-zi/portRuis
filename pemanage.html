@@ -116,12 +116,12 @@
                 <div class="nano-content" style="right: 0 !important;">
                     <nav>
                         <ul class="nav" id="main-nav">
-                            <li class="">
+                            <li>
                                 <a href='section.html'>
                                     <i class="fa fa-university" aria-hidden="true"></i>部门管理
                                 </a>
                             </li>
-                            <li class="">
+                            <li  class="">
                                 <a href='facility.html'>
                                     <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
                                 </a>
@@ -137,18 +137,18 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href=''>
+                                <a href='project.html'>
                                     <i class="fa fa-wrench" aria-hidden="true"></i>检修规划管理
                                 </a>
                             </li>
-                            <li class=" has-child-item close-item">
-                                <a>
+                            <li class=" has-child-item close-">
+                                <a >
                                     <i class='fa fa-bar-chart' aria-hidden="true"></i>
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
                                     <li><a href='question_bang.html'>题库管理</a></li>
-                                    <li><a href=''>试卷管理</a></li>
+                                    <li><a href='test.html'>试卷管理</a></li>
                                 </ul>
                             </li>
                             <li class=" has-child-item close-item">
@@ -157,17 +157,15 @@
                                     <span>员工管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href=''>账号管理</a></li>
-                                    <li><a href=''>所属部门</a></li>
-                                    <li><a href=''>所属角色</a></li>
+                                    <li><a href='people.html'>账号管理</a></li>
+                                    <li><a href='add_people_select.html'>所属部门</a></li>
+                                    <li><a href='add_people_student.html'>所属角色</a></li>
                                 </ul>
                             </li>
-                            <li class="active-item"><a href='pemanage.html'> <i class="fa fa-edit"
-                                                                                aria-hidden="true"></i>PEInside管理
+                            <li class="active-item"><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
                             </a></li>
-                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
-                            <li class=""><a href='download.html'> <i class="fa fa-download"
-                                                                     aria-hidden="true"></i>软件下载
+                            <li class=""><a href='admin_clear.html'> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
                             </a></li>
                         </ul>
 
@@ -199,7 +197,7 @@
                                     </div>
                                     <div class="col-xs-10">
 
-                                        <input type="text" class="form-control" name="id" id="ids" readonly value="">
+                                        <input type="text" class="form-control" name="id" id="ids" readonly  disabled value="">
 
                                     </div>
                                 </div>
@@ -212,7 +210,7 @@
                                     <div class="col-xs-10">
 
                                         <input type="text" class="form-control" name="document" id="documents"
-                                               readonly value="/uploadFile/201707171147.exe">
+                                               readonly  disabled value="/uploadFile/201707171147.exe">
 
                                     </div>
                                 </div>
@@ -250,7 +248,7 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref(".removeShuju", "./section.html");
+        ace.localHref(".removeShuju", "section.html");
         ace.ajaxGet("/pe/read", function (data) {
             localStorage.setItem("pemanage",JSON.stringify(data));
 

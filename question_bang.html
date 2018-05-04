@@ -58,7 +58,7 @@
             <div class="header-middle"></div>
             <!-- 红点信息 -->
             <div class="header-section">
-                <a href="">你好,吴亮!</a>
+                <a href="" class="usname_local" onload="loginas()">你好</a>
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
@@ -85,7 +85,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href=''>
+                                <a href='course.html'>
                                     <i class="fa fa-book" aria-hidden="true"></i>课程管理
                                 </a>
                             </li>
@@ -95,7 +95,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href=''>
+                                <a href='project.html'>
                                     <i class="fa fa-wrench" aria-hidden="true"></i>检修规划管理
                                 </a>
                             </li>
@@ -115,14 +115,14 @@
                                     <span>员工管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href=''>账号管理</a></li>
-                                    <li><a href=''>所属部门</a></li>
-                                    <li><a href=''>所属角色</a></li>
+                                    <li><a href='people.html'>账号管理</a></li>
+                                    <li><a href='add_people_select.html'>所属部门</a></li>
+                                    <li><a href='add_people_student.html'>所属角色</a></li>
                                 </ul>
                             </li>
                             <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
                             </a></li>
-                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='admin_clear.html'> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
                             <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
                             </a></li>
                         </ul>
@@ -219,7 +219,7 @@
     </div>
 </div>
 
-
+<input type="hidden" id="data_upload" value="">
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
@@ -282,11 +282,43 @@
                         ace.select_curriculum[0].options[i + 1] = new Option(v.name, v.id);
                     });
 
-
                 }
+                cz = [];
             })
 
         })
+
+        var options = [
+            {"data": "id"},
+            {
+                "data": "type",
+                "render": function (data, type, full, set) {
+                    if (data === 0) {
+                        return "单选题"
+                    } else if (data === 1) {
+                        return "操作题"
+                    } else if (data === 2) {
+                        return "问答题"
+                    }
+
+                }
+            },
+            {
+                "data": "body",
+                "render": function (data, type, full, set) {
+                    var a = data.substr(1, 30) + "...";
+                    return a;
+                }
+            },
+            {"data": "createDate"},
+            {
+                "data": "body",
+                "render": function (data, type, full, set) {
+                    /*返回的数据拼接*/
+                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
+                }
+            }
+        ];
 
         //课程变化
         window.aa5 = "";//记录删除的id
@@ -295,37 +327,7 @@
 
             var that = $(this);
             var val = that.val();
-            var options = [
-                {"data": "id"},
-                {
-                    "data": "type",
-                    "render": function (data, type, full, set) {
-                        if (data === 0) {
-                            return "单选题"
-                        } else if (data === 1) {
-                            return "操作题"
-                        } else if (data === 2) {
-                            return "问答题"
-                        }
 
-                    }
-                },
-                {
-                    "data": "body",
-                    "render": function (data, type, full, set) {
-                        var a = data.substr(1, 30) + "...";
-                        return a;
-                    }
-                },
-                {"data": "createDate"},
-                {
-                    "data": "body",
-                    "render": function (data, type, full, set) {
-                        /*返回的数据拼接*/
-                        return "<button type='button' class='btn1 course_bj notazirez'>编辑</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>删除</button>"
-                    }
-                }
-            ];
             var dataset = {
                 "id": val
             };
@@ -338,31 +340,39 @@
             } else {
                 //加载数据
                 ace.ajaxPost("/questions/readByName", dataset, function (data) {
+                    if (data.length === 0) {
+                        $("#basic-table").hide();
+                        $("#basic-table_wrapper").hide();
+                        $(".section-foot").show();
+                        return false
+                    }
 
-                    //加载表格数据
-                    mo.datatables(data, options, [2, 3, 4], function (data) {
+                    if ($("#data_upload").val() === "") {
+                        //加载表格数据
+                        mo.datatables(data, options, [0, 2, 3, 4], function (datasa) {//点击编辑
+                            var aa1 = '';
+                            window.aa5 = '';
+                            $('.notazirez').click(function () {
+                                aa1 = $(this).parent().parent().children().eq(0).text();
+                                $(data.aoData).each(function (i, v) {
+                                    if (+aa1 === v._aData.id) {
+                                        localStorage.setItem("question", JSON.stringify(v._aData));
+                                    }
+                                })
+                                window.location.href = "amend_question_bang.html"
+                            });
 
-                        //点击编辑
-                        var aa1 = '';
-                        window.aa5 = '';
-                        $('.notazirez').click(function () {
-                            aa1 = $(this).parent().parent().children().eq(0).text();
-                            $(data.aoData).each(function (i, v) {
-                                if (+aa1 === v._aData.id) {
-                                    localStorage.setItem("question", JSON.stringify(v._aData));
-                                }
+
+                            $(".removeShuju").click(function () {
+                                window.aa5 = $(this).parent().parent().children().eq(0).text();
+                                window.tre = $(this).parent().parent()[0];
+                                $("#error-modal").modal();
                             })
-                            window.location.href = "amend_question_bang.html"
                         });
-
-
-                        $(".removeShuju").click(function () {
-                            window.aa5 = $(this).parent().parent().children().eq(0).text();
-                            window.tre= $(this).parent().parent()[0];
-                            $("#error-modal").modal();
-                        })
-
-                    });
+                        $("#data_upload").val("1");
+                    } else {
+                        mo.localUp(data);
+                    }
 
                 })
 

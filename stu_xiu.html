@@ -309,12 +309,11 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" title='模型浏览'>模型浏览</a></li>
-                <li><a href="#" title='考核培训'>考核培训</a></li>
-                <li><a href="#" class="selects_top" title='检修规划'>检修规划</a></li>
-                <li><a href="#" title='你好'>你好,吴亮!</a></li>
-                <li><a href="#" title='通知'><i class="fa fa-bell"></i></a></li>
-                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+                <li><a href="tea_model_read.html" title='模型浏览'>模型浏览</a></li>
+                <li ><a  href="tea_send.html" title='考核培训'>考核培训</a></li>
+                <li><a href="tea_xiu.html"  class="selects_top"  title='检修规划'>检修规划</a></li>
+                <li><a href="tea_usname.html"  title='你好' class="usname_local"  onload="loginas()">你好</a></li>
+                <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
     </div>
@@ -424,16 +423,16 @@
 <script id="butss" type="text/html">
     {{each shiti as value index}}
     <strong class="pull-left">{{value.name}}</strong>
-    <a class="pull-right org">下载</a>
+    <a class="pull-right org" onclick="window.location.href=''">下载</a>
     {{/each}}
 </script>
 <script type="text/javascript">
     var modelz = new models();
-    modelz.ajaxGet("scratch.json", function (data) {
+    modelz.ajaxGet("/overhaul/read", function (data) {
         //获取新的数组
         var parents = [];
         $(data).each(function (i, v) {
-            if (v.parent === 0) {
+            if (v.parentId === 0) {
                 parents.push(v);
             }
         });
@@ -464,7 +463,7 @@
             var yid = $(this).attr("data-codeid");
             var newId = [];
             $(data).each(function (i, v) {
-                if (v.parent === +yid) {
+                if (v.parentId === +yid) {
                     newId.push(v);
                 }
             });
@@ -500,7 +499,7 @@
                     var yid = $(this).attr("data-codeid");
                     var newId = [];
                     $(data).each(function (i, v) {
-                        if (v.parent === +yid) {
+                        if (v.parentId === +yid) {
                             newId.push(v);
                         }
                     });

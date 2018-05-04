@@ -425,3 +425,7 @@ define(function (require, exports, module) {
         "comm": comm
     }
 })
+function loginas() {
+    var logins = JSON.parse(localStorage.getItem("login"));
+    $(".usname_local").text("你好," + logins.name);
+}

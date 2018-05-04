@@ -1,15 +1,8 @@
 $(function () {
-    /*区分是培训试题还是考试试题*/
-    var cid = JSON.parse(localStorage.getItem("onlies"));
-
-    var dataset = {
-        "id": cid
-    };
-
-    $("#hidden_id").val(cid);
-    console.log(dataset);
 
     var urll = 'papers.json';
+    var aa4 = JSON.parse(localStorage.getItem("stuOnlie"));
+
     //试卷id
     $.ajax({
         url: urll,
@@ -18,6 +11,10 @@ $(function () {
         dataType: "json",
         contentType: "application/json",
         success: function (data) {
+            data = {
+                "shiti":data
+            }
+            template.config('escape', false)
 
             /*隐藏没有显示的内容*/
             template.helper('show', function (ra) {
@@ -26,15 +23,6 @@ $(function () {
                 }
             });
 
-            /*隐藏没有显示的内容*/
-            template.helper('asd', function (ra, pd) {
-                var ac = ra;
-                if (pd === "a") {
-                    console.log(ra[0]);
-
-                }
-                return "";
-            })
 
             /*判断题目类型*/
             template.helper('ttm', function (ra) {
@@ -46,6 +34,31 @@ $(function () {
                     return '多选题'
                 }
             })
+
+
+            /*判断选择题答案以及选中展示*/
+            template.helper('radiosa', function (ra, kid) {
+                var zm = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"];
+                var htm = "";
+                $(ra).each(function (ii, vv) {
+                    $(zm).each(function (i, v) {
+
+                        if (ii === i) {
+                            htm += '<label class="radio subject-options">' +
+                                '<input type = "radio"' +
+                                ' id = "papers_laber0' + kid * 139 + '" ' +
+                                ' name = "radios' + kid + '"' + ' value = "' + v + '"'
+                                + 'data-inid="' + kid + '">'
+                                + v + '、' + vv
+                                + '</label>';
+                        }
+                    })
+                });
+
+                return htm;
+            })
+
+
             var paperss = document.getElementById('subject-main');
             var html = template('papers', data);
             paperss.innerHTML = html;

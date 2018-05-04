@@ -118,7 +118,6 @@
         margin: 20px;
         margin-left: 0;
         border-radius: 5px;
-        display: none;
     }
 
     .btn.btn-wide {
@@ -128,6 +127,11 @@
 
     #basic-table_wrapper {
         width: 100% !important;
+        display: none;
+    }
+
+    #basic-table {
+        display: none;
     }
 
     .no_pei {
@@ -187,11 +191,11 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" title='模型浏览'>模型浏览</a></li>
-                <li><a href="#" title='考核培训' class="selects_top">考核培训</a></li>
-                <li><a href="#" title='检修规划'>检修规划</a></li>
-                <li><a href="#" title='你好'>你好,吴亮!</a></li>
-                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+                <li><a href="tea_model_read.html" title='模型浏览'>模型浏览</a></li>
+                <li><a href="tea_send.html" class="selects_top" title='考核培训'>考核培训</a></li>
+                <li><a href="tea_xiu.html" title='检修规划'>检修规划</a></li>
+                <li><a href="tea_usname.html" title='你好' class="usname_local" onload="loginas()">你好</a></li>
+                <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
     </div>
@@ -201,11 +205,11 @@
     <div>
         <div class="container-fluid banner-fal">
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation" class="active"><a href="#">试卷发放</a></li>
-                <li role="presentation"><a href="#">试卷管理</a></li>
-                <li role="presentation"><a href="#">模拟试卷</a></li>
-                <li role="presentation"><a href="#">成绩管理</a></li>
-                <li role="presentation"><a href="#">软件下载</a></li>
+                <li role="presentation" class="active"><a href="tea_send.html">试卷发放</a></li>
+                <li role="presentation"><a href="tea_section.html">试卷管理</a></li>
+                <li role="presentation"><a href="tea_moni_test.html">模拟试卷</a></li>
+                <li role="presentation"><a href="tea_score.html">成绩管理</a></li>
+                <li role="presentation"><a href="tea_download.html">软件下载</a></li>
 
             </ul>
         </div>
@@ -214,37 +218,11 @@
             <div class="col-xs-3">
                 <div class="no_pei no_pei_one">
                     <label style="font-size: 16px;background-color: #028097 !important;color: #fff;">
-                        <input class="no_pei_heard" type="checkbox" value="未分配员工"><i class="fa fa-user"></i>未分配员工
+                        <input class="no_pei_heard" type="checkbox" value="未分配员工"><i class="fa fa-user"></i>学员
                     </label>
+                    <!--左侧栏状态-->
                     <div id="accordion2">
-                        <div class="accordion-group ">
-                            <div class="accordion-heading">
-                                <input class="students" type="checkbox" value="培训处">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
-                                   href="#collapseThree">
-                                    培训处
-                                </a>
-                            </div>
-                            <div id="collapseThree" class=" panel-collapse collapse in">
-                                <div id="tc_no_label">
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-group ">
-                            <div class="accordion-heading">
-                                <input class="helphack" type="checkbox" value="维修处">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
-                                   href="#collapseThrees">
-                                    维修处
-                                </a>
-                            </div>
-                            <div id="collapseThrees" class="panel-collapse collapse in">
-                                <div id="tc_no_labels">
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -261,13 +239,9 @@
                             <div>
                                 设备
                                 <select name="" id="facility">
-                                    <option value="">请选择设备</option>
-                                    <option value="1">爆破阀</option>
                                 </select>
                                 课程
                                 <select name="" id="curriculum">
-                                    <option value="">请选择相应的课程</option>
-                                    <option value="2">课程</option>
                                 </select>
                                 <button id="test_button" class=" btn btn-wide btn-success" title='发送'>发送</button>
                             </div>
@@ -335,6 +309,62 @@
         </div>
     </div>
 </div>
+
+
+<!--警告信息-->
+<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="">试卷发放成功</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--警告信息-->
+<div class="modal fade" id="lg-modal1" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="">该学员有未完成的试卷,等通知完成后再进行发送</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="data_upload" value="">
 <!--向上按钮-->
 <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
 </body>
@@ -349,189 +379,146 @@
 <script type="text/html" id="selectes">
     {{each seles as value index}}
     <label>
-        <input type="checkbox" class="checkSelectss" value="{{value.id}}" id="{{value.id}}">
-        {{value.name}}--{{value.department}}
+        <input type="checkbox" class="checkSelectss" name="num" value="{{value.id}}" id="{{value.id}}">
+        {{value.userName}}
     </label>
+    {{/each}}
+</script>
+<script type="text/html" id="broad">
+    {{each seles as value index}}
+    <div class="accordion-group ">
+        <div class="accordion-heading">
+            <input class="students helphack" type="checkbox" value="{{value.name}}">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+               href="#collapse{{value.id*1397}}">
+                {{value.name}}
+            </a>
+        </div>
+        <div id="collapse{{value.id*1397}}" class=" panel-collapse collapse in">
+            <div id="tc_no_label{{value.id}}">
+
+            </div>
+        </div>
+    </div>
     {{/each}}
 </script>
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
+        var mo = new models();
+
         //隐藏栏目
         ace.select_but.click(function () {
             $(this).parent().slideUp();
         });
+
         //记录所有选择身份的id值
-        window.seleIds = [];
         window.vals = "";
-        ace.ajaxGet('options.json', function (data) {
-            var pei = [];
-            var wei = [];
-            $(data).each(function (i, v) {
-                if (v.department === "维修处") {
-                    wei.push(v);
-                } else if (v.department === "培训处") {
-                    pei.push(v);
-                }
-            })
 
-            var selespei = {
-                "seles": pei
+        ace.ajaxGet("/department/read", function (da) {
+            var datas = {
+                "seles": da
             };
+            var htm = template("broad", datas);
+            document.getElementById("accordion2").innerHTML = htm;
 
-            var seleswei = {
-                "seles": wei
-            };
-
-            var htmls = template("selectes", selespei);
-            document.getElementById("tc_no_label").innerHTML = htmls;
-
-            var htmls2 = template("selectes", seleswei);
-            document.getElementById("tc_no_labels").innerHTML = htmls2;
-            //全选
-            $(".no_pei_heard").click(function () {
-                if ($(this).prop("checked")) {
-                    $(".no_pei_one div input").each(function (i, v) {
-                        $(v).prop("checked", true);
+            ace.ajaxGet('/user/read', function (data) {
+                var pei = [];
+                $(da).each(function (i, v) {
+                    $(data).each(function (ii, vv) {
+                        if (v.name === vv.department) {
+                            pei.push(vv);
+                        }
                     })
-                    $(v).prop("checked", true);
-
-                    var vals = $(v).val();
-                    if (window.seleIds.join().indexOf(vals) === -1) {
-                        window.seleIds.push(vals);
+                    var sele = {
+                        "seles": pei
                     }
-                } else {
-                    $(".no_pei_one div input").each(function (i, v) {
-                        $(v).prop("checked", false);
+                    var htmls = template("selectes", sele);
+                    var temId = "tc_no_label" + v.id;
+                    document.getElementById(temId).innerHTML = htmls;
+                    pei = [];
+                })
 
-                        var vals = $(v).val();
-                        window.seleIds.forEach(function (v, i) {
-                            if (v === vals) {
-                                window.seleIds.splice(i, 1);
-                            }
+                //全选
+                $(".no_pei_heard").click(function () {
+                    if ($(this).prop("checked")) {
+                        $(".no_pei_one div input").each(function (i, v) {
+                            $(v).prop("checked", true);
                         })
-                    })
-                }
-                console.log(window.seleIds);
-
-            });
-
-            $(".students").click(function () {
-                if ($(this).prop("checked")) {
-                    $("#tc_no_label label input").each(function (i, v) {
-                        $(v).prop("checked", true);
-
-                        var vals = $(v).val();
-                        if (window.seleIds.join().indexOf(vals) === -1) {
-                            window.seleIds.push(vals);
-                        }
-                    })
-
-                } else {
-                    $("#tc_no_label label input").each(function (i, v) {
-                        $(v).prop("checked", false);
-
-                        var vals = $(v).val();
-                        window.seleIds.forEach(function (v, i) {
-                            if (v === vals) {
-                                window.seleIds.splice(i, 1);
-                            }
-                        })
-                    })
-
-
-                }
-                console.log(window.seleIds);
-
-            });
-            $(".helphack").click(function () {
-                if ($(this).prop("checked")) {
-                    $("#tc_no_labels label input").each(function (i, v) {
-                        $(v).prop("checked", true);
-
-                        var vals = $(v).val();
-                        if (window.seleIds.join().indexOf(vals) === -1) {
-                            window.seleIds.push(vals);
-                        }
-                    })
-
-                } else {
-                    $("#tc_no_labels label input").each(function (i, v) {
-                        $(v).prop("checked", false);
-
-                        var vals = $(v).val();
-                        window.seleIds.forEach(function (v, i) {
-                            if (v === vals) {
-                                window.seleIds.splice(i, 1);
-                            }
-                        })
-                    })
-                }
-                console.log(window.seleIds);
-
-            });
-
-            $(".checkSelectss").on("change", function () {
-                var vals = $(this).val();
-                if ($(this).is(':checked')) {
-                    if (window.seleIds.join().indexOf(vals) === -1) {
-                        window.seleIds.push(vals);
-                    }
-
-                } else {
-                    window.seleIds.forEach(function (v, i) {
-                        if (v === vals) {
-                            window.seleIds.splice(i, 1);
-                        }
-                    })
-
-                }
-                console.log(window.seleIds);
-                //获取的选中的id值数组化
-            })
-
-        })
-
-        //对数据进行
-        ace.ajaxGet('tables.json', function (data) {
-            ace.select_facility[0].options[0] = new Option('请选择设备', '')
-            $(data).each(function (i, v) {
-                ace.select_facility[0].options[i + 1] = new Option(v.name, v.id);
-            })
-        });
-
-        //设备变化
-        var mo = new models();
-        ace.select_facility.on('change', function () {
-            var that = $(this);
-            var val = that.val();
-            if (val === '') {
-
-            } else {
-                var dataset = {
-                    "id": val
-                }
-                ace.ajaxPost(url, dataset, function (data) {
-
-                    ace.select_curriculum[0].options[0] = new Option('请选择相应的课程', '')
-                    if (data === "") {
 
                     } else {
-                        //增加相应课程类目
-                        $(data).each(function (i, v) {
-                            ace.select_curriculum[0].options[i + 1] = new Option(v.name, v.id);
+                        $(".no_pei_one div input").each(function (i, v) {
+                            $(v).prop("checked", false);
                         })
                     }
+                });
 
-                })
-            }
+                $(".helphack").click(function () {
+                    var childs = $(this).parent().siblings().children().find('label input');
+                    if ($(this).prop("checked")) {
+                        childs.each(function (i, v) {
+                            $(v).prop("checked", true);
+                        })
+
+                    } else {
+                        childs.each(function (i, v) {
+                            $(v).prop("checked", false);
+                        })
+                    }
+                });
+            })
         })
-        //课程变化
+
+
+        var fac = [];
+        var course = [];
+        var cz = [];
+        ace.ajaxGet("/course/read", function (data) {
+            //加载设备id渲染在下拉框
+            $(data).each(function (i, v) {
+                if (v.parentId === 0) {
+                    fac.push(v);
+                } else {
+                    //课程数据
+                    course.push(v);
+                }
+            });
+            //增加设备
+            ace.select_facility[0].options[0] = new Option('请选择设备', '')
+            $(fac).each(function (i, v) {
+                ace.select_facility[0].options[i + 1] = new Option(v.name, v.id);
+            });
+
+
+            //设备变化
+            ace.select_facility.on('change', function () {
+                var that = $(this);
+                //设备id
+                var val = that.val();
+                if (val === '') {
+                    ace.select_curriculum[0].options[0] = new Option('请选择课程', '');
+                } else {
+                    $(course).each(function (i, v) {
+                        //判断设备在课程的parent里面的位置并进行数据重组
+                        if (+val === v.parentId) {
+                            cz.push(v);
+                        }
+                    })
+                    ace.select_curriculum[0].options[0] = new Option('请选择课程', '')
+                    //增加相应课程类目
+                    $(cz).each(function (i, v) {
+                        ace.select_curriculum[0].options[i + 1] = new Option(v.name, v.id);
+                    });
+                }
+                cz = [];
+
+            })
+        })
 
         var options = [
             {"data": "id"},
             {
-                "data": "remarks",
+                "data": "type",
                 "render": function (data, type, full, set) {
                     var inpu = "<label style='width: 100%;cursor:pointer'>" +
                         "<input name='id' type='radio' " +
@@ -541,87 +528,100 @@
                     return inpu
                 }
             },
+            {"data": "machineName"},
+            {"data": "courseName"},
             {"data": "name"},
-            {"data": "name"},
+            {"data": "createDate"},
             {
-                "data": "position"
-            },
-            {
-                "data": "remarks",
-                "render": function (data, type, full, set) {
-                    return "2017-05-19 11:11"
-                }
-            },
-            {
-                "data": "remarks",
+                "data": "createDate",
                 "render": function (data, type, full, set) {
                     /*返回的数据拼接*/
-                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button>"
+                    return "<button type='button' class='btn1 course_bj notazirez'>编辑</button>";
                 }
             }
         ];
-        ace.datatables('model.json', options, [0, 1, 2, 3, 4, 5, 6], function (data) {
-            //试卷id值
-            $(".checkSelect").on("change", function () {
-                window.vals = $(this).val();
-                //获取的选中的id值数组化
-            })
 
-            //点击编辑
-            var aa1 = '';
-            var aa2 = '';
-            window.aa5 = '';
-            $('.notazirez').click(function () {
-                aa1 = $(this).parent().parent().children().eq(0).text();
-                $(data.aoData).each(function (i, v) {
-                    if (+aa1 === v._aData.id) {
-                        localStorage.setItem("tea_sends", JSON.stringify(v._aData));
-                    }
-                })
-                window.open("tea_amend_send.html", "_blank")
-            });
-
-            //回掉函数获取加载的数据信息
-
-        });
-
+        //课程改变
         ace.select_curriculum.on('change', function () {
             var that = $(this);
             var val = that.val();
-            var dataset = {
-                "id": val
-            };
-            //数据重新加载
-            if (val === '') {
-                $("#section-foot").show();
+
+            if (val === "" || val === undefined) {
                 $("#basic-table").hide();
                 $("#basic-table_wrapper").hide();
                 $(".section-foot").show();
             } else {
-                mo.tables();
+                //加载数据
+                ace.ajaxGet("/paper/read", function (data) {
+                    var pushs = [];
+                    var datas = [];
+                    //区分考试题还是模拟试题
+                    $(data).each(function (i, v) {
+                        if (data.paperType === 1) {
+                            datas.push(v);
+                        }
+                    })
+
+                    if(datas.length === 0){
+                        $("#basic-table").hide();
+                        $("#basic-table_wrapper").hide();
+                        $(".section-foot").show();
+                        return false
+                    }
+
+
+                    $(datas).each(function (i, v) {
+                        if (+val === v.CourseId) {
+                            pushs.push(v);//找到所有相同的课程进行加载
+                        }
+                    });
+                    if ($("#data_upload").val() === "") {
+
+                        //加载表格数据
+                        mo.datatables(pushs, options, [0, 1, 2, 3, 4, 5, 6], function (datasa) {
+                            $(".checkSelect").on("change", function () {
+                                window.vals = $(this).val();
+                                //获取的选中的id值数组化
+                            })
+                            //点击编辑
+                            var aa1 = '';
+                            window.aa5 = '';
+                            $('.notazirez').click(function () {
+                                aa1 = $(this).parent().parent().children().eq(0).text();
+                                $(datasa).each(function (i, v) {
+                                    if (+aa1 === v.id) {
+                                        localStorage.setItem("tea_sends", JSON.stringify(v));
+                                    }
+                                })
+                                window.open("tea_amend_send.html", "_blank")
+                            });
+                        });
+                        $("#data_upload").val("1");
+                    } else {
+                        mo.localUp(pushs);
+                    }
+                });
+
                 $("#basic-table").show();
                 $("#basic-table_wrapper").show();
                 $(".section-foot").hide();
             }
 
-            ace.ajaxPost(url, dataset, function (data) {
-                //加载到页面上
-                if (data === '') {
-
-                }
-
-            });
         });
 
-
-        var modals = ['error-modal', 'error-modal2'];
-        mo.modtal(modals);
-
         $("#test_button").click(function () {
+            var aces = [];
+            $(".no_pei_one div input[name='num']").each(function (i, v) {
+                if ($(v).prop("checked")) {
+                    aces.push($(v).val());
+                }
+            })
+
+            console.log(aces);
             var facility = $("#facility").val();
             var course = $("#curriculum").val();
 
-            if (window.seleIds.length === 0) {
+            if (aces.length === 0) {
                 $(".span_one3").show();
                 $(".span_one1").hide();
                 $(".span_one2").hide();
@@ -641,18 +641,21 @@
                 return false
             }
             var dataset = {
-                "shijuan": window.vals,
-                "xueyuan": window.seleIds
+                "paperId": window.vals,
+                "id": aces
             };
 
-            var datasetss = {
-                "facility": facility,
-                "facilityT": $("#facility  option:selected").text(),
-                "course": course,
-                "courseT": $("#curriculum  option:selected").text(),
-            }
-            localStorage.setItem("tea_send", JSON.stringify(datasetss));
-            console.log(dataset);
+            ace.ajaxPost("/paper/sendOnePaper", dataset, function (data) {
+                if (data.type === 0) {
+                    $("#error-modal").modal();
+                    window.location.href = "";
+                } else {
+                    $("#lg-modal1").modal();
+                    setTimeout(function () {
+                        $("#lg-modal1").modal('hide');
+                    }, 800)
+                }
+            })
 
         })
 

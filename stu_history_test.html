@@ -18,6 +18,11 @@
     #basic-table_length, #basic-table_filter {
         display: none;
     }
+
+    .table.dataTable tbody tr td:nth-last-child(0) {
+        text-align: left !important;
+        display: inline-block !important;
+    }
 </style>
 <!--[if lt IE 8]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
@@ -47,12 +52,12 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" title='模型浏览'>模型浏览</a></li>
-                <li><a href="#" title='考核培训'>考核培训</a></li>
-                <li><a href="#" title='检修规划'>检修规划</a></li>
-                <li><a href="#" title='你好'>你好,吴亮!</a></li>
-                <li><a href="#" title='通知'><i class="fa fa-bell"></i></a></li>
-                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+                <li><a href="stu_model_read.html" title='模型浏览'>模型浏览</a></li>
+                <li><a class="selects_top" href="oeinsder.html" title='考核培训'>考核培训</a></li>
+                <li><a href="stu_xiu.html" title='检修规划'>检修规划</a></li>
+                <li><a href="stu_usname.html" title='你好' class="usname_local" onload="loginas()">你好</a></li>
+                <li><a href="stu_student.html" title='通知'><i class="fa fa-bell"></i></a></li>
+                <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
     </div>
@@ -62,10 +67,10 @@
     <div>
         <div class="container-fluid banner-fal">
             <ul class="banner_top clearfix">
-                <li><a title="课程学习" href="oeinsder.html">课程学习</a></li>
-                <li><a href="onile.html" title='在线考试'>在线考试</a></li>
-                <li><a href="" title='模拟考试'>模拟考试</a></li>
-                <li><a href="" class="select" title='成绩查看'>成绩查看</a></li>
+                <li><a href="oeinsder.html" title="课程学习">课程学习</a></li>
+                <li><a href="stu_student.html" title='在线考试'>在线考试</a></li>
+                <li><a href="stu_moni_test.html" title='模拟考试'>模拟考试</a></li>
+                <li><a href="stu_history_test.html" class="select" title='成绩查看'>成绩查看</a></li>
                 <li class="pull-right"><a href="stu_download.html" title='软件下载'>软件下载</a></li>
             </ul>
         </div>
@@ -84,7 +89,6 @@
                                width="100%">
                             <thead>
                             <tr>
-                                <th>标识</th>
                                 <th>试卷名称</th>
                                 <th>姓名</th>
                                 <th>总分</th>
@@ -120,23 +124,42 @@
         var ace = new main.comm();
 
         var options = [
-            {"data": "id"},
-            {"data": "name"},
-            {"data": "name"},
-            {"data": "name"},
-            {"data": "name"},
+            {"data": "paperName"},
+            {"data": "userName"},
+            {"data": "total"},
             {
-                "data": "position"
+                "data": "sendDate",
+                "render": function (data, type, full, set) {
+                    if (data === null) {
+                        return ""
+                    } else {
+                        return data;
+                    }
+                }
             },
             {
-                "data": "remarks",
+                "data": "submitDate",
                 "render": function (data, type, full, set) {
-                    return "2017-05-19 11:11"
+                    if (data === null) {
+                        return ""
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            {
+                "data": "checkDate",
+                "render": function (data, type, full, set) {
+                    if (data === null) {
+                        return ""
+                    } else {
+                        return data;
+                    }
                 }
             }
         ];
 
-        ace.datatables('model.json', options, [2, 3, 4, 5], function (data) {
+        ace.datatables('/paper/score', options, [2, 3, 4, 5], function (data) {
 
 
         });

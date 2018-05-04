@@ -1,21 +1,21 @@
 [
   {
     "id": 1,
-    "name": "名称",
+    "name": "维修处",
     "parentId": 1,
     "note": "备注",
     "parentName": "上级名称"
   },
   {
     "id": 3,
-    "name": "名称1",
+    "name": "培训处",
     "parentId": 1,
     "note": null,
     "parentName": "上级名称"
   },
   {
     "id": 2,
-    "name": "名称2",
+    "name": "运行",
     "parentId": 1,
     "note": "备注",
     "parentName": "上级名称"

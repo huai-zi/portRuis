@@ -154,7 +154,7 @@
                 <li><a href="#" title='模型浏览'>模型浏览</a></li>
                 <li><a href="#" title='考核培训' class="selects_top">考核培训</a></li>
                 <li><a href="#" title='检修规划'>检修规划</a></li>
-                <li><a href="#" title='你好'>你好,吴亮!</a></li>
+                <li><a href="#" title='你好' class="usname_local"  onload="loginas()">你好</a></li>
                 <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
@@ -223,28 +223,29 @@
         </div>
 </div>
 
-<!--删除按钮模态框-->
+
+<!--警告信息-->
 <div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
      aria-labelledby="modal-error-label"
      style="display: none;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header state modal-danger">
+            <div class="modal-header state modal-primary">
                 <button type="button" class="close" data-dismiss="modal"
                         aria-label="Close"><span
                         aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>提示
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
                 </h4>
             </div>
             <div class="modal-body">
-                <span id="modal_remove"></span>试卷删除后不可再恢复. <br>确定要删除选中的试卷?
+                <span class="error-span1">信息保存成功</span>
+
             </div>
             <div class="modal-footer">
                 <!--确认删除-->
-                <button type="button" class="btn btn-danger itm_qx" data-dismiss="modal">
-                    确定
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
                 </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
             </div>
         </div>
     </div>
@@ -263,7 +264,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <span></span>请先选择设备及课程
+                请输入试卷名称
             </div>
             <div class="modal-footer">
                 <!--确认删除-->
@@ -274,6 +275,7 @@
         </div>
     </div>
 </div>
+
 <!--向上按钮-->
 <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
 </body>
@@ -287,83 +289,109 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-        ace.localHref("#test_close", "test.html");
-        window.seleIds = [];
-        var locals = JSON.parse(localStorage.getItem("tea_tests"));
+        var mo = new models();
+
+        ace.localHref("#test_close", "tea_section.html");
+        // window.seleIds = [];
+        var locals = JSON.parse(localStorage.getItem("teatests"));
+
+
+        $('#facility').val(locals.machineName);
+        $('#curriculum').val(locals.courseName);
         $("#forms_test").val(locals.name);
         //同时传试卷id,获取选中的题目的id值进行标注，同时上传id进行保存
-        var jieguo = ["2", "3", "6","21"];
-        window.seleIds = jieguo;
-        var options = [
-            {"data": "id"},
-            {
-                "data": "remarks",
-                "render": function (data, type, full, set) {
-                    var inpu = "<label style='width: 100%;cursor:pointer'>" +
-                        "<input name='id' type='checkbox' " +
-                        "class='checkSelect checkedSe" +
-                        full.id + "' value='" + full.id + "'>" +
-                        "</label>"
-                    return inpu
-                }
-            },
-            {"data": "name"},
-            {
-                "data": "position",
-                "render": function (data, type, full, set) {
-                    var substrs = full.position.substr(0, 18) + "...";
-                    return substrs;
-                }
-            },
-            {
-                "data": "position",
-                "render": function (data, type, full, set) {
-                    return "2018-04-20"
-                }
-            }
-        ];
+        window.seleIds = locals.questionId;
 
-        ace.datatables('model.json', options, [0, 1, 2, 3, 4], function (data) {
-            window.aa5 = '';
-            //回掉函数获取加载的数据信息
-            $(".removeShuju").click(function () {
-                window.aa5 = $(this).parent().parent().children().eq(0).text();
-            });
-            $(".checkSelect").on("change", function () {
-                var vals = $(this).val();
-                if ($(this).is(':checked')) {
-                    if (window.seleIds.join().indexOf(vals) === -1) {
-                        window.seleIds.push(vals);
+        var dataset = {
+            "id": locals.CourseId
+        }
+        //根据课程查询全部试题
+        ace.ajaxForm("/questions/readByName", dataset, function (datas) {
+            var options = [
+                {"data": "id"},
+                {
+                    "data": "type",
+                    "render": function (data, type, full, set) {
+                        var inpu = "<label style='width: 100%;cursor:pointer'>" +
+                            "<input name='id' type='checkbox' " +
+                            "class='checkSelect checkedSe" +
+                            full.id + "' value='" + full.id + "'>" +
+                            "</label>"
+                        return inpu
                     }
-
-                } else {
-                    window.seleIds.forEach(function (v, i) {
-                        if (v === vals) {
-                            window.seleIds.splice(i, 1);
+                },
+                {
+                    "data": "type",
+                    "render": function (data, type, full, set) {
+                        if (data === 0) {
+                            return "单选题"
+                        } else if (data === 1) {
+                            return "操作题"
+                        } else if (data === 2) {
+                            return "问答题"
                         }
-                    })
 
-                }
-                console.log(window.seleIds);
-                //获取的选中的id值数组化
-            })
+                    }
+                },
+                {
+                    "data": "body",
+                    "render": function (data, type, full, set) {
+                        var substrs = full.body.substr(0, 18) + "...";
+                        return substrs;
+                    }
+                },
+                {"data": "createDate"}
+            ];
 
-            jieguo.forEach(function (v, i) {
-                var num = ".checkedSe" + v;
-                $(num).prop('checked', true);
-            })
-        });
-        //设备变化
-        var mo = new models();
-        var local = JSON.parse(localStorage.getItem("tea_test"));
-//        $('#facility').val(local.facility);//设备Id
-        $('#facility').val(local.facilityT);
-//        $('#curriculum').val(local.course);//课程id
-        $('#curriculum').val(local.courseT);
+            //数据处理并进行渲染
+            mo.datatables(datas, options, [0, 1, 2, 3, 4], function (data) {
+
+                //回掉函数获取加载的数据信息
+                $(".checkSelect").on("change", function () {
+                    var vals = $(this).val();
+                    if ($(this).is(':checked')) {
+                        if (window.seleIds.join().indexOf(vals) === -1) {
+                            window.seleIds.push(vals);
+                        }
+
+                    } else {
+                        window.seleIds.forEach(function (v, i) {
+                            if (v === vals) {
+                                window.seleIds.splice(i, 1);
+                            }
+                        })
+
+                    }
+                })
+
+                window.seleIds.forEach(function (v, i) {
+                    var num = ".checkedSe" + v;
+                    $(num).prop('checked', true);
+                })
+            });
+
+        })
+
+
+        //保存数据
         $("#test_button").click(function () {
-            console.log(window.seleIds);
-            var dataset = window.seleIds;
-            ace.ajaxPost(url, dataset);
+            var dataset = {
+                "id": locals.id,
+                "name": $("#forms_test").val(),
+                "machineId": locals.machineId,
+                "courseId": locals.courseId,
+                "questionId": window.seleIds
+            };
+
+            if ($("#forms_test").val() === "") {
+                $("#error-modal2").modal();
+            } else {
+                ace.ajaxPost("/paper/update", dataset, function () {
+                    $("#error-modal").modal();
+                    window.location.href = "tea_section.html";
+
+                });
+            }
         })
 
     })

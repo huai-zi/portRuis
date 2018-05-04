@@ -81,7 +81,6 @@
         display: none;
     }
 
-
     .nav-tabs {
         background-color: rgb(248, 248, 248) !important;
     }
@@ -154,7 +153,7 @@
     .no_pei {
         border-color: #028097 !important;
         overflow-x: hidden;
-        min-height: auto !important;
+        min-height: inherit !important;
         background-color: #fff;
     }
 
@@ -221,8 +220,9 @@
     .tab-pane > div span {
         line-height: 34px;
     }
-    .subject-next{
-        padding:0 20px 30px 0;
+
+    .subject-next {
+        padding: 0 20px 30px 0;
     }
 </style>
 <!--[if lt IE 8]>
@@ -253,11 +253,11 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" title='模型浏览'>模型浏览</a></li>
-                <li><a href="#" title='考核培训'>考核培训</a></li>
-                <li><a href="#" title='检修规划'>检修规划</a></li>
-                <li><a href="#" title='你好'>你好,吴亮!</a></li>
-                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+                <li><a href="tea_model_read.html" title='模型浏览'>模型浏览</a></li>
+                <li><a href="tea_send.html" class="selects_top" title='考核培训'>考核培训</a></li>
+                <li><a href="tea_xiu.html" title='检修规划'>检修规划</a></li>
+                <li><a href="tea_usname.html" title='你好' class="usname_local" onload="loginas()">你好</a></li>
+                <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
     </div>
@@ -267,11 +267,11 @@
     <div>
         <div class="container-fluid banner-fal">
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation"><a href="#">试卷发放</a></li>
-                <li role="presentation"><a href="#">试卷管理</a></li>
-                <li role="presentation"><a href="#">模拟试卷</a></li>
-                <li role="presentation" class="active"><a href="#">成绩管理</a></li>
-                <li role="presentation"><a href="#">软件下载</a></li>
+                <li role="presentation"><a href="tea_send.html">试卷发放</a></li>
+                <li role="presentation"><a href="tea_section.html">试卷管理</a></li>
+                <li role="presentation"><a href="tea_moni_test.html">模拟试卷</a></li>
+                <li role="presentation" class="active"><a href="tea_score.html">成绩管理</a></li>
+                <li role="presentation"><a href="tea_download.html">软件下载</a></li>
 
             </ul>
         </div>
@@ -300,11 +300,11 @@
                                 考卷
                             </div>
                             <div style="margin-top:30px ;border-bottom: 1px solid #e7eaec;margin-bottom: 25px;">
-                                课程:<input type="text" style="display: inline-block
+                                课程:<input type="text" id="coursed" style="display: inline-block
 " disabled=true>
-                                试卷:<input type="text" style="display: inline-block
+                                试卷:<input type="text" id="tests" style="display: inline-block
 " disabled=true>
-                                学员:<input type="text" style="display: inline-block
+                                学员:<input type="text" id="students" style="display: inline-block
 " disabled=true></div>
                             <div class="tab-content" id="subject-main">
                                 <!--<div role="tabpanel" class="tab-pane active" id="home">home</div>-->
@@ -313,8 +313,9 @@
                             <div class="subject-action clearfix text-right">
                                 <div class="subject-next">
                                     <input type="hidden" name="id" value="" id="hidden_id">
-                                    <span id="aheadFinish" class="btn warning-btn color_green"
-                                          style="color: #fff;">关闭</span>
+                                    <a id="aheadFinish" href="javascript:window.close();"
+                                       class="btn warning-btn color_green"
+                                       style="color: #fff;">关闭</a>
                                     <span id="prevs" class="btn warning-btn">上一题</span>
                                     <span id="next" class="btn warning-btn">下一题</span>
                                 </div>
@@ -328,61 +329,6 @@
 </div>
 
 
-<!--警告信息-->
-<div class="modal fade" id="error-modal2" tabindex="-1" role="dialog"
-     aria-labelledby="modal-error-label"
-     style="display: none;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header state modal-warning">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
-                </h4>
-            </div>
-            <div class="modal-body">
-                <span class="error-span1">需要先选择正确备选项</span>
-            </div>
-            <div class="modal-footer">
-                <!--确认删除-->
-                <button type="button" class="btn " data-dismiss="modal">
-                    确定
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--培训提示信息-->
-<div class="modal fade" id="error-modal" tabindex="-1" role="dialog"
-     aria-labelledby="modal-error-label"
-     style="display: none;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header state modal-primary">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
-                </h4>
-            </div>
-            <div class="modal-body">
-                <span class="error-span1">进入操作考核阶段后,理论考核页面将不可见。</span><br><span>确认考试操作考核吗？</span>
-            </div>
-            <div class="modal-footer">
-                <!--确认删除-->
-                <button type="button" class="btn " data-dismiss="modal">
-                    取消
-                </button>
-                <button style="background-color: #1ab394;color: #fff" type="button" class="btn " id="buttons"
-                        data-dismiss="modal">
-                    确定
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 <!--向上按钮-->
 <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
 </body>
@@ -401,7 +347,7 @@
                 题型
             </div>
             <div class="col-xs-10">
-                <input type="text" class="form-control" readonly value="{{value.title}}">
+                <input type="text" class="form-control" readonly disabled value="{{ttm(value.type)}}">
             </div>
         </div>
         <div class="clearfix">
@@ -409,7 +355,7 @@
                 所属课程
             </div>
             <div class="col-xs-10">
-                <span> {{value.title}}</span>
+                <span data-kcId="{{value.courseId}}"> {{value.courseName}}</span>
             </div>
         </div>
         <div class="clearfix">
@@ -417,48 +363,30 @@
                 题干
             </div>
             <div class="col-xs-10">
-                <textarea name="" id="" class="form-control" cols="30" rows="5" readonly>{{value.title}}
+                <textarea name="" id="" class="form-control" cols="30" rows="5" readonly disabled>{{value.body}}
                 </textarea>
 
             </div>
         </div>
         {{if value.type === 0}}
         <!--单选题-->
-
-
         <div class="clearfix">
             <div class="col-xs-2 text-right">
                 备选答案
             </div>
             <div class="col-xs-10">
-                <label>
-                    <input type="radio" disabled="true">A、{{value.title}}
-                </label>
             </div>
+            {{radiosa(value.answer,value.right)}}
 
-            <div class="col-xs-2 text-right">
-            </div>
-            <div class="col-xs-10">
-                <label>
-                    <input type="radio" disabled="true">A、{{value.title}}
-                </label>
-            </div>
-
-            <div class="col-xs-2 text-right">
-            </div>
-            <div class="col-xs-10">
-                <label>
-                    <input type="radio" disabled="true">A、{{value.title}}
-                </label>
-            </div>
         </div>
         <div class="clearfix">
             <div class="col-xs-2 text-right">
                 学员回答
             </div>
             <div class="col-xs-10">
-                <input type="text" class="form-control" value="{{value.title}} " readonly>
-
+                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly disabled
+                          cols="30"
+                          rows="7">{{student(value.studentAnswer,0)}}</textarea>
             </div>
         </div>
         <div class="clearfix">
@@ -466,7 +394,7 @@
                 得分
             </div>
             <div class="col-xs-10">
-                <input type="text" class="form-control" readonly value="{{value.title}}">
+                <input type="text" class="form-control" readonly disabled value="{{value.score}}">
             </div>
         </div>
         {{/if}}
@@ -477,7 +405,7 @@
                 题目序号
             </div>
             <div class="col-xs-10">
-                <input type="text" class="form-control" readonly value="{{value.title}}">
+                <input type="text" class="form-control" readonly disabled value="{{value.modelId}}">
             </div>
         </div>
         <div class="clearfix">
@@ -485,7 +413,7 @@
                 操作步骤
             </div>
             <div class="col-xs-10">
-                <textarea name="" class="form-control" readonly cols="30" rows="5">{{value.title}}</textarea>
+                <textarea name="" class="form-control" readonly disabled cols="30" rows="5">{{step(value.answer)}}</textarea>
             </div>
         </div>
         <div class="clearfix">
@@ -493,8 +421,11 @@
                 学员回答
             </div>
             <div class="col-xs-10">
-                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly cols="30"
-                          rows="7">第{{index+1}}步：{{value.title}}</textarea>
+                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly disabled
+                          cols="30"
+                          rows="7">
+                    {{student(value.studentAnswer,1)}}
+                </textarea>
             </div>
         </div>
         <div class="clearfix">
@@ -502,7 +433,7 @@
                 得分
             </div>
             <div class="col-xs-10">
-                <input type="text" class="form-control" readonly value="{{value.title}}">
+                <input type="text" class="form-control" readonly disabled value="{{value.score}}">
             </div>
         </div>
         {{/if}}
@@ -514,7 +445,7 @@
                 题目图像
             </div>
             <div class="col-xs-10">
-                <img src="{{value.title}}" alt="没有指定图像">
+                <img src="{{value.image}}" alt="没有指定图像">
             </div>
         </div>
 
@@ -523,8 +454,9 @@
                 学员回答
             </div>
             <div class="col-xs-10">
-                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly cols="30"
-                          rows="7">{{value.title}}</textarea>
+                <textarea name="" style="min-height: 154px;overflow-y: auto" class="form-control" readonly disabled
+                          cols="30"
+                          rows="7">{{student(value.studentAnswer,0)}}</textarea>
             </div>
         </div>
         <div class="clearfix">
@@ -532,7 +464,7 @@
                 得分
             </div>
             <div class="col-xs-10">
-                <input type="text" class="form-control" readonly value="{{value.title}}">
+                <input type="text" class="form-control" readonly disabled value="{{value.score}}">
             </div>
         </div>
         {{/if}}
@@ -550,9 +482,14 @@
 </script>
 <script type="text/javascript">
     $(function () {
+        var aa4 = JSON.parse(localStorage.getItem('lookGrade'));
+        $("#coursed").val(aa4.courseName);
+        $("#tests").val(aa4.name);
+        $("#students").val(aa4.usname);
         var modealz = new models();
+
         $("#aheadFinish").click(function () {
-            console.log(22);
+            window.location.href = "tea_score.html";
         })
 
     })

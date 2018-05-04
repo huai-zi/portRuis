@@ -28,16 +28,16 @@
     input[readonly="readonly"] {
         cursor: auto !important;
     }
+
+    #basic-table_wrapper {
+        margin-top: 20px;
+    }
 </style>
 <!--[if lt IE 8]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
-<style>
-    #basic-table_wrapper {
-        margin-top: 20px;
-    }
-</style>
+
 <body onselectstart="return false">
 
 <!--记载过程中的loading-->
@@ -61,7 +61,7 @@
             <div class="header-middle"></div>
             <!-- 红点信息 -->
             <div class="header-section">
-                <a href="">你好,吴亮!</a>
+                <a href="" class="usname_local"  onload="loginas()">你好</a>
             </div>
             <div class="header-separator"></div>
             <div class="header-section" style="margin-right: 50px;">
@@ -88,7 +88,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href=''>
+                                <a href='course.html'>
                                     <i class="fa fa-book" aria-hidden="true"></i>课程管理
                                 </a>
                             </li>
@@ -108,8 +108,8 @@
                                     <span>考试管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li class=""><a href='question_bang.html'>题库管理</a></li>
-                                    <li class="active-item"><a href=''>试卷管理</a></li>
+                                    <li><a href='question_bang.html'>题库管理</a></li>
+                                    <li class="active-item"><a href='test.html'>试卷管理</a></li>
                                 </ul>
                             </li>
                             <li class=" has-child-item close-item">
@@ -118,14 +118,14 @@
                                     <span>员工管理</span>
                                 </a>
                                 <ul class="nav child-nav level-1">
-                                    <li><a href=''>账号管理</a></li>
-                                    <li><a href=''>所属部门</a></li>
-                                    <li><a href=''>所属角色</a></li>
+                                    <li><a href='people.html'>账号管理</a></li>
+                                    <li><a href='add_people_select.html'>所属部门</a></li>
+                                    <li><a href='add_people_student.html'>所属角色</a></li>
                                 </ul>
                             </li>
                             <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
                             </a></li>
-                            <li class=""><a href=''> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='admin_clear.html'> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
                             <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
                             </a></li>
                         </ul>

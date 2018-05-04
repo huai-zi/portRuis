@@ -15,6 +15,10 @@
         padding: 3px !important;
     }
 
+    #closeLocal ,#aheadFinish{
+        display: none;
+    }
+
     .heard_top {
         line-height: 35px;
         background-color: rgb(31, 167, 193);
@@ -98,12 +102,12 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" title='模型浏览'>模型浏览</a></li>
-                <li><a href="#" title='考核培训'>考核培训</a></li>
-                <li><a href="#" title='检修规划'>检修规划</a></li>
-                <li><a href="#" title='你好'>你好,吴亮!</a></li>
-                <li><a href="#" title='通知'><i class="fa fa-bell"></i></a></li>
-                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+                <li><a href="stu_model_read.html" title='模型浏览'>模型浏览</a></li>
+                <li><a class="selects_top" href="oeinsder.html" title='考核培训'>考核培训</a></li>
+                <li><a href="stu_xiu.html" title='检修规划'>检修规划</a></li>
+                <li><a href="stu_usname.html" title='你好' class="usname_local" onload="loginas()">你好</a></li>
+                <li><a href="stu_student.html" title='通知'><i class="fa fa-bell"></i></a></li>
+                <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
     </div>
@@ -113,10 +117,10 @@
     <div>
         <div class="container-fluid banner-fal">
             <ul class="banner_top clearfix">
-                <li><a title="课程学习" href="oeinsder.html">课程学习</a></li>
-                <li><a href="onile.html"title='在线考试'>在线考试</a></li>
-                <li><a href="" class="select"  title='模拟考试'>模拟考试</a></li>
-                <li><a href="" title='成绩查看'>成绩查看</a></li>
+                <li><a href="oeinsder.html" title="课程学习">课程学习</a></li>
+                <li><a href="stu_student.html" title='在线考试'>在线考试</a></li>
+                <li><a href="stu_moni_test.html" class="select" title='模拟考试'>模拟考试</a></li>
+                <li><a href="stu_history_test.html" title='成绩查看'>成绩查看</a></li>
                 <li class="pull-right"><a href="stu_download.html" title='软件下载'>软件下载</a></li>
             </ul>
         </div>
@@ -149,10 +153,17 @@
                             <div class="subject-action clearfix text-right">
                                 <div class="subject-next">
                                     <input type="hidden" name="id" value="" id="hidden_id">
-                                    <span id="aheadFinish" class="btn warning-btn"
-                                          style="background-color: #f8ac59;color: #fff;">操作考核</span>
+
+                                    <span>
+                                        <span id="aheadFinish" class="btn warning-btn"
+                                              style="background-color: #f8ac59;color: #fff;">操作考核</span>
+                                    <span id="aheadFinish1" class="btn warning-btn"
+                                          style="background-color: #f8ac59;color: #fff;">提交试卷</span>
                                     <span id="prevs" class="btn warning-btn">上一题</span>
                                     <span id="next" class="btn warning-btn">下一题</span>
+                                    </span>
+                                    <span id="closeLocal" class="btn warning-btn"
+                                          style="background-color: #f8ac59;color: #fff;">关闭</span>
                                 </div>
                             </div>
                         </div>
@@ -219,6 +230,36 @@
         </div>
     </div>
 </div>
+
+<!--培训提示信息-->
+<div class="modal fade" id="info-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-span1">确认试卷提交,提交完成后,页面将不在存在</span>
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    取消
+                </button>
+                <button style="background-color: #1ab394;color: #fff" type="button" class="btn " id="buttons1"
+                        data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <!--向上按钮-->
 <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
 </body>
@@ -237,26 +278,8 @@
                     style="margin-right: 15px;">[{{ttm(value.type)}}]</span><br>{{index+1}}、{{value.title}}</p>
         </div>
         <div class="container-fluid col-xs-7">
-            <label class="radio subject-options" for="papers_laber0{{(value.id+9)*1357}}" style="{{show(value.raA)}}">
-                <input type="radio" id="papers_laber0{{(value.id+9)*1357}}" name="radios{{value.id}}" value="A"
-                       data-inid="{{index}}">
-                A、{{value.raA}}
-            </label>
-            <label class="radio subject-options" for='papers_laber0{{(value.id+9)*2357}}' style="{{show(value.raB)}}">
-                <input type="radio" id="papers_laber0{{(value.id+9)*2357}}" name="radios{{value.id}}" value="B"
-                       data-inid="{{index}}">
-                B、{{value.raB}}
-            </label>
-            <label class="radio subject-options" for='papers_laber0{{(value.id+9)*3357}}' style="{{show(value.raC)}}">
-                <input type="radio" id="papers_laber0{{(value.id+9)*3357}}" name="radios{{value.id}}" value="C"
-                       data-inid="{{index}}">
-                C、{{value.raC}}
-            </label>
-            <label class="radio subject-options" for='papers_laber0{{(value.id+9)*4357}}' style="{{show(value.raD)}}">
-                <input type="radio" id="papers_laber0{{(value.id+9)*4357}}" name="radios{{value.id}}" value="D"
-                       data-inid="{{index}}">
-                D、{{value.raD}}
-            </label>
+            {{radiosa(value.answer,value.id)}}
+
         </div>
     </div>
     {{/each}}
@@ -265,7 +288,8 @@
     {{each shiti as value index}}
     <li role="presentation" class="">
         <a href="#collapseOne{{index}}" aria-controls="#collapseOne{{index}}" role="tab" class="collapseOne{{index}}"
-           data-toggle="tab" data-id="{{index}}">{{index+1}}、{{value.title}}<span class="yikncang{{index}}">(未回答)</span></a>
+           data-toggle="tab" data-id="{{index}}">{{index+1}}、{{value.title}}<span
+                class="yikncang{{value.id}}">(未回答)</span></a>
     </li>
     {{/each}}
 </script>
@@ -276,14 +300,21 @@
             $("#error-modal").modal();
         })
 
+        $("#aheadFinish1").click(function () {
+            $("#info-modal").modal();
+        })
         $("#buttons").click(function () {
             var cid = JSON.parse(localStorage.getItem("onlies"));
 
             modealz.numcs(url, "forms", +cid, function () {
-                window.location.href = "stu_student.html";
+                window.location.href = ".html";
             })
 
         })
+
+        $('#closeLocal').click(function () {
+            window.location.href = '.html';
+        });
     })
 </script>
 </html>

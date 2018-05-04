@@ -74,7 +74,7 @@
   {
     "id": 54,
     "name": "设备名称2",
-    "department":"培训处",
+    "department":"运行",
     "sex":1
   },
   {
@@ -90,9 +90,27 @@
     "sex":1
   },
   {
-    "id": 32,
+    "id": 123,
+    "name": "设备名称5",
+    "department":"运行",
+    "sex":1
+  },
+  {
+    "id": 546,
+    "name": "设备名称5",
+    "department":"运行",
+    "sex":1
+  },
+  {
+    "id": 321,
     "name": "设备名称5",
     "department":"维修处",
+    "sex":1
+  },
+  {
+    "id": 9999,
+    "name": "设备名称5",
+    "department":"",
     "sex":1
   }
 ]

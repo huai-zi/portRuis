@@ -308,7 +308,6 @@ var models = (function () {
         })
     }
 
-
     model.prototype = {
         constructor: model,
         "slide": slide,
@@ -332,3 +331,7 @@ var models = (function () {
 var mo = new models();
 var modalss = ['lg-modal1', 'info-modal', 'error-modal', 'error-modal2'];
 mo.modtal(modalss);
+function loginas() {
+    var logins = JSON.parse(localStorage.getItem("login"));
+    $(".usname_local").text("你好," + logins.name);
+}

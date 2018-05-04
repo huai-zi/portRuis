@@ -100,11 +100,12 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" title='模型浏览'>模型浏览</a></li>
-                <li><a href="#" title='考核培训'>考核培训</a></li>
-                <li><a href="#" title='检修规划' class="selects_top">检修规划</a></li>
-                <li><a href="#" title='你好'>你好,吴亮!</a></li>
-                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+                <li><a href="stu_model_read.html" title='模型浏览'>模型浏览</a></li>
+                <li ><a  href="oeinsder.html" title='考核培训'>考核培训</a></li>
+                <li><a href="stu_xiu.html" class="selects_top" title='检修规划'>检修规划</a></li>
+                <li><a href="stu_usname.html" title='你好' class="usname_local"  onload="loginas()">你好</a></li>
+                <li><a href="stu_student.html" title='通知'><i class="fa fa-bell"></i></a></li>
+                <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
         </div>
     </div>
@@ -156,26 +157,22 @@
 <script type="text/javascript">
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
-
         var options = [
             {"data": "id"},
             {"data": "name"},
+            {"data": "note"},
             {
-                "data": "remarks",
-                "render": function (data, type, full, set) {
-                    return "2017-05-19 11:11"
-                }
-            },
-            {
-                "data": "remarks",
+                "data": "file",
                 "render": function (data, type, full, set) {
                     /*返回的数据拼接*/
-                    return "<a href=''  class='btn1 course_bj notazirez'>下载</a>"
+                    var bb = "<a href='" + data +
+                        "'  class='btn1 course_bj notazirez' >下载</a>"
+                    return bb;
                 }
             }
         ];
 
-        ace.datatables('model.json', options, [2, 3], function (data) {
+        ace.datatables('/overhaul/read', options, [2, 3], function (data) {
         });
 
 

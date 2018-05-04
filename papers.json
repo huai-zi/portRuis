@@ -1,5 +1,4 @@
-{
-  "shiti":[
+[
     {
       "type":0,
       "title":"aaaa",
@@ -8,7 +7,7 @@
       "raA":"Aas",
       "raB":"Aas",
       "raC":"Aas",
-      "answer":["asd","asd","asd"],
+      "answer":["asd1","asd1","asd1"],
       "raC":"Aas",
       "qus":"A",
       "point":"qwee"
@@ -22,21 +21,8 @@
       "raB":"Aas",
       "raC":"Aas",
       "raD":"Aas",
-      "answer":["asd","asd","asd"],
-      "qus":"A",
-      "point":"qwee"
-    },
-    {
-      "type":2,
-      "title":"ccccc",
-      "fs":122,
-      "id":4,
-      "raA":"Aas",
-      "raB":"Aas",
-      "raC":"Aas",
-      "answer":["asd","asd","asd"],
-      "raD":"Aas",
-      "qus":"A",
+      "answer":["asd2","asd2","asd2"],
+      "qus":"B",
       "point":"qwee"
     },
     {
@@ -47,10 +33,22 @@
       "raA":"Aas",
       "raB":"Aas",
       "raC":"Aas",
-      "answer":["asd","asd","asd"],
+      "answer":["asd3","asd3","asd3"],
       "raD":"Aas",
-      "qus":"A",
+      "qus":["A"],
+      "point":"qwee"
+    },
+    {
+      "type":0,
+      "title":"ccccc",
+      "fs":122,
+      "id":42,
+      "raA":"Aas",
+      "raB":"Aas",
+      "raC":"Aas",
+      "answer":["asd4","asd4","asd4"],
+      "raD":"Aas",
+      "qus":"C",
       "point":"qwee"
     }
   ]
-}
