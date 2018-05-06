@@ -19,7 +19,7 @@
         display: none;
     }
 </style>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -351,7 +351,6 @@
                         //加载表格数据
                         mo.datatables(data, options, [0, 2, 3, 4], function (datasa) {//点击编辑
                             var aa1 = '';
-                            window.aa5 = '';
                             $('.notazirez').click(function () {
                                 aa1 = $(this).parent().parent().children().eq(0).text();
                                 $(data.aoData).each(function (i, v) {

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta  http-equiv="X-UA-Compatible"  content="IE=Edge，chrome=1">
     <title>三门核电有限公司三门数字化仿真检修平台</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
@@ -94,15 +95,8 @@
         margin: 30px 0 0 0;
         text-align: center;
         font-size: 16px;
-        display: none;
     }
 
-    #tip2 {
-        margin: 30px 0 0 0;
-        text-align: center;
-        font-size: 16px;
-        display: none;
-    }
 
     .box {
         width: 160px;
@@ -227,6 +221,7 @@
         font-size: 24px;
         color: #000;
         font-weight: 600;
+        cursor: pointer;
     }
 
     .btn-lg, .btn-group-lg > .btn {
@@ -280,11 +275,20 @@
     .org {
         background-color: orange !important;
     }
+    video{
+        cursor: pointer;
+        display: none;
+    }
+
+
 </style>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
+<script type="text/javascript"  src="javascripts/api.html5media.min.js"></script>
+
 <![endif]-->
+
 <body onselectstart="return false">
 <!--记载过程中的loading-->
 <div class="text-center">
@@ -350,36 +354,17 @@
             <div class="container-fluid heard_top">
                 <i class="fa fa-medium"></i> 检修规划规范
             </div>
-            <div class="tab-content" id="subject-main main">
-                <div class="panel-body" style="background-color:white;">
-                    <div id="tip1">目前不支持您所使用的浏览器，请使用IE浏览器进行课程学习。</div>
-                    <div id="tip2">系统检测到您还未安装浏览模型所需的组件。<br/>32位操作系统请 <a href="/UploadFiles/Software/Composer_X86.exe">点此下载</a>
-                        32位程序并安装。<br/>64位操作系统请下载 <a href="/UploadFiles/Software/Composer_X64.msi">点此下载</a>64位程序并安装。
-                    </div>
-                    <div id="wrapper">
-                        <div id="showModul">
-                            <div id="mainContainer">
-                                <object id="viewer" height="800" width="800"
-                                        classid="CLSID:410B702D-FCFC-46B7-A954-E876C84AE4C0">
-                                    <!--value内填写.smgXml后缀文件存放路径，注意图片等文件要放在与smgXml同目录下-->
-                                    <param name="_StockProps" value="0">
-                                    <param name="RenderGroundShadow" value="0">
-                                    <param name="RenderMode" value="1">
-                                    <param name="CameraPlayMode" value="1">
-                                    <param name="AntiAliasingOnIdle" value="0">
-                                    <param name="GroundGrid" value="0">
-                                    <param name="AutoPlay" value="0">
-
-                                    <param name="FileName" value="/UploadFiles/Moduls/201708161528331345.smg">
-                                </object>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="tab-content" id="subject-main">
+                <video poster="images/ace.png" src="" width="320" height="200" controls preload style="width: 100%;">
+                    <source>
+                </video>
+                <p id="tip1">请在左侧选择相应的检修规划文件进行查看</p>
             </div>
         </div>
     </div>
 </div>
+
+
 <input type="hidden" id="uzid" value="">
 <!--向上按钮-->
 <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
@@ -393,9 +378,8 @@
 <script id="but" type="text/html">
     {{each shiti as value index}}
     <div class=" btn-link btn-lg clearfix bga">
-
-        <strong class="pull-left btn_id" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
-                data-target="#menu{{value.id}}">{{value.name}}</strong>
+        <strong class="pull-left btn_id btn_clickdu" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
+                data-target="#menu{{value.id}}"  data-file="{{value.file}}" data-qb="{{value.type}}">{{value.name}}</strong>
         <a class="pull-right org">下载</a>
         <b class="pull-right btn_id" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
            data-target="#menu{{value.id}}">展开</b>
@@ -408,7 +392,7 @@
 <script id="buts" type="text/html">
     {{each shiti as value index}}
     <div class=" btn-link btn-lg clearfix">
-        <strong class="pull-left  btn_ids" role="button" type="button" data-toggle="collapse"
+        <strong class="pull-left  btn_ids" role="button" type="button"  data-file="{{value.file}}" data-qb="{{value.type}}"data-toggle="collapse"
                 data-target="#menus{{value.id}}"
                 data-codeid="{{value.id}}">{{value.name}}</strong>
         <a class="pull-right org">下载</a>
@@ -423,7 +407,7 @@
 </script>
 <script id="butss" type="text/html">
     {{each shiti as value index}}
-    <strong class="pull-left">{{value.name}}</strong>
+    <strong class="pull-left"  data-file="{{value.file}}" data-qb="{{value.type}}">{{value.name}}</strong>
     <a class="pull-right org" onclick="window.location.href=''">下载</a>
     {{/each}}
 </script>
@@ -437,7 +421,6 @@
                 parents.push(v);
             }
         });
-        console.log(parents);
         var datas = {
             "shiti": parents
         }
@@ -445,6 +428,18 @@
         document.getElementById("add_page").innerHTML = htm;
         var ace = true;
         var aces = true;
+        //点击文字展示视频信息
+        $(".btn_clickdu").click(function(){
+            var files = $(this).attr("data-file");
+            var qb = $(this).attr("data-type");
+            if(qb === 0){
+                $("video").show();
+                $("#tip1").hide();
+                $("video").attr("src",files);
+                $("video").attr("autoplay");
+            }else{
+            }
+        })
 
         $(".btn_id").click(function () {
             if (ace) {
@@ -481,6 +476,7 @@
                 var names = "menu" + yid;
                 document.getElementById(names).innerHTML = htm;
 
+
                 $("#uzid").val(yid);
 
                 $(".btn_ids").click(function () {
@@ -514,129 +510,53 @@
                     var htmff = template("butss", datas);
                     var names = "menus" + yid;
                     document.getElementById(names).innerHTML = htmff;
+
                 })
+
+
             }
         })
     })
-    var hei = $(window).height();
-    $("#peinsder-box").height(hei);
+  $(function(){
 
 
-    var currentModulId = 'e0dced9a-1b33-42bf-80fa-e4a6b939a6a0';
+      var aces = true ;
+      $("video").click(function(){
+            console.log();
+          if($(this).attr("src") === ""){
 
+             return false
+          }else{
+              if(aces){
+                  $(this).trigger('play');
+                  aces = false ;
+              }else{
+                  $(this).trigger('pause');
+                  aces = true ;
+              }
+          }
+      })
+      var hei = $(window).height();
+      $("#peinsder-box").height(hei);
+      var minWidth = 600;
+      var minHeight = 500;
+      var viewHeight = $(window).height() - 190 ;
+      if (viewHeight < minHeight) {
+          viewHeight = minHeight;
+      }
+      $(".tab-content").height(viewHeight + 50);
+      $(".tab-content video").height(viewHeight + 50);
 
-    var minWidth = 600;
-    var minHeight = 500;
-    var viewHeight = $(window).height() - 120;
-    if (viewHeight < minHeight) {
-        viewHeight = minHeight;
-    }
-    $("#viewer").height(viewHeight);
+      $(window).resize(function () {
+          var viewHeight = $(window).height() - 120;
+          if (viewHeight < minHeight) {
+              viewHeight = minHeight;
+          }
+          $(".tab-content").height(viewHeight + 50);
+          $(".tab-content video").height(viewHeight + 50);
 
-    $("#main").height(viewHeight + 50);
-    var viewWidth = $(window).width() - $("#menu").width() - 15;
-    console.log(viewWidth);
-    $("#viewer").width((minWidth < viewWidth) ? viewWidth : minWidth);
+      });
+  })
 
-    var viewWidth = $(window).width() - $("#menu").width();
-
-    $(window).resize(function () {
-        var viewHeight = $(window).height() - 120;
-        if (viewHeight < minHeight) {
-            viewHeight = minHeight;
-        }
-        $("#viewer").height(viewHeight);
-        $("#main").height(viewHeight + 50);
-        var viewWidth = $(window).width() - $("#menu").width() - 15;
-        $("#viewer").width((minWidth < viewWidth) ? viewWidth : minWidth);
-
-    });
-
-
-    function isIE() { //ie?
-        if (!!window.ActiveXObject || "ActiveXObject" in window)
-            return true;
-        else
-            return false;
-    }
-
-    //检测控件是否存在
-    function checkControlExist() {
-        try {
-            var comActiveX = new ActiveXObject("DS.3DVIAPlayerActiveXCtrl");
-        }
-        catch (e) {
-            return false;
-        }
-        return true;
-    }
-
-    if (!isIE()) {
-        $("#tip1").show();
-        $("#tip2").hide();
-        $("#wrapper").hide();
-    } else {
-        //检测插件是否运行加载
-        if (!checkControlExist()) {
-            $("#tip1").hide();
-            $("#tip2").show();
-            //有提示用记安装控件
-            $("#wrapper").hide();
-        }
-        else {
-            $("#tip1").hide();
-            $("#tip2").hide();
-            //有提示用记安装控件
-            $("#wrapper").show();
-        }
-    }
-
-    function collapseAccordionSub(subId, id) {
-        var subItem = $("#" + id);
-        var target = $("#" + subId)[0];
-        if (target.innerText == "折叠") {
-            $("div[tag='" + id + "'").collapse('hide');
-            target.innerText = "展开";
-        } else {
-            target.innerText = "折叠";
-            $("div[tag='" + id + "'").collapse('show');
-        }
-    }
-
-    function collapseAccordion(target, id) {
-        var subItem = $("#" + id);
-        if (target.innerText == "折叠") {
-            $("div[tag='" + id + "'").collapse('hide');
-            target.innerText = "展开";
-        } else {
-            target.innerText = "折叠";
-            $("div[tag='" + id + "'").collapse('show');
-        }
-    }
-
-    function showModul(url) {
-        location.href = url;
-        return false;
-    }
-
-    function showItem() {
-        var data = new Array();
-        var content = ["40377f79-36b0-4c22-b8b2-fb5d6a5b4b05_", "32013314-f95d-4523-a9ac-dfa0ddfffdf3_"];
-        if (content != 0) {
-            for (var i = 0; i < content.length; i++) {
-                data.push(content[i]);
-            }
-        }
-        for (var i = 0; i < data.length; i++) {
-            $("#" + data[i]).click();
-        }
-
-    }
-
-    showItem();
-
-    function downloadModul(id) {
-        window.open("/TDVIA/GetModulFile/" + id, "_blank");
-    }
 </script>
 </html>

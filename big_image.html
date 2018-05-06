@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en" class="fixed">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <title>三门核电有限公司三门数字化仿真检修平台</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheets/css/vendor/animate.css/animate.css">
+    <!--<link rel="stylesheet" href="stylesheets/css/style.css">-->
+    <link rel="stylesheet" href="stylesheets/css/oeinsder.css">
+</head>
+<style>
+    .peinsder-box {
+        padding: 3px !important;
+    }
+
+    .onile-box .col-sm-3 {
+        min-height: inherit !important;
+    }
+
+    .onile-box .col-sm-3, .onile-box .col-sm-9 {
+        min-height: inherit !important;
+    }
+
+    .heard_top {
+        line-height: 35px;
+        background-color: rgb(31, 167, 193);
+        font-size: 18px;
+        font-weight: bolder;
+        padding: 2px 10px;
+        color: #fff;
+        border-radius: 5px;
+        margin: 0 -14px;
+    }
+
+    .heard_top i {
+        margin-right: 10px;
+    }
+
+    .onile-box .col-sm-3 ul {
+        margin: 0 -14px !important;
+
+    }
+
+    #prevs {
+        display: none;
+    }
+
+    .subject-action {
+        padding-top: 30px;
+    }
+
+    h4 {
+        padding: 0 !important;
+        color: #fff;
+    }
+
+    h3 {
+        border-bottom: 1px solid #e7eaec;
+        padding-bottom: 10px;
+    }
+
+    .subject-question p {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+        margin-left: 0 !important;
+    }
+
+    .col-xs-7 {
+        margin-left: 30px !important;
+    }
+
+    .btn {
+        background: transparent;
+        border: 1px solid #e7eaec;
+        margin-bottom: 0px !important;
+    }
+
+    .onile-box .col-sm-3 ul li a {
+        font-size: 20px !important;
+        line-height: 54px !important;
+    }
+
+    .onile-box .col-sm-3 ul {
+        /*border: 1px solid #ccc;*/
+        background-color: transparent !important;
+        color: rgb(51, 122, 183);
+        padding-left: 20px;
+    }
+
+    #tip1 {
+        margin: 30px 0 0 0;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .box {
+        width: 160px;
+        height: 160px;
+        margin: 0 20px 20px 0;
+        border-radius: 5%;
+        float: left;
+        position: relative;
+        text-align: center;
+        background-color: navajowhite;
+    }
+
+    .box img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 20px auto;
+        max-width: 100%;
+        max-height: 100%;
+        outline: none;
+    }
+
+    #bgbox {
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index: 10001;
+        opacity: .70;
+        filter: alpha(opacity=70);
+    }
+
+    #boxshow {
+        display: none;
+        position: absolute;
+        top: 25%;
+        left: 22%;
+        width: 53%;
+        height: 49%;
+        padding: 8px;
+        border: 8px solid #E8E9F7;
+        background-color: white;
+        z-index: 10002;
+        overflow: hidden;
+    }
+
+    #boxshow img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #boxflash {
+        display: none;
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        width: 80%;
+        height: 60%;
+        padding: 8px;
+        border: 8px solid #E8E9F7;
+        background-color: white;
+        z-index: 10002;
+        overflow: hidden;
+    }
+
+    #close_btn, #close_btn2 {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    #lable-count {
+        padding: 0 10px;
+        border-radius: 5px;
+        opacity: 0.3;
+        font-size: 20px;
+        filter: alpha(opacity=30);
+        background-color: coral;
+    }
+
+    #flash-content {
+        z-index: -1;
+        overflow: auto;
+    }
+
+    #flash2 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .panel-body div b {
+        color: #fff;
+        padding: 0 12px;
+        height: 23px;
+        line-height: 23px;
+        margin-top: 11px;
+        border-radius: 30px;
+        font-size: 14px;
+        background-color: forestgreen;
+    }
+
+    .panel-body div a {
+        text-decoration: none;
+        cursor: pointer;
+        color: #fff;
+        padding: 0 12px;
+        height: 23px;
+        line-height: 23px;
+        margin-top: 11px;
+        border-radius: 30px;
+        font-size: 14px;
+        margin-left: 5px;
+        font-weight: 600;
+    }
+
+    .panel-body div strong {
+        font-size: 24px;
+        color: #000;
+        font-weight: 600;
+    }
+
+    .btn-lg, .btn-group-lg > .btn {
+        padding: 3px 16px;
+    }
+
+    #peinsder-box {
+        padding-top: 80px;
+    }
+
+    .onile-box {
+        height: 100%;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    .panel-body {
+        padding: 0;
+        margin: 0 -14px;
+    }
+
+    .panel-body > div {
+        padding: 0 24px;
+    }
+
+    .panel-body div {
+        margin: 0 -14px;
+        line-height: 44px;
+    }
+
+    #menu {
+        overflow-x: hidden;
+    }
+
+    .bga {
+        background-color: rgb(210, 245, 251);
+        margin-bottom: 3px !important;
+
+    }
+
+    .bga:hover {
+        background-color: rgb(210, 245, 251) !important;
+    }
+
+    #subject-main {
+        height: 100%;
+    }
+
+    .org {
+        background-color: orange !important;
+    }
+
+    video {
+        cursor: pointer;
+        display: none;
+    }
+
+    .close {
+        font-size: 40px;
+        color: #ccc;
+        margin: 20px;
+        opacity: 1;
+    }
+
+    .close:hover {
+        color: #fff;
+    }
+
+    .img_big {
+        width: 200px;
+        height: 200px;
+        display: table-cell;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        line-height: 200px;
+    }
+
+    .img_big img {
+        display: inline-block;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .img_margin {
+        display: inline-block;
+        margin: 20px;
+    }
+</style>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="javascripts/html5.js"></script>
+<script type="text/javascript" src="javascripts/respond.js"></script>
+<script type="text/javascript" src="javascripts/api.html5media.min.js"></script>
+
+<![endif]-->
+
+<body onselectstart="return false">
+<!--记载过程中的loading-->
+<div class="text-center">
+<span class='text-center shuju-tishi shuju-tishi1' style='color:white;display: none;'>
+</span>
+    <span class='text-center shuju-tishi shuju-tishi2' style='background-color:red;color:white;display: none;'>
+</span>
+</div>
+
+<!--导航条-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!--汉堡菜单-->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#" title='模型浏览'>模型浏览</a></li>
+                <li><a href="#" title='考核培训'>考核培训</a></li>
+                <li><a href="#" class="selects_top" title='检修规划'>检修规划</a></li>
+                <li><a href="#" title='你好' class="usname_local" onload="loginas()">你好</a></li>
+                <li><a href="#" title='通知'><i class="fa fa-bell"></i></a></li>
+                <li><a href="#" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--底部栏-->
+<div class="row" id="peinsder-box">
+    <!--显示课程设备学习图解-->
+    <div class="container-fluid onile-box">
+        <div class="col-sm-3" id="menu">
+            <div class="container-fluid heard_top">
+                <i class="fa fa-joomla"></i>检修规划目录
+            </div>
+            <!--<ul id="answer-sheet-num" class="answer-sheet-box">-->
+            <!--&lt;!&ndash;<li role="presentation" class="active">&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="#home" aria-controls="home" role="tab"&ndash;&gt;-->
+            <!--&lt;!&ndash;data-toggle="tab" class="clearfix">Home <span class="pull-right">展开</span></a>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--<li role="presentation" class="active">-->
+            <!--<a href="#home" class="clearfix" aria-controls="home" role="tab"-->
+            <!--data-toggle="tab">Home <span class="pull-right">展开</span></a>-->
+            <!---->
+            <!--</li>-->
+            <!--&lt;!&ndash;展示题目区域&ndash;&gt;-->
+
+            <!--</ul>-->
+
+            <div class="panel-body" id="add_page">
+
+            </div>
+
+        </div>
+        <div class="col-sm-9">
+            <div class="container-fluid heard_top">
+                <i class="fa fa-medium"></i> 检修规划规范
+            </div>
+            <div class="tab-content" id="subject-main">
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <img src="images/asd.png" alt="">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <img src="images/model.jpg" alt="">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <img src="images/model.dmp" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--培训提示信息-->
+<div class="modal fade text-center" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">×</span></button>
+    <img src="" class="modelImg" alt="center-block" style="margin-top: 10%;">
+</div>
+<input type="hidden" id="uzid" value="">
+<!--向上按钮-->
+<a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
+</body>
+<script src="javascripts/jquery.1.10.2.js"></script>
+<script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src='javascripts/template.js'></script>
+<script src='javascripts/stu_ready.js'></script>
+<script src="javascripts/peinsder.js"></script>
+<script src='javascripts/course.js'></script>
+<script id="but" type="text/html">
+    {{each shiti as value index}}
+    <div class=" btn-link btn-lg clearfix bga">
+        <strong class="pull-left btn_id btn_clickdu" data-codeid="{{value.id}}" role="button" type="button"
+                data-toggle="collapse"
+                data-target="#menu{{value.id}}">{{value.name}}</strong>
+        <a class="pull-right org">下载</a>
+        <b class="pull-right btn_id" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
+           data-target="#menu{{value.id}}">展开</b>
+    </div>
+    <div id="menu{{value.id}}" class="collapse">
+
+    </div>
+    {{/each}}
+</script>
+<script id="buts" type="text/html">
+    {{each shiti as value index}}
+    <div class=" btn-link btn-lg clearfix">
+        <strong class="pull-left  btn_ids" role="button" type="button" data-toggle="collapse"
+                data-target="#menus{{value.id}}"
+                data-codeid="{{value.id}}">{{value.name}}</strong>
+        <a class="pull-right org">下载</a>
+        <b class="pull-right btn_ids" role="button" type="button" data-toggle="collapse"
+           data-target="#menus{{value.id}}"
+           data-codeid="{{value.id}}">展开</b>
+    </div>
+    <div id="menus{{value.id}}" class="collapse bga clearfix btn-link btn-lg clearfix">
+
+    </div>
+    {{/each}}
+</script>
+<script id="butss" type="text/html">
+    {{each shiti as value index}}
+    <strong class="pull-left">{{value.name}}</strong>
+    <a class="pull-right org" onclick="window.location.href=''">下载</a>
+    {{/each}}
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(".img_big").click(function () {
+            var imgSrc = $(this).children("img").attr("src");
+            $(".modelImg").attr("src", imgSrc);
+            $("#error-modal").modal();
+        })
+    })
+</script>
+</html>

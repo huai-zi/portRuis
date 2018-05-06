@@ -153,7 +153,7 @@
         display: none;
     }
 </style>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -355,8 +355,18 @@
             $("#loginNames").val(sxid.loginName);
             $("#userNames").val(sxid.userName);
             $("#numbers").val(sxid.number);
-            $("#emails").val(sxid.email);
-            $("#tels").val(sxid.tel);
+
+            if (sxid.email === null) {
+                $("#emails").val("");
+            } else {
+                $("#emails").val(sxid.email);
+            }
+            if (sxid.tel === null) {
+                $("#tels").val("");
+            } else {
+                $("#tels").val(sxid.tel);
+            }
+
             if (sxid.sex === 0) {
                 $("#sexs0").prop('checked', true);
             } else {

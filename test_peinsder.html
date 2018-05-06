@@ -79,7 +79,7 @@
     var hrefs = window.location.hash.split("#")[1];
     // var courseViewModel = "zip/201708171431435419.zip";
     var courseViewModel = hrefs;
-    
+
     var questionInfo = "kaoti:1;shijuanId:d90a4c9a-b433-430c-8a60-6d1863fcba7d;id:1";
     $(function () {
         $("#wrapper").css("height", ($(window).height() - 10));
@@ -209,18 +209,23 @@
             if (rega.test(resultmessage)) {
                 resultmessage = resultmessage.replace(rega, '}]');
             }
-            var cid = JSON.parse(localStorage.getItem("stuOnlie"));
+            var cid = JSON.parse(localStorage.getItem("test_stu_moni"));
 
-            console.log(resultmessage);
             var dataset = {
                 "id": cid.id,
-                "answer":resultmessage.Result
+                "answer": resultmessage.Result
             }
-            var mo  = new models();
-            mo.ajaxPost("/paper/answer",dataset,function(data){
-                if(data.type === 0){
-                    location.href = "stu_student.html";
-                }else{
+            var mo = new models();
+            mo.ajaxPost("/paper/answer", dataset, function (data) {
+                if (data.type === 0) {
+                    if (cid.type === 1) {
+                        location.href = "stu_student.html";
+
+                    } else {
+                        location.href = "stu_moni_test.html";
+
+                    }
+                } else {
                     alert('提交试卷失败，请重试');
                 }
             })

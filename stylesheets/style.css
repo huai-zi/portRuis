@@ -12,7 +12,9 @@
 select, select option {
     cursor: pointer;
 }
-
+.close:focus{
+    outline:none !important;
+}
 /*banner背景*/
 html.fixed .content2 {
     background: url("../../images/index-bgc04.jpg") no-repeat center;

@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -72,7 +72,7 @@
                                     <i class="fa fa-university" aria-hidden="true"></i>部门管理
                                 </a>
                             </li>
-                            <li  class="">
+                            <li class="">
                                 <a href='facility.html'>
                                     <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
                                 </a>
@@ -93,7 +93,7 @@
                                 </a>
                             </li>
                             <li class=" has-child-item close-item">
-                                <a >
+                                <a>
                                     <i class='fa fa-bar-chart' aria-hidden="true"></i>
                                     <span>考试管理</span>
                                 </a>
@@ -115,7 +115,8 @@
                             </li>
                             <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
                             </a></li>
-                            <li class=""><a href='admin_clear.html'> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='admin_clear.html'> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
+                            </a></li>
                             <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
                             </a></li>
                         </ul>
@@ -207,8 +208,8 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <span id="modal_remove" class="modal_span">锁定用户账号成功</span>
-                <span id="modal_removeS" class="modal_span">解锁用户账号成功</span>
+                <span>数据删除成功</span>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -238,6 +239,60 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="error-modal2" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-warning">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span>数据删除失败,请重新删除</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lg-modal1" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-warning">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span>确认删除用户信息为: <span class="error-span1"></span>,此条记录,删除后相关的记录一并移除,请慎重考虑</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    取消删除
+                </button>
+                <button type='button' class='btn1 course_bj course_bj' data-hiId="">确定删除</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="javascripts/jquery.1.10.2.js"></script>
 <script src="stylesheets/css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="stylesheets/css/vendor/nano-scroller/nano-scroller.js"></script>
@@ -307,15 +362,15 @@
                 }
             },
             {
-                "data": "lock",
+                "data": "character",
                 "render": function (data, type, full, set) {
                     /*返回的数据拼接 0:解锁  1:锁定 */
-                    if (full.character === 0) {
-                        return "";
-                    } else if (data === 0) {
-                        return "<button type='button' class='btn1 color_green notazirez ' data-hidd='0'>解锁</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>重置密码</button>"
+                    if (data === 0) {
+                        return ""
                     } else {
-                        return "<button type='button' class='btn1 color_ora notazirez' data-hidd='1'>锁定</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>重置密码</button>"
+                        var ace = "<button type='button' class='btn1 color_green removeUsname ' data-hidd='" + full.id + "'>删除</button><button type='button' class='btn1 course_remove removeShuju' data-toggle='modal' data-target='#lg-modal1'>重置密码</button>";
+
+                        return ace;
                     }
 
                 }
@@ -328,7 +383,7 @@
                 window.localData.push(v._aData);
             })
 
-            localStorage.setItem("peoples",JSON.stringify(window.localData));
+            localStorage.setItem("peoples", JSON.stringify(window.localData));
             //点击编辑
             var aa2 = '';
             var aa5 = '';
@@ -342,9 +397,8 @@
                 var shu = ace.regex("id", aa5, window.localData);
 
                 shu.password = "888888";
-                var dataset = shu;
 
-                ace.ajaxPost("/user/update", dataset, function (data) {
+                ace.ajaxPost("/user/update", shu, function (data) {
                     if (data.type === 0) {
                         $("#error-modal1").modal();
 
@@ -353,45 +407,33 @@
             })
 
             var aa1 = '';
-            //锁定与解锁
-            $('.notazirez').on('click', function () {
-                var that = $(this);
+            var aa3 = '';
+            $(".removeUsname").click(function () {
                 aa1 = $(this).parent().parent().children().eq(0).text();
-                var shu = ace.regex("id", aa1, window.localData);
+                aa3 = $(this).parent().parent().children().eq(1).text();
+                window.tre = $(this).parent().parent()[0];
 
-                if ($(this).attr('data-hidd') === "0") {
-                    shu.lock = 1
-                } else {
-                    shu.lock = 0
-                }
-                var dataset = shu;
-                mo.ajaxform("/user/update", dataset, function (data) {
-                    if (data.type === 0) {
-                        if (that.attr('data-hidd') === "0") {
-                            that.removeClass("color_green");
-                            that.addClass("color_ora");
-                            that.text("锁定");
-                            that.attr("data-hidd", "1");
-                            $("#modal_removeS").show();
-                            $("#modal_remove").hide();
-
-                        } else if (that.attr('data-hidd') === "1") {
-                            that.removeClass("color_ora");
-                            that.addClass("color_green");
-                            that.text("解锁");
-                            that.attr("data-hidd", "0");
-                            $("#modal_removeS").hide();
-                            $("#modal_remove").show();
-
-                        }
-                        $("#error-modal").modal();
-                    }
-                });
-
-
-            });
+                $(".error-span1").text(aa3);
+                $(".course_bj2").attr("data-hiId", aa1);
+                $("#lg-modal1").modal();
+            })
 
         });
+        $(".course_bj2").click(function () {
+            var hiId = $(this).attr("data-hiId");
+            var shu = ace.regex("id", hiId, window.localData);
+
+            ace.ajaxPost("/user/delete", shu, function (data) {
+                if (data.type === 0) {
+                    $("#error-modal").modal();
+                    var table = $('.data-table').DataTable();
+                    table.row(window.tre).remove().draw();
+                } else {
+                    $("#error-modal2").modal();
+                }
+            })
+
+        })
 
     });
 

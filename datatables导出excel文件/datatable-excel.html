@@ -10,19 +10,19 @@
 <table id="example" class="display" style="width:100%">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Position</th>
-        <th>Office</th>
-        <th>Age</th>
-        <th>Start date</th>
-        <th>Salary</th>
+        <th>姓名</th>
+        <th>地位</th>
+        <th>文件</th>
+        <th>年龄</th>
+        <th>开始时间</th>
+        <th>结束时间</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td>Tiger Nixon</td>
         <td>System Architect</td>
-        <td>Edinburgh</td>
+        <td></td>
         <td>61</td>
         <td>2011/04/25</td>
         <td>$320,800</td>
@@ -39,7 +39,7 @@
         <td>Ashton Cox</td>
         <td>Junior Technical Author</td>
         <td>San Francisco</td>
-        <td>66</td>
+        <td></td>
         <td>2009/01/12</td>
         <td>$86,000</td>
     </tr>
@@ -63,7 +63,7 @@
         <td>Brielle Williamson</td>
         <td>Integration Specialist</td>
         <td>New York</td>
-        <td>61</td>
+        <td></td>
         <td>2012/12/02</td>
         <td>$372,000</td>
     </tr>
@@ -487,13 +487,65 @@
     </tr>
     </tfoot>
 </table>
+<button id="butns">进行数据隐藏</button>
 </body>
 <script src='js/jquery-1.12.4.js'></script>
 <script src='js/jquery.dataTables.min.js'></script>
 <script src='js/dataTables.buttons.min.js'></script>
 <script src='js/jszip.min.js'></script>
 <script src='js/buttons.html5.min.js'></script>
+<script src="js/button.print.min.js"></script>
+<script src="js/buttons.colVis.min.js"></script>
 <script type="text/javascript">
+    $("#butns").click(function(){
+        var table = $('#example').DataTable();
+        var allData = table.columns(0).data();//得到所有列的数据
+        var allData1 = table.columns().indexes();//得到所有列的索引
+        var allData2 = table.columns();//得到所有列的数据
+        var allData3 = table.columns().visible(4);//显示所有的加载的数据
+//        var allData3 = table.columns().clear();//清楚数据,不能点击下一页
+        var column = table.column('#column-3');
+        console.log(column);
+        console.log(allData);
+        console.log(allData1);
+        console.log(allData2);
+        fnShowHide(3)
+        fnShowHide(0)
+    })
+//    table.row.add( [
+//        counter +'.1',
+//        counter +'.2',
+//        counter +'.3',
+//        counter +'.4',
+//        counter +'.5'
+//    ] ).draw();添加行,数组里面的参数要和表格行的个数对应起来
+    //顺序为表格中的索引,
+    function fnShowHide(iCol ){
+        var oTable = $('#example').dataTable();
+        var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+        oTable.fnSetColumnVis( iCol , bVis ? false : true );
+    }
+//    var table = $('#example').DataTable( {
+//        columnDefs: [
+////            { visible: false, targets: 1 }//初始化加载的时候,隐藏某一行
+//        ],
+//        columns: [//给每一列申明一个名称
+//            { name: 'first-name' },
+//            { name: 'last-name' },
+//            { name: 'position' },
+//            { name: 'location' },
+//            { name: 'age' },
+//            { name: 'salary' }
+//        ]
+//    } );
+    $('#example tbody').on( 'click', 'td', function () {
+        var columnData = table
+            .column($(this).index()+':visIdx')
+            .data();
+        console.log($(this).index()+':visIdx');//获取点击列的索引
+        console.log(table.column( 'salary:name' ).data());//通过上述的命名方法,可以获取到当前列的所有数据
+    } );
+
     $(document).ready(function () {
         $('#example').DataTable({
             dom: 'Bfrtip',//下方创建完按钮之后,需要将按钮的显示位置进行设置,在界面上才能看到按钮的显示位置
@@ -503,6 +555,13 @@
                 className: 'cad', //按钮的class类名
                 //title: '通过datatable导出excel',//导出文件的文件名
                 extension: '.xlsx',//创建文件的扩展名
+                columnDefs: [{
+                    targets:[1,2,3],//指定哪几列
+                    render: function(data){
+                        console.log(data);
+                        return "\u200C" + data ;
+                    }
+                }],
                 header: true,//excel是否显示表头
 //                action: function (e, dt, button, config) {//action出来之后,就不能正常创建excel文件
 //                    console.log(e);
@@ -516,19 +575,21 @@
 //                    // Do something with the 'info' variable when creating custom export
 //                },
                 customize: function (xlsx) {
+//                    console.log(xlsx);
                     var sheet = xlsx.xl.worksheets['sheet1.xml'];//选择第一个表格文件的名称
                     //这边的B表示的是,在第一个文件中的第二列,同时设置上加粗attr
 //                    $('row c[r^="C"]', sheet).attr('s', '11');
                     //可以单独的设置属性,增加判断条件设置相应的属性信息
                     $('row c[r^="C"]', sheet).each(function (i, v) {
-                        console.log(i);
-                        console.log(v);
+//                        console.log(i);
+//                        console.log(v);
                         if ($('is t', this).text() == 'New York') {
-                            $(this).attr('s', '11');
+                            $(this).attr('s', '11');//后面的数字为样式表,官网里面有,一共67种样式
                         }
                     });
 
                 },
+//
 //                'exportOptions': { //从DataTable中选择要收集的数据。这包括列、行、排序和搜索的选项。请参阅button.exportdata()方法以获得完整的详细信息——该参数所提供的对象将直接传递到该操作中，以收集所需的数据，更多options选项参见：https://datatables.net/reference/api/buttons.exportData()
 //                    'format': { //用于导出将使用的单元格格式化函数的容器对象 format有三个子标签，header，body和foot
 //                        header: function ( data, columnIdx ) {//导出表格顶部信息

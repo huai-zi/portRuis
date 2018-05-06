@@ -78,7 +78,7 @@
         margin-bottom: 0px !important;
     }
 </style>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -259,6 +259,27 @@
                         data-dismiss="modal">
                     确定
                 </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--提示信息-->
+<div class="modal fade" id="info-modal1" tabindex="-1" role="dialog" aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>提示</h4>
+            </div>
+            <div class="modal-body">
+                试卷提交失败,请联系管理员,重新测似
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn btn-danger" id="remove" data-dismiss="modal">确认</button>
+
             </div>
         </div>
     </div>

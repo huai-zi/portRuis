@@ -254,6 +254,12 @@ define(function (require, exports, module) {
                 },
                 fileHandler: function (e) {
                     var me = h;
+                    if(this.files[0] === undefined){
+                        me.progress.style = "width:0%";
+                        $(fontShow).text('')
+                        return false
+                    }
+                    var me = h;
                     me.loaded = 0;
 
                     var file = me.file = this.files[0];
@@ -284,10 +290,12 @@ define(function (require, exports, module) {
 //                console.log(e);
                     //me,为读取完全整个文件的数据大小
                     //     console.log(me);
-                    me.progress.style = "width:" + parseInt((me.loaded / me.total) * 100) + "%";
+                    var ace =  parseInt((me.loaded / me.total) * 100) + "%";
+                    console.log(ace);
+                    $("#Progress").css("width",ace);
+                    // me.progress.style = "width:" +ace;
 
                     var values = (me.loaded / me.total) * 100;
-
                     if (values >= 100) {
                         $(fontShow).html("已上传完成");
                         $(fontShow).attr('title', "已上传完成");

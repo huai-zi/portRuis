@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="stylesheets/css/subject.css">
 </head>
 
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -99,6 +99,7 @@
                     </div>
                 </div>
             </div>
+
             <div id="example"></div>
         </div>
     </div>
@@ -154,9 +155,9 @@
         ];
         ace.ajaxGet("/paper/tests", function (data) {
             var paperId = [];
-            $(data).each(function(i,v){
+            $(data).each(function (i, v) {
                 //考试题
-                if(v.paperType === 1){
+                if (v.paperType === 1) {
                     paperId.push(v);
                 }
             });

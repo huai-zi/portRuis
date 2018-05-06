@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<embed src='http://player.youku.com/player.php/sid/XMzU4NDg5NjI0OA==/v.swf' allowFullScreen='true'
+       quality='high' width='480' height='400' align='middle' allowScriptAccess='always'
+       type='application/x-shockwave-flash'></embed>
+</body>
+<script>
+    function hasFlash() {
+        var swf;
+        console.log(navigator.userAgent);
+        console.log(navigator.userAgent.indexOf("MSIE"));
+        if (navigator.userAgent.indexOf("MSIE") > 0) {//ie11不能检测到
+            try {
+                var swf = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
+                alert('已安装flash插件');
+            }
+            catch (e) {
+                alert('没有安装flash插件');
+            }
+        }
+        if (navigator.userAgent.indexOf("Firefox") > 0 || navigator.userAgent.indexOf("Chrome") > 0) {
+            swf = navigator.plugins["Shockwave Flash"];
+            console.log(swf);
+            (swf) ? alert('已安装flash插件11') : alert('没有安装flash插件11');
+        }
+    }
+    hasFlash()
+</script>
+</html>

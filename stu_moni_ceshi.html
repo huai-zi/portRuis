@@ -15,7 +15,7 @@
         padding: 3px !important;
     }
 
-    #closeLocal ,#aheadFinish{
+    #closeLocal, #aheadFinish {
         display: none;
     }
 
@@ -74,7 +74,7 @@
         margin-bottom: 0px !important;
     }
 </style>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -125,7 +125,7 @@
             </ul>
         </div>
         <div class="peinsder-box">
-            <form name="forms">
+            <form name="forms" id="forms">
                 <div class="row" id="peinsder-box">
                     <!--显示课程设备学习图解-->
                     <div class="container-fluid onile-box">
@@ -154,7 +154,7 @@
                                 <div class="subject-next">
                                     <input type="hidden" name="id" value="" id="hidden_id">
 
-                                    <span>
+                                    <span class="subject-actions">
                                         <span id="aheadFinish" class="btn warning-btn"
                                               style="background-color: #f8ac59;color: #fff;">操作考核</span>
                                     <span id="aheadFinish1" class="btn warning-btn"
@@ -260,6 +260,27 @@
         </div>
     </div>
 </div>
+<!--提示信息-->
+<div class="modal fade" id="info-modal1" tabindex="-1" role="dialog" aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="modal-error-label"><i class="fa fa-warning"></i>提示</h4>
+            </div>
+            <div class="modal-body">
+                试卷提交失败,请联系管理员,重新测似
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn btn-danger" id="remove" data-dismiss="modal">确认</button>
+
+            </div>
+        </div>
+    </div>
+</div>
 <!--向上按钮-->
 <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
 </body>
@@ -269,13 +290,12 @@
 <script src='javascripts/stu_moni.js'></script>
 <script src="javascripts/peinsder.js"></script>
 <script src='javascripts/course.js'></script>
-
 <script id="papers" type="text/html">
     {{each shiti as value index}}
     <div class="tab-pane" role="tabpanel" id="collapseOne{{index}}">
         <div class="subject-question">
             <p style="margin-left: 21.0pt;text-align: left"><span
-                    style="margin-right: 15px;">[{{ttm(value.type)}}]</span><br>{{index+1}}、{{value.title}}</p>
+                    style="margin-right: 15px;">[{{ttm(value.type)}}]</span><br>{{index+1}}、{{value.body}}</p>
         </div>
         <div class="container-fluid col-xs-7">
             {{radiosa(value.answer,value.id)}}
@@ -288,7 +308,7 @@
     {{each shiti as value index}}
     <li role="presentation" class="">
         <a href="#collapseOne{{index}}" aria-controls="#collapseOne{{index}}" role="tab" class="collapseOne{{index}}"
-           data-toggle="tab" data-id="{{index}}">{{index+1}}、{{value.title}}<span
+           data-toggle="tab" data-id="{{index}}">{{index+1}}、{{value.body}}<span
                 class="yikncang{{value.id}}">(未回答)</span></a>
     </li>
     {{/each}}
@@ -303,17 +323,9 @@
         $("#aheadFinish1").click(function () {
             $("#info-modal").modal();
         })
-        $("#buttons").click(function () {
-            var cid = JSON.parse(localStorage.getItem("onlies"));
-
-            modealz.numcs(url, "forms", +cid, function () {
-                window.location.href = ".html";
-            })
-
-        })
 
         $('#closeLocal').click(function () {
-            window.location.href = '.html';
+            window.location.href = 'stu_moni_test.html';
         });
     })
 </script>

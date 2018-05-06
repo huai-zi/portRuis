@@ -267,7 +267,7 @@
         background-color: orange !important;
     }
 </style>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -574,31 +574,9 @@
         }
     }
 
-    function collapseAccordionSub(subId, id) {
-        var subItem = $("#" + id);
-        var target = $("#" + subId)[0];
-        if (target.innerText == "折叠") {
-            $("div[tag='" + id + "'").collapse('hide');
-            target.innerText = "展开";
-        } else {
-            target.innerText = "折叠";
-            $("div[tag='" + id + "'").collapse('show');
-        }
-    }
-
-    function collapseAccordion(target, id) {
-        var subItem = $("#" + id);
-        if (target.innerText == "折叠") {
-            $("div[tag='" + id + "'").collapse('hide');
-            target.innerText = "展开";
-        } else {
-            target.innerText = "折叠";
-            $("div[tag='" + id + "'").collapse('show');
-        }
-    }
-
     function showModul(url) {
         location.href = url;
+
         return false;
     }
 

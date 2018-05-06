@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="stylesheets/css/subject.css">
     <link rel="stylesheet" href="stylesheets/css/course.css">
 </head>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -339,7 +339,7 @@
                 $(data.aoData).each(function (i, v) {
                     if (+textId === v._aData.id) {
                         $("#course_name").text(v._aData.name);
-                        $("#course_img").text(v._aData.name);
+                        $("#course_img").text(v._aData.parentName);
                         $("#course_xs").text(v._aData.note);
                     }
                 })

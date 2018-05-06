@@ -18,11 +18,9 @@
         background-color: #f9f9f9 !important;
     }
 
-    table td:first-child, table th:first-child {
-        display: block !important;
-    }
+
 </style>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -76,7 +74,7 @@
                                     <i class="fa fa-university" aria-hidden="true"></i>部门管理
                                 </a>
                             </li>
-                            <li  class="">
+                            <li class="">
                                 <a href='facility.html'>
                                     <i class="fa fa-diamond" aria-hidden="true"></i>设备管理
                                 </a>
@@ -119,7 +117,8 @@
                             </li>
                             <li class=""><a href='pemanage.html'> <i class="fa fa-edit" aria-hidden="true"></i>PEInside管理
                             </a></li>
-                            <li class=""><a href='admin_clear.html'> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件 </a></li>
+                            <li class=""><a href='admin_clear.html'> <i class="fa fa-trash" aria-hidden="true"></i>清理临时文件
+                            </a></li>
                             <li class=""><a href='download.html'> <i class="fa fa-download" aria-hidden="true"></i>软件下载
                             </a></li>
                         </ul>
@@ -168,6 +167,7 @@
                                             width="100%">
                                         <thead>
                                         <tr>
+                                            <td>标识</td>
                                             <td>资源名称</td>
                                             <td>所属部分</td>
                                             <td>资源文件</td>
@@ -175,6 +175,7 @@
                                         </tr>
                                         </thead>
                                     </table>
+                                    <span class="read_resource">请选择需要浏览的资源</span>
                                 </div>
                             </div>
                             <div class="Add_course_bottom text-center">
@@ -216,6 +217,7 @@
         });
 
         var options = [
+            {"data": "id"},
             {"data": "name"},
             {"data": "parentName"},
             {"data": "note"},
@@ -227,9 +229,36 @@
                 }
             }
         ];
-        mo.datatables(url, options, [0, 3], function () {
 
-        });
+        ace.ajaxGet("", function (data) {
+            window.sxx = data;
+            if (data.length === 0) {
+                $(".read_resource").show();
+            } else {
+                $(".read_resource").hide();
+                mo.datatables(data, options, [0, 3, 4], function () {
+
+                });
+            }
+
+
+        })
+
+        var sx = [];
+        $("#course-select").on("change", function () {
+            $(window.sxx).each(function (i, v) {
+                if (v.id === +this.val()) {
+                    sx.push(v);
+                }
+            })
+            if (sx.length === 0) {
+                $(".read_resource").show();
+            } else {
+                $(".read_resource").hide();
+                mo.localUp(sx)
+            }
+
+        })
 
     })
 </script>

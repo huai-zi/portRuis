@@ -21,6 +21,8 @@ $(function () {
         data = {
             "shiti": data
         }
+        var peTest = data[0].test;
+
         template.config('escape', false)
         /*隐藏没有显示的内容*/
         template.helper('show', function (ra) {
@@ -76,11 +78,22 @@ $(function () {
             var radiosA = $("#forms").serializeArray();
             if (radiosA.length === data.shiti.length) {
                 var dataset = {
-                    "id": cid.id,
+                    "id": aa4.id,
                     "answer": radiosA
                 }
-                modealz.ajaxPost("/paper/answer", dataset, function (data) {
-                    window.location.href = "test_peinsder.html" + '#' + data.test;//pe插件路径
+                modealz.ajaxPost("/paper/answer", dataset, function (datas) {
+                    if (datas.type === 0) {
+                        var sss = {
+                            "type":1,
+                            "id":aa4.id
+                        }
+                        localStorage.setItem('test_stu_moni',JSON.stringify(sss));
+
+                        window.location.href = "test_peinsder.html" + '#' + peTest;//pe插件路径
+                    } else {
+                        $("#info-modal1").modal();
+
+                    }
                 });
 
             } else {
@@ -95,7 +108,7 @@ $(function () {
             var radiosA = $("#forms").serializeArray();
             if (radiosA.length === data.shiti.length) {
                 var dataset = {
-                    "id": cid.id,
+                    "id": aa4.id,
                     "answer": radiosA
                 }
                 modealz.ajaxPost("/paper/answer", dataset, function (data) {

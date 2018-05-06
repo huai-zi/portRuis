@@ -89,7 +89,6 @@ var excels = (function () {
                 for (var key in v) {
                     var bb = v[key];
                     //删除填写格式不规范的对象
-                    console.log(v);
                     delete v[key];
                     //将填写出的对象进行清除空格处理
                     key = $.trim(key);
@@ -166,13 +165,17 @@ var excels = (function () {
                 }
             ],
             buttons: [ {
-                extend: 'excelHtml5',
-                customize: function( xlsx ) {
-                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                extend: 'excelHtml5',//导出文件格式为excel
+                text: '导出',//按钮文字
+                className: 'cad', //按钮的class类名
+                //title: '通过datatable导出excel',//导出文件的文件名
+                extension: '.xlsx',//创建文件的扩展名
+                header: true,//excel是否显示表头
+                customize: function (xlsx) {
 
-                    $('row c[r^="C"]', sheet).attr( 's', '2' );
                 }
             } ],
+            dom: 'Bfrtip',//下方创建完按钮之后,需要将按钮的显示位置进行设置,在界面上才能看到按钮的显示位置
             destroy: true,//清空数据
             ordering: false,
             iDisplayLength: 5,

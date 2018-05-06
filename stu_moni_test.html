@@ -32,7 +32,7 @@
         display: none;
     }
 </style>
-<!--[if lt IE 8]>
+<!--[if lt IE 9]>
 <script type="text/javascript" src="javascripts/html5.js"></script>
 <script type="text/javascript" src="javascripts/respond.js"></script>
 <![endif]-->
@@ -192,6 +192,34 @@
         </div>
     </div>
 </div>
+
+<!--培训提示信息-->
+<div class="modal fade" id="lg-modal1" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label"
+     style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header state modal-primary">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="error-span1">试卷抽取成功,进行模拟测试吧</span>
+
+            </div>
+            <div class="modal-footer">
+                <!--确认删除-->
+                <button type="button" class="btn " data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--向上按钮-->
 <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
 </body>
@@ -309,14 +337,13 @@
                 }
             },
             {
-                "data": "",
+                "data": "submitTime",
                 "render": function (data, type, full, set) {
                     /*返回的数据拼接*/
-                    if (data ===) {
-                        return "<button type='button' class='btn1 course_bj notazirez'>开始考试</button>"
-
+                    if (data === null) {
+                        return "<button type='button' class='btn1 course_bj notazirez'>开始考试</button>";
                     } else {
-                        return false
+                        return ""
                     }
                 }
             }
@@ -329,6 +356,8 @@
                     paperId.push(v);
                 }
             });
+            window.cousId = paperId;//保存课程相关模拟试卷
+
             if (paperId.length === 0) {
                 $("#basic-table").hide();
                 $("#basic-table_wrapper").hide();
@@ -336,11 +365,9 @@
                 return false
             } else {
                 mo.datatables(paperId, options, [2, 3, 4, 5], function (data) {
-
                     //点击编辑
                     var aa1 = '';
                     var aa2 = '';
-                    window.aa5 = '';
                     //开始考试
                     $('.notazirez').click(function () {
                         aa1 = $(this).parent().parent().children().eq(0).text();
@@ -352,60 +379,65 @@
                         window.location.href = "stu_moni_ceshi.html"
                     });
 
-
                 });
             }
-
 
         })
 
         //课程进行数据变化
         ace.select_curriculum.on('change', function () {
             var that = $(this);
-            var val = that.val();
-
-            var dataset = {
-                "id": val
-            };
-            //根据课程id查询当前模拟试卷
-            //数据重新加载
-            ace.ajaxPost("/questions/readByName", dataset, function (data) {
-
+            var val = that.val();//课程id
+            var newCou = [];
+            $(window.cousId).each(function (i, v) {
+                if (+val === v.courseId) {
+                    newCou.push(v);
+                }
             })
-            if (val === '') {
+            if (newCou.length === 0) {
                 $("#basic-table").hide();
                 $("#basic-table_wrapper").hide();
                 $(".section-foot").show();
             } else {
-                mo.tables();
+                mo.localUp(newCou);
                 $("#basic-table").show();
                 $("#basic-table_wrapper").show();
                 $(".section-foot").hide();
             }
 
-            ace.ajaxPost(url, dataset, function (data) {
-                //加载到页面上
-                if (data === '') {
-
-                }
-
-            });
         });
 
 
+        //抽取模拟试卷
         $("#test_button").click(function () {
             var facility = $("#facility").val();
             var course = $("#curriculum").val();
+
             if (facility === "" || course === '') {
                 $('#error-modal2').modal();
 
             } else {
                 var dataset = {
-                    "id": course
+                    "id": course//课程id
                 }
                 ace.ajaxPost("/paper/draw", dataset, function (data) {
+                    //抽取成功
                     if (data.type === 0) {
-                        location.href = "";
+                        $('#lg-modal1').modal();
+                        ace.ajaxGet("/paper/tests", function (data) {
+                            var paperId = [];
+                            $(data).each(function (i, v) {
+                                //模拟试卷
+                                if (v.paperType === 2) {
+                                    paperId.push(v);
+                                }
+                            });
+                            mo.localUp(paperId);
+                            $("#basic-table").show();
+                            $("#basic-table_wrapper").show();
+                            $(".section-foot").hide();
+                        })
+
                     } else {
                         $(".section-foot").show();
                         $("#basic-table").hide();
