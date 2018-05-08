@@ -171,7 +171,7 @@
                             <i class="fa fa-ellipsis-v "></i>编辑检修规划
                         </div>
                         <h3>检修规划信息</h3>
-                        <form id="forms" enctype="multipart/form-data" name="forms">
+                        <form id="formw" enctype="multipart/form-data" name="formw">
 
                             <div class="container-fluid">
                                 <div class="clearfix">
@@ -304,11 +304,11 @@
             });
         })
 
-        var forms = document.forms;
-        forms.name.value = courses.name;
-        forms.id.value = courses.id;
+        var formw = document.formw;
+        formw.name.value = courses.name;
+        formw.id.value = courses.id;
         $("#files").val(courses.file)
-        forms.note.value = courses.note;
+        formw.note.value = courses.note;
         //选中
         $("#course-select").children().each(function (i, v) {
             if ($(v).text().indexOf(courses.name) !== -1) {
@@ -318,10 +318,10 @@
         })
 
         $('.notazirez').click(function () {
-            if (forms.name.value === "") {
+            if (formw.name.value === "") {
                 $(".warm-xinxi").show()
             } else {
-                mo.numcs("/overhaul/update", "forms", "", function () {
+                mo.numcs("/overhaul/update", "formw", "", function () {
                     $(".warm-xinxi").hide();
                     $("#error-modal").modal();
                     window.location.href = "project.html";

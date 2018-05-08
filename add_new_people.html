@@ -171,7 +171,7 @@
                             <i class="fa fa-ellipsis-v "></i>添加用户
                         </div>
                         <h3>用户信息</h3>
-                        <form id="forms" enctype="multipart/form-data" name="forms">
+                        <form id="formw" enctype="multipart/form-data" name="formw">
 
                             <div class="container-fluid">
                                 <div class="clearfix">
@@ -347,7 +347,7 @@
         var mo = new models();
         //点击添加判断
         $('.notazirez').click(function () {
-            var formas = document.forms;
+            var formas = document.formw;
 
             //判断内容值,并进行传输
             if (formas.number.value === "") {
@@ -368,7 +368,7 @@
                 return false
 
             } else {
-                mo.numcs("/user/create", "forms", "", function (data) {
+                mo.numcs("/user/create", "formw", "", function (data) {
                     if (data.type === 0) {
                         $("#error-modal").modal();
                         window.location.href = "people.html";

@@ -51,14 +51,13 @@ var PE = (function () {
 
     //获取值并进行数据渲染
     function templates(url, json, id) {
+        var fac = [];
+        var fac1 = [];
         if (url !== "") {
             $.ajax({
                 url: url,
                 type: "get",
                 success: function (data) {
-
-                    var fac = [];
-                    var fac1 = [];
                     //对特殊数据进行处理,双重身份
                     $(data).each(function (i, v) {
                         if (v.parentId !== 0) {
@@ -130,7 +129,7 @@ var PE = (function () {
             "ex": ex
         };
         bb = [];
-        var htms = template('peinsders', mes)
+        var htms = template('peinsders', mes);
         document.getElementById(id).innerHTML = htms;
 
         $('.peinsder-imgas').on("click", function () {

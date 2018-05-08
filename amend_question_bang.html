@@ -181,7 +181,7 @@
                             <i class="fa fa-ellipsis-v "></i>编辑题目
                         </div>
                         <h3>题目信息</h3>
-                        <form id="forms" enctype="multipart/form-data" name="forms">
+                        <form id="formw" enctype="multipart/form-data" name="formw">
                             <div class="container-fluid">
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
@@ -441,7 +441,7 @@
     })
     $(function () {
         var mo = new models();
-        var forms = document.forms;
+        var formw = document.formw;
 
         //获取到比较的数据值
         var question = JSON.parse(localStorage.getItem("question"));
@@ -481,8 +481,8 @@
             $(".steam_shiti1").hide();
         }
 
-        forms.id.value = question.id;//题目id
-        forms.modelId.value = question.modelId;//题目序号
+        formw.id.value = question.id;//题目id
+        formw.modelId.value = question.modelId;//题目序号
         mo.selected("#courseId", question.courseId);//所属课程选中
         mo.selected("#steam_shiti", question.type);//类型
         $("#images").val(question.image);//图片隐藏
@@ -568,7 +568,7 @@
                 $(".steam_shiti0").remove();
                 $(".steam_shiti1").remove();
             }
-            mo.numcs("/questions/update", "forms", "", function () {
+            mo.numcs("/questions/update", "formw", "", function () {
 
                 $("#error-modal").modal();
                 window.location.href = "question_bang.html";

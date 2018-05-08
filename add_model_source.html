@@ -139,7 +139,7 @@
                         <div class="Add_course_head">
                             <i class="fa fa-ellipsis-v "></i>添加模型资源
                         </div>
-                        <form id="forms" enctype="multipart/form-data" name="forms">
+                        <form id="formw" enctype="multipart/form-data" name="formw">
                             <h3>资源信息</h3>
                             <div class="container-fluid">
                                 <div class="clearfix">
@@ -289,17 +289,17 @@
         });
         //点击添加判断
         $('.notazirez').click(function () {
-            var forms = document.forms;
-            if (forms.name === "") {
+            var formw = document.formw;
+            if (formw.name === "") {
                 $(".warm-xinxi").show();
                 return false
 
-            } else if (forms.parent === "") {
+            } else if (formw.parent === "") {
                 $("#lg-modal1").modal();
                 return false
             }
 
-            mo.numcs(url, "forms", "", function (data) {
+            mo.numcs(url, "formw", "", function (data) {
                 if (data.type === 0) {
                     window.location.href = "model.html";
                 } else {

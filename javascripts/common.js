@@ -67,8 +67,8 @@ define(function (require, exports, module) {
 
 
         /*异步上传form表单*/
-        function ajaxForm(url, forms, callback) {
-            var formData = new FormData($("#" + forms)[0]);
+        function ajaxForm(url, formw, callback) {
+            var formData = new FormData($("#" + formw)[0]);
             $.ajax({
                 url: url,
                 type: 'POST',

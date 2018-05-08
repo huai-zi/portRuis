@@ -171,7 +171,7 @@
                             <i class="fa fa-ellipsis-v "></i>编辑设备
                         </div>
                         <h3>设备信息</h3>
-                        <form id="forms" name='forms' enctype="multipart/form-data">
+                        <form id="formw" name='formw' enctype="multipart/form-data">
 
                             <div class="container-fluid">
                                 <div class="clearfix">
@@ -284,20 +284,20 @@
         ace.filesUpload('modelImg', 'Progress', '.sr-only');
 
         var courses = JSON.parse(localStorage.getItem("facility"));
-        var forms = document.forms;
-        forms.name.value = courses.name;
+        var formw = document.formw;
+        formw.name.value = courses.name;
         $("#ids").val(courses.id);
         $("#images").val(courses.image);
         $("#model_img").attr('src', courses.image);
-        forms.note.value = courses.note;
+        formw.note.value = courses.note;
 
         var mo = new models();
         //点击添加判断
         $('.notazirez').click(function () {
-            if (forms.name.value === "") {
+            if (formw.name.value === "") {
                 $(".warm-xinxi").show()
             } else {
-                mo.numcs("/course/update", "forms", "", function () {
+                mo.numcs("/course/update", "formw", "", function () {
                     $(".warm-xinxi").hide();
                     $("#error-modal").modal();
 

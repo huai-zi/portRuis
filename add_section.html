@@ -171,7 +171,7 @@
                             <i class="fa fa-ellipsis-v "></i>添加部门
                         </div>
                         <h3>部门信息</h3>
-                        <form id="forms" enctype="multipart/form-data" name="forms">
+                        <form id="formw" enctype="multipart/form-data" name="formw">
 
                             <div class="container-fluid">
                                 <div class="clearfix">
@@ -262,7 +262,7 @@
         var ace = new main.comm();
         ace.localHref(".removeShuju", "section.html");
         var datass = [];
-        var forms = document.forms;
+        var formw = document.formw;
 
         ace.ajaxGet("/department/read", function (data) {
             var num = 0;
@@ -279,10 +279,10 @@
         //点击添加判断
 
         $('.notazirez').click(function () {
-            if (forms.name.value === "") {
+            if (formw.name.value === "") {
                 $(".warm-xinxi").show();
             } else {
-                mo.numcs("/department/create", "forms", "", function () {
+                mo.numcs("/department/create", "formw", "", function () {
                     $(".warm-xinxi").hide();
                     $("#error-modal").modal();
                     window.location.href = "section.html";

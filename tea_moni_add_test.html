@@ -190,7 +190,7 @@
                                 课程
                                 <input type="text" readonly="readonly" id="curriculum" value="">
                                 试卷名称
-                                <input type="text" name="test_name" id="forms_test" value="">
+                                <input type="text" name="test_name" id="formw_test" value="">
 
 
                             </div>
@@ -296,7 +296,7 @@
         $('#facility').val(local.facilityT);
         $('#curriculum').val(local.courseT);
         var flo = local.courseT + Math.floor(Math.random() * 1000);
-        $("#forms_test").val(flo);
+        $("#formw_test").val(flo);
         var dataset = {
             "id": locals.course
         }
@@ -366,12 +366,12 @@
 
         $("#test_button").click(function () {
             var dataset = {
-                "name": $("#forms_test").val(),
+                "name": $("#formw_test").val(),
                 "machineId": local.facility,
                 "courseId": local.course,
                 "questionId": window.seleIds
             };
-            if ($("#forms_test").val() === "") {
+            if ($("#formw_test").val() === "") {
                 $("#error-modal2").modal();
             } else {
                 ace.ajaxPost("/paper/create", dataset, function () {

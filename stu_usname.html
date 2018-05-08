@@ -107,7 +107,7 @@
                     <div class="Add_course_head">
                         <i class="fa fa-ellipsis-v "></i>更新账号信息
                     </div>
-                    <form id="forms" enctype="multipart/form-data" name="forms">
+                    <form id="formw" enctype="multipart/form-data" name="formw">
 
                         <div class="container-fluid">
                             <div class="clearfix">
@@ -267,7 +267,7 @@
         })
         //数据保存
         $(".notazirez").click(function () {
-            mo.numcs("/user/update", "forms", "", function (data) {
+            mo.numcs("/user/update", "formw", "", function (data) {
                 if (data.type === 0) {
                     $("#error-modal").modal();
                     window.location.href = "oeinsder.html";

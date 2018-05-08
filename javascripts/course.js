@@ -67,13 +67,13 @@ var models = (function () {
     }
 
     //传递图片信息
-    function numcs(url, forms, cid, callback) {
-        var formData = new FormData($("#" + forms)[0]);
+    function numcs(url, formw, cid, callback) {
+        var formData = new FormData($("#" + formw)[0]);
         if (typeof(cid) === "number") {
             formData.append("id", cid);
 
         } else if (cid !== "") {
-            var tid = document.forms.cid.value;
+            var tid = document.formw.cid.value;
             formData.append("id", tid);
         }
 
@@ -183,14 +183,14 @@ var models = (function () {
             //选项内容
             html +=
                 "<label>" +
-                "<input type='checkbox' name='answer' value='" +
+                "<input type='checkbox' name='radios"+zm[i]+"' value='" +
                 v + "'> " +
                 zm[i] + '、' + v +
                 "</label>" + "<br>";
             //正确答案
             radios +=
                 "<label>" +
-                "<input type='radio' name='right' data-en='" + zm[i] +
+                "<input type='radio' name='answer' data-en='" + zm[i] +
                 "' value='" +
                 v + "'> " +
                 zm[i] +
@@ -329,7 +329,7 @@ var models = (function () {
 })();
 
 var mo = new models();
-var modalss = ['info-modal1', 'lg-modal1', 'info-modal', 'error-modal', 'error-modal2'];
+var modalss = ['info-modal1', "error-modal1", 'lg-modal1', 'info-modal', 'error-modal', 'error-modal2'];
 mo.modtal(modalss);
 function loginas() {
     var logins = JSON.parse(localStorage.getItem("login"));

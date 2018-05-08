@@ -181,7 +181,7 @@
                             <i class="fa fa-ellipsis-v "></i>添加题目
                         </div>
                         <h3>题目信息</h3>
-                        <form id="forms" enctype="multipart/form-data" name="forms">
+                        <form id="formw" enctype="multipart/form-data" name="formw">
                             <div class="container-fluid">
                                 <div class="clearfix">
                                     <div class="col-xs-3 text-right">
@@ -494,7 +494,7 @@
                 $(".steam_shiti0").remove();
                 $(".steam_shiti1").remove();
             }
-            mo.numcs("/questions/create", "forms", "", function () {
+            mo.numcs("/questions/create", "formw", "", function () {
 
                 $("#error-modal").modal();
                 window.location.href = "question_bang.html";

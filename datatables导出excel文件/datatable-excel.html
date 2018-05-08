@@ -497,7 +497,7 @@
 <script src="js/button.print.min.js"></script>
 <script src="js/buttons.colVis.min.js"></script>
 <script type="text/javascript">
-    $("#butns").click(function(){
+    $("#butns").click(function () {
         var table = $('#example').DataTable();
         var allData = table.columns(0).data();//得到所有列的数据
         var allData1 = table.columns().indexes();//得到所有列的索引
@@ -512,39 +512,50 @@
         fnShowHide(3)
         fnShowHide(0)
     })
-//    table.row.add( [
-//        counter +'.1',
-//        counter +'.2',
-//        counter +'.3',
-//        counter +'.4',
-//        counter +'.5'
-//    ] ).draw();添加行,数组里面的参数要和表格行的个数对应起来
+
+    //    table.row.add( [
+    //        counter +'.1',
+    //        counter +'.2',
+    //        counter +'.3',
+    //        counter +'.4',
+    //        counter +'.5'
+    //    ] ).draw();添加行,数组里面的参数要和表格行的个数对应起来
     //顺序为表格中的索引,
-    function fnShowHide(iCol ){
+    function fnShowHide(iCol) {
         var oTable = $('#example').dataTable();
         var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
-        oTable.fnSetColumnVis( iCol , bVis ? false : true );
+        oTable.fnSetColumnVis(iCol, bVis ? false : true);
     }
-//    var table = $('#example').DataTable( {
-//        columnDefs: [
-////            { visible: false, targets: 1 }//初始化加载的时候,隐藏某一行
-//        ],
-//        columns: [//给每一列申明一个名称
-//            { name: 'first-name' },
-//            { name: 'last-name' },
-//            { name: 'position' },
-//            { name: 'location' },
-//            { name: 'age' },
-//            { name: 'salary' }
-//        ]
-//    } );
-    $('#example tbody').on( 'click', 'td', function () {
-        var columnData = table
-            .column($(this).index()+':visIdx')
-            .data();
-        console.log($(this).index()+':visIdx');//获取点击列的索引
-        console.log(table.column( 'salary:name' ).data());//通过上述的命名方法,可以获取到当前列的所有数据
-    } );
+    var table = $('#example').DataTable({
+        columnDefs: [
+//            { visible: false, targets: 1 }//初始化加载的时候,隐藏某一行
+        ],
+        columns: [//给每一列申明一个名称
+            {name: 'first-name'},
+            {name: 'last-name'},
+            {name: 'position'},
+            {name: 'location'},
+            {name: 'age'},
+            {name: 'salary'}
+        ]
+    });
+
+    $('#example tbody tr').on('click', function () {
+        //获取点击行内的所有元素
+        console.log(this);
+        var data = table.row(this).data();
+        console.log(data);
+    });
+
+    //    $('#example tbody').on( 'click', 'td', function () {
+    //        var columnData = table
+    //            .column($(this).index()+':visIdx')
+    //            .data();
+    //
+    //        console.log(tables);
+    //        console.log($(this).index()+':visIdx');//获取点击列的索引
+    //        console.log(table.column( 'salary:name' ).data());//通过上述的命名方法,可以获取到当前列的所有数据
+    //    } );
 
     $(document).ready(function () {
         $('#example').DataTable({
@@ -556,10 +567,10 @@
                 //title: '通过datatable导出excel',//导出文件的文件名
                 extension: '.xlsx',//创建文件的扩展名
                 columnDefs: [{
-                    targets:[1,2,3],//指定哪几列
-                    render: function(data){
+                    targets: [1, 2, 3],//指定哪几列
+                    render: function (data) {
                         console.log(data);
-                        return "\u200C" + data ;
+                        return "\u200C" + data;
                     }
                 }],
                 header: true,//excel是否显示表头

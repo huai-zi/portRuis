@@ -290,7 +290,8 @@ html.right-sidebar-opened .right-sidebar {
     }
 
     html.fixed .content-header1 {
-        position: absolute;
+        overflow-y: scroll;
+        /*position: absolute;*/
         right: 0;
         top: 0px;
         left: 0;
@@ -2101,7 +2102,7 @@ body.modal-open .row.animated {
 }
 
 /*=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
-/* FORMS*/
+/* formw*/
 /*================================================*/
 .form-group:last-child, .form-group:last-of-type {
     margin-bottom: 0;

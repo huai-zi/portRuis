@@ -87,7 +87,7 @@ $(function () {
         //进入模型题
         $(document).on('click', "#buttons", function () {
 
-            var radiosA = $("#forms").serializeArray();
+            var radiosA = $("#formw").serializeArray();
             if (radiosA.length === data.shiti.length) {
                 var dataset = {
                     "id": aa4.id,
@@ -116,7 +116,7 @@ $(function () {
         //直接提交试卷
         $(document).on('click', "#buttons1", function () {
 
-            var radiosA = $("#forms").serializeArray();
+            var radiosA = $("#formw").serializeArray();
             if (radiosA.length === data.shiti.length) {
                 var dataset = {
                     "id": aa4.id,

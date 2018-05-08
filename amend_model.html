@@ -135,7 +135,7 @@
                             <i class="fa fa-ellipsis-v "></i>编辑模型
                         </div>
                         <h3>模型信息</h3>
-                        <form id="forms" enctype="multipart/form-data" name="forms">
+                        <form id="formw" enctype="multipart/form-data" name="formw">
 
                             <div class="container-fluid">
                                 <div class="clearfix">
@@ -287,10 +287,10 @@
             }
         });
 
-        var forms = document.forms;
-        forms.name.value = courses.name;
-        forms.id.value = courses.id;
-        forms.id.note = courses.note;
+        var formw = document.formw;
+        formw.name.value = courses.name;
+        formw.id.value = courses.id;
+        formw.id.note = courses.note;
         $("#models").val(courses.model);
         $("#downloads").val(courses.download);
         //选中
@@ -301,10 +301,10 @@
             }
         })
         $('.notazirez').click(function () {
-            if (forms.name.value === "") {
+            if (formw.name.value === "") {
                 $(".warm-xinxi").show();
             } else {
-                mo.numcs("/model/update", "forms", "", function () {
+                mo.numcs("/model/update", "formw", "", function () {
                     $(".warm-xinxi").hide();
                     $("#error-modal").modal();
                     window.location.href = "model.html";

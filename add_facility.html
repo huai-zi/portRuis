@@ -136,7 +136,7 @@
                             <i class="fa fa-ellipsis-v "></i>添加设备
                         </div>
                         <h3>设备信息</h3>
-                        <form id="forms" enctype="multipart/form-data" name="forms">
+                        <form id="formw" enctype="multipart/form-data" name="formw">
 
                             <div class="container-fluid">
                                 <div class="clearfix">
@@ -242,17 +242,17 @@
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
         var mo = new models();
-        var forms = document.forms;
+        var formw = document.formw;
 
         ace.localHref(".removeShuju", "facility.html");
         ace.change("#modelImg", "#model_img");
         ace.filesUpload('modelImg', 'Progress', '.sr-only');
 
         $('.notazirez').click(function () {
-            if (forms.name.value === "") {
+            if (formw.name.value === "") {
                 $(".warm-xinxi").show()
             } else {
-                mo.numcs("/course/create", "forms", "", function () {
+                mo.numcs("/course/create", "formw", "", function () {
                     $(".warm-xinxi").hide();
                     $("#error-modal").modal();
 

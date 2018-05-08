@@ -379,10 +379,10 @@
     {{each shiti as value index}}
     <div class=" btn-link btn-lg clearfix bga">
         <strong class="pull-left btn_id btn_clickdu" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
-                data-target="#menu{{value.id}}"  data-file="{{value.file}}" data-qb="{{value.type}}">{{value.name}}</strong>
+                data-target="#menu{{value.id}}"  data-file="{{value.file}}" data-qb="{{value.son}}">{{value.name}}</strong>
         <a class="pull-right org">下载</a>
         <b class="pull-right btn_id" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
-           data-target="#menu{{value.id}}">展开</b>
+           data-target="#menu{{value.id}}" style={{judeg(value.son)}}>展开</b>
     </div>
     <div id="menu{{value.id}}" class="collapse">
 
@@ -392,13 +392,14 @@
 <script id="buts" type="text/html">
     {{each shiti as value index}}
     <div class=" btn-link btn-lg clearfix">
-        <strong class="pull-left  btn_ids" role="button" type="button"  data-file="{{value.file}}" data-qb="{{value.type}}"data-toggle="collapse"
+        <strong class="pull-left  btn_ids" role="button" type="button"  data-file="{{value.file}}" data-qb="{{value.son}}"data-toggle="collapse"
                 data-target="#menus{{value.id}}"
                 data-codeid="{{value.id}}">{{value.name}}</strong>
         <a class="pull-right org">下载</a>
         <b class="pull-right btn_ids" role="button" type="button" data-toggle="collapse"
            data-target="#menus{{value.id}}"
-           data-codeid="{{value.id}}">展开</b>
+           data-codeid="{{value.id}}" style={{judeg(value.son)}}>展开</b>
+
     </div>
     <div id="menus{{value.id}}" class="collapse bga clearfix btn-link btn-lg clearfix">
 
@@ -407,7 +408,7 @@
 </script>
 <script id="butss" type="text/html">
     {{each shiti as value index}}
-    <strong class="pull-left"  data-file="{{value.file}}" data-qb="{{value.type}}">{{value.name}}</strong>
+    <strong class="pull-left"  data-file="{{value.file}}" data-qb="{{value.son}}">{{value.name}}</strong>
     <a class="pull-right org" onclick="window.location.href=''">下载</a>
     {{/each}}
 </script>
@@ -424,6 +425,14 @@
         var datas = {
             "shiti": parents
         }
+
+        template.helper("judeg", function (son) {
+            if (son === 0) {
+                return "display:none;"
+            } else {
+            }
+            return "display:block;"
+        })
         var htm = template("but", datas);
         document.getElementById("add_page").innerHTML = htm;
         var ace = true;
@@ -510,6 +519,7 @@
                     var htmff = template("butss", datas);
                     var names = "menus" + yid;
                     document.getElementById(names).innerHTML = htmff;
+                    $(document.getElementById(names)).collapse('toggle');
 
                 })
 

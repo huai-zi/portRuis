@@ -213,8 +213,8 @@ var models = (function () {
     }
 
     //传递图片信息
-    function numcs(url, forms, cid,callback) {
-        var formData = new FormData($("#" + forms)[0]);
+    function numcs(url, formw, cid,callback) {
+        var formData = new FormData($("#" + formw)[0]);
         formData.append("id",cid);
         $.ajax({
             url: url,

@@ -266,10 +266,6 @@
         background-color: rgb(210, 245, 251) !important;
     }
 
-    #subject-main {
-        height: 100%;
-    }
-
     .org {
         background-color: orange !important;
     }
@@ -293,15 +289,20 @@
     .img_big {
         width: 200px;
         height: 200px;
-        display: table-cell;
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 10px;
-        line-height: 200px;
+        line-height: 175px;
+        float: left;
+        margin: 0 auto;
     }
 
     .img_big img {
-        display: inline-block;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .img_big embed {
         width: 100%;
         cursor: pointer;
     }
@@ -379,24 +380,152 @@
             </div>
 
         </div>
+
+        <div class="panel-group" id="accordion">
+            <div class="panel ">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            点击我进行展开，再次点击我进行折叠。第 1 部分
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="panel ">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion1"
+                                       href="#collapseOne1">
+                                        点击我进行展开，再次点击我进行折叠。第 1 部分
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne1" class="panel-collapse collapse in">
+                                <div class="panel-body">
+
+                                        点击我进行展开，再次点击我进行折叠。第 1 部分
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel ">
+                <div class="panel-heading">
+
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseTwo">
+                        点击我进行展开，再次点击我进行折叠。第 2 部分
+                    </a>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="">
+                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson
+                        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                        vice lomo.
+                    </div>
+                </div>
+            </div>
+            <div class="panel ">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            点击我进行展开，再次点击我进行折叠。第 3 部分
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson
+                        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                        vice lomo.
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="col-sm-9">
             <div class="container-fluid heard_top">
                 <i class="fa fa-medium"></i> 检修规划规范
             </div>
-            <div class="tab-content" id="subject-main">
+            <div class="">
                 <div class="img_margin">
                     <div class="text-center img_big">
-                        <img src="images/asd.png" alt="">
+                        <img src="./images/asd.png" alt="">
                     </div>
                 </div>
                 <div class="img_margin">
                     <div class="text-center img_big">
-                        <img src="images/model.jpg" alt="">
+                        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="180" height="180">
+                            <param name="movie" value="images/External_mechanice_stress.swf" />
+                            <param name="quality" value="high" />
+                            <param name="wmode" value="transparent" />
+                            <embed src="images/External_mechanice_stress.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="180" height="180" wmode="transparent"></embed>
+                        </object>
                     </div>
                 </div>
                 <div class="img_margin">
                     <div class="text-center img_big">
-                        <img src="images/model.dmp" alt="">
+                        <img src="./images/topbar_bg.png" alt="">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <img src="./images/topbar_bg.png" alt="">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <img src="./images/download.png" alt="">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <embed src="images/External_mechanice_stress.swf" type="" width="100%" height="100%">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <img src="./images/download.png" alt="">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <embed src="images/External_mechanice_stress.swf" type="" width="100%" height="100%">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <embed src="images/External_mechanice_stress.swf" type="" width="100%" height="100%">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <img src="./images/download.png" alt="">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <embed src="images/External_mechanice_stress.swf" type="" width="100%" height="100%">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <embed src="images/External_mechanice_stress.swf" type="" width="100%" height="100%">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <img src="./images/download.png" alt="">
+                    </div>
+                </div>
+                <div class="img_margin">
+                    <div class="text-center img_big">
+                        <embed src="images/External_mechanice_stress.swf" type="" width="100%" height="100%">
                     </div>
                 </div>
             </div>
@@ -410,7 +539,14 @@
      aria-labelledby="modal-error-label">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
             aria-hidden="true">×</span></button>
-    <img src="" class="modelImg" alt="center-block" style="margin-top: 10%;">
+    <img src="" class="modelImg" alt="center-block" style="margin: 6% 0;">
+</div>
+<!--培训提示信息-->
+<div class="modal fade text-center" id="error-modal1" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">×</span></button>
+    <embed src="" class="modelImg1" alt="center-block" style="margin: 6% 0;">
 </div>
 <input type="hidden" id="uzid" value="">
 <!--向上按钮-->
@@ -462,9 +598,18 @@
 <script type="text/javascript">
     $(function () {
         $(".img_big").click(function () {
-            var imgSrc = $(this).children("img").attr("src");
-            $(".modelImg").attr("src", imgSrc);
-            $("#error-modal").modal();
+            var imgSrc = $(this).children().attr("src");
+            console.log(imgSrc);
+            var imgSrc1 = imgSrc.substr(imgSrc.lastIndexOf(".") + 1).toUpperCase();
+            if (imgSrc1 !== "SWF") {
+                $(".modelImg").attr("src", imgSrc);
+                $("#error-modal").modal();
+            } else {
+
+                $(".modelImg1").attr("src", imgSrc);
+                $("#error-modal1").modal();
+            }
+
         })
     })
 </script>

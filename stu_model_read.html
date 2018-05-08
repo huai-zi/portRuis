@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="stylesheets/css/oeinsder.css">
 </head>
 <style>
+    a:hover,
+    a:focus {
+        color: #23527c;
+        text-decoration: none !important;
+        cursor: pointer;
+    }
+
     .peinsder-box {
         padding: 3px !important;
     }
@@ -51,10 +58,7 @@
         padding-top: 30px;
     }
 
-    h4 {
-        padding: 0 !important;
-        color: #fff;
-    }
+
 
     h3 {
         border-bottom: 1px solid #e7eaec;
@@ -259,12 +263,75 @@
         background-color: rgb(210, 245, 251) !important;
     }
 
-    #subject-main {
+    #main {
         height: 100%;
     }
 
     .org {
         background-color: orange !important;
+    }
+
+    strong {
+        padding: 8px;
+        background-color: #ef5350;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+
+    div:hover {
+        text-decoration: none !important;
+    }
+
+    strong:hover {
+        opacity: .7;
+    }
+
+    .img_big {
+        cursor: pointer;
+        width: 200px;
+        height: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        line-height: 175px;
+        margin: 0 auto;
+    }
+
+    .img_big img {
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .img_big embed {
+        width: 100%;
+        cursor: pointer !important;
+    }
+
+    .img_margin {
+        display: inline-block;
+        margin: 20px;
+    }
+
+    .viewer2 {
+        width: 100%;
+        height: 100%;
+        display: none;
+        overflow-y: scroll;
+        padding: 50px 0;
+
+    }
+
+    .close {
+        font-size: 40px;
+        color: #ccc;
+        margin: 20px;
+        opacity: 1;
+    }
+
+    .close:hover {
+        color: #fff;
     }
 </style>
 <!--[if lt IE 9]>
@@ -295,10 +362,10 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="stu_model_read.html"  class="selects_top"  title='模型浏览'>模型浏览</a></li>
-                <li ><a href="oeinsder.html" title='考核培训'>考核培训</a></li>
+                <li><a href="stu_model_read.html" class="selects_top" title='模型浏览'>模型浏览</a></li>
+                <li><a href="oeinsder.html" title='考核培训'>考核培训</a></li>
                 <li><a href="stu_xiu.html" title='检修规划'>检修规划</a></li>
-                <li><a href="stu_usname.html" title='你好' class="usname_local"  onload="loginas()">你好</a></li>
+                <li><a href="stu_usname.html" title='你好' class="usname_local" onload="loginas()">你好</a></li>
                 <li><a href="stu_student.html" title='通知'><i class="fa fa-bell"></i></a></li>
                 <li><a href="login.html" title='注销'><i class="fa fa-sign-out" style='margin-right: 7px;'></i>注销</a></li>
             </ul>
@@ -327,7 +394,7 @@
 
             <!--</ul>-->
 
-            <div class="panel-body" id="add_page">
+            <div class="panel-body panel-group" id="add_page">
 
             </div>
 
@@ -336,7 +403,7 @@
             <div class="container-fluid heard_top">
                 <i class="fa fa-medium"></i> 模型浏览
             </div>
-            <div class="tab-content" id="subject-main main">
+            <div class="tab-content" id="main">
                 <div class="panel-body" style="background-color:white;">
                     <div id="tip1">目前不支持您所使用的浏览器，请使用IE浏览器进行课程学习。</div>
                     <div id="tip2">系统检测到您还未安装浏览模型所需的组件。<br/>32位操作系统请 <a href="/UploadFiles/Software/Composer_X86.exe">点此下载</a>
@@ -345,7 +412,7 @@
                     <div id="wrapper">
                         <div id="showModul">
                             <div id="mainContainer">
-                                <object id="viewer" height="800" width="800"
+                                <object id="viewer" class="viewer viewer1" height="800" width="800"
                                         classid="CLSID:410B702D-FCFC-46B7-A954-E876C84AE4C0">
                                     <!--value内填写.smgXml后缀文件存放路径，注意图片等文件要放在与smgXml同目录下-->
                                     <param name="_StockProps" value="0">
@@ -357,14 +424,38 @@
                                     <param name="AutoPlay" value="0">
                                     <param name="FileName" value="/UploadFiles/Moduls/201708161528331345.smg">
                                 </object>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="viewer2" id="viewer2">
+
+            </div>
         </div>
     </div>
 </div>
+
+<!--模型资源浏览图-->
+<div class="modal fade text-center" id="error-modal" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">×</span></button>
+    <img src="" class="modelImg" alt="center-block" style="margin: 6% 0;">
+</div>
+
+<!--培训提示信息-->
+<div class="modal fade text-center" id="error-modal1" tabindex="-1" role="dialog"
+     aria-labelledby="modal-error-label">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">×</span></button>
+    <div class="acesss" id="acesss">
+
+    </div>
+
+</div>
+
 <input type="hidden" id="uzid" value="">
 <!--向上按钮-->
 <a href="#" class="scroll-to-top"><i class="fa fa-angle-double-up"></i></a>
@@ -377,41 +468,60 @@
 <script src='javascripts/course.js'></script>
 <script id="but" type="text/html">
     {{each shiti as value index}}
-    <div class=" btn-link btn-lg clearfix bga">
-
-        <a class="pull-left btn_id" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
-           data-target="#menu{{value.id}}">{{value.name}}</a>
-        <b class="pull-right btn_id" data-codeid="{{value.id}}" role="button" type="button" data-toggle="collapse"
-           data-target="#menu{{value.id}}">展开</b>
+    <div class="panel panel-heading btn-link btn-lg clearfix bga">
+        <a class="pull-left btn_id " data-parent="#add_page" data-codeid="{{value.id}}" type="button"
+           data-toggle="collapse" href="#menu{{value.id}}">{{value.name}}</a>
+        <b class="pull-right btn_id " data-parent="#add_page" data-codeid="{{value.id}}" role="button"
+           type="button" data-toggle="collapse"
+           href="#menu{{value.id}}" style={{judeg(value.son)}}>展开</b>
     </div>
-    <div id="menu{{value.id}}" class="collapse">
+    <div id="menu{{value.id}}" class="collapse panel-collapse">
 
     </div>
     {{/each}}
 </script>
 <script id="buts" type="text/html">
     {{each shiti as value index}}
-    <div class=" btn-link btn-lg clearfix">
-        <a class="pull-left  btn_ids" role="button" type="button" data-toggle="collapse"
+    <div class=" btn-link btn-lg clearfix model_clis " data-son="{{value.son}}">
+        <a class="pull-left  btn_ids " data-parent="#add_page1" data-son="{{value.son}}" role="button"
+           type="button" data-toggle="collapse"
            data-target="#menus{{value.id}}"
            data-codeid="{{value.id}}">{{value.name}}</a>
-        <b class="pull-right btn_ids" role="button" type="button" data-toggle="collapse"
+        <b class="pull-right btn_ids" data-son="{{value.son}}" role="button" type="button" data-toggle="collapse"
            data-target="#menus{{value.id}}"
-           data-codeid="{{value.id}}">展开</b>
+           data-codeid="{{value.id}}" style={{judeg(value.son)}}>展开</b>
+        <b class="pull-right org" style={{jude(value.son)}} onclick="window.location.href='{{value.download}}'">下载</b>
     </div>
-    <div id="menus{{value.id}}" class="collapse bga clearfix btn-link btn-lg clearfix">
+    {{resources(value.son,value.imabges,value.name,value.id)}}
+    <div id="menus{{value.id}}" class="collapse clearfix" style="margin: 0;">
 
     </div>
     {{/each}}
 </script>
 <script id="butss" type="text/html">
     {{each shiti as value index}}
-    <a class="pull-left">{{value.name}}</a>
-    <b class="pull-right org" onclick="window.location.href='{{value.download}}'">下载</b>
+    <div class=" bga clearfix btn-link btn-lg model_clis" data-son="{{value.son}}">
+        <a class="pull-left">{{value.name}}</a>
+        <b class="pull-right org" onclick="window.location.href='{{value.download}}'">下载</b>
+    </div>
+    {{resources(value.son,value.imabges,value.name,value.id)}}
+
+    {{/each}}
+</script>
+<script id="viewer2s" type="text/html">
+    {{each shiti as value index}}
+    {{each value.imabges as v i}}
+    <div class="img_margin">
+        <div class="text-center img_big pull-left" data-file="{{v}}">
+            {{templ(v)}}
+        </div>
+    </div>
+    {{/each}}
     {{/each}}
 </script>
 <script type="text/javascript">
     var modelz = new models();
+    //    /model/read
     modelz.ajaxGet("/model/read", function (data) {
         //获取新的数组
         var parents = [];
@@ -423,11 +533,114 @@
         var datas = {
             "shiti": parents
         }
+        template.config("escape", false);
+
+        template.helper("judeg", function (son) {
+            if (son === 0) {
+                return "display:none;";
+            } else {
+                return "display:block;";
+
+            }
+        })
+        template.helper("templ", function (son) {
+            var imgSrc1 = son.substr(son.lastIndexOf(".") + 1).toUpperCase();
+
+            if (imgSrc1 !== "SWF") {
+                return "<img src='" +
+                    son + "' alt=''>";
+            } else {
+                return '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="180" height="180">'
+                    + '<param name="movie" value="' + son +
+                    '" />'
+                    + '<param name="quality" value="high" />'
+                    + '<param name="wmode" value="transparent" />'
+                    + '<embed src="' +
+                    son + '" onfocus="img.apply(this)" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" data-file="' +
+                    son + '" width="180" height="180" wmode="transparent"></embed>'
+                    + '</object>';
+            }
+        })
+        template.helper("jude", function (son) {
+            if (son !== 0) {
+                return "display:none;";
+            } else {
+            }
+            return "display:block;";
+        })
+
+
+        template.helper("resources", function (son, htm, ziyuan, cid) {
+            if (son === 0) {
+                var htms = '<div data-cid="' + cid +
+                    '" class=" btn-link btn-lg clearfix resource" data-length="' +
+                    htm.length + '"><a class="pull-left">' + ziyuan + "资源" +
+                    '</a><strong class="bgc_num">' +
+                    htm.length +
+                    '</strong>' +
+                    '</div>';
+                return htms;
+            } else {
+                return "";
+            }
+        })
         var htm = template("but", datas);
         document.getElementById("add_page").innerHTML = htm;
         var ace = true;
         var aces = true;
 
+        //点击资源管理
+        $(document).on('click', ".resource", function () {
+
+            var cid = $(this).attr("data-cid");
+            var length = $(this).attr("data-length");
+            if (length === "0") {
+                $("#viewer2").html("<h4 class='text-center'>请联系管理员,添加相应的模型资源哦</h4>");
+                $("#main").hide();
+                $(".viewer2").show();
+                return false
+            }
+            var newCid = [];
+            $(data).each(function (i, v) {
+                if (v.id === +cid) {
+                    newCid.push(v);
+                }
+            });
+            var datasets = {
+                "shiti": newCid
+            }
+            var htm = template("viewer2s", datasets);
+            document.getElementById("viewer2").innerHTML = htm;
+            $("#main").hide();
+            $(".viewer2").show();
+
+            $(".img_big").click(function () {
+                var imgSrc = $(this).children("img").attr("src");
+//                var imgSrc1 = imgSrc.substr(imgSrc.lastIndexOf(".") + 1).toUpperCase();
+                if (imgSrc === undefined) {
+
+                } else {
+                    $(".modelImg").attr("src", imgSrc);
+                    $("#error-modal").modal();
+                }
+
+            })
+
+        })
+        //点击模型图形处理//问题,下方的false原因,阻止了点击事件
+        $(document).on('click', ".model_clis", function () {
+
+            var cid = $(this).attr("data-son");
+            if (+cid === 0) {
+                $("#main").show();
+                $(".viewer2").hide();
+            } else {
+
+            }
+        })
+
+
+        //第一层数据展开格式
         $(".btn_id").click(function () {
             if (ace) {
                 if ($(this).parent().children("b.btn_id").text() === "展开") {
@@ -457,49 +670,64 @@
                 $(this).parent().children("b.btn_id").hide();
                 return false
             }
+            //避免重复添加数据
             if ($("#uzid").val() === yid) {
+
             } else {
                 var htm = template("buts", datas);
                 var names = "menu" + yid;
                 document.getElementById(names).innerHTML = htm;
 
                 $("#uzid").val(yid);
-
+//                第二层数据格式
                 $(".btn_ids").click(function () {
-                    if (aces) {
-                        if ($(this).parent().children("b.btn_ids").text() === "展开") {
-                            $(this).parent().children("b.btn_ids").text("折叠")
-                        } else {
-                            $(this).parent().children("b.btn_ids").text("展开")
-                        }
-                        aces = false;
+                    if ($(this).attr("data-son") === "0") {
                     } else {
-                        return false
-                    }
-                    setTimeout(function () {
-                        aces = true;
-                    }, 400);
-                    var yid = $(this).attr("data-codeid");
-                    var newId = [];
-                    $(data).each(function (i, v) {
-                        if (v.parentId === +yid) {
-                            newId.push(v);
+                        if (aces) {
+                            if ($(this).parent().children("b.btn_ids").text() === "展开") {
+                                $(this).parent().children("b.btn_ids").text("折叠")
+                            } else {
+                                $(this).parent().children("b.btn_ids").text("展开")
+                            }
+                            aces = false;
+                        } else {
+                            return false
                         }
-                    });
-                    if (newId.length === 0) {
-                        $(this).parent().children("b.btn_ids").hide();
-                        return false
+                        setTimeout(function () {
+                            aces = true;
+                        }, 400);
+                        var yid = $(this).attr("data-codeid");
+                        var newId = [];
+                        $(data).each(function (i, v) {
+                            if (v.parentId === +yid) {
+                                newId.push(v);
+                            }
+                        });
+                        if (newId.length === 0) {
+                            $(this).parent().children("b.btn_ids").hide();
+                            return false
+                        }
+                        var datas = {
+                            "shiti": newId
+                        }
+                        var htmff = template("butss", datas);
+                        var names = "menus" + yid;
+                        document.getElementById(names).innerHTML = htmff;
+                        $(document.getElementById(names)).collapse('toggle');
+
                     }
-                    var datas = {
-                        "shiti": newId
-                    }
-                    var htmff = template("butss", datas);
-                    var names = "menus" + yid;
-                    document.getElementById(names).innerHTML = htmff;
+
                 })
             }
         })
     })
+    function img() {
+        var imgSrc = $(this).attr("data-file");
+        var ace = '<embed src="' + imgSrc +
+            '" class="modelImg1" alt="center-block" style="margin: 6% 0;"  quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash">';
+        document.getElementById("acesss").innerHTML = ace;
+        $("#error-modal1").modal();
+    }
     var hei = $(window).height();
     $("#peinsder-box").height(hei);
 
@@ -511,12 +739,10 @@
     if (viewHeight < minHeight) {
         viewHeight = minHeight;
     }
-    $("#viewer").height(viewHeight);
-
+    $(".viewer").height(viewHeight);
     $("#main").height(viewHeight + 50);
     var viewWidth = $(window).width() - $("#menu").width() - 15;
-    console.log(viewWidth);
-    $("#viewer").width((minWidth < viewWidth) ? viewWidth : minWidth);
+    $(".viewer").width((minWidth < viewWidth) ? viewWidth : minWidth);
 
     var viewWidth = $(window).width() - $("#menu").width();
 
@@ -525,10 +751,10 @@
         if (viewHeight < minHeight) {
             viewHeight = minHeight;
         }
-        $("#viewer").height(viewHeight);
+        $(".viewer").height(viewHeight);
         $("#main").height(viewHeight + 50);
         var viewWidth = $(window).width() - $("#menu").width() - 15;
-        $("#viewer").width((minWidth < viewWidth) ? viewWidth : minWidth);
+        $(".viewer").width((minWidth < viewWidth) ? viewWidth : minWidth);
 
     });
 

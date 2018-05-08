@@ -190,7 +190,7 @@
                                 课程
                                 <input type="text" readonly="readonly" id="curriculum" value="">
                                 试卷名称
-                                <input type="text" name="test_name" id="forms_test" value="">
+                                <input type="text" name="test_name" id="formw_test" value="">
 
 
                             </div>
@@ -298,7 +298,7 @@
 
         $('#facility').val(locals.machineName);
         $('#curriculum').val(locals.courseName);
-        $("#forms_test").val(locals.name);
+        $("#formw_test").val(locals.name);
         //同时传试卷id,获取选中的题目的id值进行标注，同时上传id进行保存
         window.seleIds = locals.questionId;
 
@@ -377,13 +377,13 @@
         $("#test_button").click(function () {
             var dataset = {
                 "id": locals.id,
-                "name": $("#forms_test").val(),
+                "name": $("#formw_test").val(),
                 "machineId": locals.machineId,
                 "courseId": locals.courseId,
                 "questionId": window.seleIds
             };
 
-            if ($("#forms_test").val() === "") {
+            if ($("#formw_test").val() === "") {
                 $("#error-modal2").modal();
             } else {
                 ace.ajaxPost("/paper/update", dataset, function () {

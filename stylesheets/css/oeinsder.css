@@ -12,14 +12,34 @@ body {
 
 .peinsder-imgas img {
     width: 100%;
-    min-height: 200px;
+    cursor: pointer;
 }
 
 .peinsder-imgas1 img {
     width: 100%;
-    min-height: 200px;
+    cursor: pointer;
+}
+
+.peinsder-imgas .imgnei  {
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    line-height: 200px;
+    margin:0 auto;
+}
+
+
+.peinsder-imgas1 .imgnei  {
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    line-height: 200px;
+    margin:0 auto;
 
 }
+
 
 .fadeInRight {
     padding-bottom: 0 !important;

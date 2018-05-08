@@ -175,7 +175,7 @@
                         <h2>PEInside管理</h2>
                     </div>
                     <!--中间区域独立模块-->
-                    <form id="forms" enctype="multipart/form-data" name="forms">
+                    <form id="formw" enctype="multipart/form-data" name="formw">
                         <div class="Add_course">
                             <div class="Add_course_head">
                                 <i class="fa fa-pencil-square-o "></i>修改PEInside管理
@@ -314,10 +314,10 @@
     seajs.use('./javascripts/common.js', function (main) {
         var ace = new main.comm();
         var mo = new models();
-        var formss = document.forms;
+        var formws = document.formw;
         var ids = localStorage.getItem("pemanage");
-        formss.id.value = ids.id;
-        formss.documents.value = ids.document;
+        formws.id.value = ids.id;
+        formws.documents.value = ids.document;
 
         ace.filesUpload("modelImg", "Progress", ".sr-only");
 
@@ -326,7 +326,7 @@
                 $("#error-modal2").modal();
             } else {
                 //提交数据
-                mo.numcs("/pe/update", "forms", "", function (data) {
+                mo.numcs("/pe/update", "formw", "", function (data) {
                     if (data.type === 0) {
                         $("#error-modal").modal();
                         window.location.href = "pemanage.html";
